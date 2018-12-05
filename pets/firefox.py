@@ -9,3 +9,6 @@ class FireFox(pets.pet.Pet):
     skill_list = {
         '1': talent_skills
     }
+
+    debuff_dict = {}
+    buff_dict = {}

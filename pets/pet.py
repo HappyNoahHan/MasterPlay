@@ -35,7 +35,7 @@ class Pet(object):
         self.skill_list[key] = value
 
 
-    debuff_dict={}
+    debuff_dict = {}
     buff_dict = {}
 
     def setDebuff(self,key,value):
