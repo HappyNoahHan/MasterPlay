@@ -7,7 +7,7 @@ class Pet(object):
         self.attack = attack
         self.defense = defense
         self.speed = speed
-        self.max_health = self.health
+        self._max_health = self.health
         self.tmp_attack = 0
         self.tmp_defense = 0
 
