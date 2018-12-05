@@ -1,3 +1,6 @@
 
 *.pyc
 .idea/*
+.idea/MasterPlay.iml
+.idea/misc.xml
+.idea/workspace.xml

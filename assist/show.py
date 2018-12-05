@@ -1,3 +1,5 @@
+import battle.skilllistmap
+
 def printTurn(name):
     print("%s 的回合" % name)
 
@@ -42,3 +44,6 @@ def showPetStatus(obj):
 def showPetSkills(obj):
     for key,value in obj.skill_list.items():
         print(key,':',value.skill_show_name)
+
+def learnSkill(code):
+    print("%s 学习成功！" % battle.skilllistmap.skill_dict[code].skill_show_name)
