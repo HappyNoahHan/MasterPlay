@@ -25,6 +25,9 @@ class Pet(object):
     def getDefense(self):
         return self.defense + self.tmp_defense
 
+    def getAttack(self):
+        return self.attack + self.tmp_attack
+
     talent_skills = battle.skill.skill()
 
     skill_list = {

@@ -17,6 +17,7 @@ class skill(object):
     index_per = 0.0
     effect_turns = 1
     skill_info = '使用技能'
+    property = 'normal'
 
     def __str__(self):
         return self.skill_info
@@ -33,10 +34,17 @@ class steadiness(skill):
     skill_show_name = '稳固'
     skill_code = 'N002'
     index_per = 0.2
-    property = 'normal'
     skill_model = '0002'
     effect_turns = 3
     skill_info = "防御临时上升20%，持续3回合"
+
+class strengthCre(skill):
+    skill_show_name = '力量增幅'
+    skill_code = 'N003'
+    index_per = 0.3
+    skill_model = '0004'
+    effect_turns = 3
+    skill_info = "力量增幅,持续3回合"
 
 class fireBall(skill):
     skill_show_name = '火球'
@@ -61,7 +69,6 @@ class flameAffinity(skill):
     index_per = 0.5
     property = 'fire'
     skill_model = '0009'
-    effect_turns = 1
     skill_code = "火焰亲和觉醒,接下来的一个回合，火属性技能伤害加成50%"
 
 class vinesTied(skill):

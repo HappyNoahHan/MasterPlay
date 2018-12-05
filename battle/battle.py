@@ -35,18 +35,16 @@ def damageCount(obj1,obj2,obj_skill):
             pro_buff_list = battle.buff.proBuffCount(obj2)
             if pro_buff_list:
                 pro_buff_index = sum(pro_buff_list)
-                print("伤害加成 %s" % pro_buff_index)
-        print("伤害加成 %s" % pro_buff_index)
-        if obj2.attack - obj1.getDefense() > 0:
+        if obj2.getAttack() - obj1.getDefense() > 0:
             #tmpdamage 测试伤害计算
-            tmpdamage = round(((obj2.attack - obj1.getDefense()) * obj_skill.index_per) * (1+pro_buff_index))
+            tmpdamage = round(((obj2.getAttack() - obj1.getDefense()) * obj_skill.index_per) * (1+pro_buff_index))
             obj1.health -= tmpdamage
             print("造成了%s 的伤害" % tmpdamage)
         else:
             assist.show.noDamage()
     elif obj_skill.skill_model == '0002':
 
-        tmp_defense_value = obj2.defense * obj_skill.index_per
+        tmp_defense_value = round(obj2.defense * obj_skill.index_per)
         obj2.setBuff(obj_skill,[obj_skill.effect_turns,tmp_defense_value])
         for key,value in obj2.buff_dict.items():
             print(key.skill_show_name,':',value)
@@ -54,6 +52,12 @@ def damageCount(obj1,obj2,obj_skill):
     elif obj_skill.skill_model == '0003':
         obj1.setDebuff(obj_skill,[obj_skill.effect_turns,obj_skill.index_per])
         for key,value in obj1.debuff_dict.items():
+            print(key.skill_show_name, ':', value)
+
+    elif obj_skill.skill_model == '0004':
+        tmp_attack_value = round(obj2.attack * obj_skill.index_per)
+        obj2.setBuff(obj_skill,[obj_skill.effect_turns,tmp_attack_value])
+        for key,value in obj2.buff_dict.items():
             print(key.skill_show_name, ':', value)
 
     elif obj_skill.skill_model == '0009':

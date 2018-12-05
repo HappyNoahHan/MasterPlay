@@ -17,6 +17,11 @@ def buffCount(obj):
                 value[1] = 0
                 obj.tmp_defense += value[1]
                 buff_remove_list.append(key)
+        elif key.skill_model == '0004':
+            if value[0] == 0:
+                value[1] = 0
+                buff_remove_list.append(key)
+            obj.tmp_attack += value[1]
         else:
             pass
     if buff_remove_list:
