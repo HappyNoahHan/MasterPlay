@@ -37,12 +37,18 @@ class Pet(object):
 
     debuff_dict = {}
     buff_dict = {}
+    property_buff = {}
 
     def setDebuff(self,key,value):
         self.debuff_dict[key] = value
 
     def setBuff(self,key,value):
         self.buff_dict[key] = value
+
+    def setProBuff(self,key,value):
+        self.property_buff[key] = value
+
+    property = ['normal']
 
 
 

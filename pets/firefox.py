@@ -12,3 +12,8 @@ class FireFox(pets.pet.Pet):
 
     debuff_dict = {}
     buff_dict = {}
+    property_buff = {}
+
+    property = ['fire']
+
+    can_learn_skills = ['A','N']

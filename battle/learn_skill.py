@@ -4,6 +4,11 @@ import assist.show
 import time
 
 def learnSkill(obj,skill_code):
+
+    if skill_code[0] not in obj.can_learn_skills:
+        print("属性不符合，无法学习该系别技能")
+        return False
+
     for key in ['2','3','4']:
         if key not in obj.skill_list:
             obj.skill_list[key] = battle.skilllistmap.skill_dict[skill_code]

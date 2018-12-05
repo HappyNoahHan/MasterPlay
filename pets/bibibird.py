@@ -11,3 +11,8 @@ class WildBBBird(pets.pet.Pet):
 
     debuff_dict = {}
     buff_dict = {}
+    property_buff = {}
+
+    property = ['fly','normal']
+
+    can_learn_skills = ['N','F']

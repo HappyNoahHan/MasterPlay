@@ -20,7 +20,7 @@ if __name__ == '__main__':
         assist.show.learnSkill('N002')
     if battle.learn_skill.learnSkill(fox,'A004'):
         assist.show.learnSkill('A004')
-    battle.learn_skill.learnSkill(fox,'B004')
+    battle.learn_skill.learnSkill(fox,'A009')
     #fox.skill_first = battle.skill.steadiness()
 
     if fox.speed > bird.speed:

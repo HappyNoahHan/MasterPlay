@@ -1,5 +1,6 @@
 import random
 import time
+import math
 import battle.skill
 import battle.skilllistmap
 import assist.show
@@ -16,6 +17,7 @@ def damageCount(obj1,obj2,obj_skill):
     :return:
     :model : 0001:伤害加成  0002： 防御临时提高
     '''
+    #技能使用前buff 检查
     if obj2.buff_dict:
         battle.buff.buffCount(obj2)
         battle.buff.buffIndex(obj2)
@@ -27,10 +29,18 @@ def damageCount(obj1,obj2,obj_skill):
 
 
     if obj_skill.skill_model == '0001':
+        #计算属性增幅，道具增幅
+        pro_buff_index = 0
+        if obj2.property_buff:
+            pro_buff_list = battle.buff.proBuffCount(obj2)
+            if pro_buff_list:
+                pro_buff_index = sum(pro_buff_list)
+                print("伤害加成 %s" % pro_buff_index)
+        print("伤害加成 %s" % pro_buff_index)
         if obj2.attack - obj1.getDefense() > 0:
             #tmpdamage 测试伤害计算
-            tmpdamage = (obj2.attack - obj1.getDefense()) * obj_skill.index_per
-            obj1.health -= (obj2.attack - obj1.getDefense()) * obj_skill.index_per
+            tmpdamage = round(((obj2.attack - obj1.getDefense()) * obj_skill.index_per) * (1+pro_buff_index))
+            obj1.health -= tmpdamage
             print("造成了%s 的伤害" % tmpdamage)
         else:
             assist.show.noDamage()
@@ -44,6 +54,11 @@ def damageCount(obj1,obj2,obj_skill):
     elif obj_skill.skill_model == '0003':
         obj1.setDebuff(obj_skill,[obj_skill.effect_turns,obj_skill.index_per])
         for key,value in obj1.debuff_dict.items():
+            print(key.skill_show_name, ':', value)
+
+    elif obj_skill.skill_model == '0009':
+        obj2.setProBuff(obj_skill,[obj_skill.effect_turns,obj_skill.index_per])
+        for key,value in obj2.property_buff.items():
             print(key.skill_show_name, ':', value)
 
     if obj2.debuff_dict:

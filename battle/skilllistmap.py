@@ -4,6 +4,7 @@ import battle.skill
 skill_dict = {
     'A001': battle.skill.fireBall(),
     'A004': battle.skill.fireSpin(pp=20),
+    'A009': battle.skill.flameAffinity(pp=10),
     'N001': battle.skill.scream(),
     'N002': battle.skill.steadiness(pp=25),
     'B004': battle.skill.vinesTied(pp=35),
