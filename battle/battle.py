@@ -6,6 +6,7 @@ import battle.skilllistmap
 import assist.show
 import battle.buff
 import assist.ppvalue
+import props.drug
 
 
 def damageCount(obj1,obj2,obj_skill):
@@ -137,8 +138,18 @@ def battleRun(obj1,obj2):
             assist.show.printTurn(obj2.name)
             return battleRun(obj2,obj1)
     elif int(command) == 3:
-        #使用道具模块
-        pass
+        assist.show.showProps()
+        command = input(">")
+        if int(command) == 1:
+            #drup_to_use = props.drug.ppDrug()
+            for key, value in obj1.skill_list.items():
+                if value != None:
+                    print("技能" + key, ":", value.skill_show_name, ' PP:', value.pp_value)
+            print("请选择要恢复的技能")
+            skill_number = input(">")
+            print(obj1.skill_list[skill_number].skill_show_name)
+            assist.ppvalue.ppRecoverMax(obj1.skill_list[skill_number])
+
         return battleRun(obj2,obj1)
     else:
         print("指令错误!")

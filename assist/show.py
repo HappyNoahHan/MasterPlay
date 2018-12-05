@@ -33,6 +33,10 @@ def petUseDefense(name):
 def showSelect():
     print("请选择使用的指令1：特殊攻击 2.交换精灵 3.使用道具 4.临阵脱逃")
 
+def showProps():
+    #测试
+    print("请选择使用的道具：1 PP恢复剂")
+
 def showPetStatus(obj):
     '''
     显示精灵状态
