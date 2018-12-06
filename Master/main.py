@@ -20,7 +20,7 @@ if __name__ == '__main__':
 
     if battle.learn_skill.learnSkill(fox,'N002'):
         assist.show.learnSkill('N002')
-    if battle.learn_skill.learnSkill(fox,'T001'):
+    if battle.learn_skill.learnSkill(fox,'T002'):
         assist.show.learnSkill('A004')
     battle.learn_skill.learnSkill(fox,'S001')
     #fox.skill_first = battle.skill.steadiness()

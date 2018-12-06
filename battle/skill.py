@@ -8,9 +8,12 @@
                      buff  标记attack denfense 法强 法防 提升 统一  0002 buff类技能
 
                      ---2.1
-                     debuff 类集合 包括 属性临时降低
                      0007  debuff 移除技能
                      0006  buff 驱散技能
+
+                     ---2.2
+                     debuff 战前结算 属性临时降低
+                            战后结算 气血损失
 #pp_value   技能次数（pp值）
 '''
 
@@ -45,6 +48,8 @@ class debuffSkill(skill):
     def __init__(self,pp=30):
         super().__init__(pp)
         self.skill_model = '0003'
+
+    damage_debuff = False
 
 class removeBuffSkill(skill):
     def __init__(self,pp=30):
@@ -108,6 +113,7 @@ class fireSpin(debuffSkill):
     property = 'fire'
     effect_turns = 3
     skill_info = "持续性火焰伤害，每回合受到血量10%的伤害"
+    damage_debuff = True
 
 class flameAffinity(propSkill):
     skill_show_name = '火焰亲和'
@@ -151,3 +157,12 @@ class disperse(removeBuffSkill):
     skill_code = 'T001'
     property = 'dark'
     skill_show_name = '驱散'
+
+class threaten(debuffSkill):
+    skill_info = "恐吓对方，迫使对方攻击下降10%，持续3回合"
+    effect_turns = 3
+    skill_code = 'T002'
+    skill_show_name = '恐吓'
+    property = 'dark'
+    index_per = 0.1
+    debuff_prop = 'Attack'

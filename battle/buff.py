@@ -37,6 +37,9 @@ def buffCount(obj):
             obj.buff_dict.pop(key)
             print("移除 %s 效果" % key.skill_show_name)
 
+    #战前debuff计算
+    proDebuffCount(obj)
+
 
 def buffIndex(obj):
     '''
@@ -52,18 +55,17 @@ def buffIndex(obj):
             #buff_remove_list.append(key)
         print("%s 效果渐渐减弱" % key.skill_show_name)
 
-def debuffCount(obj):
+def damageDebuffCount(obj):
     '''
-    战斗后buff计算
+    伤害型debuff 计算
     :param obj:
     :return:
     '''
     debuff_remove_list = []
     for key,value in obj.debuff_dict.items():
-        if key.skill_model == '0003':
-            #调整系数
+        #调整系数 伤害debuff 战斗后结算
+        if key.damage_debuff == True:
             index_number = assist.petattr.getAttrMap(key,obj)
-
             if value[0] >= 1:
                 lost_health = round(obj.health * value[1] * index_number)
                 obj.health -= lost_health
@@ -76,6 +78,34 @@ def debuffCount(obj):
         for key in debuff_remove_list:
             obj.debuff_dict.pop(key)
             print("移除 %s 伤害" % key.skill_show_name)
+
+def proDebuffCount(obj):
+    '''
+    属性debuff 计算
+    :param obj:
+    :return:
+    '''
+    debuff_move_list = []
+    for key,value in obj.debuff_dict.items():
+        if key.damage_debuff == False:
+            if key.debuff_prop == 'Attack':
+                if value[0] > 0:
+                    tmp_attack = round(obj.attack * value[1])
+                    obj.tmp_attack -= tmp_attack
+                    value[0] -= 1
+                else:
+                    debuff_move_list.append(key)
+            elif key.debuff_prop == 'Defense':
+                if value[0] > 0:
+                    tmp_defense = round(obj.defense * value[1])
+                    obj.tmp_defense -= tmp_defense
+                    value[0] -= 1
+                else:
+                    debuff_move_list.append(key)
+    if debuff_move_list:
+        for key in debuff_move_list:
+            obj.debuff_dict.pop(key)
+            print("移除 %s 负面效果" % key.skill_show_name)
 
 def proBuffCount(obj):
     '''
@@ -123,6 +153,12 @@ def removeObjBuff(obj,num):
     buffCount(obj)
 
 def removeOwnDebuff(obj,num):
+    '''
+    清除自己的负面效果
+    :param obj:
+    :param num:
+    :return:
+    '''
     if obj.debuff_dict:
         if num <= len(obj.debuff_dict.items()):
             for i in range(num):
@@ -133,3 +169,4 @@ def removeOwnDebuff(obj,num):
             print("驱散成功")
     else:
         print("自己没有debuff")
+

@@ -4,7 +4,7 @@ import battle.skill
 class BBird(pets.pet.Pet):
     def __init__(self,name,health,attack,defense,speed):
         super().__init__(name,health,attack,defense,speed)
-        self.init_skills = battle.skill.steadiness()
+        self.init_skills = battle.skill.strengthCre()
         super().setSkills('1',self.init_skills)
         self.property = ['fly','normal']
         self.can_learn_skills = ['A','N','F','B','T','S']

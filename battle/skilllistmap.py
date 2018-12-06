@@ -13,6 +13,7 @@ skill_dict = {
     'B005': battle.skill.vinesTied(pp=35),
     'S001': battle.skill.illuminatiom(pp=10),
     'T001': battle.skill.disperse(pp=10),
+    'T002': battle.skill.threaten(),
 
 }
 

@@ -59,6 +59,7 @@ def damageCount(obj1,obj2,obj_skill):
 
     elif obj_skill.skill_model == '0003':
         obj1.setDebuff(obj_skill,[obj_skill.effect_turns,obj_skill.index_per])
+        battle.buff.proDebuffCount(obj1)
         for key,value in obj1.debuff_dict.items():
             print(key.skill_show_name, ':', value)
 
@@ -78,7 +79,7 @@ def damageCount(obj1,obj2,obj_skill):
             print(key.skill_show_name, ':', value)
 
     if obj2.debuff_dict:
-        battle.buff.debuffCount(obj2) #行动后debuff 计算
+        battle.buff.damageDebuffCount(obj2) #行动后debuff 计算
 
     if obj1.health <= 0:
         assist.show.petDie(obj1.name)

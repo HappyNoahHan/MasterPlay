@@ -1,3 +1,7 @@
+'''
+    ready 2.0 法强  法防
+'''
+
 import battle.skill
 
 class Pet(object):
