@@ -5,6 +5,7 @@
                      0007 生命回复buff技能 0008 生命恢复 0009 属性亲和，同属性技能伤害加成
                      --- 2.0
                      buff 类 与 debuff 类 集合
+                     buff  标记attack denfense 法强 法防 提升 统一  0002 buff类技能
 #pp_value   技能次数（pp值）
 '''
 
@@ -17,16 +18,20 @@ class skill(object):
 
     skill_info = '使用技能'
     effect_turns = 1
+    property = 'normal'
 
     def __str__(self):
         return self.skill_info
+
+    def getProp(self):
+        return self.property
 
 class damageSkill(skill):
     def __init__(self,pp=30):
         super().__init__(pp)
         self.skill_model = '0001'
 
-class defenseBuffSkill(skill):
+class buffSkill(skill):
     def __init__(self,pp=30):
         super().__init__(pp)
         self.skill_model = '0002'
@@ -35,16 +40,6 @@ class debuffSkill(skill):
     def __init__(self,pp=30):
         super().__init__(pp)
         self.skill_model = '0003'
-
-class attackBuffSkill(skill):
-    def __init__(self,pp=30):
-        super().__init__(pp)
-        self.skill_model = '0004'
-
-class lifeBuffSkill(skill):
-    def __init__(self,pp=30):
-        super().__init__(pp)
-        self.skill_model = '0007'
 
 class lifeRecoreSkill(skill):
     def __init__(self,pp=30):
@@ -64,19 +59,21 @@ class scream(damageSkill):
     property = 'fly'
     skill_info = '伤害加成20%'
 
-class steadiness(defenseBuffSkill):
+class steadiness(buffSkill):
     skill_show_name = '稳固'
     skill_code = 'N002'
     index_per = 0.2
     effect_turns = 3
     skill_info = "防御临时上升20%，持续3回合"
+    buff_prop = 'Defense'
 
-class strengthCre(attackBuffSkill):
+class strengthCre(buffSkill):
     skill_show_name = '力量增幅'
     skill_code = 'N003'
     index_per = 0.3
     effect_turns = 3
     skill_info = "力量增幅,持续3回合"
+    buff_prop = 'Attack'
 
 class fireBall(damageSkill):
     skill_show_name = '火球'
@@ -107,13 +104,14 @@ class lifeRecovery(lifeRecoreSkill):
     property = 'wood'
     skill_info = "恢复技能，恢复最大生命值50%"
 
-class lifeChains(lifeBuffSkill):
+class lifeChains(buffSkill):
     skill_show_name = '生命锁链'
     skill_code = 'B004'
     index_per = 0.1
     property = 'wood'
     effect_turns = 3
     skill_info = "生命锁链，每回合恢复最大生命值10%的生命，持续3回合"
+    buff_prop = 'Health'
 
 class vinesTied(debuffSkill):
     skill_show_name = '蔓藤捆绑'

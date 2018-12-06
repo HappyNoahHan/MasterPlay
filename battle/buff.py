@@ -11,7 +11,7 @@ def buffCount(obj):
     obj.tmp_attack = 0
     buff_remove_list = []  # buff 移除列表
     for key,value in obj.buff_dict.items():
-        if key.skill_model == '0002':
+        if key.buff_prop == 'Defense':
             if value[0] > 0:
                 obj.tmp_defense += value[1]
             else:
@@ -19,12 +19,13 @@ def buffCount(obj):
                 obj.tmp_defense += value[1]
                 buff_remove_list.append(key)
 
-        elif key.skill_model == '0004':
+        elif key.buff_prop == 'Attack':
             if value[0] == 0:
                 value[1] = 0
                 buff_remove_list.append(key)
             obj.tmp_attack += value[1]
-        elif key.skill_model == '0007':
+
+        elif key.buff_prop == 'Health':
             if value[0] > 0:
                 assist.life.healthRecover(obj,key) #调用回复技能
             else:
@@ -34,7 +35,7 @@ def buffCount(obj):
     if buff_remove_list:
         for key in buff_remove_list:
             obj.buff_dict.pop(key)
-            print("移除buff")
+            print("移除 %s 效果" % key.skill_show_name)
 
 
 def buffIndex(obj):
@@ -49,8 +50,7 @@ def buffIndex(obj):
         else:
             value[0] -= 1
             #buff_remove_list.append(key)
-        print("buff 效果渐渐减弱")
-        print(key.skill_show_name,value)
+        print("%s 效果渐渐减弱" % key.skill_show_name)
 
 def debuffCount(obj):
     '''
@@ -75,7 +75,7 @@ def debuffCount(obj):
     if debuff_remove_list:
         for key in debuff_remove_list:
             obj.debuff_dict.pop(key)
-            print("移除debuff")
+            print("移除 %s 伤害" % key.skill_show_name)
 
 def proBuffCount(obj):
     '''
@@ -97,7 +97,7 @@ def proBuffCount(obj):
     if probuff_remove_list:
         for key in probuff_remove_list:
             obj.property_buff.pop(key)
-            print("移除增幅buff")
+            print("移除 %s 增幅效果" % key.skill_show_name)
 
     return pro_index
 

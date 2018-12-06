@@ -44,8 +44,14 @@ def damageCount(obj1,obj2,obj_skill):
         else:
             assist.show.noDamage()
     elif obj_skill.skill_model == '0002':
-        tmp_defense_value = round(obj2.defense * obj_skill.index_per)
-        obj2.setBuff(obj_skill,[obj_skill.effect_turns-1,tmp_defense_value])
+        tmp_increase_value = 0
+        if obj_skill.buff_prop == 'Defense':
+            tmp_increase_value = round(obj2.defense * obj_skill.index_per)
+        elif obj_skill.buff_prop == 'Attack':
+            tmp_increase_value = round(obj2.attack * obj_skill.index_per)
+        #elif obj_skill.buff_prop == 'Health':
+            #assist.life.healthRecover(obj2, obj_skill)
+        obj2.setBuff(obj_skill,[obj_skill.effect_turns-1,tmp_increase_value])
         battle.buff.buffCount(obj2)
 
         for key,value in obj2.buff_dict.items():
@@ -56,18 +62,6 @@ def damageCount(obj1,obj2,obj_skill):
         for key,value in obj1.debuff_dict.items():
             print(key.skill_show_name, ':', value)
 
-    elif obj_skill.skill_model == '0004':
-        tmp_attack_value = round(obj2.attack * obj_skill.index_per)
-        obj2.setBuff(obj_skill,[obj_skill.effect_turns-1,tmp_attack_value])
-        battle.buff.buffCount(obj2)
-        for key,value in obj2.buff_dict.items():
-            print(key.skill_show_name, ':', value)
-
-    elif obj_skill.skill_model == '0007':
-        assist.life.healthRecover(obj2,obj_skill)
-        obj2.setBuff(obj_skill,[obj_skill.effect_turns-1,0])
-        for key,value in obj2.buff_dict.items():
-            print(key.skill_show_name, ':', value)
     elif obj_skill.skill_model == '0008':
         assist.life.healthRecover(obj2,obj_skill)
 
