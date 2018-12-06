@@ -6,6 +6,11 @@
                      --- 2.0
                      buff 类 与 debuff 类 集合
                      buff  标记attack denfense 法强 法防 提升 统一  0002 buff类技能
+
+                     ---2.1
+                     debuff 类集合 包括 属性临时降低
+                     0007  debuff 移除技能
+                     0006  buff 驱散技能
 #pp_value   技能次数（pp值）
 '''
 
@@ -40,6 +45,20 @@ class debuffSkill(skill):
     def __init__(self,pp=30):
         super().__init__(pp)
         self.skill_model = '0003'
+
+class removeBuffSkill(skill):
+    def __init__(self,pp=30):
+        super().__init__(pp)
+        self.skill_model = '0006'
+
+    remove_num = 1
+
+class removeDebuffSkill(skill):
+    def __init__(self,pp=30):
+        super().__init__(pp)
+        self.skill_model = '0007'
+
+    remove_num = 1
 
 class lifeRecoreSkill(skill):
     def __init__(self,pp=30):
@@ -84,7 +103,7 @@ class fireBall(damageSkill):
 
 class fireSpin(debuffSkill):
     skill_show_name = '火焰漩涡'
-    skill_code = 'A002'
+    skill_code = 'A004'
     index_per = 0.1
     property = 'fire'
     effect_turns = 3
@@ -120,3 +139,15 @@ class vinesTied(debuffSkill):
     property = 'wood'
     effect_turns = 3
     skill_info = "捆绑，持续性收到10%气血的伤害"
+
+class illuminatiom(removeDebuffSkill):
+    skill_show_name = '光照'
+    skill_info = "驱散一个debuff效果"
+    skill_code = 'S001'
+    property = 'light'
+
+class disperse(removeBuffSkill):
+    skill_info = "驱散一个对方的增益效果"
+    skill_code = 'T001'
+    property = 'dark'
+    skill_show_name = '驱散'

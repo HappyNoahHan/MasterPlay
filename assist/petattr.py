@@ -2,6 +2,8 @@ attr_map_dict ={
     'fire':{'fire': 1,'wood': 1.5},
     'wood':{'wood': 1},
     'fly' :{'stone': 1.5},
+    'light':{'dark': 2},
+    'dark' :{'light': 2},
 }
 
 

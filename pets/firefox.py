@@ -7,7 +7,7 @@ class Fire(pets.pet.Pet):
         self.init_skills = battle.skill.fireBall()
         super().setSkills('1',self.init_skills)
         self.property = ['fire', 'normal']
-        self.can_learn_skills = ['A','B','N']
+        self.can_learn_skills = ['A','B','N','T','S']
 
     def __str__(self):
         return print("火属性神奇宝贝")

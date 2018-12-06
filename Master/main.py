@@ -13,15 +13,16 @@ if __name__ == '__main__':
                                random.randint(4,6),10)
 
     bird.showStatus()
+    battle.learn_skill.learnSkill(bird,'A004')
     print("=" * 30)
     print("你的火狐狸准备战斗")
     fox = pets.firefox.FireFox('火狐狸',100,20,10,20)
 
     if battle.learn_skill.learnSkill(fox,'N002'):
         assist.show.learnSkill('N002')
-    if battle.learn_skill.learnSkill(fox,'B004'):
+    if battle.learn_skill.learnSkill(fox,'T001'):
         assist.show.learnSkill('A004')
-    battle.learn_skill.learnSkill(fox,'N003')
+    battle.learn_skill.learnSkill(fox,'S001')
     #fox.skill_first = battle.skill.steadiness()
 
     if fox.speed > bird.speed:

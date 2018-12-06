@@ -102,3 +102,34 @@ def proBuffCount(obj):
     return pro_index
 
 
+def removeObjBuff(obj,num):
+    '''
+    驱散对方增益buff
+    :param obj:
+    :param num:
+    :return:
+    '''
+    if obj.buff_dict:
+        if num <= len(obj.buff_dict.items()):
+            for i in range(num):
+                del_item = obj.buff_dict.popitem()
+                print("驱散  %s" % del_item[0].skill_show_name)
+        else:
+            obj.buff_dict.clear()
+            print("驱散成功！")
+    else:
+        print("对方没有buff")
+
+    buffCount(obj)
+
+def removeOwnDebuff(obj,num):
+    if obj.debuff_dict:
+        if num <= len(obj.debuff_dict.items()):
+            for i in range(num):
+                del_item = obj.debuff_dict.popitem()
+                print("移除 %s 负面效果" % del_item[0].skill_show_name)
+        else:
+            obj.debuff_dict.clear()
+            print("驱散成功")
+    else:
+        print("自己没有debuff")

@@ -41,6 +41,12 @@ class Pet(object):
     def setBuff(self,key,value):
         self.buff_dict[key] = value
 
+    def removeBuff(self,key):
+        self.buff_dict.pop(key)
+
+    def removeDebuff(self,key):
+        self.debuff_dict.pop(key)
+
     def setProBuff(self,key,value):
         self.property_buff[key] = value
 

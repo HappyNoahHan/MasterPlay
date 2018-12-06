@@ -62,6 +62,13 @@ def damageCount(obj1,obj2,obj_skill):
         for key,value in obj1.debuff_dict.items():
             print(key.skill_show_name, ':', value)
 
+    #0006 - 0007 移除buff debuff
+    elif obj_skill.skill_model == '0006':
+        battle.buff.removeObjBuff(obj1,obj_skill.remove_num)
+
+    elif obj_skill.skill_model == '0007':
+        battle.buff.removeOwnDebuff(obj2,obj_skill.remove_num)
+
     elif obj_skill.skill_model == '0008':
         assist.life.healthRecover(obj2,obj_skill)
 
