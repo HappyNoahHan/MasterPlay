@@ -55,9 +55,11 @@ def damageCount(obj1,obj2,obj_skill):
 
     elif obj_skill.skill_model == '0004':
         tmp_attack_value = round(obj2.attack * obj_skill.index_per)
-        obj2.setBuff(obj_skill,[obj_skill.effect_turns,tmp_attack_value])
+        obj2.setBuff(obj_skill,[obj_skill.effect_turns-1,tmp_attack_value])
+        battle.buff.buffCount(obj2)
         for key,value in obj2.buff_dict.items():
             print(key.skill_show_name, ':', value)
+
     elif obj_skill.skill_model == '0007':
         assist.life.healthRecover(obj2,obj_skill)
         obj2.setBuff(obj_skill,[obj_skill.effect_turns-1,0])

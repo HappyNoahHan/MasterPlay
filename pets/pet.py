@@ -10,6 +10,10 @@ class Pet(object):
         self._max_health = self.health
         self.tmp_attack = 0
         self.tmp_defense = 0
+        self.debuff_dict = {}
+        self.buff_dict = {}
+        self.property_buff = {}
+
 
     autoAi = False
 
@@ -28,19 +32,14 @@ class Pet(object):
     def getAttack(self):
         return self.attack + self.tmp_attack
 
-    talent_skills = battle.skill.skill()
+    init_skills = battle.skill.skill()
 
     skill_list = {
-        '1':talent_skills
+        '1':init_skills
     }
 
     def setSkills(self,key,value):
         self.skill_list[key] = value
-
-
-    debuff_dict = {}
-    buff_dict = {}
-    property_buff = {}
 
     def setDebuff(self,key,value):
         self.debuff_dict[key] = value
@@ -50,8 +49,6 @@ class Pet(object):
 
     def setProBuff(self,key,value):
         self.property_buff[key] = value
-
-    property = ['normal']
 
 
 

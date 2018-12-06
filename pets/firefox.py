@@ -1,19 +1,24 @@
 import pets.pet
 import battle.skill
 
+class Fire(pets.pet.Pet):
+    def __init__(self, name, health, attack, defense, speed):
+        super().__init__(name, health, attack, defense, speed)
+        self.init_skills = battle.skill.fireBall()
 
-class FireFox(pets.pet.Pet):
+        self.skill_list = {
+            '1': self.init_skills
+        }
 
-    talent_skills = battle.skill.fireBall()
+        self.property = ['fire', 'normal']
 
-    skill_list = {
-        '1': talent_skills
-    }
+        self.can_learn_skills = ['A', 'N']
+    def __str__(self):
+        return print("火属性神奇宝贝")
 
-    debuff_dict = {}
-    buff_dict = {}
-    property_buff = {}
+class FireFox(Fire):
 
-    property = ['fire']
+    talent = 'a' #天赋 eg：火属性技能伤害+10% 后续nnn版本 做一张map 天赋技能树 各种类型
 
-    can_learn_skills = ['A','N','B']
+    def __str__(self):
+        return print("火狐狸神奇宝贝")

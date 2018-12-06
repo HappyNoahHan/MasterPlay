@@ -18,6 +18,7 @@ def buffCount(obj):
                 value[1] = 0
                 obj.tmp_defense += value[1]
                 buff_remove_list.append(key)
+
         elif key.skill_model == '0004':
             if value[0] == 0:
                 value[1] = 0
@@ -38,7 +39,7 @@ def buffCount(obj):
 
 def buffIndex(obj):
     '''
-    buff 每回合 递减
+    所有增益buff 每回合 递减（debuff等是自己管自己）
     :param obj:
     :return:
     '''
