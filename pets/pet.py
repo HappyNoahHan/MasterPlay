@@ -13,7 +13,7 @@ class Pet(object):
         self.debuff_dict = {}
         self.buff_dict = {}
         self.property_buff = {}
-
+        self.skill_list = {}
 
     autoAi = False
 
@@ -31,12 +31,6 @@ class Pet(object):
 
     def getAttack(self):
         return self.attack + self.tmp_attack
-
-    init_skills = battle.skill.skill()
-
-    skill_list = {
-        '1':init_skills
-    }
 
     def setSkills(self,key,value):
         self.skill_list[key] = value

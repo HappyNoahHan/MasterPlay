@@ -9,7 +9,7 @@ def learnSkill(obj,skill_code):
         print("属性不符合，无法学习该系别技能")
         return False
 
-    for key in ['2','3','4']:
+    for key in ['1','2','3','4']:
         if key not in obj.skill_list:
             obj.skill_list[key] = battle.skilllistmap.skill_dict[skill_code]
             return True
