@@ -7,6 +7,7 @@ import assist.show
 import battle.buff
 import assist.ppvalue
 import assist.life
+import assist.petattr
 import props.drug
 
 
@@ -33,9 +34,11 @@ def damageCount(obj1,obj2,obj_skill):
             pro_buff_list = battle.buff.proBuffCount(obj2)
             if pro_buff_list:
                 pro_buff_index = sum(pro_buff_list)
+        #计算属性相克关系
+        attr_index_number = assist.petattr.getAttrMap(obj_skill,obj1)
         if obj2.getAttack() - obj1.getDefense() > 0:
             #tmpdamage 测试伤害计算
-            tmpdamage = round(((obj2.getAttack() - obj1.getDefense()) * obj_skill.index_per) * (1+pro_buff_index))
+            tmpdamage = round((((obj2.getAttack() - obj1.getDefense()) * obj_skill.index_per) * (1+pro_buff_index)) * attr_index_number)
             obj1.health -= tmpdamage
             print("造成了%s 的伤害" % tmpdamage)
         else:

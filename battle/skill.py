@@ -27,7 +27,7 @@ class scream(skill):
     skill_show_name = '尖叫'
     skill_code = 'N001'
     index_per = 1.2
-    property = 'bird'
+    property = 'fly'
     skill_model = '0001'
     skill_info = '伤害加成20%'
 
