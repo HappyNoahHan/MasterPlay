@@ -1,7 +1,7 @@
 '''
 #skill_code 技能代号  A  火系  N 普通系 B 木系
 #skill_mode 技能类型  0001 伤害技能 0002 防御临时提升 003 debuff 行动后气血损伤
-                    0008 生命恢复 0009 属性亲和，同属性技能伤害加成
+                    0007 生命回复buff技能 0008 生命恢复 0009 属性亲和，同属性技能伤害加成
 #pp_value   技能次数（pp值）
 '''
 
@@ -72,17 +72,26 @@ class flameAffinity(skill):
     skill_model = '0009'
     skill_info = "火焰亲和觉醒,接下来的一个回合，火属性技能伤害加成50%"
 
-class  lifeRecovery(skill):
+class lifeRecovery(skill):
     skill_show_name = '生命复苏'
     skill_code = 'B003'
     index_per = 0.5
     property = 'wood'
     skill_model = '0008'
-    skill_info = "生命恢复，恢复技能，恢复最大生命值50%"
+    skill_info = "恢复技能，恢复最大生命值50%"
+
+class lifeChains(skill):
+    skill_show_name = '生命锁链'
+    skill_code = 'B004'
+    index_per = 0.1
+    property = 'wood'
+    skill_model = '0007'
+    effect_turns = 3
+    skill_info = "生命锁链，每回合恢复最大生命值10%的生命，持续3回合"
 
 class vinesTied(skill):
     skill_show_name = '蔓藤捆绑'
-    skill_code = 'B004'
+    skill_code = 'B005'
     index_per = 0.1
     property = 'wood'
     skill_model = '0003'

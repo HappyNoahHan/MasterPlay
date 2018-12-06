@@ -10,6 +10,8 @@ def healthRecover(obj,obj_skill):
     if obj.health >= obj._max_health:
         obj.health = obj._max_health
 
+    print("生命恢复1次")
+
 
 def healthRecoverMax(obj):
     '''

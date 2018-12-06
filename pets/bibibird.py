@@ -15,4 +15,4 @@ class WildBBBird(pets.pet.Pet):
 
     property = ['fly','normal']
 
-    can_learn_skills = ['N','F']
+    can_learn_skills = ['N','F','B']

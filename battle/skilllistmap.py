@@ -9,7 +9,8 @@ skill_dict = {
     'N002': battle.skill.steadiness(pp=25),
     'N003': battle.skill.strengthCre(pp=20),
     'B003': battle.skill.lifeRecovery(pp=10),
-    'B004': battle.skill.vinesTied(pp=35),
+    'B004': battle.skill.lifeChains(),
+    'B005': battle.skill.vinesTied(pp=35),
 
 }
 

@@ -1,4 +1,5 @@
 import assist.petattr
+import assist.life
 import math
 def buffCount(obj):
     '''
@@ -22,6 +23,11 @@ def buffCount(obj):
                 value[1] = 0
                 buff_remove_list.append(key)
             obj.tmp_attack += value[1]
+        elif key.skill_model == '0007':
+            if value[0] > 0:
+                assist.life.healthRecover(obj,key) #调用回复技能
+            else:
+                buff_remove_list.append(key)
         else:
             pass
     if buff_remove_list:

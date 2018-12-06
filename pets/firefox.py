@@ -16,4 +16,4 @@ class FireFox(pets.pet.Pet):
 
     property = ['fire']
 
-    can_learn_skills = ['A','N']
+    can_learn_skills = ['A','N','B']
