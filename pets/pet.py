@@ -5,11 +5,13 @@
 import battle.skill
 
 class Pet(object):
-    def __init__(self,name,health,attack,defense,speed):
-        self.name = name
+    def __init__(self,health,attack,defense,spell_power,spell_defense,speed):
+
         self.health = health
         self.attack = attack
         self.defense = defense
+        self.spell_power = spell_power
+        self.spell_defense = spell_defense
         self.speed = speed
         self._max_health = self.health
         self.tmp_attack = 0
@@ -20,15 +22,6 @@ class Pet(object):
         self.skill_list = {}
 
     autoAi = False
-
-    def showStatus(self):
-        print("%s： 攻击 %s 防御 %s 速递 %s 生命 %s " %(
-            self.name,
-            self.attack + self.tmp_attack,
-            self.defense + self.tmp_defense,
-            self.speed,
-            self.health )
-              )
 
     def getDefense(self):
         return self.defense + self.tmp_defense

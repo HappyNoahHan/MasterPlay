@@ -36,12 +36,18 @@ def damageCount(obj1,obj2,obj_skill):
                 pro_buff_index = sum(pro_buff_list)
         #计算属性相克关系
         attr_index_number = assist.petattr.getAttrMap(obj_skill,obj1)
-        if obj2.getAttack() - obj1.getDefense() > 0:
-            #tmpdamage 测试伤害计算
-            tmpdamage = round((((obj2.getAttack() - obj1.getDefense()) * obj_skill.index_per) * (1+pro_buff_index)) * attr_index_number)
+        print(attr_index_number)
+        #判断是物理攻击还是元素攻击
+        if obj_skill.spell_skill == True:
+            tmpdamage = round((obj2.spell_power * obj_skill.index_per - obj1.spell_defense) * (1+pro_buff_index) * attr_index_number)
+
+        else:
+            tmpdamage = round((obj2.getAttack() * obj_skill.index_per - obj1.getDefense()) * (1+pro_buff_index) * attr_index_number)
+        if tmpdamage > 0:
             obj1.health -= tmpdamage
             print("造成了%s 的伤害" % tmpdamage)
         else:
+            obj1.health -= 1
             assist.show.noDamage()
     elif obj_skill.skill_model == '0002':
         tmp_increase_value = 0

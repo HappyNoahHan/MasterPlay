@@ -4,7 +4,7 @@ def printTurn(name):
     print("%s 的回合" % name)
 
 def noDamage():
-    print("攻击没有任何效果！")
+    print("攻击几乎任何效果！造成1点伤害 ！")
 
 def battleOver():
     print("战斗结束！")
@@ -43,7 +43,7 @@ def showPetStatus(obj):
     :param obj:
     :return:
     '''
-    print("%s 的生命值：%s  攻击值 %s 防御值 %s" % (obj.name,obj.health,obj.getAttack(),obj.getDefense()))
+    print("%s 的生命值：%s  攻击值 %s 防御值 %s 法攻值 %s 法防值 %s" % (obj.name,obj.health,obj.getAttack(),obj.getDefense(),obj.spell_power,obj.spell_defense))
 
 def showPetSkills(obj):
     for key,value in obj.skill_list.items():

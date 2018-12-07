@@ -39,6 +39,8 @@ class damageSkill(skill):
         super().__init__(pp)
         self.skill_model = '0001'
 
+    spell_skill = True
+
 class buffSkill(skill):
     def __init__(self,pp=30):
         super().__init__(pp)
@@ -82,6 +84,7 @@ class scream(damageSkill):
     index_per = 1.2
     property = 'fly'
     skill_info = '伤害加成20%'
+    spell_skill = False
 
 class steadiness(buffSkill):
     skill_show_name = '稳固'
