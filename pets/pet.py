@@ -1,5 +1,5 @@
 '''
-    ready 2.0 法强  法防
+    2.0 法强  法防  结算方式改变
 '''
 
 import battle.skill
@@ -16,6 +16,8 @@ class Pet(object):
         self._max_health = self.health
         self.tmp_attack = 0
         self.tmp_defense = 0
+        self.tmp_spell_power = 0
+        self.tmp_spell_defense = 0
         self.debuff_dict = {}
         self.buff_dict = {}
         self.property_buff = {}
@@ -28,6 +30,12 @@ class Pet(object):
 
     def getAttack(self):
         return self.attack + self.tmp_attack
+
+    def getSpellPower(self):
+        return self.spell_power + self.tmp_spell_power
+
+    def getSpellDefense(self):
+        return self.spell_defense + self.tmp_spell_defense
 
     def setSkills(self,key,value):
         self.skill_list[key] = value

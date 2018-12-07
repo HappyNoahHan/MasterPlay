@@ -39,7 +39,7 @@ def damageCount(obj1,obj2,obj_skill):
         print(attr_index_number)
         #判断是物理攻击还是元素攻击
         if obj_skill.spell_skill == True:
-            tmpdamage = round((obj2.spell_power * obj_skill.index_per - obj1.spell_defense) * (1+pro_buff_index) * attr_index_number)
+            tmpdamage = round((obj2.getSpellPower() * obj_skill.index_per - obj1.getSpellDefense()) * (1+pro_buff_index) * attr_index_number)
 
         else:
             tmpdamage = round((obj2.getAttack() * obj_skill.index_per - obj1.getDefense()) * (1+pro_buff_index) * attr_index_number)
@@ -50,16 +50,8 @@ def damageCount(obj1,obj2,obj_skill):
             obj1.health -= 1
             assist.show.noDamage()
     elif obj_skill.skill_model == '0002':
-        tmp_increase_value = 0
-        if obj_skill.buff_prop == 'Defense':
-            tmp_increase_value = round(obj2.defense * obj_skill.index_per)
-        elif obj_skill.buff_prop == 'Attack':
-            tmp_increase_value = round(obj2.attack * obj_skill.index_per)
-        #elif obj_skill.buff_prop == 'Health':
-            #assist.life.healthRecover(obj2, obj_skill)
-        obj2.setBuff(obj_skill,[obj_skill.effect_turns-1,tmp_increase_value])
+        obj2.setBuff(obj_skill,[obj_skill.effect_turns-1,obj_skill.index_per])
         battle.buff.buffCount(obj2)
-
         for key,value in obj2.buff_dict.items():
             print(key.skill_show_name,':',value)
 

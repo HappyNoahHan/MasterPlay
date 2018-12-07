@@ -12,18 +12,28 @@ def buffCount(obj):
     buff_remove_list = []  # buff 移除列表
     for key,value in obj.buff_dict.items():
         if key.buff_prop == 'Defense':
-            if value[0] > 0:
-                obj.tmp_defense += value[1]
-            else:
+            if value[0] == 0:
                 value[1] = 0
-                obj.tmp_defense += value[1]
                 buff_remove_list.append(key)
+            obj.tmp_defense += round(obj.defense * value[1])
 
         elif key.buff_prop == 'Attack':
             if value[0] == 0:
                 value[1] = 0
                 buff_remove_list.append(key)
-            obj.tmp_attack += value[1]
+            obj.tmp_attack += round(obj.attack * value[1])
+
+        elif key.buff_prop == 'SpellPower':
+            if value[0] == 0:
+                value[1] = 0
+                buff_remove_list.append(key)
+            obj.tmp_spell_power += round(obj.spell_power * value[1])
+
+        elif key.buff_prop == 'SpellDefense':
+            if value[0] == 0:
+                value[1] = 0
+                buff_remove_list.append(key)
+            obj.tmp_spell_defense += round(obj.spell_defense * value[1])
 
         elif key.buff_prop == 'Health':
             if value[0] > 0:
@@ -102,6 +112,21 @@ def proDebuffCount(obj):
                     value[0] -= 1
                 else:
                     debuff_move_list.append(key)
+            elif key.debuff_prop == 'SpellPower':
+                if value[0] > 0:
+                    tmp_spell_power = round(obj.spell_power * value[1])
+                    obj.tmp_spell_power -= tmp_spell_power
+                    value[0] -= 1
+                else:
+                    debuff_move_list.append(key)
+            elif key.debuff_prop == 'SpellDefense':
+                if value[0] > 0:
+                    tmp_spell_defense = round(obj.spell_defense * value[1])
+                    obj.tmp_spell_defense -= tmp_spell_defense
+                    value[0] -= 1
+                else:
+                    debuff_move_list.append(key)
+
     if debuff_move_list:
         for key in debuff_move_list:
             obj.debuff_dict.pop(key)

@@ -14,6 +14,9 @@
                      ---2.2
                      debuff 战前结算 属性临时降低
                             战后结算 气血损失
+
+                     ---2.3
+                     buff debuff 法强 法防
 #pp_value   技能次数（pp值）
 '''
 
@@ -168,4 +171,4 @@ class threaten(debuffSkill):
     skill_show_name = '恐吓'
     property = 'dark'
     index_per = 0.1
-    debuff_prop = 'Attack'
+    debuff_prop = 'SpellDefense'
