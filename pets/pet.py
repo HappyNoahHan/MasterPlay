@@ -1,5 +1,7 @@
 '''
     2.0 法强  法防  结算方式改变
+    3.0 经验值
+    3.1 ready 升级属性提升
 '''
 
 import battle.skill
@@ -22,6 +24,7 @@ class Pet(object):
         self.buff_dict = {}
         self.property_buff = {}
         self.skill_list = {}
+        self.exp_for_current = 0
 
     autoAi = False
 

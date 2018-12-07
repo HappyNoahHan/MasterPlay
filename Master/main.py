@@ -9,7 +9,7 @@ if __name__ == '__main__':
     print("小心，你已经进入了战斗！  ")
 
     #bird = fly.aiPidgey(random.randint(99,100),random.randint(18,21),random.randint(4,6),10,10,10)
-    gress = wood.aiOodish(random.randint(99, 100), random.randint(18, 21), random.randint(4, 6), 10, 10, 10)
+    gress = wood.aiOodish(random.randint(10, 15), random.randint(18, 21), random.randint(4, 6), 10, 10, 10)
 
     print(gress)
     assist.show.showPetStatus(gress)
@@ -20,7 +20,7 @@ if __name__ == '__main__':
     print(fox)
     assist.show.showPetStatus(fox)
 
-    if battle.learn_skill.learnSkill(fox,'N001'):
+    if battle.learn_skill.learnSkill(fox,'N002'):
         assist.show.learnSkill('N001')
     if battle.learn_skill.learnSkill(fox,'A004'):
         assist.show.learnSkill('A004')

@@ -8,6 +8,7 @@ import battle.buff
 import assist.ppvalue
 import assist.life
 import assist.petattr
+from assist import exp
 import props.drug
 
 
@@ -129,7 +130,12 @@ def battleRun(obj1,obj2):
             assist.show.printTurn(obj2.name)
             return battleRun(obj2,obj1)
         else:
-            pass
+            #经验值计算
+            got_exp = exp.getBattleSuccessExp(obj2)
+            print("%s 获得 %s 经验值" % (obj1.name,got_exp))
+            obj1.exp_for_current += got_exp
+            if exp.isLevelUp(obj1):
+                assist.show.battleOver()
 
 
     elif int(command) == 2:

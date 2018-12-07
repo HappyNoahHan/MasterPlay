@@ -10,10 +10,10 @@ def battleOver():
     print("战斗结束！")
 
 def gameOver():
-    print("战斗失败，游戏结束！")
+    print("战斗失败！")
 
 def petDie(name):
-    print("%s 死亡，战斗结束！" % name)
+    print("%s 死亡" % name)
 
 def petThink(name):
     print("%s 正在思考！" % name)
