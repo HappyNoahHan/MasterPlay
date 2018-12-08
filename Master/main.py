@@ -8,15 +8,15 @@ if __name__ == '__main__':
     print("=" * 30)
     print("小心，你已经进入了战斗！  ")
 
-    #bird = fly.aiPidgey(random.randint(99,100),random.randint(18,21),random.randint(4,6),10,10,10)
-    gress = wood.aiOodish(random.randint(10, 15), random.randint(18, 21), random.randint(4, 6), 10, 10, 10)
+    #bird = fly.aiPidgey(4)
+    gress = wood.aiOodish(10)
 
     print(gress)
     assist.show.showPetStatus(gress)
     battle.learn_skill.learnSkill(gress,'A004')
     print("=" * 30)
     print("你的火狐狸准备战斗")
-    fox = fire.FireFox(100,20,10,20,10,15)
+    fox = fire.FireFox(10)
     print(fox)
     assist.show.showPetStatus(fox)
 

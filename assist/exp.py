@@ -56,3 +56,23 @@ def isLevelUp(obj):
         return isLevelUp(obj)
     else:
         return True
+
+
+def levelUp(obj):
+    '''
+    升级 属性增加
+    :param obj:
+    :return:
+    '''
+    pass
+
+
+def propUp(obj):
+    '''
+    属性增加判定
+    :param obj:
+    :return:
+    '''
+    for prop_level in [obj.health_level,obj.attack_level,obj.defense_level,obj.spell_power_level,obj.spell_defense_level,obj.speed_level]:
+        if prop_level == 'SSS':
+            pass

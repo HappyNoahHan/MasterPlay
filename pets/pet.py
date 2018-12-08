@@ -1,20 +1,32 @@
 '''
     2.0 法强  法防  结算方式改变
     3.0 经验值
-    3.1 ready 升级属性提升
+    3.1 pet init 改造 基础能力值
+    3.2 ready 升级属性提升
 '''
 
 import battle.skill
+from assist import cap
 
 class Pet(object):
-    def __init__(self,health,attack,defense,spell_power,spell_defense,speed):
+    health_basic = 1
+    attack_basic = 1
+    defense_basic = 1
+    spell_power_basic = 1
+    spell_defense_basic = 1
+    speed_basic = 1
 
-        self.health = health
-        self.attack = attack
-        self.defense = defense
-        self.spell_power = spell_power
-        self.spell_defense = spell_defense
-        self.speed = speed
+
+
+    def __init__(self,level):
+        self.level = level
+
+        self.health = cap.gethpCapValue(self.health_basic,self.level)
+        self.attack = cap.getCapValue(self.attack_basic,self.level)
+        self.defense = cap.getCapValue(self.defense_basic,self.level)
+        self.spell_power = cap.getCapValue(self.spell_power_basic,self.level)
+        self.spell_defense = cap.getCapValue(self.spell_defense_basic,self.level)
+        self.speed = cap.getCapValue(self.speed_basic,self.level)
         self._max_health = self.health
         self.tmp_attack = 0
         self.tmp_defense = 0
@@ -26,7 +38,10 @@ class Pet(object):
         self.skill_list = {}
         self.exp_for_current = 0
 
+
+
     autoAi = False
+
 
     def getDefense(self):
         return self.defense + self.tmp_defense

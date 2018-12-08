@@ -40,10 +40,10 @@ def damageCount(obj1,obj2,obj_skill):
         print(attr_index_number)
         #判断是物理攻击还是元素攻击
         if obj_skill.spell_skill == True:
-            tmpdamage = round((obj2.getSpellPower() * obj_skill.index_per - obj1.getSpellDefense()) * (1+pro_buff_index) * attr_index_number)
+            tmpdamage = round((obj2.getSpellPower() * obj_skill.index_per ) * (1+pro_buff_index) * attr_index_number- obj1.getSpellDefense())
 
         else:
-            tmpdamage = round((obj2.getAttack() * obj_skill.index_per - obj1.getDefense()) * (1+pro_buff_index) * attr_index_number)
+            tmpdamage = round((obj2.getAttack() * obj_skill.index_per ) * (1+pro_buff_index) * attr_index_number- obj1.getDefense())
         if tmpdamage > 0:
             obj1.health -= tmpdamage
             print("造成了%s 的伤害" % tmpdamage)
@@ -135,6 +135,7 @@ def battleRun(obj1,obj2):
             print("%s 获得 %s 经验值" % (obj1.name,got_exp))
             obj1.exp_for_current += got_exp
             if exp.isLevelUp(obj1):
+                assist.show.showPetStatus(obj1)
                 assist.show.battleOver()
 
 

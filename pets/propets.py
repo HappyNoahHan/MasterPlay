@@ -2,8 +2,8 @@ import pets.pet
 import battle.skill
 
 class Fire(pets.pet.Pet):
-    def __init__(self, health,attack,defense,spell_power,spell_defense,speed):
-        super().__init__(health,attack,defense,spell_power,spell_defense,speed)
+    def __init__(self, level):
+        super().__init__(level)
         self.init_skills = battle.skill.fireBall()
         super().setSkills('1',self.init_skills)
         self.property = ['fire', 'normal']
@@ -14,8 +14,8 @@ class Fire(pets.pet.Pet):
         return self.info
 
 class Wood(pets.pet.Pet):
-    def __init__(self, health,attack,defense,spell_power,spell_defense,speed):
-        super().__init__(health,attack,defense,spell_power,spell_defense,speed)
+    def __init__(self, level):
+        super().__init__(level)
         self.init_skills = battle.skill.lifeChains()
         super().setSkills('1',self.init_skills)
         self.property = ['wood', 'normal']
@@ -26,8 +26,8 @@ class Wood(pets.pet.Pet):
         return self.info
 
 class Fly(pets.pet.Pet):
-    def __init__(self,health,attack,defense,spell_power,spell_defense,speed):
-        super().__init__(health,attack,defense,spell_power,spell_defense,speed)
+    def __init__(self,level):
+        super().__init__(level)
         self.init_skills = battle.skill.strengthCre()
         super().setSkills('1',self.init_skills)
         self.property = ['fly','normal']
