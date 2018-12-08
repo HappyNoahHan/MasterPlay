@@ -10,12 +10,6 @@ class FireFox(pets.propets.Fire):
 
     def __init__(self, level):
         super().__init__(level)
-        self.attack_level = 'A'
-        self.defense_level = 'C'
-        self.spell_power_level = 'S'
-        self.spell_defense_level = 'A'
-        self.speed_level = 'B'
-        self.health_level = 'C'
         self.name = '火狐狸'
             #talent = 'a' #天赋 eg：火属性技能伤害+10% 后续nnn版本 做一张map 天赋技能树 各种类型
         self.basic_exp_value = 51
