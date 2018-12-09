@@ -1,5 +1,6 @@
 from pets import pet, wood, fire, fly
 from assist import cap,evolve
+from battle import learnskill
 import math
 import random
 
@@ -57,6 +58,11 @@ def isLevelUp(obj):
         print('%s 升到 %s 级！' % (obj.name, obj.level))
 
         levelUp(obj)
+
+        #判断是否学习可以学习新技能
+        if obj.level in obj.skill_tree:
+            learnskill.learnSkill(obj,obj.skill_tree[obj.level])
+
 
         return isLevelUp(obj)
     else:

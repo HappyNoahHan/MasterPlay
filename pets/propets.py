@@ -16,7 +16,7 @@ class Fire(pets.pet.Pet):
 class Wood(pets.pet.Pet):
     def __init__(self, level):
         super().__init__(level)
-        self.init_skills = battle.skill.lifeChains()
+        self.init_skills = battle.skill.scream()
         super().setSkills('1',self.init_skills)
         self.property = ['wood', 'normal']
         self.can_learn_skills = ['A','B','N','T','S']

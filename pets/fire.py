@@ -1,4 +1,5 @@
 import pets.propets
+from battle import skill
 
 class Charmander(pets.propets.Fire):
     health_basic = 39
@@ -17,7 +18,13 @@ class Charmander(pets.propets.Fire):
     def __str__(self):
         return super().__str__() + ':' + self.name
 
-    evolve_level = 16
+    evolve_level = 8
+
+    #技能树
+    skill_tree = {
+        8 : 'A004',
+        9 : 'S001',
+    }
 
 class Charmeleon(Charmander):
     health_basic = 58
@@ -34,3 +41,8 @@ class Charmeleon(Charmander):
         self.basic_exp_value = 134
 
     evolve_level = 32
+
+    skill_tree = {
+        13: 'A004',
+        16: 'S001',
+    }

@@ -110,7 +110,7 @@ class strengthCre(buffSkill):
 class fireBall(damageSkill):
     skill_show_name = '火球'
     skill_code = 'A001'
-    index_per = 1.5
+    index_per = 1.4
     property = 'fire'
     skill_info = '伤害加成10%'
 
