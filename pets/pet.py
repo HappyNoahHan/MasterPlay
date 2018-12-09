@@ -22,7 +22,9 @@ class Pet(object):
     speed_basic = 1
 
     #个体值 随机1-31 天生差距 无法修正
+    #没有重写，进化无需重新赋值
     health_indi = random.randint(1,31)
+    #health_indi =31
     attack_indi = random.randint(1,31)
     defense_indi = random.randint(1,31)
     spell_power_indi = random.randint(1,31)

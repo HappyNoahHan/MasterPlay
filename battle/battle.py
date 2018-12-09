@@ -134,9 +134,9 @@ def battleRun(obj1,obj2):
             got_exp = exp.getBattleSuccessExp(obj2)
             print("%s 获得 %s 经验值" % (obj1.name,got_exp))
             obj1.exp_for_current += got_exp
-            if exp.isLevelUp(obj1):
-                assist.show.showPetStatus(obj1)
-                assist.show.battleOver()
+            obj1=exp.isLevelUp(obj1)
+            assist.show.showPetStatus(obj1)
+
 
 
     elif int(command) == 2:

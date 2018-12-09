@@ -1,5 +1,5 @@
 from pets import pet, wood, fire, fly
-from assist import cap
+from assist import cap,evolve
 import math
 import random
 
@@ -53,13 +53,22 @@ def isLevelUp(obj):
     if obj.exp_for_current >= getExpForUp(obj.level):
 
         obj.exp_for_current -= getExpForUp(obj.level)
-
-        print('%s 升到 %s 级！' % (obj.name,obj.level))
-        levelUp(obj)
         obj.level += 1
+        print('%s 升到 %s 级！' % (obj.name, obj.level))
+        if obj.level >= obj.evolve_level:
+            print("精灵是否进化！ 1 yes  2 no ")
+            isEvo = input(">")
+            if int(isEvo) == 1:
+                obj = evolve.isEvolve(obj)
+            else:
+                print("精灵停止进化！")
+
+
+        levelUp(obj)
+
         return isLevelUp(obj)
     else:
-        return True
+        return obj
 
 
 def levelUp(obj):
@@ -68,45 +77,34 @@ def levelUp(obj):
     :param obj:
     :return:
     '''
-    one_up = propUp(obj)
+    health_up = cap.gethpCapValueForOne(obj.health_basic, obj.level, obj.health_indi)
+    attack_up = cap.getCapValueForOne(obj.attack_basic, obj.level, obj.attack_indi)
+    defense_up = cap.getCapValueForOne(obj.defense_basic, obj.level, obj.defense_indi)
+    spell_power_up = cap.getCapValueForOne(obj.spell_power_basic, obj.level, obj.spell_power_indi)
+    spell_defense_up = cap.getCapValueForOne(obj.spell_defense_basic, obj.level, obj.spell_defense_indi)
+    speed_up = cap.getCapValueForOne(obj.speed_basic, obj.level, obj.speed_indi)
 
-    health_up = random.randint(int(one_up[0]),int(one_up[0])+1)
+
     print("生命 up %s !" % health_up)
     obj._max_health += health_up
     obj.health += health_up
 
-    attack_up = random.randint(int(one_up[1]),int(one_up[1]+1))
+
     obj.attack += attack_up
     print("攻击 up %s !" % attack_up)
 
-    defense_up = random.randint(int(one_up[2]),int(one_up[2]+1))
+
     obj.defense += defense_up
     print("防御 up %s !" % defense_up)
 
-    spell_power_up = random.randint(int(one_up[3]),int(one_up[3])+1)
+
     obj.spell_power += spell_power_up
     print("法攻 up %s !" % spell_power_up)
 
-    spell_defense_up = random.randint(int(one_up[4]),int(one_up[4])+1)
+
     obj.spell_defense += spell_defense_up
     print("法防 up %s !" % spell_defense_up)
 
-    speed_up = random.randint(int(one_up[5]),int(one_up[5])+1)
+
     obj.speed += speed_up
     print("速度 up %s !" % speed_up)
-
-
-def propUp(obj):
-    '''
-    升1级属性判定
-    :param obj:
-    :return:
-    '''
-    health_up = cap.gethpCapValueForOne(obj.health_basic)
-    attack_up = cap.getCapValueForOne(obj.attack_basic)
-    defense_up = cap.getCapValueForOne(obj.defense_basic)
-    spell_power_up = cap.getCapValueForOne(obj.spell_power_basic)
-    spell_defense_up = cap.getCapValueForOne(obj.spell_defense_basic)
-    speed = cap.getCapValueForOne(obj.speed_basic)
-
-    return [health_up,attack_up,defense_up,spell_power_up,spell_defense_up,speed]

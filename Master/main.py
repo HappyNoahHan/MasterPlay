@@ -9,15 +9,15 @@ if __name__ == '__main__':
     print("小心，你已经进入了战斗！  ")
 
     #bird = fly.aiPidgey(4)
-    gress = wood.aiOodish(100)
+    gress = wood.aiOodish(5)
 
     print(gress)
     assist.show.showPetStatus(gress)
     battle.learn_skill.learnSkill(gress,'A004')
     print("=" * 30)
     print("你的火狐狸准备战斗")
-    fox = fire.FireFox(100)
-    print(fox)
+    fox = fire.Charmander(5)
+    print(fox.health_indi)
     assist.show.showPetStatus(fox)
 
     if battle.learn_skill.learnSkill(fox,'N002'):
@@ -26,6 +26,8 @@ if __name__ == '__main__':
         assist.show.learnSkill('A004')
     battle.learn_skill.learnSkill(fox,'T002')
     #fox.skill_first = battle.skill.steadiness()
+
+
 
     if fox.speed > gress.speed:
         print("%s 优先进攻" % fox.name)
