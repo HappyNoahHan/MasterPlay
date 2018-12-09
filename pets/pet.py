@@ -2,14 +2,18 @@
     2.0 法强  法防  结算方式改变
     3.0 经验值
     3.1 pet init 改造 基础能力值
-    3.2 升级属性提升  后续版本个体值 随机1-31 基础点数
+    3.2 升级属性提升  后续版本个体值
+    3.21 随机1-31 基础点数
     3.3 ready 需要一个函数random 几率
 '''
 
 import battle.skill
 from assist import cap
 
+import random
+
 class Pet(object):
+    #能力值 每个精灵属性皆不同
     health_basic = 1
     attack_basic = 1
     defense_basic = 1
@@ -17,17 +21,24 @@ class Pet(object):
     spell_defense_basic = 1
     speed_basic = 1
 
+    #个体值 随机1-31 天生差距 无法修正
+    health_indi = random.randint(1,31)
+    attack_indi = random.randint(1,31)
+    defense_indi = random.randint(1,31)
+    spell_power_indi = random.randint(1,31)
+    spell_defense_indi = random.randint(1,31)
+    speed_indi = random.randint(1,31)
+
 
 
     def __init__(self,level):
         self.level = level
-
-        self.health = cap.gethpCapValue(self.health_basic,self.level)
-        self.attack = cap.getCapValue(self.attack_basic,self.level)
-        self.defense = cap.getCapValue(self.defense_basic,self.level)
-        self.spell_power = cap.getCapValue(self.spell_power_basic,self.level)
-        self.spell_defense = cap.getCapValue(self.spell_defense_basic,self.level)
-        self.speed = cap.getCapValue(self.speed_basic,self.level)
+        self.health = cap.gethpCapValue(self.health_basic,self.level,self.health_indi)
+        self.attack = cap.getCapValue(self.attack_basic,self.level,self.attack_indi)
+        self.defense = cap.getCapValue(self.defense_basic,self.level,self.defense_indi)
+        self.spell_power = cap.getCapValue(self.spell_power_basic,self.level,self.spell_power_indi)
+        self.spell_defense = cap.getCapValue(self.spell_defense_basic,self.level,self.spell_defense_indi)
+        self.speed = cap.getCapValue(self.speed_basic,self.level,self.speed_indi)
         self._max_health = self.health
         self.tmp_attack = 0
         self.tmp_defense = 0

@@ -10,8 +10,8 @@ class aiOodish(pets.propets.Wood):
 
     name = '野生走路草'
     autoAi = True
-    basic_exp_value = 56
-    #basic_exp_value = 1000
+   #basic_exp_value = 56
+    basic_exp_value = 1000
     level = 3
 
     def __str__(self):

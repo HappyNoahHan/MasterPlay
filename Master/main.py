@@ -9,14 +9,14 @@ if __name__ == '__main__':
     print("小心，你已经进入了战斗！  ")
 
     #bird = fly.aiPidgey(4)
-    gress = wood.aiOodish(10)
+    gress = wood.aiOodish(100)
 
     print(gress)
     assist.show.showPetStatus(gress)
     battle.learn_skill.learnSkill(gress,'A004')
     print("=" * 30)
     print("你的火狐狸准备战斗")
-    fox = fire.FireFox(10)
+    fox = fire.FireFox(100)
     print(fox)
     assist.show.showPetStatus(fox)
 

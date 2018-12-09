@@ -1,14 +1,14 @@
-def getCapValue(value,lv):
+def getCapValue(value,lv,value_indi):
     '''
     计算能力值
     :param value:
     :return:
     '''
 
-    return int(round((value * 2) * lv /100 + 5))
+    return int(round((value * 2 + value_indi) * lv /100 + 5))
 
 
-def gethpCapValue(value,lv):
+def gethpCapValue(value,lv,value_indi):
     '''
     计算hp 能力
     :param value:
@@ -16,7 +16,7 @@ def gethpCapValue(value,lv):
     :return:
     '''
 
-    return int(round((value * 2) * lv /100 + lv + 10))
+    return int(round((value * 2 + value_indi ) * lv /100 + lv + 10))
 
 def getCapValueForOne(value):
     '''
