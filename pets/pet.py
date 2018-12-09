@@ -33,7 +33,7 @@ class Pet(object):
 
 
 
-    def __init__(self,level):
+    def __init__(self,level=1):
         self.level = level
         self.health = cap.gethpCapValue(self.health_basic,self.level,self.health_indi)
         self.attack = cap.getCapValue(self.attack_basic,self.level,self.attack_indi)
@@ -55,6 +55,7 @@ class Pet(object):
 
 
     autoAi = False
+    canEvolve = True
 
 
     def getDefense(self):

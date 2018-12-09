@@ -17,6 +17,8 @@
 
                      ---2.3
                      buff debuff 法强 法防
+
+                     ---2.4 ready 睡眠粉 毒buff
 #pp_value   技能次数（pp值）
 '''
 

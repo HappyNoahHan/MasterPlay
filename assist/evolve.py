@@ -6,15 +6,8 @@ from pets import fire
 from assist import  show
 
 evolve_dict={
-    '小火龙': fire.Charmeleon(6),
+    '小火龙': fire.Charmeleon,
 }
-
-
-
-def petEvolve():
-    pass
-
-
 
 
 def isEvolve(obj):
@@ -25,7 +18,7 @@ def isEvolve(obj):
     '''
     inherit_skill_list = obj.skill_list
     inherit_exp_for_current = obj.exp_for_current
-    new_obj = evolve_dict[obj.name]
+    new_obj = evolve_dict[obj.name](level = obj.level)
 
 
     new_obj.skill_list = inherit_skill_list

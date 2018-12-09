@@ -55,20 +55,12 @@ def isLevelUp(obj):
         obj.exp_for_current -= getExpForUp(obj.level)
         obj.level += 1
         print('%s 升到 %s 级！' % (obj.name, obj.level))
-        if obj.level >= obj.evolve_level:
-            print("精灵是否进化！ 1 yes  2 no ")
-            isEvo = input(">")
-            if int(isEvo) == 1:
-                obj = evolve.isEvolve(obj)
-            else:
-                print("精灵停止进化！")
-
 
         levelUp(obj)
 
         return isLevelUp(obj)
     else:
-        return obj
+        return True
 
 
 def levelUp(obj):

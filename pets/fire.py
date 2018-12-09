@@ -17,7 +17,7 @@ class Charmander(pets.propets.Fire):
     def __str__(self):
         return super().__str__() + ':' + self.name
 
-    evolve_level = 6
+    evolve_level = 16
 
 class Charmeleon(Charmander):
     health_basic = 58
