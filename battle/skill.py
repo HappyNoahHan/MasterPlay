@@ -19,12 +19,17 @@
                      buff debuff 法强 法防
 
                      ---2.4
-                     技能威力以及命中
+                     技能命中
+
+                     ---3.0
+                     技能改版，技能威力，伤害技能结算改变
 
                      ---2.5 ready 睡眠粉 毒buff
-#pp_value   技能次数（pp值）
-#index_per  威力  0.1 =  威力10
-#hit_rate   命中  100 = 100% 命中
+
+#pp_value    技能次数（pp值）
+#index_per   buff debuff 伤害
+#skill_power 技能威力
+#hit_rate    命中  100 = 100% 命中
 '''
 
 
@@ -50,7 +55,7 @@ class damageSkill(skill):
         super().__init__(pp)
         self.skill_model = '0001'
 
-    spell_skill = True
+    spell_skill = True #特殊攻击类型 物理攻击类型
 
 class buffSkill(skill):
     def __init__(self,pp=30):
@@ -92,7 +97,7 @@ class propSkill(skill):
 class scream(damageSkill):
     skill_show_name = '尖叫'
     skill_code = 'N001'
-    index_per = 1.2
+    skill_power = 40
     property = 'fly'
     skill_info = '伤害加成20%'
     spell_skill = False
@@ -116,9 +121,9 @@ class strengthCre(buffSkill):
 class fireBall(damageSkill):
     skill_show_name = '火球'
     skill_code = 'A001'
-    index_per = 1.4
+    skill_power = 40
     property = 'fire'
-    skill_info = '伤害加成10%'
+    skill_info = '使用火球术攻击，威力一般'
     hit_rate = 80
 
 class fireSpin(debuffSkill):
@@ -136,6 +141,15 @@ class flameAffinity(propSkill):
     index_per = 0.5
     property = 'fire'
     skill_info = "火焰亲和觉醒,接下来的一个回合，火属性技能伤害加成50%"
+
+class azorLeaf(damageSkill):
+    skill_show_name = '飞叶快刀'
+    skill_code = 'B002'
+    skill_power = 55
+    spell_skill = False
+    property = 'wood'
+    hit_rate = 95
+    skill_info = "飞叶攻击，片片不占身"
 
 class lifeRecovery(lifeRecoreSkill):
     skill_show_name = '生命复苏'

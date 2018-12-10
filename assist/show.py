@@ -51,3 +51,6 @@ def showPetSkills(obj):
 
 def learnSkill(code):
     print("%s 学习成功！" % battle.skilllistmap.skill_dict[code].skill_show_name)
+
+def useSkill(obj,skill):
+    print("%s 使用 %s 攻击！" % (obj.name, skill.skill_show_name))

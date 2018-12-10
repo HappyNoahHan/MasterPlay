@@ -10,8 +10,8 @@ import assist.ppvalue
 import assist.life
 import assist.petattr
 from assist import exp,evolve
+from battle import skilldamage
 import props.drug
-
 
 def damageCount(obj1,obj2,obj_skill):
     '''
@@ -30,27 +30,8 @@ def damageCount(obj1,obj2,obj_skill):
         print("没有buff")
 
     if obj_skill.skill_model == '0001':
-        #计算属性增幅，道具增幅
-        pro_buff_index = 0
-        if obj2.property_buff:
-            pro_buff_list = battle.buff.proBuffCount(obj2)
-            if pro_buff_list:
-                pro_buff_index = sum(pro_buff_list)
-        #计算属性相克关系
-        attr_index_number = assist.petattr.getAttrMap(obj_skill,obj1)
-        print(attr_index_number)
-        #判断是物理攻击还是元素攻击
-        if obj_skill.spell_skill == True:
-            tmpdamage = round((obj2.getSpellPower() * obj_skill.index_per ) * (1+pro_buff_index) * attr_index_number- obj1.getSpellDefense())
+        skilldamage.skillDamage(obj2,obj1,obj_skill)
 
-        else:
-            tmpdamage = round((obj2.getAttack() * obj_skill.index_per ) * (1+pro_buff_index) * attr_index_number- obj1.getDefense())
-        if tmpdamage > 0:
-            obj1.health -= tmpdamage
-            print("造成了%s 的伤害" % tmpdamage)
-        else:
-            obj1.health -= 1
-            assist.show.noDamage()
     elif obj_skill.skill_model == '0002':
         obj2.setBuff(obj_skill,[obj_skill.effect_turns-1,obj_skill.index_per])
         battle.buff.buffCount(obj2)
@@ -81,6 +62,7 @@ def damageCount(obj1,obj2,obj_skill):
     if obj2.debuff_dict:
         battle.buff.damageDebuffCount(obj2) #行动后debuff 计算
 
+    #问题 1P 死了怎么结算
     if obj1.health <= 0:
         assist.show.petDie(obj1.name)
         return False
@@ -125,6 +107,7 @@ def battleRun(obj1,obj2):
             if not assist.ppvalue.ppCount(obj1.skill_list[skill_number]):
                 print("指令失败,重新选择！")
                 return battleRun(obj1, obj2)
+        assist.show.useSkill(obj1,obj1.skill_list[skill_number])
         print(obj1.skill_list[skill_number]) #显示技能描述
         #命中与否判断
         if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number].hit_rate):
@@ -137,6 +120,7 @@ def battleRun(obj1,obj2):
             return battleRun(obj2,obj1)
         else:
             pass
+            #战后结算放入上级
 
     elif int(command) == 2:
         #交换精灵模块

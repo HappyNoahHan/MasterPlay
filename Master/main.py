@@ -13,7 +13,7 @@ if __name__ == '__main__':
 
     print(gress)
     assist.show.showPetStatus(gress)
-    battle.learnskill.learnSkill(gress,'A001')
+    battle.learnskill.learnSkill(gress,'B002')
     print("=" * 30)
     print("你的火狐狸准备战斗")
     fox = fire.Charmander(level=5)
@@ -25,7 +25,9 @@ if __name__ == '__main__':
     if battle.learnskill.learnSkill(fox,'A004'):
         assist.show.learnSkill('A004')
     battle.learnskill.learnSkill(fox,'T002')
+    #测试用例
     #fox.skill_first = battle.skill.steadiness()
+    #fox.speed = 255
 
 
 
