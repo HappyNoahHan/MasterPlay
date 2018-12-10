@@ -34,3 +34,7 @@ if __name__ == '__main__':
         battle.battle.battleRun(fox,gress)
     else:
         battle.battle.battleRun(gress,fox)
+
+
+
+

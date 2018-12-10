@@ -3,6 +3,7 @@ from assist import cap,evolve
 from battle import learnskill
 import math
 import random
+import time
 
 
 def getExpForUp(lv):
@@ -58,11 +59,16 @@ def isLevelUp(obj):
         print('%s 升到 %s 级！' % (obj.name, obj.level))
 
         levelUp(obj)
+        #增加点执行时间
+        time.sleep(3)
 
         #判断是否学习可以学习新技能
         if obj.level in obj.skill_tree:
-            learnskill.learnSkill(obj,obj.skill_tree[obj.level])
+            learnOrNot=learnskill.learnSkill(obj,obj.skill_tree[obj.level])
 
+            if learnOrNot == False:
+                #print("技能已经学会")
+                pass
 
         return isLevelUp(obj)
     else:

@@ -4,6 +4,11 @@ import assist.show
 import time
 
 def learnSkill(obj,skill_code):
+    #判断是否已经领悟
+    for key,value in obj.skill_list.items():
+        if value == battle.skilllistmap.skill_dict[skill_code]:
+            return False
+
     print("%s 领悟了 %s 技能！" % (obj.name,battle.skilllistmap.skill_dict[skill_code].skill_show_name))
 
     if skill_code[0] not in obj.can_learn_skills:

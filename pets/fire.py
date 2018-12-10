@@ -23,7 +23,7 @@ class Charmander(pets.propets.Fire):
     #技能树
     skill_tree = {
         8 : 'A004',
-        9 : 'S001',
+        12 : 'S001',
     }
 
 class Charmeleon(Charmander):

@@ -185,3 +185,6 @@ def battleRun(obj1,obj2):
     #obj1.debuff_dict.clear()
     obj1.property_buff.clear()
     assist.show.battleOver()
+
+    #测试
+    #return battleRun(obj1, obj2)
