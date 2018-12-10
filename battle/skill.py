@@ -18,8 +18,13 @@
                      ---2.3
                      buff debuff 法强 法防
 
-                     ---2.4 ready 睡眠粉 毒buff
+                     ---2.4
+                     技能威力以及命中
+
+                     ---2.5 ready 睡眠粉 毒buff
 #pp_value   技能次数（pp值）
+#index_per  威力  0.1 =  威力10
+#hit_rate   命中  100 = 100% 命中
 '''
 
 
@@ -32,6 +37,7 @@ class skill(object):
     skill_info = '使用技能'
     effect_turns = 1
     property = 'normal'
+    hit_rate = 100
 
     def __str__(self):
         return self.skill_info
@@ -113,6 +119,7 @@ class fireBall(damageSkill):
     index_per = 1.4
     property = 'fire'
     skill_info = '伤害加成10%'
+    hit_rate = 80
 
 class fireSpin(debuffSkill):
     skill_show_name = '火焰漩涡'

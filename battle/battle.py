@@ -3,6 +3,7 @@ import time
 import math
 import battle.skill
 import battle.skilllistmap
+import battle.hitrate
 import assist.show
 import battle.buff
 import assist.ppvalue
@@ -125,6 +126,11 @@ def battleRun(obj1,obj2):
                 print("指令失败,重新选择！")
                 return battleRun(obj1, obj2)
         print(obj1.skill_list[skill_number]) #显示技能描述
+        #命中与否判断
+        if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number].hit_rate):
+            assist.show.printTurn(obj2.name)
+            return battleRun(obj2,obj1)
+
         #改写结算 直接把技能扔进去
         if damageCount(obj2,obj1,obj1.skill_list[skill_number]):
             assist.show.printTurn(obj2.name)
