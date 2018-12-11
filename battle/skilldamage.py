@@ -3,6 +3,8 @@
 如果基础伤害＞997，基础伤害＝997。
 基础伤害＝基础伤害＋2。
 技能伤害结算
+
+加入随机数217~255 平衡伤害
 :return:
 判断是否会心一击
 会心一击判定
@@ -14,7 +16,7 @@
 
 from battle import buff,skill,skilllistmap
 from assist import petattr,ppvalue,show
-from pets import talentmap,pettalent
+from pets import talentmap,pettalent,statusmap,status
 import random
 
 def basicDamage(obj,level,skill,skill_power,attack_value,defense_value,speed):
@@ -37,6 +39,10 @@ def basicDamage(obj,level,skill,skill_power,attack_value,defense_value,speed):
     if basic_damage > 997:
         basic_damage = 997
     basic_damage += 2
+
+    random_index = random.randint(217,255)
+
+    basic_damage = int(basic_damage * random_index / 255)
 
 
 
@@ -90,14 +96,11 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
     spell_defense = obj_defense.getSpellDefense()
     speed = obj_attack.speed
 
-    #加入战斗前天赋计算
+    #加入战斗前天赋计算  技能威力提升
     if talentmap.checkTalent(obj_attack, 'before'):
-        if talentmap.talent_dict[obj_attack.talent].talent_type == '属性增强类型':
-            if talentmap.talent_dict[obj_attack.talent].effect_prop == 'skill_power':
-                power = talentmap.talent_dict[obj_attack.talent].talentEffect(skill.skill_power)
+        if talentmap.talent_dict[obj_attack.talent].talent_type == '技能威力类型':
+            power = talentmap.talent_dict[obj_attack.talent].talentEffect(skill.skill_power)
 
-    if talentmap.checkTalent(obj_defense, 'before'):
-        pass
 
     print(power)
     #判断是物理攻击还是元素攻击
@@ -113,6 +116,12 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
     #战斗中天赋计算
     if talentmap.checkTalent(obj_attack,'middle'):
         damage = talentmap.talentEffectMiddle(obj_attack,skill,damage)
+        print(damage)
+
+    #战斗后敌方状态加成
+    if obj_defense.status:
+        damage = statusmap.checkStatusAfterBattle(obj_defense,skill,damage)
+        print(damage)
 
     if damage > 0:
         obj_defense.health -= damage

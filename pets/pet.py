@@ -5,7 +5,7 @@
     3.2 升级属性提升  后续版本个体值
     3.21 随机1-31 基础点数
     3.3 特性 eg：猛火
-    3.3 ready 需要一个函数random 几率
+    3.4 状态 eg：灼伤
 '''
 
 import battle.skill
@@ -53,6 +53,7 @@ class Pet(object):
         self.skill_list = {}
         self.exp_for_current = 0
         self.realize_skill_list = [] #已经领悟的技能表
+        self.status = [] #状态表
 
 
 

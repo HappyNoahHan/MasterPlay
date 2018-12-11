@@ -19,20 +19,21 @@
                      buff debuff 法强 法防
 
                      ---2.4
-                     技能命中
+                     技能命中 威力
 
-                     ---3.0
-                     技能改版，技能威力，伤害技能结算改变
+                     ---2.5
+                     技能附带附加状态已经命中的概率
 
-                     ---3.1 ready 睡眠粉 毒buff
 
+ready 睡眠粉 毒buff
 #pp_value    技能次数（pp值）
 #index_per   buff debuff 伤害
 #skill_power 技能威力
 #hit_rate    命中  100 = 100% 命中
 '''
 
-
+from assist import  rancom
+from pets import statusmap
 
 class skill(object):
     def __init__(self,pp=30):
@@ -56,6 +57,9 @@ class damageSkill(skill):
         self.skill_model = '0001'
 
     spell_skill = True #特殊攻击类型 物理攻击类型
+
+    def addStatus(self,obj):
+        pass
 
 class buffSkill(skill):
     def __init__(self,pp=30):
@@ -123,8 +127,15 @@ class fireBall(damageSkill):
     skill_code = 'A001'
     skill_power = 40
     property = 'fire'
-    skill_info = '使用火球术攻击，威力一般'
+    skill_info = '使用火球术攻击，威力一般,有5%的几率使对手进入灼伤状态'
     hit_rate = 80
+    status_rate = 5
+
+    def addStatus(self,obj):
+        if rancom.statusRandom(self.status_rate):
+            if 'ST001' not in obj.status:
+                obj.status.append('ST001')
+                print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict['ST001']))
 
 class fireSpin(debuffSkill):
     skill_show_name = '火焰漩涡'

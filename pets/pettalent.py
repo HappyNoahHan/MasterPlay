@@ -1,6 +1,9 @@
 '''
     天赋特性  --1.0    initial
-             --1.1   生效时间
+             --1.1   生效时间  #战前类型 只有技能威力的提升 其他有buff 提供 或者后续版本
+                              #战中类型 只有伤害增强类型
+                              #战后类型 只有回复气血类型
+                              #其他类型  后续nn个版本
 '''
 from assist import life
 
@@ -30,7 +33,7 @@ class RestoreTalent(object):
 
 class PropUpTalen(object):
     def __init__(self):
-        self.talent_type = '属性增强类型'
+        self.talent_type = '技能威力类型'
 
     index_per = 0.1
     def talentEffect(self,value):
@@ -60,5 +63,4 @@ class SunShine(PropUpTalen):
     talent_property = 'fire'
     talent_code = 'TA003'
     effect_time = ['before']
-    effect_prop = 'skill_power'
     index_per = 2

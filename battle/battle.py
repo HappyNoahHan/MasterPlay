@@ -11,7 +11,7 @@ import assist.life
 import assist.petattr
 from assist import exp,evolve
 from battle import skilldamage
-from pets import pettalent,talentmap
+from pets import pettalent,talentmap,status,statusmap
 import props.drug
 
 def damageCount(obj_defense,obj_attack,obj_skill):
@@ -33,6 +33,8 @@ def damageCount(obj_defense,obj_attack,obj_skill):
     if obj_skill.skill_model == '0001':
         pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
         skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index)
+        obj_skill.addStatus(obj_defense) #附加状态
+        print(obj_defense.status)
 
     elif obj_skill.skill_model == '0002':
         obj_attack.setBuff(obj_skill,[obj_skill.effect_turns-1,obj_skill.index_per])
@@ -117,6 +119,10 @@ def battleRun(obj1,obj2):
                 return battleRun(obj1, obj2)
         assist.show.useSkill(obj1,obj1.skill_list[skill_number])
         print(obj1.skill_list[skill_number]) #显示技能描述
+        #状态判断是否可以行动
+        if not statusmap.checkStatusBeforeBattle(obj1):
+            print("技能被封锁,无法使用,重新选择！")
+            return battleRun(obj1,obj2)
         #命中与否判断
         if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number].hit_rate):
             assist.show.printTurn(obj2.name)

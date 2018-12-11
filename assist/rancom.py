@@ -14,3 +14,12 @@ def randomRange():
         return 3
     else:
         return 4
+
+def statusRandom(value):
+    x = random.randint(1,100)
+
+    if x <= value:
+        return True
+    else:
+        return False
+
