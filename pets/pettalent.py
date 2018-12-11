@@ -28,6 +28,14 @@ class RestoreTalent(object):
         life.healthRecoverByTalent(obj,self.index_per)
         print("生命回复10%")
 
+class PropUpTalen(object):
+    def __init__(self):
+        self.talent_type = '属性增强类型'
+
+    index_per = 0.1
+    def talentEffect(self,value):
+        return value * self.index_per
+
 
 
 class Firaga(DamageTalent):
@@ -45,3 +53,12 @@ class Growth(RestoreTalent):
     index_per = 0.1
     talent_code = 'TA002'
     effect_time = ['after']
+
+class SunShine(PropUpTalen):
+    talent_show_name = '阳光'
+    talent_info = '火系技能威力翻倍'
+    talent_property = 'fire'
+    talent_code = 'TA003'
+    effect_time = ['before']
+    effect_prop = 'skill_power'
+    index_per = 2

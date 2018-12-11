@@ -30,12 +30,6 @@ def damageCount(obj_defense,obj_attack,obj_skill):
     else:
         print("没有buff")
 
-    #检查战斗前天赋技能
-    if talentmap.checkTalent(obj_attack,'before'):
-        pass
-    if talentmap.checkTalent(obj_defense,'before'):
-        pass
-
     if obj_skill.skill_model == '0001':
         pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
         skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index)
