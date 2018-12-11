@@ -132,21 +132,37 @@ def proDebuffCount(obj):
             obj.debuff_dict.pop(key)
             print("移除 %s 负面效果" % key.skill_show_name)
 
-def proBuffCount(obj):
+def proBuffCount(obj,skill):
     '''
     属性增幅buff
     :param obj:
     :return:
     '''
-    pro_index = []
+    prop_buff_index = 1
+    prop_buff_list = []
+    if obj.property_buff:
+        for key,value in obj.property_buff.items():
+            if skill.property == key.property:
+                prop_buff_list.append(value[1])
+
+        prop_buff_index += sum(prop_buff_list)
+
+    print(prop_buff_index)
+    return prop_buff_index
+
+
+
+
+def proBuffindex(obj):
+    '''
+    属性buff 每回合递减
+    :param obj:
+    :return:
+    '''
     probuff_remove_list = []
-    for key,value in obj.property_buff.items():
-        if key.property in obj.property:
-            if value[0] > 0:
-                pro_index.append(value[1])
-                print("增幅%s " % value[1])
-            else:
-                probuff_remove_list.append(key)
+    for key, value in obj.property_buff.items():
+        if value[0] <= 0:
+            probuff_remove_list.append(key)
         value[0] -= 1
 
     if probuff_remove_list:
@@ -154,7 +170,6 @@ def proBuffCount(obj):
             obj.property_buff.pop(key)
             print("移除 %s 增幅效果" % key.skill_show_name)
 
-    return pro_index
 
 
 def removeObjBuff(obj,num):

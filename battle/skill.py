@@ -24,7 +24,7 @@
                      ---3.0
                      技能改版，技能威力，伤害技能结算改变
 
-                     ---2.5 ready 睡眠粉 毒buff
+                     ---3.1 ready 睡眠粉 毒buff
 
 #pp_value    技能次数（pp值）
 #index_per   buff debuff 伤害

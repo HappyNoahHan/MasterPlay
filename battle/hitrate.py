@@ -7,6 +7,9 @@ def hitOrNot(rate):
 
     random_number = random.random() * 100
 
+    #测试
+    #print(random_number)
+
     if random_number <= rate:
         print("技能命中！")
         return True

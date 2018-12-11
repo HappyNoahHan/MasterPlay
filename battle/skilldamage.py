@@ -62,7 +62,7 @@ def luckyAttack(speed,skill):
         return False
 
 
-def skillDamage(obj_attack,obj_defense,skill):
+def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
     '''
     伤害计算
     :param obj_attack:
@@ -70,13 +70,8 @@ def skillDamage(obj_attack,obj_defense,skill):
     :param skill:
     :return:
     '''
-    # 计算属性增幅，道具增幅等后续
-    pro_buff_index = 1
-    if obj_attack.property_buff:
-        pro_buff_list = buff.proBuffCount(obj_attack)
-        if pro_buff_list:
-            pro_buff_index = sum(pro_buff_list)
-    #计算属性相克关系 有点问题 克制问题
+
+    #计算属性相克关系
     attr_index_number = petattr.getAttrMap(skill,obj_defense)
     print(attr_index_number)
     #计算是否使用的是本属性的技能

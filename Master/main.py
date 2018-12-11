@@ -25,9 +25,9 @@ if __name__ == '__main__':
 
     if battle.learnskill.learnSkill(fox,'N002'):
         assist.show.learnSkill('N001')
-    if battle.learnskill.learnSkill(fox,'A004'):
+    if battle.learnskill.learnSkill(fox,'A009'):
         assist.show.learnSkill('A004')
-    battle.learnskill.learnSkill(fox,'T002')
+    battle.learnskill.learnSkill(fox,'N001')
     #测试用例
     #fox.skill_first = battle.skill.steadiness()
     #fox.speed = 255
