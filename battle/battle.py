@@ -119,8 +119,7 @@ def battleRun(obj1,obj2):
             assist.show.printTurn(obj2.name)
             return battleRun(obj2,obj1)
         else:
-            pass
-            #战后结算放入上级
+            return True
 
     elif int(command) == 2:
         #交换精灵模块
@@ -153,28 +152,3 @@ def battleRun(obj1,obj2):
         print("指令错误!")
         return battleRun(obj1,obj2)
 
-    #战斗结束之前结算部分
-    # 经验值计算
-    got_exp = exp.getBattleSuccessExp(obj2)
-    print("%s 获得 %s 经验值" % (obj1.name, got_exp))
-    obj1.exp_for_current += got_exp
-
-    if exp.isLevelUp(obj1):
-        assist.show.showPetStatus(obj1)
-    # 进化判断
-    if obj1.canEvolve:
-        if obj1.level >= obj1.evolve_level:
-            print("精灵是否进化！ 1 yes  2 no ")
-            isEvo = input(">")
-            if int(isEvo) == 1:
-                obj1 = evolve.isEvolve(obj1)
-            else:
-                print("精灵停止进化！")
-    #清除buff
-    obj1.buff_dict.clear()
-    #obj1.debuff_dict.clear()
-    obj1.property_buff.clear()
-    assist.show.battleOver()
-
-    #测试
-    #return battleRun(obj1, obj2)

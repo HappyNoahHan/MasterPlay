@@ -4,6 +4,9 @@ import battle.skill
 import battle.learnskill
 import random
 import assist.show
+from assist import exp,evolve
+
+
 if __name__ == '__main__':
     print("=" * 30)
     print("小心，你已经进入了战斗！  ")
@@ -33,9 +36,39 @@ if __name__ == '__main__':
 
     if fox.speed > gress.speed:
         print("%s 优先进攻" % fox.name)
-        battle.battle.battleRun(fox,gress)
+        battle_end = battle.battle.battleRun(fox,gress)
     else:
-        battle.battle.battleRun(gress,fox)
+        battle_end = battle.battle.battleRun(gress,fox)
+
+    if battle_end == True:
+        if fox.health <= 0:
+            assist.show.gameOver()
+        else:
+            # 战斗结束之后结算
+            # 经验值计算
+            got_exp = exp.getBattleSuccessExp(gress)
+            print("%s 获得 %s 经验值" % (fox.name, got_exp))
+            fox.exp_for_current += got_exp
+
+            if exp.isLevelUp(fox):
+                assist.show.showPetStatus(fox)
+            # 进化判断
+            if fox.canEvolve:
+                if fox.level >= fox.evolve_level:
+                    print("精灵是否进化！ 1 yes  2 no ")
+                    isEvo = input(">")
+                    if int(isEvo) == 1:
+                        obj1 = evolve.isEvolve(fox)
+                    else:
+                        print("精灵停止进化！")
+            # 清除buff
+            fox.buff_dict.clear()
+            # obj1.debuff_dict.clear()
+            fox.property_buff.clear()
+            assist.show.battleOver()
+
+            # 测试
+            # return battleRun(obj1, obj2)
 
 
 

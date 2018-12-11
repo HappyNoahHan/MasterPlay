@@ -67,7 +67,7 @@ def isLevelUp(obj):
             learnOrNot=learnskill.learnSkill(obj,obj.skill_tree[obj.level])
 
             if learnOrNot == False:
-                #print("技能已经学会")
+                print("技能已经学会")
                 pass
 
         return isLevelUp(obj)
