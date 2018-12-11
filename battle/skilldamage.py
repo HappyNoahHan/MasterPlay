@@ -14,6 +14,7 @@
 
 from battle import buff,skill,skilllistmap
 from assist import petattr,ppvalue,show
+from pets import talentmap,pettalent
 import random
 
 def basicDamage(obj,level,skill,attack_value,defense_value):
@@ -90,6 +91,10 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
 
 
     damage = round(basic_damage * pro_buff_index * attr_index_number * skill_prop_match_obj_prop)
+
+    #伤害类天赋计算
+    if talentmap.talent_dict[obj_attack.talent].talent_type == '伤害类型':
+        damage = talentmap.talent_dict[obj_attack.talent].talentEffect(skill,damage)
 
     if damage > 0:
         obj_defense.health -= damage

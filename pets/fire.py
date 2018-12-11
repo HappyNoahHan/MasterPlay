@@ -12,7 +12,7 @@ class Charmander(pets.propets.Fire):
     def __init__(self, level):
         super().__init__(level)
         self.name = '小火龙'
-            #talent = 'a' #天赋 eg：火属性技能伤害+10% 后续nnn版本 做一张map 天赋技能树 各种类型
+        self.talent = 'TA001' #天赋 eg：火属性技能伤害+10% 后续nnn版本 做一张map 天赋技能树 各种类型
         self.basic_exp_value = 51
 
     def __str__(self):
