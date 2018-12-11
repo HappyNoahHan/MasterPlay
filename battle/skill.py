@@ -223,4 +223,21 @@ class StunSpore(statusSkill):
     skill_show_name = '麻痹粉'
     status = status.Paralysis()
     property = 'worm'
+    hit_rate = 50
+
+class SleepingPowder(statusSkill):
+    skill_info = '是对手进入睡眠，无法行动，但有一定几率清醒'
+    skill_code = 'C002'
+    skill_show_name = '睡眠粉'
+    status = status.Sleeping()
+    property = 'worm'
     hit_rate = 85
+
+class HolyLight(removeStatusSkill):
+    skill_show_name = '圣光'
+    skill_info = '移除所有状态'
+    skill_code = 'S002'
+    property = 'light'
+
+    def useSkill(self,obj):
+        statusmap.removeStatus(obj)

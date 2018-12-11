@@ -13,8 +13,10 @@ skill_dict = {
     'B004': battle.skill.lifeChains(),
     'B005': battle.skill.vinesTied(pp=35),
     'S001': battle.skill.illuminatiom(pp=10),
+    'S002': battle.skill.HolyLight(pp=5),
     'T001': battle.skill.disperse(pp=10),
     'T002': battle.skill.threaten(),
     'C001': battle.skill.StunSpore(pp=20),
+    'C002': battle.skill.SleepingPowder(pp=20),
 
 }

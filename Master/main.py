@@ -20,10 +20,10 @@ if __name__ == '__main__':
     print("=" * 30)
     print("你的火狐狸准备战斗")
     fox = fire.Charmander(level=5)
-    print(fox.health_indi)
+
     assist.show.showPetStatus(fox)
 
-    if battle.learnskill.learnSkill(fox,'C001'):
+    if battle.learnskill.learnSkill(fox,'S002'):
         assist.show.learnSkill('N001')
     if battle.learnskill.learnSkill(fox,'A009'):
         assist.show.learnSkill('A004')
@@ -32,7 +32,11 @@ if __name__ == '__main__':
     #测试用例
     #fox.skill_first = battle.skill.steadiness()
     #fox.speed = 255
-    fox.realize_skill_list.append('S001')
+    #fox.realize_skill_list.append('S001')
+    #print(fox.health_indi)
+    fox.status.append('ST001')
+    fox.status.append('ST002')
+    print(fox.status)
 
 
     if fox.speed > gress.speed:

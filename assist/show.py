@@ -19,7 +19,7 @@ def petThink(name):
     print("%s 正在思考！" % name)
 
 def petSelectSkill(name):
-    print("%s 正在开始释放技能!" % name)
+    print("%s 正在思考选择技能!" % name)
 
 def petUseRun(name):
     print("%s 开始逃跑了" % name)

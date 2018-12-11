@@ -27,3 +27,15 @@ class Paralysis(Status):
             return True
         else:
             return False
+
+class Sleeping(Status):
+    status_show_name = '睡眠'
+    status_code = 'ST003'
+    status_info = '睡眠，有一定的几率自我清醒'
+    rate = 30
+
+    def statusEffect(self):
+        if rancom.statusRandom(self.rate):
+            return True
+        else:
+            return False
