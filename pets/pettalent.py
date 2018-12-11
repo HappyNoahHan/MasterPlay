@@ -1,6 +1,8 @@
 '''
-    天赋特性
+    天赋特性  --1.0    initial
+             --1.1   生效时间
 '''
+from assist import life
 
 class DamageTalent(object):
     def __init__(self):
@@ -20,7 +22,12 @@ class RestoreTalent(object):
         self.talent_type = '回复类型'
 
     talent_property = 'normal'
-    index_per = 1.1
+    index_per = 0.1
+
+    def talentEffect(self,obj):
+        life.healthRecoverByTalent(obj,self.index_per)
+        print("生命回复10%")
+
 
 
 class Firaga(DamageTalent):
@@ -29,10 +36,12 @@ class Firaga(DamageTalent):
     talent_property = 'fire'
     index_per = 1.1
     talent_code = 'TA001'
+    effect_time = ['middle']
 
 class Growth(RestoreTalent):
     talent_show_name = '生长'
-    talent_info = '每回合回复生命10%'
+    talent_info = '战斗后回复滋生生命10%'
     talent_property = 'wood'
-    index_per = 1.1
+    index_per = 0.1
     talent_code = 'TA002'
+    effect_time = ['after']

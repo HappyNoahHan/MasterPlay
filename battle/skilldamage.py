@@ -92,9 +92,9 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
 
     damage = round(basic_damage * pro_buff_index * attr_index_number * skill_prop_match_obj_prop)
 
-    #伤害类天赋计算
-    if talentmap.talent_dict[obj_attack.talent].talent_type == '伤害类型':
-        damage = talentmap.talent_dict[obj_attack.talent].talentEffect(skill,damage)
+    #战斗中天赋计算
+    if talentmap.checkTalent(obj_attack,'middle'):
+        damage = talentmap.talentEffectMiddle(obj_attack,skill,damage)
 
     if damage > 0:
         obj_defense.health -= damage

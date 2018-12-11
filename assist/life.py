@@ -20,3 +20,11 @@ def healthRecoverMax(obj):
     :return:
     '''
     obj.health = obj._max_health
+
+def healthRecoverByTalent(obj,per):
+
+    obj.health += round(obj._max_health * per)
+
+    if obj.health >= obj._max_health:
+        obj.health = obj._max_health
+    return True

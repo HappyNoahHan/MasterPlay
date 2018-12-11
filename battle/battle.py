@@ -11,6 +11,7 @@ import assist.life
 import assist.petattr
 from assist import exp,evolve
 from battle import skilldamage
+from pets import pettalent,talentmap
 import props.drug
 
 def damageCount(obj_defense,obj_attack,obj_skill):
@@ -28,6 +29,12 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         battle.buff.buffIndex(obj_attack)
     else:
         print("没有buff")
+
+    #检查战斗前天赋技能
+    if talentmap.checkTalent(obj_attack,'before'):
+        pass
+    if talentmap.checkTalent(obj_defense,'before'):
+        pass
 
     if obj_skill.skill_model == '0001':
         pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
@@ -67,11 +74,14 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         battle.buff.proBuffindex(obj_attack) #属性增强buff 次数计算
 
 
-    if obj_defense.health <= 0:
+    if obj_defense.health <= 0: #战斗结束
         assist.show.petDie(obj_defense.name)
         return False
 
     else:
+        #检查战斗后特性检查
+        if talentmap.checkTalent(obj_attack,'after'):
+            talentmap.talentEffectAfter(obj_attack,obj_skill)
 
         assist.show.showPetStatus(obj_defense)
         assist.show.showPetStatus(obj_attack)
