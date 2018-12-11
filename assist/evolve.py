@@ -18,10 +18,13 @@ def isEvolve(obj):
     '''
     inherit_skill_list = obj.skill_list
     inherit_exp_for_current = obj.exp_for_current
+    inherit_realize_skill_list = obj.realize_skill_list
     new_obj = evolve_dict[obj.name](level = obj.level)
 
 
     new_obj.skill_list = inherit_skill_list
     new_obj.exp_for_current = inherit_exp_for_current
+    new_obj.realize_skill_list = inherit_realize_skill_list
     show.showPetStatus(new_obj)
+    #print(new_obj.realize_skill_list)
     return new_obj

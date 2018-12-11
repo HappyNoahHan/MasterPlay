@@ -28,10 +28,11 @@ if __name__ == '__main__':
     if battle.learnskill.learnSkill(fox,'A009'):
         assist.show.learnSkill('A004')
     battle.learnskill.learnSkill(fox,'N001')
+
     #测试用例
     #fox.skill_first = battle.skill.steadiness()
     #fox.speed = 255
-
+    fox.realize_skill_list.append('S001')
 
 
     if fox.speed > gress.speed:
@@ -58,7 +59,7 @@ if __name__ == '__main__':
                     print("精灵是否进化！ 1 yes  2 no ")
                     isEvo = input(">")
                     if int(isEvo) == 1:
-                        obj1 = evolve.isEvolve(fox)
+                        fox = evolve.isEvolve(fox)
                     else:
                         print("精灵停止进化！")
             # 清除buff
@@ -66,9 +67,6 @@ if __name__ == '__main__':
             # obj1.debuff_dict.clear()
             fox.property_buff.clear()
             assist.show.battleOver()
-
-            # 测试
-            # return battleRun(obj1, obj2)
 
 
 

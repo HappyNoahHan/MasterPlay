@@ -51,6 +51,8 @@ class Pet(object):
         self.property_buff = {}
         self.skill_list = {}
         self.exp_for_current = 0
+        self.realize_skill_list = [] #已经领悟的技能表
+
 
 
 
