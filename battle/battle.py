@@ -48,6 +48,11 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         for key,value in obj_defense.debuff_dict.items():
             print(key.skill_show_name, ':', value)
 
+    elif obj_skill.skill_model == '0004':
+        if obj_skill.status.status_code not in obj_defense.status:
+            obj_defense.status.append(obj_skill.status.status_code)
+            print(obj_defense.status)
+
     #0006 - 0007 移除buff debuff
     elif obj_skill.skill_model == '0006':
         battle.buff.removeObjBuff(obj_defense,obj_skill.remove_num)
@@ -120,9 +125,9 @@ def battleRun(obj1,obj2):
         assist.show.useSkill(obj1,obj1.skill_list[skill_number])
         print(obj1.skill_list[skill_number]) #显示技能描述
         #状态判断是否可以行动
-        if not statusmap.checkStatusBeforeBattle(obj1):
-            print("技能被封锁,无法使用,重新选择！")
-            return battleRun(obj1,obj2)
+        if statusmap.checkStatusBeforeBattle(obj1):
+            print("%s 没有成功使用技能" % obj1.name)
+            return battleRun(obj2,obj1)
         #命中与否判断
         if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number].hit_rate):
             assist.show.printTurn(obj2.name)

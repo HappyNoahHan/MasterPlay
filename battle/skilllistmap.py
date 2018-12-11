@@ -15,5 +15,6 @@ skill_dict = {
     'S001': battle.skill.illuminatiom(pp=10),
     'T001': battle.skill.disperse(pp=10),
     'T002': battle.skill.threaten(),
+    'C001': battle.skill.StunSpore(pp=20),
 
 }

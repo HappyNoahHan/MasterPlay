@@ -7,7 +7,7 @@ class Fire(pets.pet.Pet):
         self.init_skills = battle.skill.fireBall()
         super().setSkills('1',self.init_skills)
         self.property = ['fire']
-        self.can_learn_skills = ['A','B','N','T','S']
+        self.can_learn_skills = ['A','B','N','T','S','C']
         self.info = '火系神奇宝贝'
 
     def __str__(self):
@@ -19,7 +19,7 @@ class Wood(pets.pet.Pet):
         self.init_skills = battle.skill.scream()
         super().setSkills('1',self.init_skills)
         self.property = ['wood']
-        self.can_learn_skills = ['A','B','N','T','S']
+        self.can_learn_skills = ['A','B','N','T','S','C']
         self.info = '木系神奇宝贝'
 
     def __str__(self):

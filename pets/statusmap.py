@@ -1,10 +1,12 @@
 from pets import status
+from assist import rancom
 '''
     eg:ST009   麻痹 技能无法使用
 '''
 
 status_dict={
-    'ST001' : status.Cauma()
+    'ST001' : status.Cauma(),
+    'ST002' : status.Paralysis(),
 }
 
 
@@ -19,7 +21,9 @@ def checkStatusAfterBattle(obj,skill,damage):
 
 
 def checkStatusBeforeBattle(obj):
-    if 'ST009' in obj.status:
-        return False
+    if 'ST002' in obj.status:
 
-    return True
+        if status_dict['ST002'].statusEffect():
+            return True
+
+    return False

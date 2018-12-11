@@ -23,7 +23,7 @@ if __name__ == '__main__':
     print(fox.health_indi)
     assist.show.showPetStatus(fox)
 
-    if battle.learnskill.learnSkill(fox,'N002'):
+    if battle.learnskill.learnSkill(fox,'C001'):
         assist.show.learnSkill('N001')
     if battle.learnskill.learnSkill(fox,'A009'):
         assist.show.learnSkill('A004')

@@ -1,8 +1,8 @@
 '''
 #skill_code 技能代号  A  火系  N 普通系 B 木系
-#skill_mode 技能类型   0001 伤害技能 0002 防御临时提升 003 debuff 行动后气血损伤 0004 力量加成技能
-                     0005 法强加成  0006 法防加成
-                     0007 生命回复buff技能 0008 生命恢复 0009 属性亲和，同属性技能伤害加成
+#skill_mode 技能类型   0001 伤害技能 0002 防御临时提升 003 debuff 技能
+                     0004 施加状态技能  0005 移除状态技能
+                     0008 生命恢复 0009 属性亲和，同属性技能伤害加成
                      --- 2.0
                      buff 类 与 debuff 类 集合
                      buff  标记attack denfense 法强 法防 提升 统一  0002 buff类技能
@@ -33,7 +33,7 @@ ready 睡眠粉 毒buff
 '''
 
 from assist import  rancom
-from pets import statusmap
+from pets import statusmap,status
 
 class skill(object):
     def __init__(self,pp=30):
@@ -72,6 +72,16 @@ class debuffSkill(skill):
         self.skill_model = '0003'
 
     damage_debuff = False
+
+class statusSkill(skill):
+    def __init__(self,pp=30):
+        super().__init__(pp)
+        self.skill_model = '0004'
+
+class removeStatusSkill(skill):
+    def __init__(self,pp=30):
+        super().__init__(pp)
+        self.skill_model = '0005'
 
 class removeBuffSkill(skill):
     def __init__(self,pp=30):
@@ -129,10 +139,10 @@ class fireBall(damageSkill):
     property = 'fire'
     skill_info = '使用火球术攻击，威力一般,有5%的几率使对手进入灼伤状态'
     hit_rate = 80
-    status_rate = 5
+    addition_status_rate = 5
 
     def addStatus(self,obj):
-        if rancom.statusRandom(self.status_rate):
+        if rancom.statusRandom(self.addition_status_rate):
             if 'ST001' not in obj.status:
                 obj.status.append('ST001')
                 print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict['ST001']))
@@ -206,3 +216,11 @@ class threaten(debuffSkill):
     property = 'dark'
     index_per = 0.1
     debuff_prop = 'SpellDefense'
+
+class StunSpore(statusSkill):
+    skill_info = '麻痹对手，使对手有一定的几率无法成功使用技能'
+    skill_code = 'C001'
+    skill_show_name = '麻痹粉'
+    status = status.Paralysis()
+    property = 'worm'
+    hit_rate = 85
