@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
     #bird = fly.aiPidgey(4)
     gress = wood.aiOodish(level=5)
-    gress.health = 100
+    #gress.health = 100
     print(gress)
     assist.show.showPetStatus(gress)
     battle.learnskill.learnSkill(gress,'B002')

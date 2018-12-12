@@ -34,7 +34,7 @@ class Pet(object):
 
 
 
-    def __init__(self,level=1):
+    def __init__(self,level=1,skill_list={},exp_for_current=0,realize_skill_list=[],status=[],carry_prop=None):
         self.level = level
         self.health = cap.gethpCapValue(self.health_basic,self.level,self.health_indi)
         self.attack = cap.getCapValue(self.attack_basic,self.level,self.attack_indi)
@@ -50,11 +50,12 @@ class Pet(object):
         self.debuff_dict = {}
         self.buff_dict = {}
         self.property_buff = {}
-        self.skill_list = {}
-        self.exp_for_current = 0
-        self.realize_skill_list = [] #已经领悟的技能表
-        self.status = [] #状态表
-        self.carry_prop = None
+        #以下是进化时需要继承的选线
+        self.skill_list = skill_list
+        self.exp_for_current = exp_for_current
+        self.realize_skill_list = realize_skill_list #已经领悟的技能表
+        self.status = status #状态表
+        self.carry_prop = carry_prop
 
 
 

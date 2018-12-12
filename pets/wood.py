@@ -8,11 +8,9 @@ class aiOodish(pets.propets.Wood):
     spell_defense_basic = 65
     speed_basic = 30
 
-    def __init__(self, level):
-        super().__init__(level)
-        self.name = '野生走路草'
-        self.talent = 'TA002'
-        self.basic_exp_value = 1000
+    name = '野生走路草'
+    talent = 'TA002'
+    basic_exp_value = 1000
 
     autoAi = True
 

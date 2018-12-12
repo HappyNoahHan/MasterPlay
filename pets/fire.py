@@ -9,11 +9,10 @@ class Charmander(pets.propets.Fire):
     spell_defense_basic = 50
     speed_basic = 65
 
-    def __init__(self, level):
-        super().__init__(level)
-        self.name = '小火龙'
-        self.talent = 'TA003' #天赋 eg：火属性技能伤害+10% 后续nnn版本 做一张map 天赋技能树 各种类型
-        self.basic_exp_value = 51
+
+    name = '小火龙'
+    talent = 'TA003' #天赋 eg：火属性技能伤害+10% 后续nnn版本 做一张map 天赋技能树 各种类型
+    basic_exp_value = 51
 
     def __str__(self):
         return super().__str__() + ':' + self.name
@@ -34,11 +33,9 @@ class Charmeleon(Charmander):
     spell_defense_basic = 65
     speed_basic = 80
 
-    def __init__(self, level):
-        super().__init__(level)
-        self.name = '火恐龙'
+    name = '火恐龙'
             #talent = 'a' #天赋 eg：火属性技能伤害+10% 后续nnn版本 做一张map 天赋技能树 各种类型
-        self.basic_exp_value = 134
+    basic_exp_value = 134
 
     evolve_level = 32
 

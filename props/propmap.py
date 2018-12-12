@@ -1,7 +1,7 @@
 from props import  prop
 
 prop_dict ={
-    '攻击之爪': prop.PropertyUpProp(per=1.3,up_type='1111')
+    '攻击之爪': prop.PropertyUpProp(per=1.3,up_type='attack')
 }
 
 
