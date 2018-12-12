@@ -15,6 +15,7 @@ class Cauma(Status):
     def statusEffect(self,skill,damage):
         if skill.property == 'fire':
             return int(damage * self.index_per)
+        return damage
 
 class Paralysis(Status):
     status_show_name = '麻痹'
