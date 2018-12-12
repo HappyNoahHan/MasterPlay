@@ -7,7 +7,7 @@ class Status(object):
 
 
 class Cauma(Status):
-    status_show_name = '灼烧'
+    status_show_name = '灼伤'
     status_code = 'ST001'
     status_info = '受到火属性伤害加成20%'
     index_per = 1.2

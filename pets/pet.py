@@ -54,6 +54,7 @@ class Pet(object):
         self.exp_for_current = 0
         self.realize_skill_list = [] #已经领悟的技能表
         self.status = [] #状态表
+        self.carry_prop = None
 
 
 

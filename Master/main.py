@@ -5,6 +5,7 @@ import battle.learnskill
 import random
 import assist.show
 from assist import exp,evolve
+from props import propmap
 
 
 if __name__ == '__main__':
@@ -34,9 +35,17 @@ if __name__ == '__main__':
     #fox.speed = 255
     #fox.realize_skill_list.append('S001')
     #print(fox.health_indi)
-    fox.status.append('ST001')
-    fox.status.append('ST002')
-    print(fox.status)
+    #fox.status.append('ST001')
+    #fox.status.append('ST002')
+    #print(fox.status)
+    fox.carry_prop = propmap.prop_dict['攻击之爪']
+
+    if propmap.checkCarryProp(fox):
+
+        assist.show.showPetStatus(fox)
+    else:
+        assist.show.gameOver()
+        exit(1)
 
 
     if fox.speed > gress.speed:

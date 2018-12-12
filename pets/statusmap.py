@@ -54,6 +54,7 @@ def removeStatus(obj,status_code='all'):
     :param status_code:
     :return:
     '''
+    #全能解状态药剂
     if status_code == 'all':
         obj.status.clear()
 

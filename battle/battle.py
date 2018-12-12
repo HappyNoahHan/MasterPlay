@@ -65,7 +65,7 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         battle.buff.removeOwnDebuff(obj_attack,obj_skill.remove_num)
 
     elif obj_skill.skill_model == '0008':
-        assist.life.healthRecover(obj_attack,obj_skill)
+        assist.life.healthRecoverBySkill(obj_attack,obj_skill)
 
     elif obj_skill.skill_model == '0009':
         obj_attack.setProBuff(obj_skill,[obj_skill.effect_turns,obj_skill.index_per])

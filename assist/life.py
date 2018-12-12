@@ -1,4 +1,4 @@
-def healthRecover(obj,obj_skill):
+def healthRecoverBySkill(obj,obj_skill):
     '''
     生命恢复
     :param obj:
@@ -27,4 +27,12 @@ def healthRecoverByTalent(obj,per):
 
     if obj.health >= obj._max_health:
         obj.health = obj._max_health
+    return True
+
+def healthRecoreByDrug(obj,value):
+    obj.health += value
+
+    if obj.health >= obj._max_health:
+        obj.health = obj._max_health
+
     return True
