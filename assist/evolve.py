@@ -16,14 +16,18 @@ def isEvolve(obj):
     :param obj:
     :return:
     '''
-
     new_obj = evolve_dict[obj.name](level= obj.level,
                                     skill_list=obj.skill_list,
                                     exp_for_current=obj.exp_for_current,
                                     realize_skill_list=obj.realize_skill_list,
                                     status=obj.status,
-                                    carry_prop=obj.carry_prop)
+                                    carry_prop=obj.carry_prop,
+                                    indi_list = [obj.health_indi,
+                                                 obj.attack_indi,
+                                                 obj.defense_indi,
+                                                 obj.spell_power_indi,
+                                                 obj.spell_defense_indi,
+                                                 obj.speed_indi])
 
     show.showPetStatus(new_obj)
-    print(new_obj.realize_skill_list)
     return new_obj

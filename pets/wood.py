@@ -1,4 +1,5 @@
 import pets.propets
+import random
 
 class aiOodish(pets.propets.Wood):
     health_basic = 45

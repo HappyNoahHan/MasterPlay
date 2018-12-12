@@ -23,3 +23,12 @@ def statusRandom(value):
     else:
         return False
 
+
+def getIndiValue():
+    indi_list = []
+
+    for i in range(6):
+        indi_list.append(random.randint(1,31))
+
+    return indi_list
+

@@ -9,7 +9,7 @@
 '''
 
 import battle.skill
-from assist import cap
+from assist import cap,rancom
 
 import random
 
@@ -23,19 +23,16 @@ class Pet(object):
     speed_basic = 1
 
     #个体值 随机1-31 天生差距 无法修正
-    #没有重写，进化无需重新赋值
-    health_indi = random.randint(1,31)
-    #health_indi =31
-    attack_indi = random.randint(1,31)
-    defense_indi = random.randint(1,31)
-    spell_power_indi = random.randint(1,31)
-    spell_defense_indi = random.randint(1,31)
-    speed_indi = random.randint(1,31)
 
-
-
-    def __init__(self,level=1,skill_list={},exp_for_current=0,realize_skill_list=[],status=[],carry_prop=None):
+    def __init__(self,level=1,skill_list={},exp_for_current=0,realize_skill_list=[],
+                 status=[],carry_prop=None,indi_list=rancom.getIndiValue()):
         self.level = level
+        [self.health_indi,
+            self.attack_indi,
+            self.defense_indi,
+            self.spell_power_indi,
+            self.spell_defense_indi,
+            self.speed_indi] = indi_list
         self.health = cap.gethpCapValue(self.health_basic,self.level,self.health_indi)
         self.attack = cap.getCapValue(self.attack_basic,self.level,self.attack_indi)
         self.defense = cap.getCapValue(self.defense_basic,self.level,self.defense_indi)
