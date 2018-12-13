@@ -81,12 +81,12 @@ def levelUp(obj):
     :param obj:
     :return:
     '''
-    health_up = cap.gethpCapValueForUp(obj.health_basic, obj.level, obj.health_indi,obj._max_health)
-    attack_up = cap.getCapValueForUp(obj.attack_basic, obj.level, obj.attack_indi,obj.attack)
-    defense_up = cap.getCapValueForUp(obj.defense_basic, obj.level, obj.defense_indi,obj.defense)
-    spell_power_up = cap.getCapValueForUp(obj.spell_power_basic, obj.level, obj.spell_power_indi,obj.spell_power)
-    spell_defense_up = cap.getCapValueForUp(obj.spell_defense_basic, obj.level, obj.spell_defense_indi,obj.spell_defense)
-    speed_up = cap.getCapValueForUp(obj.speed_basic, obj.level, obj.speed_indi,obj.speed)
+    health_up = cap.gethpCapValue(obj.health_basic, obj.level, obj.health_indi,obj.health_base_point) - obj._max_health
+    attack_up = cap.getCapValue(obj.attack_basic, obj.level, obj.attack_indi,obj.attack_base_point) - obj.attack
+    defense_up = cap.getCapValue(obj.defense_basic, obj.level, obj.defense_indi,obj.defense_base_point) - obj.defense
+    spell_power_up = cap.getCapValue(obj.spell_power_basic, obj.level, obj.spell_power_indi,obj.spell_power_base_point) - obj.spell_power
+    spell_defense_up = cap.getCapValue(obj.spell_defense_basic, obj.level, obj.spell_defense_indi,obj.spell_defense_base_point) -obj.spell_defense
+    speed_up = cap.getCapValue(obj.speed_basic, obj.level, obj.speed_indi,obj.speed_base_point) - obj.speed
 
     #属性改变
     obj._max_health += health_up

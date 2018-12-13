@@ -15,6 +15,9 @@ class aiOodish(pets.propets.Wood):
 
     autoAi = True
 
+    can_get_base_point = 2
+    can_get_base_point_type = 'attack'
+
 
     def __str__(self):
         return super().__str__() + ':' + self.name

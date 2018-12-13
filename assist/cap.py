@@ -1,14 +1,14 @@
-def getCapValue(value,lv,value_indi):
+def getCapValue(basic,lv,value_indi,base_point):
     '''
     计算能力值
     :param value:
     :return:
     '''
 
-    return int((value * 2 + value_indi) * lv /100 + 5)
+    return int((basic * 2 + base_point /4 + value_indi) * lv /100 + 5)
 
 
-def gethpCapValue(value,lv,value_indi):
+def gethpCapValue(basic,lv,value_indi,base_point):
     '''
     计算hp 能力
     :param value:
@@ -16,23 +16,4 @@ def gethpCapValue(value,lv,value_indi):
     :return:
     '''
 
-    return int((value * 2 + value_indi ) * lv /100 + lv + 10)
-
-def getCapValueForUp(value,lv,value_indi,now_value):
-    '''
-    计算1级属性提升
-    :param now_value: 现在的值
-    :return:
-    '''
-
-    return getCapValue(value,lv,value_indi) - now_value
-
-def gethpCapValueForUp(value,lv,value_indi,now_value):
-    '''
-    计算1级hp属性提升
-    :param value:
-    :param lv:
-    :return:
-    '''
-
-    return gethpCapValue(value,lv,value_indi) - now_value
+    return int((basic * 2 + base_point /4 + value_indi ) * lv /100 + lv + 10)

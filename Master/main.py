@@ -6,6 +6,7 @@ import random
 import assist.show
 from assist import exp,evolve
 from props import propmap
+from battle import asscount
 
 
 if __name__ == '__main__':
@@ -55,6 +56,11 @@ if __name__ == '__main__':
         if fox.health <= 0:
             assist.show.gameOver()
         else:
+            #计算获得的基础点数
+            #print(fox.attack_base_point)
+            asscount.getBasePoint(fox,gress)
+            #print(fox.attack_base_point)
+
             # 战斗结束之后结算
             # 经验值计算
             got_exp = exp.getBattleSuccessExp(gress)

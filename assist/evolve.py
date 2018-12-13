@@ -27,13 +27,21 @@ def isEvolve(obj):
                                                  obj.defense_indi,
                                                  obj.spell_power_indi,
                                                  obj.spell_defense_indi,
-                                                 obj.speed_indi])
+                                                 obj.speed_indi],
+                                    base_points_list = [obj.health_base_point,
+                                                       obj.attack_base_point,
+                                                       obj.defense_base_point,
+                                                       obj.spell_power_base_point,
+                                                       obj.spell_defense_base_point,
+                                                       obj.speed_base_point])
+
     evolveUp(obj,new_obj)
     show.showPetStatus(new_obj)
     return new_obj
 
 def evolveUp(obj,new_obj):
     health_up = new_obj._max_health - obj._max_health
+    new_obj.health = obj.health + health_up
     attack_up = new_obj.attack - obj.attack
     defense_up = new_obj.defense - obj.defense
     spell_power_up = new_obj.spell_power - obj.spell_power

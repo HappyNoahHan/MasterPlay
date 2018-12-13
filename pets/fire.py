@@ -18,8 +18,8 @@ class Charmander(pets.propets.Fire):
 
     #技能树
     skill_tree = {
-        6 : 'A004',
-        9 : 'S001',
+        9 : 'A004',
+        12 : 'S001',
     }
 
     def __str__(self):
@@ -39,6 +39,6 @@ class Charmeleon(Charmander):
     evolve_level = 32
 
     skill_tree = {
-        10: 'A004',
-        12: 'S001',
+        14: 'A004',
+        17: 'S001',
     }
