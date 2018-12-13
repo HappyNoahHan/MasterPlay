@@ -5,7 +5,7 @@ def getCapValue(value,lv,value_indi):
     :return:
     '''
 
-    return int(round((value * 2 + value_indi) * lv /100 + 5))
+    return int((value * 2 + value_indi) * lv /100 + 5)
 
 
 def gethpCapValue(value,lv,value_indi):
@@ -16,18 +16,18 @@ def gethpCapValue(value,lv,value_indi):
     :return:
     '''
 
-    return int(round((value * 2 + value_indi ) * lv /100 + lv + 10))
+    return int((value * 2 + value_indi ) * lv /100 + lv + 10)
 
-def getCapValueForOne(value,lv,value_indi):
+def getCapValueForUp(value,lv,value_indi,now_value):
     '''
     计算1级属性提升
-    :param value:
+    :param now_value: 现在的值
     :return:
     '''
 
-    return getCapValue(value,lv,value_indi) - getCapValue(value,lv-1,value_indi)
+    return getCapValue(value,lv,value_indi) - now_value
 
-def gethpCapValueForOne(value,lv,value_indi):
+def gethpCapValueForUp(value,lv,value_indi,now_value):
     '''
     计算1级hp属性提升
     :param value:
@@ -35,4 +35,4 @@ def gethpCapValueForOne(value,lv,value_indi):
     :return:
     '''
 
-    return gethpCapValue(value,lv,value_indi) -gethpCapValue(value,lv-1,value_indi)
+    return gethpCapValue(value,lv,value_indi) - now_value

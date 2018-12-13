@@ -18,11 +18,12 @@ class Prop(object):
 
 
 class PropertyUpProp(Prop):
-    def __init__(self,per = 1.1,up_type = 'attack'):
+    def __init__(self,per = 0.3,up_type = 'attack'):
         self.info = '属性提升道具'
         self.per = per
         self.up_type = up_type
         self.prop_type = 'basic'
 
     def propCarry(self,value):
+        #print(value * self.per)
         return  int(value * self.per)

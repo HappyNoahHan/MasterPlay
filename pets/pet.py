@@ -22,8 +22,7 @@ class Pet(object):
     spell_defense_basic = 1
     speed_basic = 1
 
-    #个体值 随机1-31 天生差距 无法修正
-
+    #初始化函数
     def __init__(self,level=1,skill_list={},exp_for_current=0,realize_skill_list=[],
                  status=[],carry_prop=None,indi_list=rancom.getIndiValue()):
         self.level = level
@@ -40,10 +39,18 @@ class Pet(object):
         self.spell_defense = cap.getCapValue(self.spell_defense_basic,self.level,self.spell_defense_indi)
         self.speed = cap.getCapValue(self.speed_basic,self.level,self.speed_indi)
         self._max_health = self.health
+        #buff提升的能力属性
         self.tmp_attack = 0
         self.tmp_defense = 0
         self.tmp_spell_power = 0
         self.tmp_spell_defense = 0
+        self.tmp_speed = 0
+        #属性道具提升的能力属性
+        self.prop_attack_up = 0
+        self.prop_defense_up = 0
+        self.prop_spell_power_up = 0
+        self.prop_spell_defense_up = 0
+        self.prop_speed_up = 0
         self.debuff_dict = {}
         self.buff_dict = {}
         self.property_buff = {}
@@ -54,24 +61,24 @@ class Pet(object):
         self.status = status #状态表
         self.carry_prop = carry_prop
 
-
-
-
     autoAi = False
     canEvolve = True
 
 
     def getDefense(self):
-        return self.defense + self.tmp_defense
+        return self.defense + self.tmp_defense + self.prop_defense_up
 
     def getAttack(self):
-        return self.attack + self.tmp_attack
+        return self.attack + self.tmp_attack + self.prop_attack_up
 
     def getSpellPower(self):
-        return self.spell_power + self.tmp_spell_power
+        return self.spell_power + self.tmp_spell_power + self.prop_spell_power_up
 
     def getSpellDefense(self):
-        return self.spell_defense + self.tmp_spell_defense
+        return self.spell_defense + self.tmp_spell_defense + self.prop_spell_defense_up
+
+    def getSpeed(self):
+        return self.speed + self.tmp_speed + self.prop_speed_up
 
     def setSkills(self,key,value):
         self.skill_list[key] = value

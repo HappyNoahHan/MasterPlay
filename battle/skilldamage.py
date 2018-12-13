@@ -94,7 +94,7 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
     defense = obj_defense.getDefense()
     spell_power = obj_attack.getSpellPower()
     spell_defense = obj_defense.getSpellDefense()
-    speed = obj_attack.speed
+    speed = obj_attack.getSpeed()
 
     #加入战斗前天赋计算  技能威力提升
     if talentmap.checkTalent(obj_attack, 'before'):

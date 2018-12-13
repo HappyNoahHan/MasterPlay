@@ -20,15 +20,18 @@ def learnSkill(obj,skill_code):
             return True
 
 
-    print("技能格已满！")
+    print("技能格已满,是否要学习新技能？1：Yes 2: No" )
+    learn_or_not = input(">")
+    if int(learn_or_not) == 1:
+        print("请选择要遗忘的技能：")
+        assist.show.showPetSkills(obj)
+        forget_id = input(">")
 
-    print("请选择要遗忘的技能：")
-    assist.show.showPetSkills(obj)
-    forget_id = input(">")
-
-    print("正在遗忘",obj.skill_list[forget_id].skill_show_name,'技能！')
-    time.sleep(3)
-    obj.skill_list[forget_id] = battle.skilllistmap.skill_dict[skill_code]
+        print("正在遗忘",obj.skill_list[forget_id].skill_show_name,'技能！')
+        time.sleep(3)
+        obj.skill_list[forget_id] = battle.skilllistmap.skill_dict[skill_code]
+    else:
+        print("放弃学习技能")
 
     #加入已经领悟的列表
     obj.realize_skill_list.append(skill_code)

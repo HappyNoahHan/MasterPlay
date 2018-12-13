@@ -43,7 +43,7 @@ def showPetStatus(obj):
     :param obj:
     :return:
     '''
-    print("%s 的生命值：%s  攻击值 %s 防御值 %s 法攻值 %s 法防值 %s  速度 %s 等级: Lv%s" % (obj.name,obj.health,obj.getAttack(),obj.getDefense(),obj.getSpellPower(),obj.getSpellDefense(),obj.speed,obj.level))
+    print("%s 的生命值：%s  攻击值 %s 防御值 %s 法攻值 %s 法防值 %s  速度 %s 等级: Lv%s" % (obj.name,obj.health,obj.getAttack(),obj.getDefense(),obj.getSpellPower(),obj.getSpellDefense(),obj.getSpeed(),obj.level))
 
 def showPetSkills(obj):
     for key,value in obj.skill_list.items():

@@ -9,6 +9,10 @@ def buffCount(obj):
     '''
     obj.tmp_defense = 0
     obj.tmp_attack = 0
+    obj.tmp_spell_power = 0
+    obj.tmp_spell_defense = 0
+    obj.tmp_speed = 0
+
     buff_remove_list = []  # buff 移除列表
     for key,value in obj.buff_dict.items():
         if key.buff_prop == 'Defense':

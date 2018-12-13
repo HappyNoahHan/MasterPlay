@@ -40,15 +40,13 @@ if __name__ == '__main__':
     #print(fox.status)
     fox.carry_prop = propmap.prop_dict['攻击之爪']
 
-    if propmap.checkCarryProp(fox):
+    propmap.checkCarryProp(fox)
 
-        assist.show.showPetStatus(fox)
-    else:
-        assist.show.gameOver()
-        exit(1)
+    propmap.checkCarryProp(gress)
+    assist.show.showPetStatus(fox)
 
 
-    if fox.speed > gress.speed:
+    if fox.getSpeed() > gress.getSpeed():
         print("%s 优先进攻" % fox.name)
         battle_end = battle.battle.battleRun(fox,gress)
     else:

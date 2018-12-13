@@ -10,7 +10,7 @@ import assist.ppvalue
 import assist.life
 import assist.petattr
 from assist import exp,evolve
-from battle import skilldamage
+from battle import skilldamage,asscount
 from pets import pettalent,talentmap,status,statusmap
 import props.drug
 
@@ -23,12 +23,9 @@ def damageCount(obj_defense,obj_attack,obj_skill):
     :return:
     :model : 0001:伤害加成  0002： 防御临时提高
     '''
-    #技能使用前buff 检查
-    if obj_attack.buff_dict:
-        battle.buff.buffCount(obj_attack)
-        battle.buff.buffIndex(obj_attack)
-    else:
-        print("没有buff")
+    #战斗前的buff
+    asscount.checkBuffBeforeBattle(obj_attack,obj_defense)
+    #道具检查
 
     if obj_skill.skill_model == '0001':
         pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
