@@ -3,10 +3,7 @@
                 debuff 闪避类
 '''
 
-import  assist.ppvalue
-from assist import life
-from pets import statusmap
-from battle import buff
+from props import propmap
 
 
 class Prop(object):
@@ -16,14 +13,40 @@ class Prop(object):
     def __str__(self):
         return self.info
 
+    def removeProp(self,obj):
+        print("%s 卸下了 %s " % (obj.name,self.prop_show_name))
+        obj.carry_prop = None
+    def equipProp(self,obj):
+        print("%s 装备了 %s " % (obj.name,self.prop_show_name))
+        obj.carry_prop = propmap.prop_dict[self.prop_show_name]
+
 
 class PropertyUpProp(Prop):
-    def __init__(self,per = 0.3,up_type = 'attack'):
+    def __init__(self,per = 0.3,up_type = 'attack',prop_show_name = ''):
         self.info = '属性提升道具'
         self.per = per
         self.up_type = up_type
         self.prop_type = 'basic'
+        self.prop_show_name = prop_show_name
 
     def propCarry(self,value):
         #print(value * self.per)
         return  int(value * self.per)
+
+class SkillPowerUpProp(Prop):
+    def __init__(self,pety='normal',power = 20,prop_show_name = ''):
+        self.info = '技能威力提高道具'
+        self.prop_type = 'skill'
+        self.pety = pety
+        self.power = power
+        self.prop_show_name = prop_show_name
+
+    def propCarry(self,skill):
+        if self.pety == 'all':
+            return self.power
+        if self.pety == skill.property:
+            return self.power
+        else:
+            return 0
+
+

@@ -44,7 +44,7 @@ def showPetStatus(obj):
     :param obj:
     :return:
     '''
-    propmap.checkCarryProp(obj)
+    propmap.checkCarryPropForObj(obj)
     print("%s 的生命值：%s  攻击值 %s 防御值 %s 法攻值 %s 法防值 %s  速度 %s 等级: Lv%s" % (obj.name,obj.health,obj.getAttack(),obj.getDefense(),obj.getSpellPower(),obj.getSpellDefense(),obj.getSpeed(),obj.level))
 
 def showPetSkills(obj):

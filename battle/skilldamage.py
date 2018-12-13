@@ -17,6 +17,7 @@
 from battle import buff,skill,skilllistmap
 from assist import petattr,ppvalue,show
 from pets import talentmap,pettalent,statusmap,status
+from props import propmap
 import random
 
 def basicDamage(obj,level,skill,skill_power,attack_value,defense_value,speed):
@@ -87,9 +88,11 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
         skill_prop_match_obj_prop = 1.5
     else:
         skill_prop_match_obj_prop = 1
-
+    #检查是否有威力加强的道具
+    tmp_power_up = propmap.checkCarryPropForSkill(obj_attack,skill)
+    print(tmp_power_up)
     # 检查战斗前天赋技能
-    power = skill.skill_power
+    power = skill.skill_power + tmp_power_up
     attack = obj_attack.getAttack()
     defense = obj_defense.getDefense()
     spell_power = obj_attack.getSpellPower()

@@ -1,11 +1,12 @@
 from props import  prop
 
 prop_dict ={
-    '攻击之爪': prop.PropertyUpProp(per=0.3,up_type='attack')
+    '攻击之爪': prop.PropertyUpProp(per=0.3,up_type='attack',prop_show_name='攻击之爪'),
+    '火焰之心': prop.SkillPowerUpProp(pety='fire',power= 30,prop_show_name='火焰之心'),
 }
 
 
-def checkCarryProp(obj):
+def checkCarryPropForObj(obj):
     if obj.carry_prop != None:
         if obj.carry_prop.prop_type == 'basic':
             obj.prop_attack_up = 0
@@ -24,7 +25,12 @@ def checkCarryProp(obj):
                 obj.prop_spell_defense_up = obj.carry_prop.propCarry(obj.spell_defense)
             elif obj.carry_prop.up_type == 'speed':
                 obj.prop_speed_up = obj.carry_prop.propCarry(obj.speed)
-            else:
-                pass
+    else:
+        pass
 
-    return True
+def checkCarryPropForSkill(obj,skill):
+    if obj.carry_prop != None:
+        if obj.carry_prop.prop_type == skill:
+            return obj.carry_prop.propCarry(skill)
+
+    return 0

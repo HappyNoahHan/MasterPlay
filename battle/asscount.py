@@ -6,6 +6,12 @@ from battle import buff
 
 
 def checkBuffBeforeBattle(obj_attack,obj_defense):
+    '''
+    检查buff收益
+    :param obj_attack:
+    :param obj_defense:
+    :return:
+    '''
     if obj_attack.buff_dict:
         buff.buffCount(obj_attack)
         buff.buffIndex(obj_attack)
