@@ -8,6 +8,11 @@ prop_dict ={
 def checkCarryProp(obj):
     if obj.carry_prop != None:
         if obj.carry_prop.prop_type == 'basic':
+            prop_attack_up = 0
+            prop_defense_up = 0
+            prop_spell_power_up = 0
+            prop_spell_defense_up = 0
+            prop_speed_up = 0
             if obj.carry_prop.up_type == 'attack':
                 obj.prop_attack_up = obj.carry_prop.propCarry(obj.attack)
                 #print(obj.prop_attack_up)

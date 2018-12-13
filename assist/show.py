@@ -1,4 +1,5 @@
 import battle.skilllistmap
+from props import propmap
 
 def printTurn(name):
     print("%s 的回合" % name)
@@ -43,6 +44,7 @@ def showPetStatus(obj):
     :param obj:
     :return:
     '''
+    propmap.checkCarryProp(obj)
     print("%s 的生命值：%s  攻击值 %s 防御值 %s 法攻值 %s 法防值 %s  速度 %s 等级: Lv%s" % (obj.name,obj.health,obj.getAttack(),obj.getDefense(),obj.getSpellPower(),obj.getSpellDefense(),obj.getSpeed(),obj.level))
 
 def showPetSkills(obj):
@@ -54,3 +56,12 @@ def learnSkill(code):
 
 def useSkill(obj,skill):
     print("%s 使用 %s 攻击！" % (obj.name, skill.skill_show_name))
+
+
+def propertyUp(health_up,attack_up,defense_up,spell_power_up,spell_defense_up,speed_up):
+    print("生命 up %s !" % health_up)
+    print("攻击 up %s !" % attack_up)
+    print("防御 up %s !" % defense_up)
+    print("法攻 up %s !" % spell_power_up)
+    print("法防 up %s !" % spell_defense_up)
+    print("速度 up %s !" % speed_up)

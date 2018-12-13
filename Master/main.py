@@ -41,7 +41,6 @@ if __name__ == '__main__':
     fox.carry_prop = propmap.prop_dict['攻击之爪']
 
     propmap.checkCarryProp(fox)
-
     propmap.checkCarryProp(gress)
     assist.show.showPetStatus(fox)
 

@@ -1,5 +1,5 @@
 from pets import pet, wood, fire, fly
-from assist import cap,evolve
+from assist import cap,evolve,show
 from battle import learnskill
 import math
 import random
@@ -88,27 +88,15 @@ def levelUp(obj):
     spell_defense_up = cap.getCapValueForUp(obj.spell_defense_basic, obj.level, obj.spell_defense_indi,obj.spell_defense)
     speed_up = cap.getCapValueForUp(obj.speed_basic, obj.level, obj.speed_indi,obj.speed)
 
-
-    print("生命 up %s !" % health_up)
+    #属性改变
     obj._max_health += health_up
     obj.health += health_up
-
-
     obj.attack += attack_up
-    print("攻击 up %s !" % attack_up)
-
-
     obj.defense += defense_up
-    print("防御 up %s !" % defense_up)
-
-
     obj.spell_power += spell_power_up
-    print("法攻 up %s !" % spell_power_up)
-
-
     obj.spell_defense += spell_defense_up
-    print("法防 up %s !" % spell_defense_up)
-
-
     obj.speed += speed_up
-    print("速度 up %s !" % speed_up)
+
+    show.propertyUp(health_up,attack_up,defense_up,spell_power_up,spell_defense_up,speed_up)
+
+
