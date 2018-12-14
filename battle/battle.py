@@ -12,7 +12,7 @@ import assist.petattr
 from assist import exp,evolve
 from battle import skilldamage,asscount
 from pets import pettalent,talentmap,status,statusmap
-from props import propmap
+from props import propmap,bag
 import props.drug
 
 def damageCount(obj_defense,obj_attack,obj_skill):
@@ -169,19 +169,15 @@ def battleRun(obj1,obj2):
             assist.show.printTurn(obj2.name)
             return battleRun(obj2,obj1)
     elif int(command) == 3:
-        assist.show.showProps()
-        command = input(">")
-        if int(command) == 1:
-            #drup_to_use = props.drug.ppDrug()
-            for key, value in obj1.skill_list.items():
-                if value != None:
-                    print("技能" + key, ":", value.skill_show_name, ' PP:', value.pp_value)
-            print("请选择要恢复的技能")
-            skill_number = input(">")
-            print(obj1.skill_list[skill_number].skill_show_name)
-            assist.ppvalue.ppRecoverMax(obj1.skill_list[skill_number])
+        #测试 得到一个道具
+        propmap.getProp(propmap.prop_dict['五彩迷光'])
+        if bag.showBattleBagOrNot(obj1):
+            assist.show.printTurn(obj2)
+            return battleRun(obj2,obj1)
+        else:
+            print("重新选择！")
+            return battleRun(obj1,obj2)
 
-        return battleRun(obj2,obj1)
     else:
         print("指令错误!")
         return battleRun(obj1,obj2)

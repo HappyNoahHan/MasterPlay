@@ -27,9 +27,9 @@ if __name__ == '__main__':
 
     if battle.learnskill.learnSkill(fox,'S002'):
         assist.show.learnSkill('N001')
-    if battle.learnskill.learnSkill(fox,'A009'):
-        assist.show.learnSkill('A004')
-    battle.learnskill.learnSkill(fox,'N001')
+    # if battle.learnskill.learnSkill(fox,'A009'):
+    #    assist.show.learnSkill('A004')
+    #battle.learnskill.learnSkill(fox,'N001')
 
     #测试用例
     #fox.skill_first = battle.skill.steadiness()
@@ -41,8 +41,8 @@ if __name__ == '__main__':
     #print(fox.status)
     #propmap.prop_dict['火焰之心'].equipProp(fox)
     #propmap.prop_dict['火焰之心'].removeProp(fox)
-    propmap.prop_dict['五彩迷光'].equipProp(gress)
-    propmap.prop_dict['攻击之爪'].equipProp(fox)
+    #propmap.prop_dict['五彩迷光'].equipProp(gress)
+    #propmap.prop_dict['攻击之爪'].equipProp(fox)
 
     propmap.checkCarryPropForObj(fox)
     propmap.checkCarryPropForObj(gress)

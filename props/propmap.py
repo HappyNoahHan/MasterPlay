@@ -7,6 +7,13 @@ prop_dict ={
     '五彩迷光': prop.SkillHitDownProp(dodge=10,prop_show_name='五彩迷光'),
 }
 
+#背包概念 名称 数量
+prop_bag_dict={
+    1:[prop_dict['攻击之爪'],1],
+    2:[prop_dict['火焰之心'],2],
+}
+
+
 
 def checkCarryPropForObj(obj):
     if obj.carry_prop != None:
@@ -49,3 +56,16 @@ def checkCarryPropFoeDodge(obj):
         if obj.carry_prop.prop_type == 'dodge':
             return obj.carry_prop.propCarry()
     return 0
+
+def getProp(prop):
+    for key,value in prop_bag_dict.items():
+        if value[0] == prop:
+            value[1] += 1
+            return True
+
+    for key in range(1,101):
+        if key not in prop_bag_dict:
+            prop_bag_dict[key] = [prop,1]
+            return True
+
+    return False

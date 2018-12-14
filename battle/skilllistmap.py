@@ -20,3 +20,9 @@ skill_dict = {
     'C002': battle.skill.SleepingPowder(pp=20),
 
 }
+
+#背包概念 名称 数量
+skill_bag_dict={
+    1:[skill_dict['A001'],1],
+    2:[skill_dict['C002'],2],
+}
