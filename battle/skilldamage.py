@@ -88,24 +88,28 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
         skill_prop_match_obj_prop = 1.5
     else:
         skill_prop_match_obj_prop = 1
-    #检查是否有威力加强的道具
-    tmp_power_up = propmap.checkCarryPropForSkill(obj_attack,skill)
-    print(tmp_power_up)
+
     # 检查战斗前天赋技能
-    power = skill.skill_power + tmp_power_up
+    power = skill.skill_power
     attack = obj_attack.getAttack()
     defense = obj_defense.getDefense()
     spell_power = obj_attack.getSpellPower()
     spell_defense = obj_defense.getSpellDefense()
     speed = obj_attack.getSpeed()
+    print(power)
 
     #加入战斗前天赋计算  技能威力提升
     if talentmap.checkTalent(obj_attack, 'before'):
         if talentmap.talent_dict[obj_attack.talent].talent_type == '技能威力类型':
-            power = talentmap.talent_dict[obj_attack.talent].talentEffect(skill.skill_power)
+            power = talentmap.talent_dict[obj_attack.talent].talentEffect(power)
 
 
-    print(power)
+    #print("技能威力",power)
+    # 检查是否有威力加强的道具
+    tmp_power_up = propmap.checkCarryPropForSkill(obj_attack, skill)
+    #print("威力提升", tmp_power_up)
+    power += tmp_power_up
+    #print("技能威力", power)
     #判断是物理攻击还是元素攻击
     if skill.spell_skill == True:
         basic_damage = basicDamage(obj_attack,obj_attack.level,skill,power,spell_power,spell_defense,speed)

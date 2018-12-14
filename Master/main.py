@@ -39,9 +39,10 @@ if __name__ == '__main__':
     #fox.status.append('ST001')
     #fox.status.append('ST002')
     #print(fox.status)
-    propmap.prop_dict['火焰之心'].equipProp(fox)
+    #propmap.prop_dict['火焰之心'].equipProp(fox)
     #propmap.prop_dict['火焰之心'].removeProp(fox)
-    propmap.prop_dict['攻击之爪'].equipProp(gress)
+    propmap.prop_dict['聚焦之眼'].equipProp(gress)
+    propmap.prop_dict['攻击之爪'].equipProp(fox)
 
     propmap.checkCarryPropForObj(fox)
     propmap.checkCarryPropForObj(gress)

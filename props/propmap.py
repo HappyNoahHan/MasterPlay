@@ -3,6 +3,7 @@ from props import  prop
 prop_dict ={
     '攻击之爪': prop.PropertyUpProp(per=0.3,up_type='attack',prop_show_name='攻击之爪'),
     '火焰之心': prop.SkillPowerUpProp(pety='fire',power= 30,prop_show_name='火焰之心'),
+    '聚焦之眼': prop.SkillHitUpProp(hit_up=40,prop_show_name='聚焦之眼'),
 }
 
 
@@ -30,7 +31,14 @@ def checkCarryPropForObj(obj):
 
 def checkCarryPropForSkill(obj,skill):
     if obj.carry_prop != None:
-        if obj.carry_prop.prop_type == skill:
+        if obj.carry_prop.prop_type == 'skill':
             return obj.carry_prop.propCarry(skill)
+
+    return 0
+
+def checkCarryPropForHit(obj):
+    if obj.carry_prop != None:
+        if obj.carry_prop.prop_type == 'hit':
+            return obj.carry_prop.propCarry()
 
     return 0

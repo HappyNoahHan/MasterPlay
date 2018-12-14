@@ -1,6 +1,6 @@
 '''
     prop_type   basci 基础能力 六维   skill 技能威力   restore 一次性救命道具
-                debuff 闪避类
+                debuff 闪避类  hit 命中类
 '''
 
 from props import propmap
@@ -37,7 +37,7 @@ class SkillPowerUpProp(Prop):
     def __init__(self,pety='normal',power = 20,prop_show_name = ''):
         self.info = '技能威力提高道具'
         self.prop_type = 'skill'
-        self.pety = pety
+        self.pety = pety #属性
         self.power = power
         self.prop_show_name = prop_show_name
 
@@ -49,4 +49,12 @@ class SkillPowerUpProp(Prop):
         else:
             return 0
 
+class SkillHitUpProp(Prop):
+    def __init__(self,hit_up=10,prop_show_name = ''):
+        self.info = '技能命中提高道具'
+        self.prop_type = 'hit'
+        self.hit_up = hit_up
+        self.prop_show_name = prop_show_name
 
+    def propCarry(self):
+        return self.hit_up

@@ -12,6 +12,7 @@ import assist.petattr
 from assist import exp,evolve
 from battle import skilldamage,asscount
 from pets import pettalent,talentmap,status,statusmap
+from props import propmap
 import props.drug
 
 def damageCount(obj_defense,obj_attack,obj_skill):
@@ -136,7 +137,12 @@ def battleRun(obj1,obj2):
             assist.show.printTurn(obj2)
             return battleRun(obj2,obj1)
         #命中与否判断
-        if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number].hit_rate):
+        #判断命中是否提高
+        hit_up = propmap.checkCarryPropForHit(obj1)
+        print("命中提高",hit_up)
+
+
+        if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number].hit_rate + hit_up):
             assist.show.printTurn(obj2.name)
             return battleRun(obj2,obj1)
 

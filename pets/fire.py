@@ -12,7 +12,7 @@ class Charmander(pets.propets.Fire):
 
 
     name = '小火龙'
-    talent = 'TA003' #天赋 eg：火属性技能伤害+10% 后续nnn版本 做一张map 天赋技能树 各种类型
+    talent = 'TA001' #天赋 eg：火属性技能伤害+10% 后续nnn版本 做一张map 天赋技能树 各种类型
     basic_exp_value = 51
     evolve_level = 8
 

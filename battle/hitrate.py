@@ -1,7 +1,7 @@
 import random
 
 def hitOrNot(rate):
-    if rate == 100:
+    if rate >= 100:
         print("技能命中！")
         return True
 
