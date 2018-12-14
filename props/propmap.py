@@ -4,6 +4,7 @@ prop_dict ={
     '攻击之爪': prop.PropertyUpProp(per=0.3,up_type='attack',prop_show_name='攻击之爪'),
     '火焰之心': prop.SkillPowerUpProp(pety='fire',power= 30,prop_show_name='火焰之心'),
     '聚焦之眼': prop.SkillHitUpProp(hit_up=40,prop_show_name='聚焦之眼'),
+    '五彩迷光': prop.SkillHitDownProp(dodge=10,prop_show_name='五彩迷光'),
 }
 
 
@@ -41,4 +42,10 @@ def checkCarryPropForHit(obj):
         if obj.carry_prop.prop_type == 'hit':
             return obj.carry_prop.propCarry()
 
+    return 0
+
+def checkCarryPropFoeDodge(obj):
+    if obj.carry_prop != None:
+        if obj.carry_prop.prop_type == 'dodge':
+            return obj.carry_prop.propCarry()
     return 0

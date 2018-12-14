@@ -41,7 +41,7 @@ if __name__ == '__main__':
     #print(fox.status)
     #propmap.prop_dict['火焰之心'].equipProp(fox)
     #propmap.prop_dict['火焰之心'].removeProp(fox)
-    propmap.prop_dict['聚焦之眼'].equipProp(gress)
+    propmap.prop_dict['五彩迷光'].equipProp(gress)
     propmap.prop_dict['攻击之爪'].equipProp(fox)
 
     propmap.checkCarryPropForObj(fox)

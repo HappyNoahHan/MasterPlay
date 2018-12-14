@@ -69,6 +69,8 @@ class Pet(object):
         self.realize_skill_list = realize_skill_list #已经领悟的技能表
         self.status = status #状态表
         self.carry_prop = carry_prop
+        #闪避
+        self.dodge = 0
 
     autoAi = False
     canEvolve = True

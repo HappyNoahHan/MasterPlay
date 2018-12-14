@@ -140,9 +140,11 @@ def battleRun(obj1,obj2):
         #判断命中是否提高
         hit_up = propmap.checkCarryPropForHit(obj1)
         print("命中提高",hit_up)
+        dodge_up = propmap.checkCarryPropFoeDodge(obj2)
+        print("闪避提高",dodge_up)
 
 
-        if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number].hit_rate + hit_up):
+        if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number].hit_rate + hit_up,obj1,obj2,obj2.dodge + dodge_up):
             assist.show.printTurn(obj2.name)
             return battleRun(obj2,obj1)
 

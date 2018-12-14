@@ -1,6 +1,6 @@
 '''
     prop_type   basci 基础能力 六维   skill 技能威力   restore 一次性救命道具
-                debuff 闪避类  hit 命中类
+                dehit 闪避类  hit 命中类
 '''
 
 from props import propmap
@@ -58,3 +58,13 @@ class SkillHitUpProp(Prop):
 
     def propCarry(self):
         return self.hit_up
+
+class SkillHitDownProp(Prop):
+    def __init__(self,dodge = 10,prop_show_name = ''):
+        self.info = '闪避道具，降低命中'
+        self.prop_type = 'dodge'
+        self.dodge = dodge
+        self.prop_show_name = prop_show_name
+
+    def propCarry(self):
+        return self.dodge
