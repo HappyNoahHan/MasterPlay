@@ -2,7 +2,7 @@
     背包
 '''
 from assist import show
-from props import propmap,drugmap
+from props import propmap,drugmap,petballmap
 from battle import skilllistmap,learnskill
 
 bag_dict_map={
@@ -14,7 +14,7 @@ bag_dict_map={
     '0':['both','返回上级']
 }
 
-def showBattleBagOrNot(obj_attack):
+def showBattleBagOrNot(obj_attack,obj_defense):
     print("请选择使用的道具总类")
     for key,value in bag_dict_map.items():
         if value[0] == 'yes' or value[0] == 'both':
@@ -27,6 +27,8 @@ def showBattleBagOrNot(obj_attack):
         return showPropBag(obj_attack,propmap.prop_bag_dict)
     elif select_id == '2':
         return showDrugBag(obj_attack,drugmap.drug_bag_dict)
+    elif select_id == '3':
+        return showPetBallBag(obj_defense,petballmap.petball_bag_dict)
     elif select_id == '4':
         return showSkillBag(obj_attack,skilllistmap.skill_bag_dict)
     else:
@@ -105,4 +107,26 @@ def showDrugBag(obj_attack,dict):
     else:
         print("指令错误!")
         return showDrugBag(obj_attack,dict)
+    return True
+
+def showPetBallBag(obj_defense,dict):
+    for key,value in dict.items():
+        print(key,value[0].ball_name,value[1])
+    print('0','返回上级！')
+
+    print("请选择使用的道具")
+    select_id = input(">")
+    if int(select_id) in dict:
+        if dict[int(select_id)][0].usePetBall(obj_defense):
+            dict[int(select_id)][1] -= 1
+            if dict[int(select_id)][1] == 0:
+                dict.pop(int(select_id))
+        else:
+            return False
+    elif select_id == '0':
+        print("返回上级！")
+        return showBattleBagOrNot(obj_defense)
+    else:
+        print("指令错误!")
+        return showPetBallBag(obj_defense,dict)
     return True

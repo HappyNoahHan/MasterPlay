@@ -22,16 +22,16 @@ drug_bag_dict={
 }
 
 
-def getDrug(drug):
+def getDrug(drug,number = 1):
     print("获得 %s !" % drug.drug_show_name)
     for key,value in drug_bag_dict.items():
         if value[0] == drug:
-            value[1] += 1
+            value[1] += number
             return True
 
     for key in range(1,101):
         if key not in drug_bag_dict:
-            drug_bag_dict[key] = [drug,1]
+            drug_bag_dict[key] = [drug,number]
             return True
 
     return False

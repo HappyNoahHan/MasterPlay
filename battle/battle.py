@@ -175,7 +175,7 @@ def battleRun(obj1,obj2):
     elif command == '3':
         #测试 得到一个道具
         #propmap.getProp(propmap.prop_dict['五彩迷光'])
-        if bag.showBattleBagOrNot(obj1):
+        if bag.showBattleBagOrNot(obj1,obj2):
             assist.show.printTurn(obj2)
             return battleRun(obj2,obj1)
         else:
