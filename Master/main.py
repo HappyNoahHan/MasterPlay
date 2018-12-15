@@ -18,14 +18,14 @@ if __name__ == '__main__':
     #gress.health = 100
     print(gress)
     assist.show.showPetStatus(gress)
-    battle.learnskill.learnSkill(gress,'B002')
+    battle.learnskill.learnSkill(gress,'B002',realize=False)
     print("=" * 30)
     print("你的火狐狸准备战斗")
     fox = fire.Charmander(level=5)
 
     assist.show.showPetStatus(fox)
 
-    if battle.learnskill.learnSkill(fox,'S002'):
+    if battle.learnskill.learnSkill(fox,'S002',realize=False):
         assist.show.learnSkill('N001')
     # if battle.learnskill.learnSkill(fox,'A009'):
     #    assist.show.learnSkill('A004')
