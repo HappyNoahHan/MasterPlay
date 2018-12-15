@@ -30,6 +30,7 @@ def healthRecoverByTalent(obj,per):
     return True
 
 def healthRecoreByDrug(obj,value):
+    print("%s 回复了 %s HP" % (obj.name,value))
     obj.health += value
 
     if obj.health >= obj._max_health:

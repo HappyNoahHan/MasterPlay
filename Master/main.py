@@ -6,7 +6,7 @@ import random
 import assist.show
 from assist import exp,evolve
 from props import propmap
-from battle import asscount
+from battle import asscount,skilllistmap
 
 
 if __name__ == '__main__':
@@ -43,6 +43,8 @@ if __name__ == '__main__':
     #propmap.prop_dict['火焰之心'].removeProp(fox)
     #propmap.prop_dict['五彩迷光'].equipProp(gress)
     #propmap.prop_dict['攻击之爪'].equipProp(fox)
+    skilllistmap.getSkill(skilllistmap.skill_dict['A004'])
+    propmap.getProp(propmap.prop_dict['五彩迷光'])
 
     propmap.checkCarryPropForObj(fox)
     propmap.checkCarryPropForObj(gress)

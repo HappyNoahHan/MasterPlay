@@ -26,3 +26,18 @@ skill_bag_dict={
     1:[skill_dict['A001'],1],
     2:[skill_dict['C002'],2],
 }
+
+#得到技能道具
+def getSkill(skill):
+    print("获得了 %s !" % skill.skill_show_name)
+    for key,value in skill_bag_dict.items():
+        if value[0] == skill:
+            value[1] += 1
+            return True
+
+    for key in range(1,101):
+        if key not in skill_bag_dict:
+            skill_bag_dict[key] = [skill,1]
+            return True
+
+    return False

@@ -108,14 +108,15 @@ def battleRun(obj1,obj2):
         print("玩家请选择指令：")
         command = input(">>")
     if command == '1':
-        for key,value in obj1.skill_list.items():
-            if value != None:
-                print("技能" + key,":", value.skill_show_name,' PP:',value.pp_value)
         if obj1.autoAi:
             assist.show.petSelectSkill(obj1.name)
             time.sleep(3)
             skill_number = str(random.randint(1,len(obj1.skill_list)))
         else:
+            for key, value in obj1.skill_list.items():
+                if value != None:
+                    print("技能" + key, ":", value.skill_show_name, ' PP:', value.pp_value)
+            print('0','返回上级！')
             print("请选择使用的技能：")
             skill_number = input(">>")
             if skill_number == '0':

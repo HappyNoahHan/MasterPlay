@@ -57,12 +57,13 @@ class HealthMiddleRestoreDrug(Drug):
         life.healthRecoreByDrug(obj,self.restore_value)
 
 class HealthRestoreDrug(Drug):
-    def __init__(self,restore_value = 30):
+    def __init__(self,restore_value = 30,drug_show_name = ''):
         self.store_value = restore_value
         self.drug_info = '生命恢复药剂'
+        self.drug_show_name = drug_show_name
 
     def useDrug(self,obj):
-        life.healthRecoreByDrug(obj,self.store_value)
+        return life.healthRecoreByDrug(obj,self.store_value)
 
 class RemoveStatusDrug(Drug):
     def __init__(self,status_code = 'ST001'):
