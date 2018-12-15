@@ -47,7 +47,7 @@ def checkSleepingOrNot(obj):
     return False
 
 
-def removeStatus(obj,status_code='all'):
+def removeStatus(obj,status_code):
     '''
     移除状态 药品 技能等
     :param obj:
@@ -55,10 +55,15 @@ def removeStatus(obj,status_code='all'):
     :return:
     '''
     #全能解状态药剂
+    #print("使用解除剂")
     if status_code == 'all':
         obj.status.clear()
 
     if status_code in obj.status:
         obj.status.remove(status_code)
+
+    print(obj.status)
+
+    return True
 
 

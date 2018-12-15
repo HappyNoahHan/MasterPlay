@@ -65,3 +65,16 @@ def propertyUp(health_up,attack_up,defense_up,spell_power_up,spell_defense_up,sp
     print("法攻 up %s !" % spell_power_up)
     print("法防 up %s !" % spell_defense_up)
     print("速度 up %s !" % speed_up)
+
+def checkSelectID(id,dict):
+    '''
+    检查选择项目正确
+    :param id:
+    :param dict:
+    :return:
+    '''
+    if id in dict:
+        return True
+    else:
+        print("指令错误!")
+        return False

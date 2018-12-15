@@ -240,4 +240,4 @@ class HolyLight(removeStatusSkill):
     property = 'light'
 
     def useSkill(self,obj):
-        statusmap.removeStatus(obj)
+        statusmap.removeStatus(obj,status_code='all')

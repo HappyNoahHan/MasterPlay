@@ -5,7 +5,7 @@ import battle.learnskill
 import random
 import assist.show
 from assist import exp,evolve
-from props import propmap
+from props import propmap,drugmap
 from battle import asscount,skilllistmap
 
 
@@ -18,7 +18,7 @@ if __name__ == '__main__':
     #gress.health = 100
     print(gress)
     assist.show.showPetStatus(gress)
-    battle.learnskill.learnSkill(gress,'B002',realize=False)
+    battle.learnskill.learnSkill(gress,'A004',realize=False)
     print("=" * 30)
     print("你的火狐狸准备战斗")
     fox = fire.Charmander(level=5)
@@ -36,8 +36,8 @@ if __name__ == '__main__':
     #fox.speed = 255
     #fox.realize_skill_list.append('S001')
     #print(fox.health_indi)
-    #fox.status.append('ST001')
-    #fox.status.append('ST002')
+    fox.status.append('ST001')
+    fox.status.append('ST002')
     #print(fox.status)
     #propmap.prop_dict['火焰之心'].equipProp(fox)
     #propmap.prop_dict['火焰之心'].removeProp(fox)
@@ -45,6 +45,8 @@ if __name__ == '__main__':
     #propmap.prop_dict['攻击之爪'].equipProp(fox)
     skilllistmap.getSkill(skilllistmap.skill_dict['A004'])
     propmap.getProp(propmap.prop_dict['五彩迷光'])
+    drugmap.getDrug(drugmap.drug_dict['小型解毒剂'])
+
 
     propmap.checkCarryPropForObj(fox)
     propmap.checkCarryPropForObj(gress)

@@ -7,7 +7,7 @@ def hitOrNot(rate,obj_attack,obj_defense,dodge):
     else:
         basic_rate = rate + obj_attack.level - obj_defense.level
 
-    real_rate = basic_rate * 3  - dodge
+    real_rate = basic_rate * 2  - dodge
     print("命中率",real_rate)
 
     if real_rate >= 255:

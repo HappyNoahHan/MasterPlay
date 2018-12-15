@@ -203,6 +203,7 @@ def removeOwnDebuff(obj,num):
     :param num:
     :return:
     '''
+    #print("使用解毒剂")
     if obj.debuff_dict:
         if num <= len(obj.debuff_dict.items()):
             for i in range(num):
@@ -213,4 +214,6 @@ def removeOwnDebuff(obj,num):
             print("驱散成功")
     else:
         print("自己没有debuff")
+
+    return True
 
