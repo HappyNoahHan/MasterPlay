@@ -18,7 +18,7 @@ class aiOodish(pets.propets.Wood):
     can_get_base_point = 2
     can_get_base_point_type = 'attack'
 
-    capture_rate = 48
+    capture_rate = 255
 
 
     def __str__(self):

@@ -24,21 +24,21 @@ def showBattleBagOrNot(obj_attack,obj_defense):
         print("返回上级")
         return False
     elif select_id == '1':
-        return showPropBag(obj_attack,propmap.prop_bag_dict)
+        return showPropBag(obj_attack,obj_defense,propmap.prop_bag_dict)
     elif select_id == '2':
-        return showDrugBag(obj_attack,drugmap.drug_bag_dict)
+        return showDrugBag(obj_attack,obj_defense,drugmap.drug_bag_dict)
     elif select_id == '3':
-        return showPetBallBag(obj_defense,petballmap.petball_bag_dict)
+        return showPetBallBag(obj_attack,obj_defense,petballmap.petball_bag_dict)
     elif select_id == '4':
-        return showSkillBag(obj_attack,skilllistmap.skill_bag_dict)
+        return showSkillBag(obj_attack,obj_defense,skilllistmap.skill_bag_dict)
     else:
         print("指令错误！")
-        return showBattleBagOrNot(obj_attack)
+        return showBattleBagOrNot(obj_attack,obj_defense)
 
 
 
 
-def showPropBag(obj_attack,dict):
+def showPropBag(obj_attack,obj_defense,dict):
     #show.showProps()
     print("编号 名称  数量")
     for key,value in dict.items():
@@ -58,13 +58,13 @@ def showPropBag(obj_attack,dict):
             return False
     elif select_id == '0':
         print("返回上级！")
-        return showBattleBagOrNot(obj_attack)
+        return showBattleBagOrNot(obj_attack,obj_defense)
     else:
         print("指令错误！")
-        return showPropBag(obj_attack,dict)
+        return showPropBag(obj_attack,obj_defense,dict)
     return True
 
-def showSkillBag(obj_attack,dict):
+def showSkillBag(obj_attack,obj_defense,dict):
     for key,value in dict.items():
         print(key,value[0].skill_show_name,value[1])
     print('0','返回上级！')
@@ -80,14 +80,14 @@ def showSkillBag(obj_attack,dict):
             return False
     elif select_id == '0':
         print("返回上级！")
-        return showBattleBagOrNot(obj_attack)
+        return showBattleBagOrNot(obj_attack, obj_defense)
     else:
         print("指令错误!")
-        return showSkillBag(obj_attack,dict)
+        return showSkillBag(obj_attack,obj_defense,dict)
     return True
 
 
-def showDrugBag(obj_attack,dict):
+def showDrugBag(obj_attack,obj_defense,dict):
     for key,value in dict.items():
         print(key,value[0].drug_show_name,value[1])
     print('0','返回上级！')
@@ -103,13 +103,13 @@ def showDrugBag(obj_attack,dict):
             return False
     elif select_id == '0':
         print("返回上级！")
-        return showBattleBagOrNot(obj_attack)
+        return showBattleBagOrNot(obj_attack,obj_defense)
     else:
         print("指令错误!")
-        return showDrugBag(obj_attack,dict)
+        return showDrugBag(obj_attack,obj_defense,dict)
     return True
 
-def showPetBallBag(obj_defense,dict):
+def showPetBallBag(obj_attack,obj_defense,dict):
     for key,value in dict.items():
         print(key,value[0].ball_name,value[1])
     print('0','返回上级！')
@@ -125,8 +125,8 @@ def showPetBallBag(obj_defense,dict):
             return False
     elif select_id == '0':
         print("返回上级！")
-        return showBattleBagOrNot(obj_defense)
+        return showBattleBagOrNot(obj_attack,obj_defense)
     else:
         print("指令错误!")
-        return showPetBallBag(obj_defense,dict)
+        return showPetBallBag(obj_attack,obj_defense,dict)
     return True

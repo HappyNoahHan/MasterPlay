@@ -19,14 +19,14 @@ def captureOrNot(obj_defense,capture_index,status_index = 0):
         status_index += 10
 
     if obj_defense._max_health * 3 > 255:
-        base_capt = (obj_defense._max_health * 3 / 4 - obj_defense.health * 2 / 4) * obj_defense.capture_rate * capture_index / (obj_defense._max_health * 3) + status_index
+        base_capt = ((obj_defense._max_health * 3 / 4 - obj_defense.health * 2 / 4) * obj_defense.capture_rate * capture_index) / ((obj_defense._max_health * 3) + status_index)
     else:
-        base_capt = (obj_defense._max_health * 3  - obj_defense.health * 2 ) * obj_defense.capture_rate * capture_index / ( obj_defense._max_health * 3) + status_index
+        base_capt = ((obj_defense._max_health * 3  - obj_defense.health * 2 ) * obj_defense.capture_rate * capture_index )/ (( obj_defense._max_health * 3) + status_index)
     print("基础捕获",base_capt)
 
     random_number = random.randint(0,255)
 
-    if random_number < base_capt:
+    if random_number < int(base_capt):
         print("捕获 %s 成功！" % obj_defense.name)
         return True
     else:
