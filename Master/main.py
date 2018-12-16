@@ -60,36 +60,38 @@ if __name__ == '__main__':
         battle_end = battle.battle.battleRun(gress,fox)
 
     if battle_end == True:
-        if fox.health <= 0:
-            assist.show.gameOver()
-        else:
-            #计算获得的基础点数
-            #print(fox.attack_base_point)
-            asscount.getBasePoint(fox,gress)
-            #print(fox.attack_base_point)
+        if gress.captured == False:
 
-            # 战斗结束之后结算
-            # 经验值计算
-            got_exp = exp.getBattleSuccessExp(gress)
-            print("%s 获得 %s 经验值" % (fox.name, got_exp))
-            fox.exp_for_current += got_exp
+            if fox.health <= 0:
+                assist.show.gameOver()
+            else:
+                #计算获得的基础点数
+                #print(fox.attack_base_point)
+                asscount.getBasePoint(fox,gress)
+                #print(fox.attack_base_point)
 
-            if exp.isLevelUp(fox):
-                assist.show.showPetStatus(fox)
-            # 进化判断
-            if fox.canEvolve:
-                if fox.level >= fox.evolve_level:
-                    print("精灵是否进化！ 1 yes  2 no ")
-                    isEvo = input(">")
-                    if int(isEvo) == 1:
-                        fox = evolve.isEvolve(fox)
-                    else:
-                        print("精灵停止进化！")
-            # 清除buff
-            fox.buff_dict.clear()
-            # obj1.debuff_dict.clear()
-            fox.property_buff.clear()
-            assist.show.battleOver()
+                # 战斗结束之后结算
+                # 经验值计算
+                got_exp = exp.getBattleSuccessExp(gress)
+                print("%s 获得 %s 经验值" % (fox.name, got_exp))
+                fox.exp_for_current += got_exp
+
+                if exp.isLevelUp(fox):
+                    assist.show.showPetStatus(fox)
+                # 进化判断
+                if fox.canEvolve:
+                    if fox.level >= fox.evolve_level:
+                        print("精灵是否进化！ 1 yes  2 no ")
+                        isEvo = input(">")
+                        if int(isEvo) == 1:
+                            fox = evolve.isEvolve(fox)
+                        else:
+                            print("精灵停止进化！")
+        # 清除buff
+        fox.buff_dict.clear()
+        # obj1.debuff_dict.clear()
+        fox.property_buff.clear()
+        assist.show.battleOver()
 
 
 

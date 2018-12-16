@@ -74,6 +74,8 @@ class Pet(object):
 
     autoAi = False
     canEvolve = True
+    can_capture = True
+    captured = False
 
 
     def getDefense(self):

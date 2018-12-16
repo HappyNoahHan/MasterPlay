@@ -117,10 +117,12 @@ def showPetBallBag(obj_attack,obj_defense,dict):
     print("请选择使用的道具")
     select_id = input(">")
     if int(select_id) in dict:
+        dict[int(select_id)][1] -= 1
+        if dict[int(select_id)][1] == 0:
+            dict.pop(int(select_id))
         if dict[int(select_id)][0].usePetBall(obj_defense):
-            dict[int(select_id)][1] -= 1
-            if dict[int(select_id)][1] == 0:
-                dict.pop(int(select_id))
+            obj_defense.captured = True
+            return True
         else:
             return False
     elif select_id == '0':
@@ -129,4 +131,3 @@ def showPetBallBag(obj_attack,obj_defense,dict):
     else:
         print("指令错误!")
         return showPetBallBag(obj_attack,obj_defense,dict)
-    return True
