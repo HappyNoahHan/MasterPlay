@@ -34,7 +34,7 @@ def isEvolve(obj):
                                                        obj.spell_power_base_point,
                                                        obj.spell_defense_base_point,
                                                        obj.speed_base_point])
-
+    #new_obj.skill_list = obj.skill_list
     evolveUp(obj,new_obj)
     show.showPetStatus(new_obj)
     return new_obj

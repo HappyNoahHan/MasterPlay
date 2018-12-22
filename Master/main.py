@@ -4,12 +4,17 @@ from assist import exp,evolve
 from props import propmap,drugmap,petballmap
 from battle import asscount,skilllistmap,battle,learnskill
 from players import play,battering
+from place import  hospital
 
 
 if __name__ == '__main__':
     player = play.Player()
-    print("玩家 %s" % player.name)
+    print(player.current_place)
+
+    player.current_place.showMap(player)
+
     print("=" * 30)
+
 
     #bird = fly.aiPidgey(4)
     wild_pet= wood.aiOodish(level=5)

@@ -96,6 +96,8 @@ class Pet(object):
     def getSpeed(self):
         return self.speed + self.tmp_speed + self.prop_speed_up
 
+    #不能初始化，不然用的是同一个地址
+    skill_list={}
     def setSkills(self,key,value):
         self.skill_list[key] = value
 

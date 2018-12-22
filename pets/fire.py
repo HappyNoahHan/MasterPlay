@@ -49,3 +49,4 @@ class Charmeleon(Charmander):
     }
 
     can_get_base_point = 3
+

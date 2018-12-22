@@ -1,4 +1,6 @@
 from pets import fire,fly
+from place import village
+from battle import skill
 
 class Player(object):
     def __init__(self):
@@ -6,18 +8,19 @@ class Player(object):
 
 
     master_pet = fire.Charmander(level=5)
+    a=fire.Charmeleon(level=15,skill_list={'1':skill.fireBall()})
+    b=fire.Charmeleon(level=20,skill_list={'1':skill.fireBall()})
 
     pet_list = {
         '1': master_pet,
-        '2': fire.Charmeleon(level=15),
-        '3': fire.Charmeleon(level=20),
+        '2': a,
+        '3': b,
     }
 
-    #获得经验的度 1满 0.5一半
-    #exp_status = 1
 
-    #战斗是否交换精灵
-    change_pet = False
+    current_place = village.Village("新手村")
+
+
 
     def setPet(self,key,value):
         self.pet_list[key] = value
