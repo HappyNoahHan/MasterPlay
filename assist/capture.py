@@ -32,3 +32,33 @@ def captureOrNot(obj_defense,capture_index,status_index = 0):
     else:
         print("捕获失败")
         return False
+
+def addPetOrNot(player,wild_pet):
+    '''
+    加入精灵组
+    :param player:
+    :param wild_pet:
+    :return:
+    '''
+    wild_pet.autoAi = False
+    wild_pet.exp_status.clear()
+    wild_pet.can_capture = False
+    wild_pet.captured = True
+    wild_pet.basic_point_getter = None
+
+    print("是否给新精灵命名 1 yes 2 no")
+    select_id = input(">")
+    if select_id == '1':
+        print("请输入新的名字")
+        wild_pet.name = input()
+
+
+    for key in ['1','2','3','4','5','6']:
+        if key not in player.pet_list:
+            player.pet_list[key] = wild_pet
+            return True
+        else:
+            #传输到保存箱
+            pass
+
+    return True

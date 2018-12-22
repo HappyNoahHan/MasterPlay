@@ -9,9 +9,9 @@ class aiOodish(pets.propets.Wood):
     spell_defense_basic = 65
     speed_basic = 30
 
-    name = '野生走路草'
+    name = '走路草'
     talent = 'TA002'
-    basic_exp_value = 1000
+    basic_exp_value = 100
 
     autoAi = True
 

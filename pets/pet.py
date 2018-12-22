@@ -71,6 +71,9 @@ class Pet(object):
         self.carry_prop = carry_prop
         #闪避
         self.dodge = 0
+        #基础点数获得者
+        self.basic_point_getter = None
+        self.exp_status = []
 
     autoAi = False
     canEvolve = True

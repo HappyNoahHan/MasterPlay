@@ -24,6 +24,9 @@ class Charmander(pets.propets.Fire):
         12 : 'S001',
     }
 
+    can_get_base_point = 2
+    can_get_base_point_type = 'spell_power'
+
     def __str__(self):
         return super().__str__() + ':' + self.name
 
@@ -44,3 +47,5 @@ class Charmeleon(Charmander):
         14: 'A004',
         17: 'S001',
     }
+
+    can_get_base_point = 3

@@ -9,10 +9,11 @@ import battle.buff
 import assist.ppvalue
 import assist.life
 import assist.petattr
-from assist import exp,evolve
+from assist import exp,evolve,changepet
 from battle import skilldamage,asscount
 from pets import pettalent,talentmap,status,statusmap
 from props import propmap,bag
+from players import battering
 import props.drug
 
 def damageCount(obj_defense,obj_attack,obj_skill):
@@ -77,9 +78,14 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         battle.buff.proBuffindex(obj_attack) #属性增强buff 次数计算
 
 
-    if obj_defense.health <= 0: #战斗结束
+    if obj_defense.health <= 0: #战斗结束  debuff不会死亡
         assist.show.petDie(obj_defense.name)
         return False
+
+    if obj_attack.health <= 0: #反弹死
+        assist.show.petDie(obj_attack.name)
+        return False
+
 
     else:
         #检查战斗后特性检查
@@ -90,7 +96,7 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         assist.show.showPetStatus(obj_attack)
         return True
 
-def battleRun(obj1,obj2):
+def battleRun(player,obj1,obj2):
     '''
     攻击模块
     :param obj1:
@@ -121,25 +127,25 @@ def battleRun(obj1,obj2):
             skill_number = input(">>")
             if skill_number == '0':
                 print("返回上级")
-                return battleRun(obj1,obj2)
+                return battleRun(player,obj1,obj2)
             if skill_number not in obj1.skill_list:
                 print("指令错误！")
-                return battleRun(obj1,obj2)
+                return battleRun(player,obj1,obj2)
             if not assist.ppvalue.ppCount(obj1.skill_list[skill_number]):
                 print("指令失败,重新选择！")
-                return battleRun(obj1, obj2)
+                return battleRun(player,obj1, obj2)
         assist.show.useSkill(obj1,obj1.skill_list[skill_number])
         print(obj1.skill_list[skill_number]) #显示技能描述
         #检查时否是睡眠状态
         if statusmap.checkSleepingOrNot(obj1):
             print("%s 处于睡眠状态，无法使用技能！" % obj1.name)
             assist.show.printTurn(obj2)
-            return battleRun(obj2,obj1)
+            return battleRun(player,obj2,obj1)
         #状态判断是否可以行动
         if statusmap.checkParalysisOrNot(obj1):
             print("%s 没有成功使用技能" % obj1.name)
             assist.show.printTurn(obj2)
-            return battleRun(obj2,obj1)
+            return battleRun(player,obj2,obj1)
         #命中与否判断
         #判断命中是否提高
         hit_up = propmap.checkCarryPropForHit(obj1)
@@ -150,18 +156,21 @@ def battleRun(obj1,obj2):
 
         if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number].hit_rate + hit_up,obj1,obj2,obj2.dodge + dodge_up):
             assist.show.printTurn(obj2.name)
-            return battleRun(obj2,obj1)
+            return battleRun(player,obj2,obj1)
 
         #改写结算 直接把技能扔进去
         if damageCount(obj2,obj1,obj1.skill_list[skill_number]):
             assist.show.printTurn(obj2.name)
-            return battleRun(obj2,obj1)
+            return battleRun(player,obj2,obj1)
         else:
             return True
 
     elif command == '2':
         #交换精灵模块
-        return battleRun(obj2,obj1)
+        if changepet.changePet(player):
+            #加一个经验状态减半的效果 ST999 经验减半
+            obj2.exp_status.append('ST999')
+            return battering.battleing(player,obj2,change_pet=True)
     elif command == '4':
         assist.show.petUseRun(obj1.name)
         x = random.randint(1,100)
@@ -171,22 +180,22 @@ def battleRun(obj1,obj2):
         else:
             print("逃跑失败")
             assist.show.printTurn(obj2.name)
-            return battleRun(obj2,obj1)
+            return battleRun(player,obj2,obj1)
     elif command == '3':
         #测试 得到一个道具
         #propmap.getProp(propmap.prop_dict['五彩迷光'])
         if bag.showBattleBagOrNot(obj1,obj2):
             if obj2.captured == False:
                 assist.show.printTurn(obj2)
-                return battleRun(obj2,obj1)
+                return battleRun(player,obj2,obj1)
             else:
                 return True
         else:
             #print("重新选择！")
-            assist.show.printTurn(obj2)
-            return battleRun(obj2, obj1)
+            #assist.show.printTurn(obj2)
+            return battleRun(player,obj1, obj2)
 
     else:
         print("指令错误!")
-        return battleRun(obj1,obj2)
+        return battleRun(player,obj1,obj2)
 

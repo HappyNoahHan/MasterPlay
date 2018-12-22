@@ -29,3 +29,12 @@ class ProptyPetBall(PetBall):
         print('球调整',self.capture_index)
 
         return capture.captureOrNot(obj_defense,self.capture_index)
+
+#大师球 100%成功
+class MasterPetBall(Ball):
+    def __init__(self):
+        self.ball_name = '大师球'
+
+    def usePetBall(self,obj_defense):
+        print("捕获 %s 成功！" % obj_defense.name)
+        return True

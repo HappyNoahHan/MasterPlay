@@ -18,7 +18,7 @@ def getExpForUp(lv):
         return 1
 
 
-def getBattleSuccessExp(obj):
+def getBattleSuccessExp(obj,exp_basic = 1):
     '''
     战斗获胜经验
     :param lv:
@@ -29,13 +29,18 @@ def getBattleSuccessExp(obj):
     else:
         ai_index = 1.5
 
+    if 'ST999' in obj.exp_status:
+        exp_basic = 0.5
+
+    print("经验基数",exp_basic)
+
     #后续版本 随身道具
     #if withExpfruit == True:
     #    fruit_index = 1.5
     #else:
     #    fruit_index = 1
 
-    got_exp = round((obj.level * obj.basic_exp_value)/7 * ai_index * 1)
+    got_exp = int((obj.level * obj.basic_exp_value)/7 * ai_index * exp_basic)
 
     return got_exp
 
