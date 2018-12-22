@@ -1,11 +1,15 @@
 from props import petball
 import random
 petball_dict={
-    '精灵球': petball.PetBall(),
+    '精灵球': petball.PetBall(ball_name='精灵球'),
+    '绿叶球': petball.ProptyPetBall(ball_name='绿叶球',property='wood'),
+    '火焰球': petball.ProptyPetBall(ball_name='火焰球',property='fire'),
 }
 
 petball_bag_dict = {
-    1: [petball_dict['精灵球'],5]
+    1: [petball_dict['精灵球'],5],
+    2: [petball_dict['绿叶球'],1],
+    3: [petball_dict['火焰球'],2],
 }
 
 

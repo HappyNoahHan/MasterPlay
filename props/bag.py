@@ -118,10 +118,10 @@ def showPetBallBag(obj_attack,obj_defense,dict):
     select_id = input(">")
     if int(select_id) in dict:
         dict[int(select_id)][1] -= 1
-        if dict[int(select_id)][1] == 0:
-            dict.pop(int(select_id))
         if dict[int(select_id)][0].usePetBall(obj_defense):
             obj_defense.captured = True
+            if dict[int(select_id)][1] == 0:
+                dict.pop(int(select_id))
             return True
         else:
             return False
