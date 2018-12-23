@@ -2,10 +2,10 @@ from  pets import fly,wood
 from battle import skill
 import random
 
-wild_pet_list_for_grass_no1 = {
-        wood.aiOodish(level=random.randint(3, 5), skill_list={'1': skill.scream()}): 50,
-        fly.aiPidgey(level=random.randint(3, 5), skill_list={'1': skill.scream()}): 50,
-    }
+wild_pet_list_for_grass_no1 ={
+    '026': (127,'grass_no1',[]),
+    '043': (128,'grass_no1',[]),
+}
 
 def meetWildPet(dict):
     '''
@@ -13,17 +13,28 @@ def meetWildPet(dict):
     :param dict:
     :return:
     '''
-    per_base = list(range(1, 101))
-    number = random.randint(1,100)
+    per_base = list(range(1, 256))
+    number = random.randint(1,255)
 
     for key,value in dict.items():
-        key.meeting_random_number=[]
-
-        for i in range(0,value):
+        value[2].clear()
+        for i in range(0,value[0]):
             x = random.choice(per_base)
-            key.meeting_random_number.append(x)
+            value[2].append(x)
             per_base.remove(x)
 
     for key,value in dict.items():
-        if number in key.meeting_random_number:
-            return key
+        if number in value[2]:
+            wild_pet_no = key
+            return wild_pet_no,value[1]
+
+
+def getWildPet(pet_list):
+    pet_no,place = meetWildPet(pet_list)
+
+    if pet_no == '043':
+        if place == 'grass_no1':
+            return wood.aiOodish(level=random.randint(5, 7), skill_list={'1': skill.scream()})
+    elif pet_no == '026':
+        if place == 'grass_no1':
+            return fly.aiPidgey(level=random.randint(3, 5), skill_list={'1': skill.scream()})

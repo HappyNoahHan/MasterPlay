@@ -25,8 +25,9 @@ class Pet(object):
     #基础点数
 
     #初始化函数
+    #初始化的时候 需要将技能 基础点数传输进去，不然每一个类是固定的
     def __init__(self,level=1,skill_list={},exp_for_current=0,realize_skill_list=[],
-                 status=[],carry_prop=None,indi_list=rancom.getIndiValue(),base_points_list=[0] * 6):
+                 status=[],carry_prop=None,indi_list=[],base_points_list=[]):
         self.level = level
         [self.health_indi,
             self.attack_indi,
@@ -71,11 +72,10 @@ class Pet(object):
         self.carry_prop = carry_prop
         #闪避
         self.dodge = 0
-        #基础点数获得者
+        #基础点数获得者，经验减半状态
         self.basic_point_getter = None
         self.exp_status = []
         #遇见随机数
-        self.meeting_random_number = []
         self.talent = None
 
 

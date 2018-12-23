@@ -1,15 +1,16 @@
 from pets import fire,fly
 from place import village
 from battle import skill
+from assist import rancom
 
 class Player(object):
     def __init__(self):
         self.name = '小智'
 
 
-    master_pet = fire.Charmander(level=5,skill_list={'1':skill.fireBall()})
-    a=fire.Charmeleon(level=15,skill_list={'1':skill.fireBall()})
-    b=fire.Charmeleon(level=20,skill_list={'1':skill.fireBall()})
+    master_pet = fire.Charmander(level=5,skill_list={'1':skill.fireBall()},indi_list=rancom.getIndiValue())
+    a=fire.Charmeleon(level=10,skill_list={'1':skill.fireBall()},indi_list=rancom.getIndiValue())
+    b=fire.Charmeleon(level=20,skill_list={'1':skill.fireBall()},indi_list=rancom.getIndiValue())
 
     pet_list = {
         '1': master_pet,

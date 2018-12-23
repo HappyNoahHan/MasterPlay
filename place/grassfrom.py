@@ -2,6 +2,7 @@ from place import placebase,wildpetlist
 from pets import wood,fly
 from players import explore
 from battle import skill
+from assist import show
 import random,time
 
 class Grassform(placebase.Place):
@@ -28,11 +29,12 @@ class Grassform(placebase.Place):
 
         if select_id == '1':
             print("正在草丛探险...")
-            time.sleep(3)
-            wild_pet = wildpetlist.meetWildPet(self.wild_pet_list)
+            #time.sleep(3)
+            wild_pet = wildpetlist.getWildPet(self.wild_pet_list)
+            show.showPetStatus(wild_pet)
             print("你遇到了 %s !" % wild_pet.name)
             if explore.explore(player,wild_pet):
-                return self.showMap(player)
+                player.current_place.showMap(player)
         elif select_id == '2':
             pass
         elif select_id == '3':
