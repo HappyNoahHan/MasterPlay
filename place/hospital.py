@@ -11,6 +11,7 @@ class Hospital(placebase.Place):
             pet.buff_dict.clear()
             pet.property_buff.clear()
             pet.status.clear()
+            pet.alive = True
 
             for key,skill in pet.skill_list.items():
                 skill.pp_value = skill._pp_value_max

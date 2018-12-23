@@ -1,22 +1,20 @@
 from pets import fly,fire,wood
 import assist.show
-from assist import exp,evolve,capture
+from assist import exp,evolve,capture,changepet
 from props import propmap,drugmap,petballmap
 from battle import asscount,skilllistmap,battle,learnskill
 from players import play
-
+import os
 
 def battleing(player,wild_pet,change_pet = False):
     #谁获得基础点数
-    wild_pet.basic_point_getter = player.master_pet
+    wild_pet.basic_point_getter = player.pet_list['Master']
     print("=" * 30)
-    master_pet = player.master_pet
+    master_pet = player.pet_list['Master']
     print("%s 准备战斗！" % master_pet.name)
     assist.show.showPetStatus(master_pet)
 
-
     # 检查携带物
-
     propmap.checkCarryPropForObj(master_pet)
     propmap.checkCarryPropForObj(wild_pet)
     #assist.show.showPetStatus(master_pet)
@@ -33,14 +31,24 @@ def battleing(player,wild_pet,change_pet = False):
 
 
     if battle_end == True:
-        if wild_pet.captured == False:
 
+        if wild_pet.captured == False:
             if master_pet.health <= 0:
-                assist.show.gameOver()
+                master_pet.alive = False
+                if changepet.changePetAfterDie(player):
+                    battleing(player,wild_pet,change_pet=True)
+                else:
+                    print("没有可以使用的精灵，游戏结束")
+                    os._exit(1)
             else:
+                # 清除buff
+                master_pet.buff_dict.clear()
+                # obj1.debuff_dict.clear()
+                master_pet.property_buff.clear()
+
                 # 计算获得的基础点数
                 # print(master_pet.attack_base_point)
-                print("基础点数获得者",wild_pet.basic_point_getter)
+                #print("基础点数获得者",wild_pet.basic_point_getter)
                 if wild_pet.basic_point_getter == master_pet:
                     asscount.getBasePoint(master_pet, wild_pet)
                 # print(master_pet.attack_base_point)
@@ -59,7 +67,8 @@ def battleing(player,wild_pet,change_pet = False):
                         print("精灵是否进化！ 1 yes  2 no ")
                         isEvo = input(">")
                         if int(isEvo) == 1:
-                            player.master_pet = evolve.isEvolve(master_pet)
+                            player.setPet('Master',evolve.isEvolve(master_pet))
+
                         else:
                             print("精灵停止进化！")
 
@@ -67,12 +76,6 @@ def battleing(player,wild_pet,change_pet = False):
         else:
             if capture.addPetOrNot(player,wild_pet):
                 print("99999999")
-
-        # 清除buff
-        master_pet.buff_dict.clear()
-        # obj1.debuff_dict.clear()
-        master_pet.property_buff.clear()
-        assist.show.battleOver()
 
     player.exp_status = 1
 

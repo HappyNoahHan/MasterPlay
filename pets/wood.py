@@ -11,7 +11,7 @@ class aiOodish(pets.propets.Wood):
 
     name = '走路草'
     talent = 'TA002'
-    basic_exp_value = 100
+    basic_exp_value = 1000
 
     autoAi = True
 

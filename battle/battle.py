@@ -80,10 +80,12 @@ def damageCount(obj_defense,obj_attack,obj_skill):
 
     if obj_defense.health <= 0: #战斗结束  debuff不会死亡
         assist.show.petDie(obj_defense.name)
+        assist.show.battleOver()
         return False
 
     if obj_attack.health <= 0: #反弹死
         assist.show.petDie(obj_attack.name)
+        assist.show.battleOver()
         return False
 
 
@@ -172,6 +174,8 @@ def battleRun(player,obj1,obj2):
             #加一个经验状态减半的效果 ST999 经验减半
             obj2.exp_status.append('ST999')
             return battering.battleing(player,obj2,change_pet=True)
+        else:
+            return battleRun(player,obj1,obj2)
     elif command == '4':
         assist.show.petUseRun(obj1.name)
         x = random.randint(1,100)

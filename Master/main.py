@@ -13,20 +13,6 @@ if __name__ == '__main__':
 
     player.current_place.showMap(player)
 
-    print("=" * 30)
-
-
-    #bird = fly.aiPidgey(4)
-    wild_pet= wood.aiOodish(level=5)
-    print("小心，你遇到了 %s ！" % wild_pet.name)
-    #gress.health = 100
-    assist.show.showPetStatus(wild_pet)
-    learnskill.learnSkill(wild_pet,'A004',realize=False)
-
-
-    if battering.battleing(player,wild_pet):
-        print(player.pet_list)
-        assist.show.showPetStatus(player.pet_list['4'])
 
 
 

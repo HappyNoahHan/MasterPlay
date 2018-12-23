@@ -19,22 +19,24 @@ def isEvolve(obj):
     new_obj = evolve_dict[obj.name](level= obj.level,
                                     skill_list=obj.skill_list,
                                     exp_for_current=obj.exp_for_current,
-                                    realize_skill_list=obj.realize_skill_list,
-                                    status=obj.status,
+                                    #realize_skill_list=obj.realize_skill_list,
+                                    #status=obj.status,
                                     carry_prop=obj.carry_prop,
-                                    indi_list = [obj.health_indi,
-                                                 obj.attack_indi,
-                                                 obj.defense_indi,
-                                                 obj.spell_power_indi,
-                                                 obj.spell_defense_indi,
-                                                 obj.speed_indi],
                                     base_points_list = [obj.health_base_point,
                                                        obj.attack_base_point,
                                                        obj.defense_base_point,
                                                        obj.spell_power_base_point,
                                                        obj.spell_defense_base_point,
                                                        obj.speed_base_point])
-    #new_obj.skill_list = obj.skill_list
+    new_obj.realize_skill_list = obj.realize_skill_list
+    new_obj.status = obj.status
+    new_obj.health_indi = obj.health_indi,
+    new_obj.attack_indi = obj.attack_indi
+    new_obj.defense_indi = obj.defense_indi
+    new_obj.spell_power_indi = obj.spell_power_indi
+    new_obj.spell_defense_indi = obj.spell_defense_indi
+    new_obj.speed_indi = obj.speed_indi
+
     evolveUp(obj,new_obj)
     show.showPetStatus(new_obj)
     return new_obj

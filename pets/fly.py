@@ -10,7 +10,7 @@ class aiPidgey(pets.propets.Fly):
 
     name = '比比'
     autoAi = True
-    basic_exp_value = 54
+    basic_exp_value = 5400
 
     can_get_base_point = 1
     can_get_base_point_type = 'speed'

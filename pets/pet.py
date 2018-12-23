@@ -9,10 +9,8 @@
     4.0 基础点数 上限255
 '''
 
-import battle.skill
-from assist import cap,rancom
 
-import random
+from assist import cap,rancom
 
 class Pet(object):
     #能力值 每个精灵属性皆不同
@@ -26,15 +24,15 @@ class Pet(object):
 
     #初始化函数
     #初始化的时候 需要将技能 基础点数传输进去，不然每一个类是固定的
-    def __init__(self,level=1,skill_list={},exp_for_current=0,realize_skill_list=[],
-                 status=[],carry_prop=None,indi_list=[],base_points_list=[]):
+    def __init__(self,level=1,skill_list={},exp_for_current=0,carry_prop=None,base_points_list=[]):
         self.level = level
+
         [self.health_indi,
             self.attack_indi,
             self.defense_indi,
             self.spell_power_indi,
             self.spell_defense_indi,
-            self.speed_indi] = indi_list
+            self.speed_indi] = rancom.getIndiValue()
         [self.health_base_point,
          self.attack_base_point,
          self.defense_base_point,
@@ -67,8 +65,8 @@ class Pet(object):
         #以下是进化时需要继承的选线
         self.skill_list = skill_list
         self.exp_for_current = exp_for_current
-        self.realize_skill_list = realize_skill_list #已经领悟的技能表
-        self.status = status #状态表
+        self.realize_skill_list = [] #已经领悟的技能表
+        self.status = [] #状态表
         self.carry_prop = carry_prop
         #闪避
         self.dodge = 0
@@ -77,6 +75,8 @@ class Pet(object):
         self.exp_status = []
         #遇见随机数
         self.talent = None
+        #是否存活
+        self.alive = True
 
 
     autoAi = False

@@ -8,5 +8,7 @@ def explore(player,wild_pet):
     '''
     if battering.battleing(player, wild_pet):
         print(player.pet_list)
-        show.showPetStatus(player.master_pet)
+        show.showPetStatus(player.pet_list['Master'])
         return True
+    else:
+        return False

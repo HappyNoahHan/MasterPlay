@@ -11,7 +11,7 @@ def battleOver():
     print("战斗结束！")
 
 def gameOver():
-    print("战斗失败！")
+    print("游戏结束！")
 
 def petDie(name):
     print("%s 死亡" % name)

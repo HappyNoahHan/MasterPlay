@@ -8,14 +8,15 @@ class Player(object):
         self.name = '小智'
 
 
-    master_pet = fire.Charmander(level=5,skill_list={'1':skill.fireBall()},indi_list=rancom.getIndiValue())
-    a=fire.Charmeleon(level=10,skill_list={'1':skill.fireBall()},indi_list=rancom.getIndiValue())
-    b=fire.Charmeleon(level=20,skill_list={'1':skill.fireBall()},indi_list=rancom.getIndiValue())
+    a = fire.Charmander(level=1,skill_list={'1':skill.fireBall()})
+    b = fire.Charmeleon(level=10,skill_list={'1':skill.fireBall()})
+    c = fire.Charmeleon(level=10,skill_list={'1':skill.fireBall()})
+
 
     pet_list = {
-        '1': master_pet,
-        '2': a,
-        '3': b,
+        'Master': a,
+        '1': c,
+        '2': b,
     }
 
 
