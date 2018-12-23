@@ -34,7 +34,8 @@ class Grassform(placebase.Place):
             if explore.explore(player,wild_pet):
                 return self.showMap(player)
             else:
-                pass
+                show.gameOver()
+                os._exit(1)
 
         elif select_id == '2':
             pass

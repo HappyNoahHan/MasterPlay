@@ -10,13 +10,13 @@ class Player(object):
 
     a = fire.Charmander(level=1,skill_list={'1':skill.fireBall()})
     b = fire.Charmeleon(level=10,skill_list={'1':skill.fireBall()})
-    c = fire.Charmeleon(level=10,skill_list={'1':skill.fireBall()})
+    c = fire.Charmeleon(level=1,skill_list={'1':skill.fireBall()})
 
 
     pet_list = {
         'Master': a,
         '1': c,
-        '2': b,
+        #'2': b,
     }
 
 

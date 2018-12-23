@@ -36,10 +36,10 @@ def battleing(player,wild_pet,change_pet = False):
             if master_pet.health <= 0:
                 master_pet.alive = False
                 if changepet.changePetAfterDie(player):
-                    battleing(player,wild_pet,change_pet=True)
+                    return battleing(player,wild_pet,change_pet=True)
                 else:
-                    print("没有可以使用的精灵，游戏结束")
-                    os._exit(1)
+                    print("没有可以使用的精灵")
+                    return False
             else:
                 # 清除buff
                 master_pet.buff_dict.clear()
