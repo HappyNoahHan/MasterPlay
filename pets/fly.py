@@ -8,9 +8,16 @@ class aiPidgey(pets.propets.Fly):
     spell_defense_basic = 35
     speed_basic = 56
 
-    name = '野生比比'
+    name = '比比'
     autoAi = True
     basic_exp_value = 54
+
+    can_get_base_point = 1
+    can_get_base_point_type = 'speed'
+
+    capture_rate = 255
+
+
 
     def __str__(self):
         return super().__str__() + ':' + self.name

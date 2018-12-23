@@ -89,8 +89,9 @@ def damageCount(obj_defense,obj_attack,obj_skill):
 
     else:
         #检查战斗后特性检查
-        if talentmap.checkTalent(obj_attack,'after'):
-            talentmap.talentEffectAfter(obj_attack,obj_skill)
+        if obj_attack.talent != None:
+            if talentmap.checkTalent(obj_attack,'after'):
+                talentmap.talentEffectAfter(obj_attack,obj_skill)
 
         assist.show.showPetStatus(obj_defense)
         assist.show.showPetStatus(obj_attack)

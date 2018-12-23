@@ -99,9 +99,10 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
     print(power)
 
     #加入战斗前天赋计算  技能威力提升
-    if talentmap.checkTalent(obj_attack, 'before'):
-        if talentmap.talent_dict[obj_attack.talent].talent_type == '技能威力类型':
-            power = talentmap.talent_dict[obj_attack.talent].talentEffect(power)
+    if obj_attack.talent != None:
+        if talentmap.checkTalent(obj_attack, 'before'):
+            if talentmap.talent_dict[obj_attack.talent].talent_type == '技能威力类型':
+                power = talentmap.talent_dict[obj_attack.talent].talentEffect(power)
 
 
     #print("技能威力",power)
@@ -121,9 +122,10 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
     damage = round(basic_damage * pro_buff_index * attr_index_number * skill_prop_match_obj_prop)
 
     #战斗中天赋计算
-    if talentmap.checkTalent(obj_attack,'middle'):
-        damage = talentmap.talentEffectMiddle(obj_attack,skill,damage)
-        print(damage)
+    if obj_attack.talent != None:
+        if talentmap.checkTalent(obj_attack,'middle'):
+            damage = talentmap.talentEffectMiddle(obj_attack,skill,damage)
+            print(damage)
 
     #战斗后敌方状态加成
     if obj_defense.status:

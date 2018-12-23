@@ -74,6 +74,10 @@ class Pet(object):
         #基础点数获得者
         self.basic_point_getter = None
         self.exp_status = []
+        #遇见随机数
+        self.meeting_random_number = []
+        self.talent = None
+
 
     autoAi = False
     canEvolve = True

@@ -7,7 +7,7 @@ class Player(object):
         self.name = '小智'
 
 
-    master_pet = fire.Charmander(level=5)
+    master_pet = fire.Charmander(level=5,skill_list={'1':skill.fireBall()})
     a=fire.Charmeleon(level=15,skill_list={'1':skill.fireBall()})
     b=fire.Charmeleon(level=20,skill_list={'1':skill.fireBall()})
 
