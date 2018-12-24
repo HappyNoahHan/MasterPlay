@@ -49,13 +49,13 @@ def showPetStatus(obj):
 
 def showPetSkills(obj):
     for key,value in obj.skill_list.items():
-        print(key,':',value.skill_show_name)
+        print(key,':',value.show_name)
 
 def learnSkill(code):
-    print("%s 学习成功！" % battle.skilllistmap.skill_dict[code].skill_show_name)
+    print("%s 学习成功！" % battle.skilllistmap.skill_dict[code].show_name)
 
 def useSkill(obj,skill):
-    print("%s 使用 %s 攻击！" % (obj.name, skill.skill_show_name))
+    print("%s 使用 %s 攻击！" % (obj.name, skill.show_name))
 
 
 def propertyUp(health_up,attack_up,defense_up,spell_power_up,spell_defense_up,speed_up):

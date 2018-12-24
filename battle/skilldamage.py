@@ -58,7 +58,7 @@ def luckyAttack(speed,skill):
     if speed > 255:
         speed = 255
 
-    if skill.skill_show_name == '飞叶快刀':
+    if skill.show_name == '飞叶快刀':
         speed *= 4
         if speed > 255:
             speed = 255

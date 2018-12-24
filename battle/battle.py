@@ -39,13 +39,13 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         obj_attack.setBuff(obj_skill,[obj_skill.effect_turns-1,obj_skill.index_per])
         battle.buff.buffCount(obj_attack)
         for key,value in obj_attack.buff_dict.items():
-            print(key.skill_show_name,':',value)
+            print(key.show_name,':',value)
 
     elif obj_skill.skill_model == '0003':
         obj_defense.setDebuff(obj_skill,[obj_skill.effect_turns,obj_skill.index_per])
         battle.buff.proDebuffCount(obj_defense)
         for key,value in obj_defense.debuff_dict.items():
-            print(key.skill_show_name, ':', value)
+            print(key.show_name, ':', value)
 
     elif obj_skill.skill_model == '0004':
         if obj_skill.status.status_code not in obj_defense.status:
@@ -69,7 +69,7 @@ def damageCount(obj_defense,obj_attack,obj_skill):
     elif obj_skill.skill_model == '0009':
         obj_attack.setProBuff(obj_skill,[obj_skill.effect_turns,obj_skill.index_per])
         for key,value in obj_attack.property_buff.items():
-            print(key.skill_show_name, ':', value)
+            print(key.show_name, ':', value)
 
     if obj_attack.debuff_dict:
         battle.buff.damageDebuffCount(obj_attack) #行动后debuff 计算
@@ -124,7 +124,7 @@ def battleRun(player,obj1,obj2):
         else:
             for key, value in obj1.skill_list.items():
                 if value != None:
-                    print("技能" + key, ":", value.skill_show_name, ' PP:', value.pp_value)
+                    print("技能" + key, ":", value.show_name, ' PP:', value.pp_value)
             print('0','返回上级！')
             print("请选择使用的技能：")
             skill_number = input(">>")
@@ -180,9 +180,10 @@ def battleRun(player,obj1,obj2):
     elif command == '4':
         assist.show.petUseRun(obj1.name)
         x = random.randint(1,100)
-        if x in range(1,11):
+        if x in range(1,51):
             print("逃跑成功")
-            print("游戏结束")
+            player.battle_run_success = True
+            return True
         else:
             print("逃跑失败")
             assist.show.printTurn(obj2.name)
@@ -190,7 +191,7 @@ def battleRun(player,obj1,obj2):
     elif command == '3':
         #测试 得到一个道具
         #propmap.getProp(propmap.prop_dict['五彩迷光'])
-        if bag.showBattleBagOrNot(obj1,obj2):
+        if bag.showBattleBagOrNot(player,obj2):
             if obj2.captured == False:
                 assist.show.printTurn(obj2)
                 return battleRun(player,obj2,obj1)

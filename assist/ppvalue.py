@@ -22,7 +22,7 @@ def ppRecoverMax(obj):
     '''
     print("请选择要恢复的技能")
     for key,value in obj.skill_list.items():
-        print(key,":",value.skill_show_name,' ',value.pp_value)
+        print(key,":",value.show_name,' ',value.pp_value)
     select_id = input(">")
     if show.checkSelectID(select_id, obj.skill_list):
         obj.skill_list[select_id].pp_value = obj.skill_list[select_id]._pp_value_max
@@ -39,7 +39,7 @@ def ppAddLong(obj,number):
     '''
     print("请选择要恢复的技能")
     for key,value in obj.skill_list.items():
-        print(key,":",value.skill_show_name,' ',value.pp_value)
+        print(key,":",value.show_name,' ',value.pp_value)
     select_id = input(">")
 
     if show.checkSelectID(select_id,obj.skill_list):
@@ -57,7 +57,7 @@ def ppRecover(obj,number):
     '''
     print("请选择要恢复的技能")
     for key,value in obj.skill_list.items():
-        print(key,":",value.skill_show_name,' ',value.pp_value)
+        print(key,":",value.show_name,' ',value.pp_value)
     select_id = input(">")
     if show.checkSelectID(select_id,obj.skill_list):
         obj.skill_list[select_id].pp_value += number

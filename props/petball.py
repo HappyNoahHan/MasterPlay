@@ -1,4 +1,4 @@
-import random
+import time
 from assist import capture
 
 class Ball(object):
@@ -8,22 +8,26 @@ class Ball(object):
 
 #普通球
 class PetBall(Ball):
-    def __init__(self,ball_name='',capture_index = 1):
-        self.ball_name = ball_name
+    def __init__(self,show_name='',capture_index = 1):
+        self.show_name = show_name
         self.capture_index = capture_index
         #self.info = '精灵球，捕获野生精灵'
 
     def usePetBall(self,obj_defense):
+        print("使用 %s ！" % self.show_name)
+        time.sleep(3)
         return capture.captureOrNot(obj_defense,self.capture_index)
 
 
 #元素球
 class ProptyPetBall(PetBall):
-    def __init__(self,ball_name='',property=''):
-        super().__init__(ball_name=ball_name,capture_index=1)
+    def __init__(self,show_name='',property=''):
+        super().__init__(show_name=show_name,capture_index=1)
         self.property = property
 
     def usePetBall(self,obj_defense):
+        print("使用 %s ！" % self.show_name)
+        time.sleep(3)
         if self.property in obj_defense.property:
             self.capture_index = 1.5
         print('球调整',self.capture_index)
@@ -33,8 +37,10 @@ class ProptyPetBall(PetBall):
 #大师球 100%成功
 class MasterPetBall(Ball):
     def __init__(self):
-        self.ball_name = '大师球'
+        self.show_name = '大师球'
 
     def usePetBall(self,obj_defense):
+        print("使用 %s ！" % self.show_name)
+        time.sleep(3)
         print("捕获 %s 成功！" % obj_defense.name)
         return True

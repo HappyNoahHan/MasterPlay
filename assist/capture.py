@@ -41,7 +41,6 @@ def addPetOrNot(player,wild_pet):
     :return:
     '''
     wild_pet.autoAi = False
-    wild_pet.exp_status.clear()
     wild_pet.can_capture = False
     wild_pet.captured = True
     wild_pet.basic_point_getter = None

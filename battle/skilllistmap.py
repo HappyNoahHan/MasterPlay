@@ -29,7 +29,7 @@ skill_bag_dict={
 
 #得到技能道具
 def getSkill(skill):
-    print("获得了 %s !" % skill.skill_show_name)
+    print("获得了 %s !" % skill.show_name)
     for key,value in skill_bag_dict.items():
         if value[0] == skill:
             value[1] += 1

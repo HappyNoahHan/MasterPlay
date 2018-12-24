@@ -9,7 +9,9 @@ from place import  hospital
 
 if __name__ == '__main__':
     player = play.Player()
-    print(player.current_place)
+
+    print("Welcome to Pet Master World!")
+    print("Command 9 or bag to open the bag！")
 
     player.current_place.showMap(player)
 

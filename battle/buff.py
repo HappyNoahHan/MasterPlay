@@ -49,7 +49,7 @@ def buffCount(obj):
     if buff_remove_list:
         for key in buff_remove_list:
             obj.buff_dict.pop(key)
-            print("移除 %s 效果" % key.skill_show_name)
+            print("移除 %s 效果" % key.show_name)
 
     #战前debuff计算
     proDebuffCount(obj)
@@ -67,7 +67,7 @@ def buffIndex(obj):
         else:
             value[0] -= 1
             #buff_remove_list.append(key)
-        print("%s 效果渐渐减弱" % key.skill_show_name)
+        print("%s 效果渐渐减弱" % key.show_name)
 
 def damageDebuffCount(obj):
     '''
@@ -83,7 +83,7 @@ def damageDebuffCount(obj):
             if value[0] >= 1:
                 lost_health = round(obj.health * value[1] * index_number)
                 obj.health -= lost_health
-                print("受到 %s  %s 伤害" %(key.skill_show_name,lost_health))
+                print("受到 %s  %s 伤害" %(key.show_name,lost_health))
                 value[0] -= 1
             else:
                 debuff_remove_list.append(key)
@@ -91,7 +91,7 @@ def damageDebuffCount(obj):
     if debuff_remove_list:
         for key in debuff_remove_list:
             obj.debuff_dict.pop(key)
-            print("移除 %s 伤害" % key.skill_show_name)
+            print("移除 %s 伤害" % key.show_name)
 
 def proDebuffCount(obj):
     '''
@@ -134,7 +134,7 @@ def proDebuffCount(obj):
     if debuff_move_list:
         for key in debuff_move_list:
             obj.debuff_dict.pop(key)
-            print("移除 %s 负面效果" % key.skill_show_name)
+            print("移除 %s 负面效果" % key.show_name)
 
 def proBuffCount(obj,skill):
     '''
@@ -172,7 +172,7 @@ def proBuffindex(obj):
     if probuff_remove_list:
         for key in probuff_remove_list:
             obj.property_buff.pop(key)
-            print("移除 %s 增幅效果" % key.skill_show_name)
+            print("移除 %s 增幅效果" % key.show_name)
 
 
 
@@ -187,7 +187,7 @@ def removeObjBuff(obj,num):
         if num <= len(obj.buff_dict.items()):
             for i in range(num):
                 del_item = obj.buff_dict.popitem()
-                print("驱散  %s" % del_item[0].skill_show_name)
+                print("驱散  %s" % del_item[0].show_name)
         else:
             obj.buff_dict.clear()
             print("驱散成功！")
@@ -208,7 +208,7 @@ def removeOwnDebuff(obj,num):
         if num <= len(obj.debuff_dict.items()):
             for i in range(num):
                 del_item = obj.debuff_dict.popitem()
-                print("移除 %s 负面效果" % del_item[0].skill_show_name)
+                print("移除 %s 负面效果" % del_item[0].show_name)
         else:
             obj.debuff_dict.clear()
             print("驱散成功")
