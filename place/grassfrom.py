@@ -1,4 +1,4 @@
-from place import placebase,wildpetlist
+from place import placebase,wildpetlist,treasure
 from players import explore
 from assist import show
 from props import bag
@@ -43,7 +43,16 @@ class Grassform(placebase.Place):
         elif select_id == '2':
             pass
         elif select_id == '3':
-            pass
+            print("正在草丛寻宝...")
+            time.sleep(1)
+            find_item = treasure.getTreasureBox(treasure.treasure_box_for_grass_no_1)
+            if find_item == None:
+                print("什么也没有发现")
+            else:
+                treasure.getPropsToBag(find_item[0],find_item[1])
+            return self.showMap(player)
+
+
         elif select_id == '0':
             player.current_place.showMap(player)
         elif select_id == '9' or select_id == 'bag':

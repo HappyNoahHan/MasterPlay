@@ -23,21 +23,21 @@ skill_dict = {
 
 #背包概念 名称 数量
 skill_bag_dict={
-    1:[skill_dict['A001'],1],
-    2:[skill_dict['C002'],2],
+    #1:[skill_dict['A001'],1],
+    #2:[skill_dict['C002'],2],
 }
 
 #得到技能道具
-def getSkill(skill):
-    print("获得了 %s !" % skill.show_name)
+def getSkill(skill_code,number = 1):
+    print("获得了 %s !" % skill_dict[skill_code].show_name)
     for key,value in skill_bag_dict.items():
-        if value[0] == skill:
-            value[1] += 1
+        if value[0] == skill_dict[skill_code]:
+            value[1] += number
             return True
 
     for key in range(1,101):
         if key not in skill_bag_dict:
-            skill_bag_dict[key] = [skill,1]
+            skill_bag_dict[key] = [skill_dict[skill_code],number]
             return True
 
     return False

@@ -9,8 +9,8 @@ prop_dict ={
 
 #背包概念 名称 数量
 prop_bag_dict={
-    1:[prop_dict['攻击之爪'],1],
-    2:[prop_dict['火焰之心'],2],
+    #1:[prop_dict['攻击之爪'],1],
+    #2:[prop_dict['火焰之心'],2],
 }
 
 
@@ -57,16 +57,16 @@ def checkCarryPropFoeDodge(obj):
             return obj.carry_prop.propCarry()
     return 0
 
-def getProp(prop,number = 1):
-    print("获得了 %s !" % prop.show_name)
+def getProp(prop_name,number = 1):
+    print("获得了 %s !" % prop_name)
     for key,value in prop_bag_dict.items():
-        if value[0] == prop:
+        if value[0] == prop_dict[prop_name]:
             value[1] += number
             return True
 
     for key in range(1,101):
         if key not in prop_bag_dict:
-            prop_bag_dict[key] = [prop,number]
+            prop_bag_dict[key] = [prop_dict[prop_name],number]
             return True
 
     return False

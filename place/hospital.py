@@ -21,7 +21,7 @@ class Hospital(placebase.Place):
         print('='*30)
         print('当前地图  %s ' % self.name)
         print("1 恢复")
-        print("2 返回")
+        print("0 返回")
         print("输入指令")
         select_id = input(">")
         if select_id == '1':
@@ -29,7 +29,7 @@ class Hospital(placebase.Place):
             time.sleep(3)
             print("所有精灵状态恢复")
             return self.showMap(player)
-        elif select_id == '2':
+        elif select_id == '0':
             player.current_place.showMap(player)
         elif select_id == '9' or select_id == 'bag':
             bag.showBag(player)
