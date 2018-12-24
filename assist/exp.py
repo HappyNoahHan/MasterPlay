@@ -18,7 +18,7 @@ def getExpForUp(lv):
         return 1
 
 
-def getBattleSuccessExp(obj,exp_basic = 1):
+def getBattleSuccessExp(player,obj,exp_basic = 1):
     '''
     战斗获胜经验
     :param lv:
@@ -29,7 +29,7 @@ def getBattleSuccessExp(obj,exp_basic = 1):
     else:
         ai_index = 1.5
 
-    if 'ST999' in obj.exp_status:
+    if len(player.battle_pet_list) > 1:
         exp_basic = 0.5
 
     print("经验基数",exp_basic)

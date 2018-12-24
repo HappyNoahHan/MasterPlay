@@ -172,7 +172,8 @@ def battleRun(player,obj1,obj2):
         #交换精灵模块
         if changepet.changePet(player):
             #加一个经验状态减半的效果 ST999 经验减半
-            obj2.exp_status.append('ST999')
+            #obj2.exp_status.append('ST999')
+            #因未返回到explore层，换精灵结算顺序正常
             return battering.battleing(player,obj2,change_pet=True)
         else:
             return battleRun(player,obj1,obj2)

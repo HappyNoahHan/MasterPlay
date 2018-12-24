@@ -72,7 +72,7 @@ class Pet(object):
         self.dodge = 0
         #基础点数获得者，经验减半状态
         self.basic_point_getter = None
-        self.exp_status = []
+        #self.exp_status = []
         #遇见随机数
         self.talent = None
         #是否存活
