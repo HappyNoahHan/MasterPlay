@@ -18,16 +18,15 @@ def getExpForUp(lv):
         return 1
 
 
-def getBattleSuccessExp(player,obj,exp_basic = 1):
+def getBattleSuccessExp(player,obj,exp_basic = 1,ai_index=1):
     '''
     战斗获胜经验
     :param lv:
     :return:
     '''
     if obj.autoAi == True:
-        ai_index = 1
-    else:
-        ai_index = 1.5
+        if obj.has_trainer == None:
+            ai_index = 1.5
 
     if len(player.battle_pet_list) > 1:
         exp_basic = 0.5
