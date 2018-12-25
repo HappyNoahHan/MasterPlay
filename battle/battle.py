@@ -180,7 +180,7 @@ def battleRun(player,obj1,obj2):
     elif command == '4':
         assist.show.petUseRun(obj1.name)
         x = random.randint(1,100)
-        if x in range(1,51):
+        if x in range(1,100):
             print("逃跑成功")
             player.battle_run_success = True
             return True

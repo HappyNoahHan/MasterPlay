@@ -1,7 +1,7 @@
 def changePet(player):
     print("请选择你要交换的精灵！")
     for key,value in player.pet_list.items():
-        print(key,':',value.name)
+        print(key,':',value.name,' Lv%s' % value.level)
     print("0 : 返回！")
     select_id = input(">")
 

@@ -1,14 +1,15 @@
 from place import placebase,wildpetlist,treasure
-from players import explore
+from players import explore,trainer
 from assist import show
 from props import bag
 import random,time,os
 
 class Grassform(placebase.Place):
-    def __init__(self,name='',wild_pet_list={},treasure_box_list={}):
+    def __init__(self,name='',wild_pet_list={},treasure_box_list={},trainer_list={}):
         super().__init__(name=name)
         self.wild_pet_list = wild_pet_list
         self.treasure_box_list = treasure_box_list
+        self.trainer_list = trainer_list
 
     maplist = {
         '1':'野外探险',
@@ -38,11 +39,24 @@ class Grassform(placebase.Place):
             if explore.explore(player,wild_pet):
                 return self.showMap(player)
             else:
-                show.gameOver()
-                os._exit(1)
+                print("无法继续战斗,请前往治疗")
+                return self.showMap(player)
 
         elif select_id == '2':
-            pass
+            #训练师对战
+            time.sleep(1)
+            find_trainer = trainer.getTrainer(self.trainer_list)
+            if find_trainer == None:
+                print("没有遇到任何对手")
+                return self.showMap(player)
+            else:
+                print("遇到了 %s ,并对你发起了对战！" % find_trainer.name)
+                if explore.trainerVS(player,find_trainer):
+                    return self.showMap(player)
+                else:
+                    print("无法继续战斗,请前往治疗")
+                    return self.showMap(player)
+
         elif select_id == '3':
             print("正在草丛寻宝...")
             time.sleep(1)
