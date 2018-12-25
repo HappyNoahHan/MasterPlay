@@ -12,7 +12,7 @@ bag_dict_map={
     '3':['yes','精灵球'],
     '4':['no','技能'],
     '5':['no','辅助'],
-    '0':['both','关闭背包']
+    '0':['both','关闭背包'],
 }
 
 def showBattleBagOrNot(player,obj_defense):
@@ -23,6 +23,7 @@ def showBattleBagOrNot(player,obj_defense):
     for key,value in bag_dict_map.items():
         if value[0] == 'yes' or value[0] == 'both':
             print(key,':  ',value[1])
+    print("金钱: %s" % player.money)
     select_id = input(">")
     if select_id == '0':
         print("返回上级")
@@ -46,6 +47,7 @@ def showBag(player):
     print("=" * 30)
     for key,value in bag_dict_map.items():
         print(key,":",value[1])
+    print("金钱: %s" % player.money)
     print("请输入指令")
     select_id = input(">")
     if select_id == '1':
@@ -252,9 +254,10 @@ def sellProp(player,prop):
 
     if int(number) <= prop[1]:
         get_money = getSellMoney(prop[0].show_name,int(number))
-        player.money += get_money
-        print("money:", player.money)
-        prop[1] -= int(number)
+        if get_money > 0:
+            player.money += get_money
+            print("money:", player.money)
+            prop[1] -= int(number)
     else:
         print("没有足够的数量售卖")
         return sellProp(player,prop)

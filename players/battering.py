@@ -1,9 +1,9 @@
 
 import assist.show
-from assist import exp,evolve,capture,changepet,show
+from assist import exp,evolve,capture,changepet,show,prize
 from props import propmap,drugmap,petballmap
 from battle import asscount,skilllistmap,battle,learnskill
-import random
+import random,time
 
 def battleing(player,wild_pet,change_pet = False):
     #谁获得基础点数
@@ -71,6 +71,8 @@ def vsBattleing(player,trainer,challenge_list):
             if len(challenge_list) == 0:
                 print("挑战胜利！")
                 trainer.can_challenge = False
+                prize.getPrize(player,trainer.prize)
+                time.sleep(3)
                 return True
             else:
                 return vsBattleing(player,trainer,challenge_list)
