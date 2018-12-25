@@ -24,7 +24,7 @@ class Pet(object):
 
     #初始化函数
     #初始化的时候 需要将技能 基础点数传输进去，不然每一个类是固定的
-    def __init__(self,level=1,skill_list={},exp_for_current=0,carry_prop=None,base_points_list=[]):
+    def __init__(self,level=1,skill_list={},exp_for_current=0,carry_prop=None,base_points_list=[],has_trainer=False,autoAi=True):
         self.level = level
 
         [self.health_indi,
@@ -77,12 +77,17 @@ class Pet(object):
         self.talent = None
         #是否存活
         self.alive = True
+        #是否玩家所有
+        self.has_trainer = has_trainer
+        if self.has_trainer == True:
+            #self.autoAi = False
+            self.captured = True
+        else:
+            #self.autoAi = True
+            self.captured = False
+        self.autoAi = autoAi
 
-
-    autoAi = False
     canEvolve = True
-    can_capture = True
-    captured = False
 
 
     def getDefense(self):

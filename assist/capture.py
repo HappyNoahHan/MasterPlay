@@ -13,6 +13,9 @@ A=（最大ＨＰ×3-当前ＨＰ×2）×捕获率×捕获修正⁄最大ＨＰ�
 import random
 
 def captureOrNot(obj_defense,capture_index,status_index = 0):
+    if obj_defense.captured == True:
+        print("%s 不可捕获" % obj_defense)
+        return False
     if 'ST001' in obj_defense.status:
         status_index += 5
     if 'ST003' in obj_defense.status or 'ST002' in obj_defense.status:
@@ -40,8 +43,8 @@ def addPetOrNot(player,wild_pet):
     :param wild_pet:
     :return:
     '''
+    wild_pet.has_trainer = True
     wild_pet.autoAi = False
-    wild_pet.can_capture = False
     wild_pet.captured = True
     wild_pet.basic_point_getter = None
 

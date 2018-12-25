@@ -2,7 +2,7 @@ from  pets import fly,wood
 from battle import skill
 import random
 
-wild_pet_list_for_grass_no1 ={
+wild_pet_list_in_grass_no_1 ={
     '026': (127,'grass_no1',[]),
     '043': (128,'grass_no1',[]),
 }

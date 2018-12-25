@@ -5,9 +5,10 @@ from props import bag
 import random,time,os
 
 class Grassform(placebase.Place):
-    def __init__(self,name='',wild_pet_list={}):
+    def __init__(self,name='',wild_pet_list={},treasure_box_list={}):
         super().__init__(name=name)
         self.wild_pet_list = wild_pet_list
+        self.treasure_box_list = treasure_box_list
 
     maplist = {
         '1':'野外探险',
@@ -45,7 +46,7 @@ class Grassform(placebase.Place):
         elif select_id == '3':
             print("正在草丛寻宝...")
             time.sleep(1)
-            find_item = treasure.getTreasureBox(treasure.treasure_box_for_grass_no_1)
+            find_item = treasure.getTreasureBox(self.treasure_box_list)
             if find_item == None:
                 print("什么也没有发现")
             else:

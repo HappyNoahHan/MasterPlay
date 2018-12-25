@@ -13,8 +13,6 @@ class aiOodish(pets.propets.Wood):
     talent = 'TA002'
     basic_exp_value = 1000
 
-    autoAi = True
-
     can_get_base_point = 2
     can_get_base_point_type = 'attack'
 

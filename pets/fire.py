@@ -15,8 +15,6 @@ class Charmander(pets.propets.Fire):
 
     basic_exp_value = 51
     evolve_level = 8
-    can_capture = False
-    captured = True
 
     #技能树
     skill_tree = {

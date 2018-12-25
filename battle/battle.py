@@ -200,7 +200,7 @@ def battleRun(player,obj1,obj2):
         else:
             #print("重新选择！")
             #assist.show.printTurn(obj2)
-            return battleRun(player,obj1, obj2)
+            return battleRun(player,obj2, obj1)
 
     else:
         print("指令错误!")

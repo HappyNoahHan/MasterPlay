@@ -4,21 +4,10 @@ from battle import skill
 from assist import rancom
 
 class Player(object):
-    def __init__(self,money=0):
-        self.name = '小智'
+    def __init__(self,money=0,name = '',pet_list={}):
+        self.name = name
         self.money = money
-
-
-    a = fire.Charmander(level=1,skill_list={'1':skill.fireBall()})
-    b = fire.Charmeleon(level=10,skill_list={'1':skill.fireBall()})
-    c = fire.Charmeleon(level=15,skill_list={'1':skill.fireBall()})
-
-
-    pet_list = {
-        'Master': c,
-        '1': a,
-        '2': b,
-    }
+        self.pet_list = pet_list
 
 
     current_place = village.Village("新手村")
