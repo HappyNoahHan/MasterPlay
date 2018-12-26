@@ -27,7 +27,7 @@ def showBattleBagOrNot(player,obj_defense):
     select_id = input(">")
     if select_id == '0':
         print("返回上级")
-        return False
+        return None
     #elif select_id == '1':
     #    return showPropBag(obj_attack,obj_defense,propmap.prop_bag_dict)
     elif select_id == '2':

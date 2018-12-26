@@ -191,12 +191,15 @@ def battleRun(player,obj1,obj2):
     elif command == '3':
         #测试 得到一个道具
         #propmap.getProp(propmap.prop_dict['五彩迷光'])
-        if bag.showBattleBagOrNot(player,obj2):
+        use_or_not = bag.showBattleBagOrNot(player,obj2)
+        if use_or_not == True:
             if obj2.captured == False:
                 assist.show.printTurn(obj2)
                 return battleRun(player,obj2,obj1)
             else:
                 return True
+        elif use_or_not == None:
+            return battleRun(player,obj1, obj2)
         else:
             #print("重新选择！")
             #assist.show.printTurn(obj2)

@@ -8,6 +8,7 @@ class Place(object):
         return self.name
 
     maplist = {}
+
     def showMap(self,player):
         print('='*30)
         print('当前地图  %s ' % self.name)
@@ -25,3 +26,6 @@ class Place(object):
         else:
             print("指令错误！")
             return self.showMap(player)
+
+    def setMapList(self,key,value):
+        self.maplist[key][1] = value

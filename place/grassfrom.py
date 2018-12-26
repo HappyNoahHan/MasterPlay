@@ -1,6 +1,6 @@
 from place import placebase,wildpetlist,treasure
 from players import explore,trainer
-from assist import show
+from assist import show,riddle
 from props import bag
 import random,time,os
 
@@ -12,10 +12,10 @@ class Grassform(placebase.Place):
         self.trainer_list = trainer_list
 
     maplist = {
-        '1':'野外探险',
-        '2':'搜索玩家',
-        '3':'寻宝',
-        '0':'返回',
+        '1':['野外探险',True],
+        '2':['搜索玩家',True],
+        '3':['寻宝',False],
+        '0':['返回',True],
     }
 
 
@@ -24,7 +24,8 @@ class Grassform(placebase.Place):
         print('='*30)
         print('当前地图  %s ' % self.name)
         for key,value in self.maplist.items():
-            print(key,':',value)
+            if value[1] != False:
+                print(key,':',value[0])
 
         print("请选择行动指令")
 
@@ -46,16 +47,18 @@ class Grassform(placebase.Place):
             #训练师对战
             time.sleep(1)
             find_trainer = trainer.getTrainer(self.trainer_list)
-            if find_trainer == None:
-                print("没有遇到任何对手")
-                return self.showMap(player)
-            else:
-                print("遇到了 %s ,并对你发起了对战！" % find_trainer.name)
+            print("遇到了 %s ！" % find_trainer.name)
+            print(find_trainer)
+            time.sleep(2)
+            if find_trainer.can_challenge == True:
                 if explore.trainerVS(player,find_trainer):
-                    return self.showMap(player)
+                    if find_trainer.has_riddle == True and find_trainer.can_challenge == False:
+                        riddle_condiction = riddle.openTheRiddle(find_trainer)
+                        self.setMapList(riddle_condiction[0],riddle_condiction[1])
+                    #return self.showMap(player)
                 else:
                     print("无法继续战斗,请前往治疗")
-                    return self.showMap(player)
+            return self.showMap(player)
 
         elif select_id == '3':
             print("正在草丛寻宝...")

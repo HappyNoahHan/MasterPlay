@@ -12,7 +12,7 @@
     <SUITE FILE_PATH="coverage/MasterPlay$bibibird.coverage" NAME="bibibird Coverage Results" MODIFIED="1544063200945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/pets" />
     <SUITE FILE_PATH="coverage/MasterPlay$play.coverage" NAME="play Coverage Results" MODIFIED="1545732793615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/players" />
     <SUITE FILE_PATH="coverage/MasterPlay$wildpetlist.coverage" NAME="wildpetlist Coverage Results" MODIFIED="1545554114186" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/place" />
-    <SUITE FILE_PATH="coverage/MasterPlay$main.coverage" NAME="main Coverage Results" MODIFIED="1545744617284" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Master" />
+    <SUITE FILE_PATH="coverage/MasterPlay$main.coverage" NAME="main Coverage Results" MODIFIED="1545829775712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Master" />
     <SUITE FILE_PATH="coverage/MasterPlay$prop.coverage" NAME="prop Coverage Results" MODIFIED="1544580801032" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/props" />
     <SUITE FILE_PATH="coverage/MasterPlay$petball.coverage" NAME="petball Coverage Results" MODIFIED="1544916591565" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/props" />
     <SUITE FILE_PATH="coverage/MasterPlay$trainer.coverage" NAME="trainer Coverage Results" MODIFIED="1545730803767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/players" />
@@ -45,33 +45,33 @@
           <entry key="project.open.time.20" value="1" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.3" value="2" />
-          <entry key="project.open.time.8" value="3" />
+          <entry key="project.open.time.8" value="4" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="18" />
+          <entry key="project.opened" value="19" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitattributes" value="1" />
-          <entry key="py" value="236" />
+          <entry key="py" value="250" />
           <entry key="py___jb_tmp___" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="236" />
+          <entry key="Python" value="250" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="495" />
-          <entry key="py" value="37812" />
+          <entry key="py" value="38868" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="38307" />
+          <entry key="Python" value="39363" />
         </counts>
       </usages-collector>
     </session>
@@ -81,8 +81,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/players/explore.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="74" column="41" selection-start-line="74" selection-start-column="41" selection-end-line="74" selection-end-column="41" />
+            <state relative-caret-position="52">
+              <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
                 <marker date="1545741668784" expanded="true" signature="2074:2079" ph="..." />
@@ -92,40 +92,38 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/battle/asscount.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-388">
-              <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pets/fly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+            <state relative-caret-position="19">
+              <caret line="11" column="24" lean-forward="true" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/players/battering.py">
+        <entry file="file://$PROJECT_DIR$/props/bag.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="69" column="22" lean-forward="true" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
+            <state relative-caret-position="19">
+              <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
               <folding>
-                <element signature="e#1#19#0" expanded="true" />
+                <element signature="e#15#38#0" expanded="true" />
+                <marker date="1545822289537" expanded="true" signature="1288:1701" ph="..." />
+                <marker date="1545822289537" expanded="true" signature="5994:6470" ph="..." />
+                <marker date="1545822289537" expanded="true" signature="6492:6493" ph="..." />
+                <marker date="1545822289537" expanded="true" signature="6824:6829" ph="..." />
+                <marker date="1545822289537" expanded="true" signature="7035:7040" ph="..." />
+                <marker date="1545822289537" expanded="true" signature="7422:7499" ph="..." />
+                <marker date="1545822289537" expanded="true" signature="7731:7736" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/place/grassfrom.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="54" selection-start-line="54" selection-end-line="54" />
+            <state relative-caret-position="19">
+              <caret line="51" column="25" lean-forward="true" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
               </folding>
@@ -134,21 +132,26 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assist/exp.py">
+        <entry file="file://$PROJECT_DIR$/players/trainer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="20" column="59" selection-start-line="20" selection-start-column="59" selection-end-line="20" selection-end-column="59" />
+            <state relative-caret-position="74">
+              <caret line="34" column="72" selection-start-line="34" selection-start-column="72" selection-end-line="34" selection-end-column="72" />
+              <folding>
+                <element signature="e#0#24#0" expanded="true" />
+                <marker date="1545829682135" expanded="true" signature="155:502" ph="..." />
+                <marker date="1545829682135" expanded="true" signature="1363:1368" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Master/main.py">
+        <entry file="file://$PROJECT_DIR$/assist/riddle.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+            <state relative-caret-position="22">
+              <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
               <folding>
-                <element signature="e#0#30#0" expanded="true" />
+                <marker date="1545829159250" expanded="true" signature="69:74" ph="..." />
               </folding>
             </state>
           </provider>
@@ -157,36 +160,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/place/placebase.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+            <state relative-caret-position="396">
+              <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pets/pet.py">
+        <entry file="file://$PROJECT_DIR$/battle/battle.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="26" column="109" selection-start-line="26" selection-start-column="98" selection-end-line="26" selection-end-column="109" />
+            <state relative-caret-position="1556">
+              <caret line="193" column="38" selection-start-line="193" selection-start-column="38" selection-end-line="193" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/props/bag.py">
+        <entry file="file://$PROJECT_DIR$/props/prop.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-58">
-              <caret line="259" column="34" lean-forward="true" selection-start-line="259" selection-start-column="34" selection-end-line="259" selection-end-column="34" />
-              <folding>
-                <element signature="e#15#38#0" expanded="true" />
-                <marker date="1545743856238" expanded="true" signature="1289:1702" ph="..." />
-                <marker date="1545743856238" expanded="true" signature="5995:6471" ph="..." />
-                <marker date="1545743856238" expanded="true" signature="6493:6494" ph="..." />
-                <marker date="1545743856238" expanded="true" signature="6825:6830" ph="..." />
-                <marker date="1545743856238" expanded="true" signature="7036:7041" ph="..." />
-                <marker date="1545743856238" expanded="true" signature="7423:7500" ph="..." />
-                <marker date="1545743856238" expanded="true" signature="7732:7737" ph="..." />
-              </folding>
+            <state relative-caret-position="-652">
+              <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/props/propmap.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -226,6 +228,7 @@
       <find>basic_point_getter</find>
       <find>sell</find>
       <find>getSkill</find>
+      <find>can_challenge</find>
     </findStrings>
     <replaceStrings>
       <replace>show_name</replace>
@@ -234,7 +237,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/assist/experience.py" />
         <option value="$PROJECT_DIR$/assist/petattr.py" />
         <option value="$PROJECT_DIR$/battle/learn_skill.py" />
         <option value="$PROJECT_DIR$/battle/basicdamage.py" />
@@ -252,7 +254,6 @@
         <option value="$PROJECT_DIR$/pets/statusmap.py" />
         <option value="$PROJECT_DIR$/battle/buff.py" />
         <option value="$PROJECT_DIR$/assist/show.py" />
-        <option value="$PROJECT_DIR$/place/placebase.py" />
         <option value="$PROJECT_DIR$/players/price.py" />
         <option value="$PROJECT_DIR$/props/prop.py" />
         <option value="$PROJECT_DIR$/props/drug.py" />
@@ -262,7 +263,6 @@
         <option value="$PROJECT_DIR$/players/play.py" />
         <option value="$PROJECT_DIR$/place/wildpetlist.py" />
         <option value="$PROJECT_DIR$/pets/fire.py" />
-        <option value="$PROJECT_DIR$/pets/fly.py" />
         <option value="$PROJECT_DIR$/pets/wood.py" />
         <option value="$PROJECT_DIR$/props/petballmap.py" />
         <option value="$PROJECT_DIR$/pets/propets.py" />
@@ -272,19 +272,22 @@
         <option value="$PROJECT_DIR$/place/village.py" />
         <option value="$PROJECT_DIR$/pets/pet.py" />
         <option value="$PROJECT_DIR$/battle/skill.py" />
-        <option value="$PROJECT_DIR$/battle/battle.py" />
         <option value="$PROJECT_DIR$/place/hospital.py" />
         <option value="$PROJECT_DIR$/assist/changepet.py" />
-        <option value="$PROJECT_DIR$/place/grassfrom.py" />
         <option value="$PROJECT_DIR$/players/explore.py" />
         <option value="$PROJECT_DIR$/place/treasure.py" />
         <option value="$PROJECT_DIR$/battle/skilllistmap.py" />
-        <option value="$PROJECT_DIR$/players/trainer.py" />
         <option value="$PROJECT_DIR$/assist/prize.py" />
-        <option value="$PROJECT_DIR$/props/bag.py" />
         <option value="$PROJECT_DIR$/players/battering.py" />
         <option value="$PROJECT_DIR$/assist/exp.py" />
         <option value="$PROJECT_DIR$/Master/main.py" />
+        <option value="$PROJECT_DIR$/pets/fly.py" />
+        <option value="$PROJECT_DIR$/place/placebase.py" />
+        <option value="$PROJECT_DIR$/battle/battle.py" />
+        <option value="$PROJECT_DIR$/props/bag.py" />
+        <option value="$PROJECT_DIR$/assist/riddle.py" />
+        <option value="$PROJECT_DIR$/players/trainer.py" />
+        <option value="$PROJECT_DIR$/place/grassfrom.py" />
       </list>
     </option>
   </component>
@@ -307,7 +310,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -354,6 +356,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -528,9 +531,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16518219" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14817813" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -542,10 +544,10 @@
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32840723" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32740214" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.20284697" />
       <window_info anchor="bottom" id="Python Console" order="11" weight="0.31850535" />
-      <window_info anchor="bottom" id="Run" order="12" weight="0.8131673" />
+      <window_info active="true" anchor="bottom" id="Run" order="12" visible="true" weight="0.8131673" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -589,13 +591,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/place/grassfrom.py</url>
-          <line>54</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -618,13 +613,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4042">
-          <caret line="1663" selection-start-line="1663" selection-end-line="1663" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -734,13 +722,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/props/drugmap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/place/wildpetlist.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -751,23 +732,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/props/petball.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="34" column="31" lean-forward="true" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assist/evolve.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="31" column="39" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assist/capture.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="836">
@@ -775,30 +739,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/props/propmap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/props/prop.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/place/trainer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/place/trainer.py" />
     <entry file="file://$PROJECT_DIR$/place/village.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -827,9 +768,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -874,20 +812,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assist/changepet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-374">
-          <caret line="3" column="55" lean-forward="true" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/battle/battle.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-457">
-          <caret line="172" column="27" selection-start-line="172" selection-start-column="27" selection-end-line="172" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/place/treasure.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
@@ -901,16 +825,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/props/petballmap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/battle/skilllistmap.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
@@ -918,90 +832,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/players/trainer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="20" column="60" selection-start-line="20" selection-start-column="60" selection-end-line="20" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-            <marker date="1545743140951" expanded="true" signature="155:363" ph="..." />
-            <marker date="1545743140951" expanded="true" signature="750:755" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assist/prize.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
           <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-            <marker date="1545743253093" expanded="true" signature="104:109" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/props/bag.py">
+    <entry file="file://$PROJECT_DIR$/battle/asscount.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-58">
-          <caret line="259" column="34" lean-forward="true" selection-start-line="259" selection-start-column="34" selection-end-line="259" selection-end-column="34" />
-          <folding>
-            <element signature="e#15#38#0" expanded="true" />
-            <marker date="1545743856238" expanded="true" signature="1289:1702" ph="..." />
-            <marker date="1545743856238" expanded="true" signature="5995:6471" ph="..." />
-            <marker date="1545743856238" expanded="true" signature="6493:6494" ph="..." />
-            <marker date="1545743856238" expanded="true" signature="6825:6830" ph="..." />
-            <marker date="1545743856238" expanded="true" signature="7036:7041" ph="..." />
-            <marker date="1545743856238" expanded="true" signature="7423:7500" ph="..." />
-            <marker date="1545743856238" expanded="true" signature="7732:7737" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pets/pet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="26" column="109" selection-start-line="26" selection-start-column="98" selection-end-line="26" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assist/exp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="20" column="59" selection-start-line="20" selection-start-column="59" selection-end-line="20" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Master/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/place/placebase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/place/grassfrom.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="54" selection-start-line="54" selection-end-line="54" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="528">
+          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/players/battering.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
+        <state relative-caret-position="1430">
           <caret line="69" column="22" lean-forward="true" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
           <folding>
             <element signature="e#1#19#0" expanded="true" />
@@ -1009,10 +856,127 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Master/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pets/pet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="26" column="109" selection-start-line="26" selection-start-column="98" selection-end-line="26" selection-end-column="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assist/changepet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="55" lean-forward="true" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assist/evolve.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="31" column="39" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assist/exp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="20" column="59" selection-start-line="20" selection-start-column="59" selection-end-line="20" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/props/drugmap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/props/petball.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-300">
+          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/props/petballmap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/props/prop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-652">
+          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/props/propmap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pets/fly.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="11" column="24" lean-forward="true" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/props/bag.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
+          <folding>
+            <element signature="e#15#38#0" expanded="true" />
+            <marker date="1545822289537" expanded="true" signature="1288:1701" ph="..." />
+            <marker date="1545822289537" expanded="true" signature="5994:6470" ph="..." />
+            <marker date="1545822289537" expanded="true" signature="6492:6493" ph="..." />
+            <marker date="1545822289537" expanded="true" signature="6824:6829" ph="..." />
+            <marker date="1545822289537" expanded="true" signature="7035:7040" ph="..." />
+            <marker date="1545822289537" expanded="true" signature="7422:7499" ph="..." />
+            <marker date="1545822289537" expanded="true" signature="7731:7736" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/battle/battle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1556">
+          <caret line="193" column="38" selection-start-line="193" selection-start-column="38" selection-end-line="193" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/place/placebase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/players/explore.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="74" column="41" selection-start-line="74" selection-start-column="41" selection-end-line="74" selection-end-column="41" />
+        <state relative-caret-position="52">
+          <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
             <marker date="1545741668784" expanded="true" signature="2074:2079" ph="..." />
@@ -1020,17 +984,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/battle/asscount.py">
+    <entry file="file://$PROJECT_DIR$/assist/riddle.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-388">
-          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
+        <state relative-caret-position="22">
+          <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+          <folding>
+            <marker date="1545829159250" expanded="true" signature="69:74" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pets/fly.py">
+    <entry file="file://$PROJECT_DIR$/players/trainer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+        <state relative-caret-position="74">
+          <caret line="34" column="72" selection-start-line="34" selection-start-column="72" selection-end-line="34" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+            <marker date="1545829682135" expanded="true" signature="155:502" ph="..." />
+            <marker date="1545829682135" expanded="true" signature="1363:1368" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/place/grassfrom.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="51" column="25" lean-forward="true" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
