@@ -50,3 +50,37 @@ def changePetAfterDie(player):
             return changePetAfterDie(player)
     return True
 
+
+def changePetWithNpc(player,condition,change_pet):
+    '''
+    与Npc 交换 精灵
+    :param player:
+    :return:
+    '''
+    current_pet_list = []
+    for key,pet in player.pet_list.items():
+        current_pet_list.append(pet.name)
+
+    if condition in current_pet_list:
+        print("哇 哇 哇  %s 是我的最爱 你是否愿意和我交换 %s " % (condition,change_pet.name))
+        print("1 yes 2 no")
+        select_id = input(">")
+        if select_id == '1':
+            for key,pet in player.pet_list.items():
+                if pet.name == condition:
+                    print(key,":",pet.name,'LV%s' % pet.level)
+            print("请选择你要交换的精灵！")
+            select_pet_id = input(">")
+            if select_pet_id in player.pet_list:
+                if player.pet_list[select_pet_id].name == condition:
+                    player.setPet(select_pet_id,change_pet)
+                    #player.pet_list[select_pet_id].autoAi = False
+                    print("你获得了 %s lv%s" % (player.pet_list[select_pet_id].name,player.pet_list[select_pet_id].level))
+                    return True
+        else:
+            print("你拒绝了交换请求！")
+            return False
+    else:
+        return False
+
+

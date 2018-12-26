@@ -16,6 +16,8 @@ class aiPidgey(pets.propets.Fly):
 
     capture_rate = 255
 
+    canEvolve = False
+
 
 
     def __str__(self):
