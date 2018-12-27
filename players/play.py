@@ -1,7 +1,6 @@
-from pets import fire,fly
-from place import village
-from battle import skill
-from assist import rancom
+
+from place import village,map
+
 
 class Player(object):
     def __init__(self,money=0,name = '',pet_list={}):
@@ -10,7 +9,7 @@ class Player(object):
         self.pet_list = pet_list
 
 
-    current_place = village.Village("新手村")
+    current_place = village.Village("新手村",maplist=map.village_map_for_start)
 
     battle_pet_list = []
     battle_run_success = False

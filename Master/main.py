@@ -18,7 +18,9 @@ if __name__ == '__main__':
 
 
     print("Welcome to Pet Master World!")
-    print("Command 9 or bag to open the bag！")
+    print("Command bag to open the bag！")
+    #print("Command back to back up!")
+    print("Command pet to open pet system")
 
     player.current_place.showMap(player)
 

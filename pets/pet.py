@@ -53,11 +53,11 @@ class Pet(object):
         self.tmp_spell_defense = 0
         self.tmp_speed = 0
         #属性道具提升的能力属性
-        self.prop_attack_up = 0
-        self.prop_defense_up = 0
-        self.prop_spell_power_up = 0
-        self.prop_spell_defense_up = 0
-        self.prop_speed_up = 0
+        #self.prop_attack_up = 0
+        #self.prop_defense_up = 0
+        #self.prop_spell_power_up = 0
+        #self.prop_spell_defense_up = 0
+        #self.prop_speed_up = 0
         #buff debuff 进化解除
         self.debuff_dict = {}
         self.buff_dict = {}
@@ -91,19 +91,39 @@ class Pet(object):
 
 
     def getDefense(self):
-        return self.defense + self.tmp_defense + self.prop_defense_up
+        if self.carry_prop != None:
+            if self.carry_prop.up_type == 'defense':
+                prop_defense_up = self.carry_prop.propCarry(self.defense)
+                return self.defense + self.tmp_defense + prop_defense_up
+        return self.defense + self.tmp_defense
 
     def getAttack(self):
-        return self.attack + self.tmp_attack + self.prop_attack_up
+        if self.carry_prop != None:
+            if self.carry_prop.up_type == 'attack':
+                prop_attack_up = self.carry_prop.propCarry(self.attack)
+                return self.attack + self.tmp_attack + prop_attack_up
+        return self.attack + self.tmp_attack
 
     def getSpellPower(self):
-        return self.spell_power + self.tmp_spell_power + self.prop_spell_power_up
+        if self.carry_prop != None:
+            if self.carry_prop.up_type == 'spell_power':
+                prop_spell_power_up = self.carry_prop.propCarry(self.spell_power)
+                return self.spell_power + self.tmp_spell_power + prop_spell_power_up
+        return self.spell_power + self.tmp_spell_power
 
     def getSpellDefense(self):
-        return self.spell_defense + self.tmp_spell_defense + self.prop_spell_defense_up
+        if self.carry_prop != None:
+            if self.carry_prop.up_type == 'spell_defense':
+                prop_spell_defense_up = self.carry_prop.propCarry(self.spell_defense)
+                return self.spell_defense + self.tmp_spell_defense + prop_spell_defense_up
+        return self.spell_defense + self.tmp_spell_defense
 
     def getSpeed(self):
-        return self.speed + self.tmp_speed + self.prop_speed_up
+        if self.carry_prop != None:
+            if self.carry_prop.up_type == 'speed':
+                prop_speed_up = self.carry_prop.propCarry(self.speed)
+                return self.speed + self.tmp_speed + prop_speed_up
+        return self.speed + self.tmp_speed
 
     #不能初始化，不然用的是同一个地址
     skill_list={}

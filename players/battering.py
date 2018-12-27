@@ -16,8 +16,8 @@ def battleing(player,wild_pet,change_pet = False):
     if master_pet not in player.battle_pet_list:
         player.battle_pet_list.append(master_pet)
     # 检查携带物
-    propmap.checkCarryPropForObj(master_pet)
-    propmap.checkCarryPropForObj(wild_pet)
+    # propmap.checkCarryPropForObj(master_pet)
+    # propmap.checkCarryPropForObj(wild_pet)
     #assist.show.showPetStatus(master_pet)
 
     #判断是否交换过精灵

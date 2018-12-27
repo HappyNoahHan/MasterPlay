@@ -9,7 +9,7 @@ prop_dict ={
 
 #背包概念 名称 数量
 prop_bag_dict={
-    #1:[prop_dict['攻击之爪'],1],
+    1:[prop_dict['攻击之爪'],1],
     #2:[prop_dict['火焰之心'],2],
 }
 

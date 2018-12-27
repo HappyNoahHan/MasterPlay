@@ -1,14 +1,18 @@
 from place import  placebase,hospital,town,grassfrom,wildpetlist,treasure
 from players import trainer
+from props import bag
 
 class Village(placebase.Place):
+    def showMap(self,player):
+        super().showMap(player)
+        print("输入指令")
 
-    maplist = {
-        '1': hospital.Hospital(name="格林医疗中心"),
-        '2': town.Town(name='格林镇'),
-        '3': grassfrom.Grassform(name='1号草丛',
-                                 wild_pet_list=wildpetlist.wild_pet_list_in_grass_no_1,
-                                 treasure_box_list=treasure.treasure_box_for_grass_no_1,
-                                 trainer_list = trainer.trainer_in_grass_no_1),
-    }
-
+        select_id = input(">")
+        if select_id in self.maplist:
+            self.maplist[select_id][0].showMap(player)
+        else:
+            if select_id == 'bag':
+                bag.showBag(player)
+                return self.showMap(player)
+        print("指令错误！")
+        return self.showMap(player)
