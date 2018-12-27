@@ -1,6 +1,7 @@
 from props import bag
 
 class Place(object):
+
     def __init__(self,name='',maplist={}):
         self.name = name
         self.maplist = maplist
@@ -9,6 +10,7 @@ class Place(object):
         return self.name
 
     def showMap(self,player):
+        player.map_run_list.append(self)
         print('='*30)
         print('当前地图  %s ' % self.name)
         for key,value in self.maplist.items():

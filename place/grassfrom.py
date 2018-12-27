@@ -1,4 +1,4 @@
-from place import placebase,wildpetlist,treasure,village,town
+from place import placebase,wildpetlist,treasure
 from players import explore,trainer
 from assist import show,riddle,prize,changepet
 from props import bag
@@ -15,6 +15,8 @@ class Grassform(placebase.Place):
 
 
     def showMap(self,player):
+        if player.map_run_list[-1] != self:
+            player.map_run_list.append(self)
         print('='*30)
         print('当前地图  %s ' % self.name)
         for key,value in self.maplist.items():
@@ -22,6 +24,7 @@ class Grassform(placebase.Place):
                 print(key,':',value[0])
 
         print("请选择行动指令")
+
 
         select_id = input(">")
         if select_id in self.maplist:
@@ -42,24 +45,27 @@ class Grassform(placebase.Place):
                     #训练师对战
                     time.sleep(1)
                     find_trainer = trainer.getTrainer(self.trainer_list)
-                    print("遇到了 %s ！" % find_trainer.name)
-                    print(find_trainer)
-                    time.sleep(2)
-                    if find_trainer.is_npc == False:
-                        if find_trainer.can_challenge == True:
-                            if explore.trainerVS(player,find_trainer):
-                                if find_trainer.has_riddle == True and find_trainer.can_challenge == False:
-                                    riddle_condiction = riddle.openTheRiddle(find_trainer)
-                                    self.setMapList(riddle_condiction[0],riddle_condiction[1])
-                                #return self.showMap(player)
-                            else:
-                                print("无法继续战斗,请前往治疗")
+                    if find_trainer != None:
+                        print("遇到了 %s ！" % find_trainer.name)
+                        print(find_trainer)
+                        time.sleep(2)
+                        if find_trainer.is_npc == False:
+                            if find_trainer.can_challenge == True:
+                                if explore.trainerVS(player,find_trainer):
+                                    if find_trainer.has_riddle == True and find_trainer.can_challenge == False:
+                                        riddle_condiction = riddle.openTheRiddle(find_trainer)
+                                        self.setMapList(riddle_condiction[0],riddle_condiction[1])
+                                    #return self.showMap(player)
+                                else:
+                                    print("无法继续战斗,请前往治疗")
+                        else:
+                            if find_trainer.prize:
+                                prize.getPrize(player, find_trainer.prize)
+                            if find_trainer.pet_change:
+                                if changepet.changePetWithNpc(player,find_trainer.change_condition,find_trainer.pet_change):
+                                    find_trainer.pet_change = None
                     else:
-                        if find_trainer.prize:
-                            prize.getPrize(player, find_trainer.prize)
-                        if find_trainer.pet_change:
-                            if changepet.changePetWithNpc(player,find_trainer.change_condition,find_trainer.pet_change):
-                                find_trainer.pet_change = None
+                        print("除了石头与空气,没有任何活物！")
                     return self.showMap(player)
 
                 elif select_id == '3':
@@ -72,13 +78,16 @@ class Grassform(placebase.Place):
                         treasure.getPropsToBag(find_item[0],find_item[1])
                     return self.showMap(player)
                 else:
+                    #player.old_place = self
                     return self.maplist[select_id][0].showMap(player)
         else:
             if select_id == 'bag':
                 bag.showBag(player)
                 return self.showMap(player)
             elif select_id == 'back':
-                return player.current_place.showMap(player)
+                #player.current_place = player.old_place
+                player.map_run_list.pop(-1)
+                return player.map_run_list[-1].showMap(player)
         print("指令错误！")
         return self.showMap(player)
 

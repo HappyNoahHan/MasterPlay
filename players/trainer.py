@@ -51,6 +51,6 @@ def getTrainer(dict):
     if choice_list.__len__() == 0:
         return None
     choice_trainer = random.choice(choice_list)
-    #dict[choice_trainer].can_challenge = False
+#dict[choice_trainer].can_challenge = False
 
     return dict[choice_trainer]
