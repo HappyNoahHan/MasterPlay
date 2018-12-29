@@ -62,15 +62,15 @@ def getWhich():
         return 'legend'
 
 
-def getPropsToBag(prop_name,kind):
+def getPropsToBag(prop_name,kind,number=1):
     if kind == 'petball':
-        petballmap.getPetBall(prop_name)
+        petballmap.getPetBall(prop_name,number)
     elif kind == 'drug':
-        drugmap.getDrug(prop_name)
+        drugmap.getDrug(prop_name,number)
     elif kind == 'prop':
-        propmap.getProp(prop_name)
+        propmap.getProp(prop_name,number)
     elif kind == 'skill':
-        skilllistmap.getSkill(prop_name)
+        skilllistmap.getSkill(prop_name,number)
     else:
         pass
 

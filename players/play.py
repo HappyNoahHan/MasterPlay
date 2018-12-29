@@ -3,7 +3,7 @@ from place import village,map
 
 
 class Player(object):
-    def __init__(self,money=0,name = '',pet_list={}):
+    def __init__(self,money=1000,name = '',pet_list={}):
         self.name = name
         self.money = money
         self.pet_list = pet_list
@@ -11,7 +11,7 @@ class Player(object):
 
     current_place = village.Village("新手村",maplist=map.village_map_for_start)
 
-    map_run_list = []
+    map_run_list = [current_place]
 
     battle_pet_list = []
     battle_run_success = False

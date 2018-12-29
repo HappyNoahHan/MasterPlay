@@ -18,6 +18,8 @@ class Hospital(placebase.Place):
                 skill.pp_value = skill._pp_value_max
 
     def showMap(self,player):
+        if player.map_run_list[-1] != self:
+            player.map_run_list.append(self)
         print('='*30)
         print('当前地图  %s ' % self.name)
         print("1 恢复")
@@ -28,11 +30,12 @@ class Hospital(placebase.Place):
             time.sleep(3)
             print("所有精灵状态恢复")
             return self.showMap(player)
-        elif select_id == 'back':
-            player.current_place.showMap(player)
         elif select_id == 'bag':
             bag.showBag(player)
             return self.showMap(player)
+        elif select_id == 'back':
+            player.map_run_list.pop(-1)
+            return player.map_run_list[-1].showMap(player)
         else:
             print("指令错误！")
             return self.showMap(player)

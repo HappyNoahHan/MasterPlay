@@ -10,7 +10,8 @@ class Place(object):
         return self.name
 
     def showMap(self,player):
-        player.map_run_list.append(self)
+        if player.map_run_list[-1] != self:
+            player.map_run_list.append(self)
         print('='*30)
         print('当前地图  %s ' % self.name)
         for key,value in self.maplist.items():
