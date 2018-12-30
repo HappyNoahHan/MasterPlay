@@ -1,4 +1,5 @@
 from place import  placebase,treasure
+from assist import system
 
 class Shop(placebase.Place):
     def __init__(self,name='',sell_list={}):
@@ -15,12 +16,14 @@ class Shop(placebase.Place):
         print('1:    shopping')
         #print("其他:      退出")
         select_id = input(">")
+        system.showSystem(player, select_id)
         if select_id == '1':
             self.buy(player)
             return self.showMap(player)
-        elif select_id == 'back':
-            player.map_run_list.pop(-1)
-            return player.map_run_list[-1].showMap(player)
+        else:
+            print("指令错误！")
+            return self.showMap(player)
+
 
     def buy(self,player):
         for key,item in self.sell_list.items():

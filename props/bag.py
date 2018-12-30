@@ -58,8 +58,10 @@ def showBag(player):
         return showDrugBag(player,drugmap.drug_bag_dict)
     elif select_id == '3':
         return showPetBallBag(player,petballmap.petball_bag_dict)
-    else:
-        return True
+    elif select_id == 'back':
+        pass
+
+    return True
 
 def showPropBag(player,dict):
     #show.showProps()

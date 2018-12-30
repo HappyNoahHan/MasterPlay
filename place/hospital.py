@@ -1,5 +1,6 @@
 from place import placebase,village
 from props import bag
+from assist import  system
 import time
 
 class Hospital(placebase.Place):
@@ -25,17 +26,12 @@ class Hospital(placebase.Place):
         print("1 恢复")
         print("输入指令")
         select_id = input(">")
+        system.showSystem(player, select_id)
         if select_id == '1':
             self.restore(player)
             time.sleep(3)
             print("所有精灵状态恢复")
             return self.showMap(player)
-        elif select_id == 'bag':
-            bag.showBag(player)
-            return self.showMap(player)
-        elif select_id == 'back':
-            player.map_run_list.pop(-1)
-            return player.map_run_list[-1].showMap(player)
         else:
             print("指令错误！")
             return self.showMap(player)
