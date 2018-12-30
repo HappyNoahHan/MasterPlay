@@ -1,6 +1,6 @@
 from place import placebase,wildpetlist,treasure
 from players import explore,trainer
-from assist import show,riddle,prize,changepet
+from assist import show,riddle,prize,changepet,system
 from props import bag
 import random,time,os
 
@@ -81,13 +81,7 @@ class Grassform(placebase.Place):
                     #player.old_place = self
                     return self.maplist[select_id][0].showMap(player)
         else:
-            if select_id == 'bag':
-                bag.showBag(player)
-                return self.showMap(player)
-            elif select_id == 'back':
-                #player.current_place = player.old_place
-                player.map_run_list.pop(-1)
-                return player.map_run_list[-1].showMap(player)
+            system.showSystem(player,select_id)
         print("指令错误！")
         return self.showMap(player)
 

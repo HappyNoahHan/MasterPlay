@@ -82,5 +82,3 @@ def changePetWithNpc(player,condition,change_pet):
             return False
     else:
         return False
-
-
