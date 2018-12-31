@@ -13,3 +13,6 @@ def showSystem(player,select_id):
     elif select_id == 'pet':
         handbook.showPets(player)
         return player.map_run_list[-1].showMap(player)
+    elif select_id == 'book':
+        handbook.showHandBook()
+        return player.map_run_list[-1].showMap(player)

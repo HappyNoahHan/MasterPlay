@@ -1,11 +1,14 @@
 
 import assist.show
 from assist import exp,evolve,capture,changepet,show,prize
-from props import propmap,drugmap,petballmap
+from props import handbook
 from battle import asscount,skilllistmap,battle,learnskill
 import random,time
 
 def battleing(player,wild_pet,change_pet = False):
+    #将未发现的精灵加入图鉴
+    if wild_pet.pet_no not in handbook.pet_handbook_dict:
+        handbook.setHandBook(wild_pet.pet_no,wild_pet.name,wild_pet.property)
     #谁获得基础点数
     wild_pet.basic_point_getter = player.pet_list['Master']
     print("=" * 30)

@@ -46,7 +46,7 @@ trainer_in_grass_no_1 = {
 def getTrainer(dict):
     choice_list = []
     for key,value in dict.items():
-        if value.name == '迷途少女':
+        if value.name == '喷火龙爱好者':
             choice_list.append(key)
     if choice_list.__len__() == 0:
         return None

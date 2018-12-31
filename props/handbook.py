@@ -1,5 +1,16 @@
 from assist import  show,changepet
 
+pet_handbook_dict={
+    #'001':('妙蛙种子',['wood',False]),
+    '004':('小火龙',['fire'],[True]),
+    '005':('火恐龙',['fire'],[True]),
+    #'026':('波波',['fly',False]),
+    #'043':('走路草',['wood',False]),
+}
+
+
+
+
 def showPets(player):
     for key,pet in player.pet_list.items():
         if key == 'Master':
@@ -28,9 +39,6 @@ def showPets(player):
             player.setPet(select_id,backup_pet)
     return showPets(player)
 
-
-
-
 def detail(pet):
     print("="*30)
     print("%s 的详细信息:" % pet.name)
@@ -47,3 +55,28 @@ def detail(pet):
     else:
         print('None')
 
+def showHandBook():
+    print("="*30)
+    print("精灵图鉴")
+    for key,value in pet_handbook_dict.items():
+        if value[2][0] == False:
+            print(key,':',value[0],'分类',end=':')
+            showProp(value[1])
+            print('未捕获！')
+        else:
+            print(key, ':', value[0], '分类', end=':')
+            showProp(value[1])
+            print('捕获！')
+
+def showProp(value):
+    for k in value:
+        if k == 'fire':
+            print('火', end=' ')
+        elif k == 'wood':
+            print('草', end=' ')
+        elif k == 'fly':
+            print('飞行',end=' ')
+        pass
+
+def setHandBook(key,name,prop,capture=[False]):
+    pet_handbook_dict[key] = (name,prop,capture)

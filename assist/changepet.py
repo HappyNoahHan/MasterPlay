@@ -1,3 +1,5 @@
+from props import handbook
+
 def changePet(player):
     print("请选择你要交换的精灵！")
     for key,value in player.pet_list.items():
@@ -76,6 +78,14 @@ def changePetWithNpc(player,condition,change_pet):
                     player.setPet(select_pet_id,change_pet)
                     #player.pet_list[select_pet_id].autoAi = False
                     print("你获得了 %s lv%s" % (player.pet_list[select_pet_id].name,player.pet_list[select_pet_id].level))
+                    # 将交换的精灵加入图鉴
+                    if change_pet.pet_no in handbook.pet_handbook_dict:
+                        if handbook.pet_handbook_dict[change_pet.pet_no][2][0] == False:
+                            handbook.setHandBook(change_pet.pet_no, change_pet.name, change_pet.property,
+                                                 capture=[True])
+                    else:
+                        handbook.setHandBook(change_pet.pet_no, change_pet.name, change_pet.property,
+                                             capture=[True])
                     return True
         else:
             print("你拒绝了交换请求！")

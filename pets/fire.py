@@ -25,6 +25,9 @@ class Charmander(pets.propets.Fire):
     can_get_base_point = 2
     can_get_base_point_type = 'spell_power'
 
+    # 精灵编号
+    pet_no = '004'
+
     def __str__(self):
         return super().__str__() + ':' + self.name
 
@@ -40,6 +43,9 @@ class Charmeleon(Charmander):
     name = '火恐龙'
     basic_exp_value = 134
     evolve_level = 32
+
+    # 精灵编号
+    pet_no = '005'
 
     skill_tree = {
         14: 'A004',

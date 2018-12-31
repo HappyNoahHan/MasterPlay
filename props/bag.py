@@ -2,7 +2,7 @@
     背包
 '''
 from assist import show
-from props import propmap,drugmap,petballmap
+from props import propmap,drugmap,petballmap,handbook
 from battle import skilllistmap,learnskill
 from players import price
 
@@ -195,6 +195,10 @@ def showBattlePetBallBag(player,obj_defense,dict):
     if int(select_id) in dict:
         dict[int(select_id)][1] -= 1
         if dict[int(select_id)][0].usePetBall(obj_defense):
+            # 将未捕获的精灵加入图鉴
+            if obj_defense.pet_no in handbook.pet_handbook_dict:
+                if handbook.pet_handbook_dict[obj_defense.pet_no][2][0] == False:
+                    handbook.setHandBook(obj_defense.pet_no, obj_defense.name, obj_defense.property,capture=[True])
             obj_defense.captured = True
             if dict[int(select_id)][1] == 0:
                 dict.pop(int(select_id))

@@ -18,6 +18,9 @@ class aiOodish(pets.propets.Wood):
 
     capture_rate = 255
 
+    # 精灵编号
+    pet_no = '043'
+
 
     def __str__(self):
         return super().__str__() + ':' + self.name

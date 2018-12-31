@@ -18,6 +18,9 @@ class aiPidgey(pets.propets.Fly):
 
     canEvolve = False
 
+    # 精灵编号
+    pet_no = '026'
+
 
 
     def __str__(self):
