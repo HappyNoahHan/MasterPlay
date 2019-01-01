@@ -1,5 +1,5 @@
 from place import hospital,town,village,grassfrom,wildpetlist,treasure,shop
-from players import  trainer,npc
+from players import  npcmap
 grassfrom_map_basic={
         '1':['野外探险',True],
         '2':['搜索玩家',True],
@@ -18,8 +18,8 @@ grassfrom_map_for_no_1={
 }
 
 town_map_for_green={
-    '1': [shop.Shop(name='绿叶百货',npc_list=npc.shop_npc_list_for_green_town),True],
-    '2': [hospital.Hospital(name="绿叶医疗中心"),True],
+    '1': [shop.Shop(name='绿叶百货',npc_list=npcmap.shop_npc_list_for_green_town),True],
+    '2': [hospital.Hospital(name="绿叶医疗中心",npc_lsit=npcmap.hospital_npc_list_for_green_town),True],
 }
 
 
@@ -31,7 +31,7 @@ village_map_for_start={
                                     maplist=grassfrom_map_for_no_1,
                                  wild_pet_list=wildpetlist.wild_pet_list_in_grass_no_1,
                                  treasure_box_list=treasure.treasure_box_for_grass_no_1,
-                                 trainer_list = trainer.trainer_in_grass_no_1),True],
+                                 trainer_list = npcmap.trainer_in_grass_no_1),True],
 }
 
 

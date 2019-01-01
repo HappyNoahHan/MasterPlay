@@ -4,6 +4,9 @@ from assist import  system
 import time
 
 class Hospital(placebase.Place):
+    def __init__(self,name,npc_lsit={}):
+        super().__init__(name=name)
+        self.npc_list = npc_lsit
 
     def restore(self,player):
         for key,pet in player.pet_list.items():
@@ -23,15 +26,22 @@ class Hospital(placebase.Place):
             player.map_run_list.append(self)
         print('='*30)
         print('当前地图  %s ' % self.name)
-        print("1 恢复")
-        print("输入指令")
+        for key,item in self.npc_list.items():
+            print(key,':',item.name)
+        print("请选择你要交流的对象")
         select_id = input(">")
         system.showSystem(player, select_id)
-        if select_id == '1':
-            self.restore(player)
-            time.sleep(3)
-            print("所有精灵状态恢复")
-            return self.showMap(player)
+        if select_id in self.npc_list:
+            if self.npc_list[select_id].is_npc == False:
+                if self.npc_list[select_id].recoverOrNot():
+                    self.restore(player)
+                    time.sleep(3)
+                    print("所有精灵状态恢复")
+                    return self.showMap(player)
+                else:
+                    print("你拒绝恢复你的精灵")
+                    return self.showMap(player)
+            pass
         else:
             print("指令错误！")
             return self.showMap(player)

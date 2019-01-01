@@ -18,9 +18,12 @@ class Shop(placebase.Place):
         select_id = input(">")
         system.showSystem(player, select_id)
         if select_id in self.npc_list:
-            self.npc_list[select_id].showSellList()
-            self.buy(player,self.npc_list[select_id])
-            return self.showMap(player)
+            if self.npc_list[select_id].is_npc == False:
+                self.npc_list[select_id].showSellList()
+                self.buy(player,self.npc_list[select_id])
+                return self.showMap(player)
+            else:
+                pass
         else:
             print("指令错误！")
             return self.showMap(player)
@@ -45,6 +48,9 @@ class Shop(placebase.Place):
             else:
                 print("数量错误,购买失败！")
                 return False
+        elif select_id in 'quit':
+            print("退出购买！")
+            return self.showMap(player)
         else:
             print("指令错误！请重新选择！")
             return self.buy(player,shop_npc)
