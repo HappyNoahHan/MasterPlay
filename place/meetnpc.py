@@ -9,7 +9,10 @@ def meetNpc(player,npcer,place):
             if explore.trainerVS(player, npcer):
                 if npcer.has_riddle == True and npcer.can_challenge == False:
                     riddle_condiction = riddle.openTheRiddle(npcer)
-                    place.setMapList(riddle_condiction[0], riddle_condiction[1])
+                    if riddle_condiction[2] == 'map':
+                        place.setMapList(riddle_condiction[0], riddle_condiction[1])
+                    else:
+                        place.setNpcList(riddle_condiction[0], riddle_condiction[1])
                 # return self.showMap(player)
             else:
                 print("无法继续战斗,请前往治疗")

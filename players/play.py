@@ -1,4 +1,3 @@
-
 from place import village,map
 
 
@@ -15,6 +14,14 @@ class Player(object):
 
     battle_pet_list = []
     battle_run_success = False
+
+    badge_dict = {
+        '绿叶徽章': False,
+        '火焰徽章': False,
+    }
+
+    def setBadge(self,key):
+        self.badge_dict[key] = True
 
 
 

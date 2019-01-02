@@ -24,4 +24,8 @@ def showSystem(player,select_id):
         else:
             prize.putPrizeToBag(get_prize)
         return player.map_run_list[-1].showMap(player)
+    elif select_id == 'badge':
+        for key,value in player.badge_dict.items():
+            print(key,':',value)
+        return player.map_run_list[-1].showMap(player)
 

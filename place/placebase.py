@@ -35,3 +35,6 @@ class Place(object):
 
     def setMapList(self,key,value):
         self.maplist[key][1] = value
+
+    def setNpcList(self,key,value):
+        self.npc_list[key][1] = value

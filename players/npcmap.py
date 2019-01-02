@@ -46,12 +46,23 @@ hospital_npc_list_for_green_town = {
 petgym_npc_list_for_green_town = {
     '1':[trainer.Trainer(name='绿叶学徒A',info='先过我这关！！！',
                         can_challenge=True,
+                        prize={'money':150},
                         is_npc = False,
+                        has_riddle = True,
                         pet_list=(wood.aiOodish(level=8,skill_list={'1':skill.azorLeaf()},has_trainer=None),)
                         ),True],
     '2':[trainer.Trainer(name='绿叶学徒B',info='我和你练练',
                         can_challenge=True,
+                        prize={'money':150},
                         is_npc = False,
+                        has_riddle = True,
                         pet_list=(wood.aiOodish(level=8,skill_list={'1':skill.azorLeaf()},has_trainer=None),)
                         ),False],
+    '3':[trainer.Trainer(name='绿叶馆长',info='我最讨厌鸟儿',
+                         can_challenge=True,
+                         prize={'money':150,'绿叶徽章': 1},
+                         is_npc=False,
+                         pet_list=(wood.aiOodish(level=9,skill_list={'1':skill.azorLeaf()},has_trainer=None),
+                                   )),False],
+    '4':[trainer.Trainer(name='守馆老人',info="飞行系是大地力量的克星~"),True],
 }

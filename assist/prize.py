@@ -1,6 +1,7 @@
 from  props import petballmap,propmap,drugmap
 from battle import skilllistmap
 import random
+
 prize_box_for_green_town_shop={
     '1':['精灵球',2],
     '2':['小型回复药剂',1],
@@ -49,6 +50,9 @@ def getPrize(player,dict):
                 drugmap.getDrug(key)
             elif key in skilllistmap.skill_dict:
                 skilllistmap.getSkill(key)
+            elif key in player.badge_dict:
+                print("获得了 %s ！" % key)
+                player.setBadge(key)
             else:
                 print("未知物品！")
     #奖品清0
