@@ -4,9 +4,6 @@ from assist import  system,prize,changepet
 import time
 
 class Hospital(placebase.Place):
-    def __init__(self,name,npc_lsit={}):
-        super().__init__(name=name)
-        self.npc_list = npc_lsit
 
     def restore(self,player):
         for key,pet in player.pet_list.items():

@@ -3,10 +3,6 @@ from assist import system,prize,changepet
 import time
 
 class Shop(placebase.Place):
-    def __init__(self,name='',npc_list={}):
-        super().__init__(name=name)
-        self.npc_list = npc_list
-
 
     def showMap(self,player):
         if player.map_run_list[-1] != self:

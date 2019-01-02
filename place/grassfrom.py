@@ -5,12 +5,9 @@ from props import bag
 import random,time,os
 
 class Grassform(placebase.Place):
-    def __init__(self,name='',maplist={},wild_pet_list={},treasure_box_list={},trainer_list={}):
-        super().__init__(name=name,maplist=maplist)
+    def __init__(self,name='',maplist={},wild_pet_list={},treasure_box_list={},npc_list={}):
+        super().__init__(name=name,maplist=maplist,treasure_box_list=treasure_box_list,npc_list=npc_list)
         self.wild_pet_list = wild_pet_list
-        self.treasure_box_list = treasure_box_list
-        self.trainer_list = trainer_list
-        self.maplist = maplist
 
 
 
@@ -44,7 +41,7 @@ class Grassform(placebase.Place):
                 elif select_id == '2':
                     #训练师对战
                     time.sleep(1)
-                    find_trainer = trainer.getTrainer(self.trainer_list)
+                    find_trainer = trainer.getTrainer(self.npc_list)
                     if find_trainer != None:
                         print("遇到了 %s ！" % find_trainer.name)
                         print(find_trainer)
