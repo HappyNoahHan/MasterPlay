@@ -22,8 +22,8 @@ class Trainer(npc.Npc):
 def getTrainer(dict):
     choice_list = []
     for key,value in dict.items():
-        #if value.name == '喷火龙爱好者':
-        choice_list.append(key)
+        if value.name == '迷途少女':
+            choice_list.append(key)
     if choice_list.__len__() == 0:
         return None
     choice_trainer = random.choice(choice_list)

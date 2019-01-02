@@ -25,7 +25,7 @@ def getBattleSuccessExp(player,obj,exp_basic = 1,ai_index=1):
     :return:
     '''
     if obj.autoAi == True:
-        if obj.has_trainer == None:
+        if obj.has_trainer == True:
             ai_index = 1.5
 
     if len(player.battle_pet_list) > 1:

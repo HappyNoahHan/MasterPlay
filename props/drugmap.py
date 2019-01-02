@@ -23,7 +23,7 @@ drug_bag_dict={
 
 
 def getDrug(drug_name,number = 1):
-    print("获得 %s !" % drug_name)
+    print("获得 %s X %d !" % (drug_name,number))
     for key,value in drug_bag_dict.items():
         if value[0] == drug_dict[drug_name]:
             value[1] += number

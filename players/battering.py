@@ -70,15 +70,17 @@ def vsBattleing(player,trainer,challenge_list):
         show.showPetStatus(trainer_master_pet)
 
         if battleing(player,trainer_master_pet):
-            challenge_list.remove(trainer_master_pet)
-            if len(challenge_list) == 0:
-                print("挑战胜利！")
-                trainer.can_challenge = False
-                prize.getPrize(player,trainer.prize)
-                time.sleep(3)
-                return True
-            else:
-                return vsBattleing(player,trainer,challenge_list)
+            if player.battle_run_success != True:
+                challenge_list.remove(trainer_master_pet)
+                if len(challenge_list) == 0:
+                    print("挑战胜利！")
+                    trainer.can_challenge = False
+                    prize.getPrize(player,trainer.prize)
+                    time.sleep(3)
+                    return True
+                else:
+                    return vsBattleing(player,trainer,challenge_list)
+            return True
         else:
             return False
     else:

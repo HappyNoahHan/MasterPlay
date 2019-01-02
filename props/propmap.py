@@ -58,7 +58,7 @@ def checkCarryPropFoeDodge(obj):
     return 0
 
 def getProp(prop_name,number = 1):
-    print("获得了 %s !" % prop_name)
+    print("获得了 %s X %d !" % (prop_name,number))
     for key,value in prop_bag_dict.items():
         if value[0] == prop_dict[prop_name]:
             value[1] += number

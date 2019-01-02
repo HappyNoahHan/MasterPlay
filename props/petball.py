@@ -42,5 +42,9 @@ class MasterPetBall(Ball):
     def usePetBall(self,obj_defense):
         print("使用 %s ！" % self.show_name)
         time.sleep(3)
-        print("捕获 %s 成功！" % obj_defense.name)
-        return True
+        if obj_defense.captured != True:
+            print("无法捕捉有主的精灵！")
+            return False
+        else:
+            print("捕获 %s 成功！" % obj_defense.name)
+            return True

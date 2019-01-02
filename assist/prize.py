@@ -16,3 +16,5 @@ def getPrize(player,dict):
                 skilllistmap.getSkill(key)
             else:
                 print("未知物品！")
+    #奖品清0
+    dict.clear()

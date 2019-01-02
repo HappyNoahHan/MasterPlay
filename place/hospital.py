@@ -1,6 +1,6 @@
-from place import placebase,village
+from place import placebase,village,meetnpc
 from props import bag
-from assist import  system
+from assist import  system,prize,changepet
 import time
 
 class Hospital(placebase.Place):
@@ -32,7 +32,7 @@ class Hospital(placebase.Place):
         select_id = input(">")
         system.showSystem(player, select_id)
         if select_id in self.npc_list:
-            if self.npc_list[select_id].is_npc == False:
+            if self.npc_list[select_id].is_special == True:
                 if self.npc_list[select_id].recoverOrNot():
                     self.restore(player)
                     time.sleep(3)
@@ -41,7 +41,10 @@ class Hospital(placebase.Place):
                 else:
                     print("你拒绝恢复你的精灵")
                     return self.showMap(player)
-            pass
+            else:
+                print(self.npc_list[select_id])
+                meetnpc.meetNpc(player,self.npc_list[select_id],self)
+
         else:
             print("指令错误！")
             return self.showMap(player)

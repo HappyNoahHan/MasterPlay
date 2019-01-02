@@ -13,7 +13,7 @@ A=（最大ＨＰ×3-当前ＨＰ×2）×捕获率×捕获修正⁄最大ＨＰ�
 import random
 
 def captureOrNot(obj_defense,capture_index,status_index = 0):
-    if obj_defense.captured == True:
+    if obj_defense.captured  != True :
         print("%s 不可捕获" % obj_defense)
         return False
     if 'ST001' in obj_defense.status:

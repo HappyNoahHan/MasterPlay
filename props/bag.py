@@ -220,6 +220,8 @@ def showBattlePetBallBag(player,obj_defense,dict):
                 dict.pop(int(select_id))
             return True
         else:
+            if dict[int(select_id)][1] == 0:
+                dict.pop(int(select_id))
             return False
     elif select_id == '0':
         print("返回上级！")

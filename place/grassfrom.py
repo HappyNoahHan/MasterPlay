@@ -1,4 +1,4 @@
-from place import placebase,wildpetlist,treasure
+from place import placebase,wildpetlist,treasure,meetnpc
 from players import explore,trainer
 from assist import show,riddle,prize,changepet,system
 from props import bag
@@ -48,22 +48,7 @@ class Grassform(placebase.Place):
                     if find_trainer != None:
                         print("遇到了 %s ！" % find_trainer.name)
                         print(find_trainer)
-                        time.sleep(2)
-                        if find_trainer.is_npc == False:
-                            if find_trainer.can_challenge == True:
-                                if explore.trainerVS(player,find_trainer):
-                                    if find_trainer.has_riddle == True and find_trainer.can_challenge == False:
-                                        riddle_condiction = riddle.openTheRiddle(find_trainer)
-                                        self.setMapList(riddle_condiction[0],riddle_condiction[1])
-                                    #return self.showMap(player)
-                                else:
-                                    print("无法继续战斗,请前往治疗")
-                        else:
-                            if find_trainer.prize:
-                                prize.getPrize(player, find_trainer.prize)
-                            if find_trainer.pet_change:
-                                if changepet.changePetWithNpc(player,find_trainer.change_condition,find_trainer.pet_change):
-                                    find_trainer.pet_change = None
+                        meetnpc.meetNpc(player,find_trainer,self)
                     else:
                         print("除了石头与空气,没有任何活物！")
                     return self.showMap(player)

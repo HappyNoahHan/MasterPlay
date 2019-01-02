@@ -1,5 +1,6 @@
-from place import  placebase,treasure
-from assist import system
+from place import  placebase,treasure,meetnpc
+from assist import system,prize,changepet
+import time
 
 class Shop(placebase.Place):
     def __init__(self,name='',npc_list={}):
@@ -18,12 +19,13 @@ class Shop(placebase.Place):
         select_id = input(">")
         system.showSystem(player, select_id)
         if select_id in self.npc_list:
-            if self.npc_list[select_id].is_npc == False:
+            if self.npc_list[select_id].is_special == True:
                 self.npc_list[select_id].showSellList()
                 self.buy(player,self.npc_list[select_id])
                 return self.showMap(player)
             else:
-                pass
+                print(self.npc_list[select_id])
+                meetnpc.meetNpc(player, self.npc_list[select_id], self)
         else:
             print("指令错误！")
             return self.showMap(player)

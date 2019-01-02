@@ -1,16 +1,17 @@
 class Npc(object):
-    def __init__(self,name='',info=None,is_npc = True):
+    def __init__(self,name='',info=None,is_npc = True,is_special = False):
         #is_npc 控制是否是有功能的
         self.is_npc = is_npc
         self.name = name
         self.info = info
+        self.is_special = is_special
 
     def __str__(self):
         return self.info
 
 class ShopNpc(Npc):
     def __init__(self,name='',info=None,sell_list={},sell_type='',is_npc=False):
-        super().__init__(name=name,info=info,is_npc=is_npc)
+        super().__init__(name=name,info=info,is_npc=is_npc,is_special = True)
         self.sell_list = sell_list
         self.sell_type = sell_type
 
@@ -21,7 +22,7 @@ class ShopNpc(Npc):
 
 class Hosptial(Npc):
     def __init__(self,name='',info=None,is_npc = False):
-        super().__init__(name=name,info=info,is_npc=is_npc)
+        super().__init__(name=name,info=info,is_npc=is_npc,is_special = True)
 
 
     def recoverOrNot(self):

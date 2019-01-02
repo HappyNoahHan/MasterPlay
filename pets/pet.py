@@ -82,6 +82,8 @@ class Pet(object):
         if self.has_trainer == True:
             #self.autoAi = False
             self.captured = True
+        elif self.has_trainer == None:
+            self.captured = None
         else:
             #self.autoAi = True
             self.captured = False

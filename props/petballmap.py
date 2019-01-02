@@ -18,7 +18,7 @@ petball_bag_dict = {
 
 
 def getPetBall(petball_name,number = 1):
-    print("获得了 %s !" % petball_name)
+    print("获得了 %s X %d !" % (petball_name,number))
     for key,value in petball_bag_dict.items():
         if value[0] == petball_dict[petball_name]:
             value[1] += number
