@@ -1,5 +1,5 @@
 from props import bag,handbook
-from assist import prize
+from assist import prize,petbox
 
 def showSystem(player,select_id):
     if select_id == 'bag':
@@ -28,4 +28,9 @@ def showSystem(player,select_id):
         for key,value in player.badge_dict.items():
             print(key,':',value)
         return player.map_run_list[-1].showMap(player)
+    elif select_id == 'box':
+        #for test
+        petbox.petBoxAction(player)
+        return player.map_run_list[-1].showMap(player)
+
 

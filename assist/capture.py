@@ -11,9 +11,10 @@ A=（最大ＨＰ×3-当前ＨＰ×2）×捕获率×捕获修正⁄最大ＨＰ�
 当最大ＨＰ×3大于255，则（最大ＨＰ×3）和（当前ＨＰ×2）都取原值的1/4，如果后者为零，则强制修正为1。这个减法本身有可能导致溢出。
 '''
 import random
+from assist import petbox
 
 def captureOrNot(obj_defense,capture_index,status_index = 0):
-    if obj_defense.captured  != True :
+    if obj_defense.captured  != False :
         print("%s 不可捕获" % obj_defense)
         return False
     if 'ST001' in obj_defense.status:
@@ -55,12 +56,14 @@ def addPetOrNot(player,wild_pet):
         wild_pet.name = input()
 
 
-    for key in ['1','2','3','4','5','6']:
+    for key in ['1','2']:
         if key not in player.pet_list:
             player.pet_list[key] = wild_pet
             return True
-        else:
-            #传输到保存箱
-            pass
+
+    if petbox.putPetToBox(wild_pet):
+        print("%s 已经被传送到保存箱！")
+    else:
+        print("已经没有足够得空间保存!")
 
     return True
