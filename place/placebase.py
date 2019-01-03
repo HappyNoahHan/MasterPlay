@@ -1,13 +1,15 @@
 from assist import system
+from place import block
 
 class Place(object):
 
-    def __init__(self,name='',maplist={},treasure_box_list={},npc_list={},prize_box_list={}):
+    def __init__(self,name='',maplist={},treasure_box_list={},npc_list={},prize_box_list={},block=None):
         self.name = name
         self.maplist = maplist
         self.treasure_box_list = treasure_box_list
         self.npc_list = npc_list
         self.prize_box_list = prize_box_list
+        self.block = block
 
     def __str__(self):
         return self.name
@@ -27,7 +29,11 @@ class Place(object):
 
         select_id = input(">")
         if select_id in self.maplist:
-            self.maplist[select_id][0].showMap(player)
+            if block.blockOpenOrNot(player,self.maplist[select_id][0]):
+                self.maplist[select_id][0].showMap(player)
+            else:
+                print("当前区域未开放！")
+                return self.showMap(player)
         else:
             system.showSystem(player, select_id)
         print("指令错误！")

@@ -1,12 +1,12 @@
-from place import placebase,wildpetlist,treasure,meetnpc
+from place import placebase,wildpetlist,treasure,meetnpc,block
 from players import explore,trainer
 from assist import show,riddle,prize,changepet,system
 from props import bag
 import random,time,os
 
 class Grassform(placebase.Place):
-    def __init__(self,name='',maplist={},wild_pet_list={},treasure_box_list={},npc_list={}):
-        super().__init__(name=name,maplist=maplist,treasure_box_list=treasure_box_list,npc_list=npc_list)
+    def __init__(self,name='',maplist={},wild_pet_list={},treasure_box_list={},npc_list={},block=None):
+        super().__init__(name=name,maplist=maplist,treasure_box_list=treasure_box_list,npc_list=npc_list,block=block)
         self.wild_pet_list = wild_pet_list
 
 
@@ -61,7 +61,11 @@ class Grassform(placebase.Place):
                     return self.showMap(player)
                 else:
                     #player.old_place = self
-                    return self.maplist[select_id][0].showMap(player)
+                    if block.blockOpenOrNot(player, self.maplist[select_id][0]):
+                        self.maplist[select_id][0].showMap(player)
+                    else:
+                        print("当前区域未开放！")
+                        return self.showMap(player)
         else:
             system.showSystem(player,select_id)
         print("指令错误！")

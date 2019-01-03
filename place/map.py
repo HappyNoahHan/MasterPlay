@@ -15,6 +15,7 @@ grassfrom_map_for_no_1={
         '4':[grassfrom.Grassform(name='2号草丛',
                                  maplist=grassfrom_map_basic,
                                  wild_pet_list=wildpetlist.wild_pet_list_in_grass_no_1,
+                                 block='绿叶徽章',
                                  ),True],
 }
 

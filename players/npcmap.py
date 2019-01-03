@@ -63,6 +63,6 @@ petgym_npc_list_for_green_town = {
                          prize={'money':150,'绿叶徽章': 1},
                          is_npc=False,
                          pet_list=(wood.aiOodish(level=9,skill_list={'1':skill.azorLeaf()},has_trainer=None),
-                                   )),False],
+                                   )),True],
     '4':[trainer.Trainer(name='守馆老人',info="飞行系是大地力量的克星~"),True],
 }
