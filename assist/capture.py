@@ -56,13 +56,13 @@ def addPetOrNot(player,wild_pet):
         wild_pet.name = input()
 
 
-    for key in ['1','2']:
+    for key in ['1','2','3','4','5']:
         if key not in player.pet_list:
             player.pet_list[key] = wild_pet
             return True
 
     if petbox.putPetToBox(wild_pet):
-        print("%s 已经被传送到保存箱！")
+        print("%s 已经被传送到保存箱！" % wild_pet.name)
     else:
         print("已经没有足够得空间保存!")
 
