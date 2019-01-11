@@ -75,27 +75,28 @@ def showPropBag(player,dict):
     print('0','返回上级!')
     print("请选择道具")
     select_id = input(">")
-    if isDigt(select_id) == False:
-        print("指令错误！")
-        return showPropBag(player, dict)
-    if int(select_id) in dict:
-        if useOrSell():
-            pet = selectPet(player)
-            if pet.carry_prop == None:
-                #obj_attack.carry_prop = propmap.prop_bag_dict[int(select_id)]
-                dict[int(select_id)][0].equipProp(pet)
-                dict[int(select_id)][1] -= 1
-                if dict[int(select_id)][1] == 0:
-                    dict.pop(int(select_id))
+    try:
+        if int(select_id) in dict:
+            if useOrSell():
+                pet = selectPet(player)
+                if pet.carry_prop == None:
+                    #obj_attack.carry_prop = propmap.prop_bag_dict[int(select_id)]
+                    dict[int(select_id)][0].equipProp(pet)
+                    dict[int(select_id)][1] -= 1
+                    if dict[int(select_id)][1] == 0:
+                        dict.pop(int(select_id))
+                else:
+                    print('已装备了道具,请先卸载道具')
             else:
-                print('已装备了道具,请先卸载道具')
+
+                sellProps(player,dict,int(select_id))
+
+        elif select_id == '0':
+            print("返回上级！")
         else:
-
-            sellProps(player,dict,int(select_id))
-
-    elif select_id == '0':
-        print("返回上级！")
-    else:
+            print("指令错误！")
+            return showPropBag(player, dict)
+    except ValueError:
         print("指令错误！")
         return showPropBag(player, dict)
     return showBag(player)
@@ -109,26 +110,27 @@ def showSkillBag(player,dict):
     print('0','返回上级！')
     print("请选择使用的道具")
     select_id = input(">")
-    if isDigt(select_id) == False:
-        print("指令错误！")
-        return showPropBag(player, dict)
-    if int(select_id) in dict:
-        if useOrSell():
-            pet = selectPet(player)
-            if learnskill.learnSkill(pet,dict[int(select_id)][0].skill_code,realize=False):
-                dict[int(select_id)][1] -= 1
-                if dict[int(select_id)][1] == 0:
-                    dict.pop(int(select_id))
+    try:
+        if int(select_id) in dict:
+            if useOrSell():
+                pet = selectPet(player)
+                if learnskill.learnSkill(pet,dict[int(select_id)][0].skill_code,realize=False):
+                    dict[int(select_id)][1] -= 1
+                    if dict[int(select_id)][1] == 0:
+                        dict.pop(int(select_id))
+                else:
+                    print("%s 无法学习！" % pet.name)
             else:
-                print("%s 无法学习！" % pet.name)
-        else:
-            sellProps(player,dict,int(select_id))
+                sellProps(player,dict,int(select_id))
 
-    elif select_id == '0':
-        print("返回上级！")
-    else:
+        elif select_id == '0':
+            print("返回上级！")
+        else:
+            print("指令错误!")
+            return showSkillBag(player,dict)
+    except ValueError:
         print("指令错误!")
-        return showSkillBag(player,dict)
+        return showSkillBag(player, dict)
     return showBag(player)
 
 def showBattleDrugBag(player,obj_defense,dict):
@@ -141,23 +143,24 @@ def showBattleDrugBag(player,obj_defense,dict):
 
     print("请选择使用的道具")
     select_id = input(">")
-    if isDigt(select_id) == False:
-        print("指令错误！")
-        return showPropBag(player, dict)
-    if int(select_id) in dict:
-        pet = selectPet(player)
-        if dict[int(select_id)][0].useDrug(pet):
-            dict[int(select_id)][1] -= 1
-            if dict[int(select_id)][1] == 0:
-                dict.pop(int(select_id))
+    try:
+        if int(select_id) in dict:
+            pet = selectPet(player)
+            if dict[int(select_id)][0].useDrug(pet):
+                dict[int(select_id)][1] -= 1
+                if dict[int(select_id)][1] == 0:
+                    dict.pop(int(select_id))
+            else:
+                return False
+        elif select_id == '0':
+            print("返回上级！")
+            return showBattleBagOrNot(player,obj_defense)
         else:
-            return False
-    elif select_id == '0':
-        print("返回上级！")
-        return showBattleBagOrNot(player,obj_defense)
-    else:
+            print("指令错误!")
+            return showBattleDrugBag(player,obj_defense,dict)
+    except ValueError:
         print("指令错误!")
-        return showBattleDrugBag(player,obj_defense,dict)
+        return showBattleDrugBag(player, obj_defense, dict)
     return True
 
 def showDrugBag(player,dict):
@@ -170,26 +173,27 @@ def showDrugBag(player,dict):
 
     print("请选择使用的道具")
     select_id = input(">")
-    if isDigt(select_id) == False:
-        print("指令错误！")
-        return showPropBag(player, dict)
-    if int(select_id) in dict:
-        if useOrSell():
-            pet = selectPet(player)
-            if dict[int(select_id)][0].useDrug(pet):
-                dict[int(select_id)][1] -= 1
-                if dict[int(select_id)][1] == 0:
-                    dict.pop(int(select_id))
+    try:
+        if int(select_id) in dict:
+            if useOrSell():
+                pet = selectPet(player)
+                if dict[int(select_id)][0].useDrug(pet):
+                    dict[int(select_id)][1] -= 1
+                    if dict[int(select_id)][1] == 0:
+                        dict.pop(int(select_id))
+                else:
+                    return False
             else:
-                return False
-        else:
-            sellProps(player,dict,int(select_id))
-    elif select_id == '0':
-        print("返回上级！")
+                sellProps(player,dict,int(select_id))
+        elif select_id == '0':
+            print("返回上级！")
 
-    else:
+        else:
+            print("指令错误!")
+            return showDrugBag(player,dict)
+    except ValueError:
         print("指令错误!")
-        return showDrugBag(player,dict)
+        return showDrugBag(player, dict)
     return showBag(player)
 
 
@@ -205,30 +209,31 @@ def showBattlePetBallBag(player,obj_defense,dict):
 
     print("请选择使用的道具")
     select_id = input(">")
-    if isDigt(select_id) == False:
-        print("指令错误！")
-        return showPropBag(player, dict)
-    if int(select_id) in dict:
-        dict[int(select_id)][1] -= 1
-        if dict[int(select_id)][0].usePetBall(obj_defense):
-            # 将未捕获的精灵加入图鉴
-            if obj_defense.pet_no in handbook.pet_handbook_dict:
-                if handbook.pet_handbook_dict[obj_defense.pet_no][2][0] == False:
-                    handbook.setHandBook(obj_defense.pet_no, obj_defense.name, obj_defense.property,capture=[True])
-            obj_defense.captured = True
-            if dict[int(select_id)][1] == 0:
-                dict.pop(int(select_id))
-            return True
+    try:
+        if int(select_id) in dict:
+            dict[int(select_id)][1] -= 1
+            if dict[int(select_id)][0].usePetBall(obj_defense):
+                # 将未捕获的精灵加入图鉴
+                if obj_defense.pet_no in handbook.pet_handbook_dict:
+                    if handbook.pet_handbook_dict[obj_defense.pet_no][2][0] == False:
+                        handbook.setHandBook(obj_defense.pet_no, obj_defense.name, obj_defense.property,capture=[True])
+                obj_defense.captured = True
+                if dict[int(select_id)][1] == 0:
+                    dict.pop(int(select_id))
+                return True
+            else:
+                if dict[int(select_id)][1] == 0:
+                    dict.pop(int(select_id))
+                return False
+        elif select_id == '0':
+            print("返回上级！")
+            return showBattleBagOrNot(player,obj_defense)
         else:
-            if dict[int(select_id)][1] == 0:
-                dict.pop(int(select_id))
-            return False
-    elif select_id == '0':
-        print("返回上级！")
-        return showBattleBagOrNot(player,obj_defense)
-    else:
+            print("指令错误!")
+            return showBattlePetBallBag(player,obj_defense,dict)
+    except ValueError:
         print("指令错误!")
-        return showBattlePetBallBag(player,obj_defense,dict)
+        return showBattlePetBallBag(player, obj_defense, dict)
 
 def showPetBallBag(player,dict):
     print("=" * 30)
@@ -239,18 +244,19 @@ def showPetBallBag(player,dict):
     print('0','返回上级！')
     print("请选择道具")
     select_id = input(">")
-    if isDigt(select_id) == False:
+    try:
+        if int(select_id) in dict:
+            sellProps(player,dict,int(select_id))
+            return showBag(player)
+        elif select_id == '0':
+            print("返回上级")
+            return showBag(player)
+        else:
+            print("指令错误！")
+            return showPetBallBag(player,dict)
+    except ValueError:
         print("指令错误！")
-        return showPropBag(player, dict)
-    if int(select_id) in dict:
-        sellProps(player,dict,int(select_id))
-        return showBag(player)
-    elif select_id == '0':
-        print("返回上级")
-        return showBag(player)
-    else:
-        print("指令错误！")
-        return showPetBallBag(player,dict)
+        return showPetBallBag(player, dict)
 
 def selectPet(player):
     print("请选择使用的精灵！")
