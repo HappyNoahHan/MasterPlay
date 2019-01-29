@@ -9,6 +9,12 @@ class Npc(object):
     def __str__(self):
         return self.info
 
+class NonPeopleNpc(Npc):
+    def __init__(self,name='',info=None,prize={}):
+        super().__init__(name=name,info=info)
+        self.prize = prize
+
+
 class ShopNpc(Npc):
     def __init__(self,name='',info=None,sell_list={},sell_type='',is_npc=False):
         super().__init__(name=name,info=info,is_npc=is_npc,is_special = True)

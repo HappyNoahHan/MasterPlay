@@ -17,9 +17,12 @@ def meetNpc(player,npcer,place):
             else:
                 print("无法继续战斗,请前往治疗")
     else:
-        if npcer.prize:
-            prize.getPrize(player, npcer.prize)
-        elif npcer.pet_change:
-            if changepet.changePetWithNpc(player, npcer.change_condition, npcer.pet_change):
-                npcer.pet_change = None
+        try:
+            if npcer.prize:
+                prize.getPrize(player, npcer.prize)
+            elif npcer.pet_change:
+                if changepet.changePetWithNpc(player, npcer.change_condition, npcer.pet_change):
+                    npcer.pet_change = None
+        except AttributeError: #非物品道具并没有交换选项
+            print("什么也没有发生")
     return place.showMap(player)
