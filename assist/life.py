@@ -38,3 +38,20 @@ def healthRecoreByDrug(obj,value):
         obj.health = obj._max_health
 
     return True
+
+def restore(pet):
+    '''
+    pet 状态恢复
+    :param pet:
+    :return:
+    '''
+    pet.health = pet._max_health
+    pet.debuff_dict.clear()
+    pet.buff_dict.clear()
+    pet.property_buff.clear()
+    pet.status.clear()
+    pet.alive = True
+    pet.basic_point_getter = None
+
+    for key,skill in pet.skill_list.items():
+        skill.pp_value = skill._pp_value_max

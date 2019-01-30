@@ -1,7 +1,6 @@
 from players import battering
-from assist import show,exp,evolve
+from assist import show,exp,evolve,life
 from battle import asscount
-from place import hospital
 def explore(player,wild_pet):
     '''
     野外探险
@@ -96,5 +95,5 @@ def trainerVS(player,trainer):
     else:
         return False
     for pet in trainer.pet_list:
-        hospital.restore(pet)
+        life.restore(pet)
     return True

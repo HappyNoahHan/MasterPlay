@@ -3,13 +3,14 @@ from place import block
 
 class Place(object):
 
-    def __init__(self,name='',maplist={},treasure_box_list={},npc_list={},prize_box_list={},block=None):
+    def __init__(self,name='',maplist={},treasure_box_list={},npc_list={},prize_box_list={},block=None,can_fishing=False):
         self.name = name
         self.maplist = maplist
         self.treasure_box_list = treasure_box_list
         self.npc_list = npc_list
         self.prize_box_list = prize_box_list
         self.block = block
+        self.can_fishing = can_fishing
 
     def __str__(self):
         return self.name
