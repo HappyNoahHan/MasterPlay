@@ -12,7 +12,7 @@ petball_bag_dict = {
     1: [petball_dict['精灵球'],5],
     #2: [petball_dict['绿叶球'],1],
     #3: [petball_dict['火焰球'],2],
-    4: [petball_dict['大师球'],1],
+    4: [petball_dict['大师球'],99],
     #5: [petball_dict['厚土球'],9],
 }
 

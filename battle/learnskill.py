@@ -17,7 +17,7 @@ def learnSkill(obj,skill_code,realize=True):
 
     for key in ['1','2','3','4']:
         if key not in obj.skill_list:
-            obj.skill_list[key] = battle.skilllistmap.skill_dict[skill_code]
+            obj.skill_list[key] = battle.skilllistmap.skill_dict[skill_code]()
             if realize == True:
                 obj.realize_skill_list.append(skill_code)
             print("%s 学会了 %s 技能！" % (obj.name, battle.skilllistmap.skill_dict[skill_code].show_name))
@@ -32,7 +32,7 @@ def learnSkill(obj,skill_code,realize=True):
 
         print("正在遗忘",obj.skill_list[forget_id].show_name,'技能！')
         time.sleep(3)
-        obj.skill_list[forget_id] = battle.skilllistmap.skill_dict[skill_code]
+        obj.skill_list[forget_id] = battle.skilllistmap.skill_dict[skill_code]()
         print("%s 学会了 %s 技能！" % (obj.name, battle.skilllistmap.skill_dict[skill_code].show_name))
     else:
         print("放弃学习技能")

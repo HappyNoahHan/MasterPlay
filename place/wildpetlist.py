@@ -1,4 +1,4 @@
-from  pets import fly,wood
+from  pets import fly,wood,skilltree
 from battle import skill
 import random
 
@@ -38,3 +38,4 @@ def getWildPet(pet_list):
     elif pet_no == '026':
         if place == 'grass_no1':
             return fly.aiPidgey(level=random.randint(3, 5), skill_list={'1': skill.scream()})
+            #return fly.aiPidgey(level=5,skill_list = skilltree.getSkillList('026',5))

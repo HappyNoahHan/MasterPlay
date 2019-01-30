@@ -49,7 +49,7 @@ class Charmeleon(Charmander):
 
     skill_tree = {
         14: 'A004',
-        17: 'S001',
+        16: 'S001',
     }
 
     can_get_base_point = 3
