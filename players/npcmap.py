@@ -41,7 +41,7 @@ hospital_npc_list_for_green_town = {
     '3': trainer.Trainer(name='喷火龙爱好者',info='喷火龙Max！！！',
                      pet_change=fly.aiPidgey(level=99,skill_list={'1': skill.scream()},has_trainer=True,autoAi=False),
                      change_condition='波波'),
-    '4':npc.NonPeopleNpc(name='垃圾桶',info='你翻了翻垃圾桶!',prize={'money':100}),
+    '4':npc.NonPeopleNpc(name='垃圾桶',info='你翻了翻垃圾桶!',prize={'A001':1}),
 }
 
 petgym_npc_list_for_green_town = {
@@ -64,6 +64,6 @@ petgym_npc_list_for_green_town = {
                          prize={'money':150,'绿叶徽章': 1},
                          is_npc=False,
                          pet_list=(wood.aiOodish(level=9,skill_list={'1':skill.azorLeaf()},has_trainer=None),
-                                   )),True],
+                                   )),False],
     '4':[trainer.Trainer(name='守馆老人',info="飞行系是大地力量的克星~"),True],
 }

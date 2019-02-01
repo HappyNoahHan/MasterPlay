@@ -1,6 +1,7 @@
 import battle.skill
 #old verson skill setting
 #技能列表与代号
+#当实例里面有参数有使用次数 用同一个类实例会出现问题
 #2.0 pp value 内部固定
 
 skill_dict = {
@@ -25,8 +26,8 @@ skill_dict = {
 
 #背包概念 名称 数量
 skill_bag_dict={
-    1:[skill_dict['A001'](),1],
-    2:[skill_dict['C002'](),2],
+    1:[skill_dict['A001'],99],
+    2:[skill_dict['C002'],99],
 }
 
 #得到技能道具

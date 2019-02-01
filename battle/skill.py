@@ -1,5 +1,5 @@
 '''
-#skill_code 技能代号  A  火系  N 普通系 B 木系
+#skill_code 技能代号  A  火系  N 普通系 B 木系 C 虫系 D 水系 S 光  D 黑暗 E 大地 F 格斗 G 龙
 #skill_mode 技能类型   0001 伤害技能 0002 防御临时提升 003 debuff 技能
                      0004 施加状态技能  0005 移除状态技能
                      0008 生命恢复 0009 属性亲和，同属性技能伤害加成
@@ -148,6 +148,8 @@ class fireBall(damageSkill):
                 print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict['ST001']))
 
 class fireSpin(debuffSkill):
+    def __init__(self,pp=15):
+        super().__init__(pp)
     show_name = '火焰漩涡'
     skill_code = 'A004'
     index_per = 0.1
@@ -157,6 +159,8 @@ class fireSpin(debuffSkill):
     damage_debuff = True
 
 class flameAffinity(propSkill):
+    def __init__(self,pp=10):
+        super().__init__(pp)
     show_name = '火焰亲和'
     skill_code = 'A009'
     index_per = 0.5
@@ -173,6 +177,8 @@ class azorLeaf(damageSkill):
     skill_info = "飞叶攻击，片片不占身"
 
 class lifeRecovery(lifeRecoreSkill):
+    def __init__(self,pp=15):
+        super().__init__(pp)
     show_name = '生命复苏'
     skill_code = 'B003'
     index_per = 0.5
@@ -180,6 +186,8 @@ class lifeRecovery(lifeRecoreSkill):
     skill_info = "恢复技能，恢复最大生命值50%"
 
 class lifeChains(buffSkill):
+    def __init__(self,pp=15):
+        super().__init__(pp)
     show_name = '生命锁链'
     skill_code = 'B004'
     index_per = 0.1
@@ -197,12 +205,16 @@ class vinesTied(debuffSkill):
     skill_info = "捆绑，持续性收到10%气血的伤害"
 
 class illuminatiom(removeDebuffSkill):
+    def __init__(self,pp=20):
+        super().__init__(pp)
     show_name = '光照'
     skill_info = "驱散一个debuff效果"
     skill_code = 'S001'
     property = 'light'
 
 class disperse(removeBuffSkill):
+    def __init__(self,pp=20):
+        super().__init__(pp)
     skill_info = "驱散一个对方的增益效果"
     skill_code = 'T001'
     property = 'dark'
@@ -234,6 +246,8 @@ class SleepingPowder(statusSkill):
     hit_rate = 85
 
 class HolyLight(removeStatusSkill):
+    def __init__(self,pp=20):
+        super().__init__(pp)
     show_name = '圣光'
     skill_info = '移除所有状态'
     skill_code = 'S002'
@@ -241,3 +255,27 @@ class HolyLight(removeStatusSkill):
 
     def useSkill(self,obj):
         statusmap.removeStatus(obj,status_code='all')
+
+class WaterJump(buffSkill):
+    show_name = '水溅跃'
+    skill_code = 'D001'
+    index_per = 0.1
+    effect_turns = 2
+    skill_info = "防御临时上升10%，持续2回合"
+    buff_prop = 'Defense'
+
+class WaterBall(damageSkill):
+    show_name = '水球'
+    skill_code = 'D002'
+    skill_power = 40
+    property = 'water'
+    skill_info = '使用水球术攻击，威力一般'
+    hit_rate = 100
+
+class WaterCannon(damageSkill):
+    show_name = '水炮'
+    skill_code = 'D003'
+    skill_power = 80
+    property = 'water'
+    skill_info = '使用水炮术攻击，威力不一般'
+    hit_rate = 95
