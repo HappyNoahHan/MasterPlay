@@ -1,4 +1,4 @@
-from place import hospital,town,village,grassfrom,wildpetlist,treasure,shop,petgym
+from place import hospital,town,village,wildform,wildpetlist,treasure,shop,petgym
 from players import  npcmap
 from assist import prize
 grassfrom_map_basic={
@@ -9,14 +9,19 @@ grassfrom_map_basic={
 
 
 grassfrom_map_for_no_1={
-        '1':['野外探险',True],
-        '2':['搜索玩家',True],
-        '3':['寻宝',False],
-        '4':[grassfrom.Grassform(name='2号草丛',
+#        '1':['野外探险',True],
+#        '2':['搜索玩家',True],
+#        '3':['寻宝',False],
+        '4':[wildform.WildForm(name='绯红大道',
                                  maplist=grassfrom_map_basic,
                                  wild_pet_list=wildpetlist.wild_pet_list_in_grass_no_1,
                                  block='绿叶徽章',
                                  ),True],
+        '5':[wildform.WildForm(name='大漩涡',
+                               maplist=grassfrom_map_basic,
+                               wild_pet_list=wildpetlist.wild_pet_list_in_grass_no_1,
+                               treasure_box_list=treasure.treasure_box_for_grass_no_1,
+                               npc_list=npcmap.trainer_in_grass_no_1), True],
 }
 
 town_map_for_green={
@@ -30,8 +35,8 @@ town_map_for_green={
 village_map_for_start={
 
         '1': [town.Town(name='绿叶镇',maplist=town_map_for_green),True],
-        '2': [grassfrom.Grassform(name='绿叶大道',
-                                    maplist=grassfrom_map_for_no_1,
+        '2': [wildform.WildForm(name='绿叶大道',
+                                    maplist=dict(grassfrom_map_basic,**grassfrom_map_for_no_1),
                                  wild_pet_list=wildpetlist.wild_pet_list_in_grass_no_1,
                                  treasure_box_list=treasure.treasure_box_for_grass_no_1,
                                  npc_list = npcmap.trainer_in_grass_no_1),True],

@@ -4,7 +4,7 @@ from assist import show,riddle,prize,changepet,system
 from props import bag
 import random,time,os
 
-class Grassform(placebase.Place):
+class WildForm(placebase.Place):
     def __init__(self,name='',maplist={},wild_pet_list={},treasure_box_list={},npc_list={},block=None):
         super().__init__(name=name,maplist=maplist,treasure_box_list=treasure_box_list,npc_list=npc_list,block=block)
         self.wild_pet_list = wild_pet_list
@@ -27,7 +27,7 @@ class Grassform(placebase.Place):
         if select_id in self.maplist:
             if self.maplist[select_id][1] != False:
                 if select_id == '1':
-                    print("正在草丛探险...")
+                    print("精灵在哪里呀...在哪里呀...")
                     time.sleep(3)
                     wild_pet = wildpetlist.getWildPet(self.wild_pet_list)
                     show.showPetStatus(wild_pet)
@@ -47,11 +47,11 @@ class Grassform(placebase.Place):
                         print(find_trainer)
                         meetnpc.meetNpc(player,find_trainer,self)
                     else:
-                        print("除了石头与空气,没有任何活物！")
+                        print("除了空气和你,没有任何会唱歌的！")
                     return self.showMap(player)
 
                 elif select_id == '3':
-                    print("正在草丛寻宝...")
+                    print("东瞅瞅，西瞅瞅，瞅出个大活宝...")
                     time.sleep(1)
                     find_item = treasure.getTreasureBox(self.treasure_box_list)
                     if find_item == None:
@@ -70,6 +70,3 @@ class Grassform(placebase.Place):
             system.showSystem(player,select_id)
         print("指令错误！")
         return self.showMap(player)
-
-
-

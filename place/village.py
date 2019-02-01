@@ -1,4 +1,4 @@
-from place import  placebase,hospital,town,grassfrom,wildpetlist,treasure
+from place import  placebase
 from assist import system
 
 class Village(placebase.Place):
