@@ -44,6 +44,8 @@ def battleing(player,wild_pet,change_pet = False):
                     return battleing(player,wild_pet,change_pet=True)
                 else:
                     print("没有可以使用的精灵")
+                    #无法出战
+                    player.can_battle = False
                     return False
         #捕获成功代码
         else:

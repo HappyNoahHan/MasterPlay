@@ -1,4 +1,4 @@
-from  pets import fly,wood,skilltree
+from  pets import fly,wood,water,skilltree
 from battle import skill
 import random
 
@@ -6,6 +6,13 @@ wild_pet_list_in_grass_no_1 ={
     '026': (127,'grass_no1',[]),
     '043': (128,'grass_no1',[]),
 }
+
+wild_pet_list_in_maelstrom_no_1={
+    '072': (51,'maelstrom_no1',[]),
+    '118': (102,'maelstrom_no1',[]),
+    '120': (102,'maelstrom_no1',[]),
+}
+
 
 def meetWildPet(dict):
     '''
@@ -39,3 +46,14 @@ def getWildPet(pet_list):
         if place == 'grass_no1':
             return fly.aiPidgey(level=random.randint(3, 5), skill_list={'1': skill.scream()})
             #return fly.aiPidgey(level=5,skill_list = skilltree.getSkillList('026',5))
+    elif pet_no == '072':
+        if place == 'maelstrom_no1':
+            return water.Tentacool(level=random.randint(10,12),skill_list={'1':skill.WaterBall()})
+
+    elif pet_no == '118':
+        if place == 'maelstrom_no1':
+            return water.Goldeen(level=random.randint(11,13),skill_list={'1':skill.WaterBall(),'2':skill.WaterCannon()})
+
+    elif pet_no == '120':
+        if place == 'maelstrom_no1':
+            return water.Staryu(level=random.randint(11, 13),skill_list={'1': skill.WaterBall(), '2': skill.WaterCannon()})

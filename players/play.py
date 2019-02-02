@@ -11,6 +11,8 @@ class Player(object):
     current_place = village.Village("新手村",maplist=map.village_map_for_start)
 
     map_run_list = [current_place]
+    #是否能出战
+    can_battle = True
 
     battle_pet_list = []
     battle_run_success = False

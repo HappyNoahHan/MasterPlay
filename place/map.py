@@ -7,6 +7,10 @@ grassfrom_map_basic={
         '3':['寻宝',False],
 }
 
+maelstrom_map_for_green={
+    '4': ['hhh',True],
+}
+
 
 grassfrom_map_for_no_1={
 #        '1':['野外探险',True],
@@ -18,10 +22,12 @@ grassfrom_map_for_no_1={
                                  block='绿叶徽章',
                                  ),True],
         '5':[wildform.WildForm(name='大漩涡',
-                               maplist=grassfrom_map_basic,
-                               wild_pet_list=wildpetlist.wild_pet_list_in_grass_no_1,
+                               maplist=dict(grassfrom_map_basic,**maelstrom_map_for_green),
+                               wild_pet_list=wildpetlist.wild_pet_list_in_maelstrom_no_1,
                                treasure_box_list=treasure.treasure_box_for_grass_no_1,
-                               npc_list=npcmap.trainer_in_grass_no_1), True],
+                               npc_list=npcmap.trainer_in_grass_no_1,
+                               #block='绿叶徽章',
+                                ),True],
 }
 
 town_map_for_green={
@@ -29,7 +35,6 @@ town_map_for_green={
     '2': [hospital.Hospital(name="绿叶医疗中心",npc_list=npcmap.hospital_npc_list_for_green_town),True],
     '3': [petgym.PetGym(name='绿叶道馆',npc_list=npcmap.petgym_npc_list_for_green_town,prize_box_list=None),True]
 }
-
 
 
 village_map_for_start={
@@ -41,6 +46,8 @@ village_map_for_start={
                                  treasure_box_list=treasure.treasure_box_for_grass_no_1,
                                  npc_list = npcmap.trainer_in_grass_no_1),True],
 }
+
+
 
 
 

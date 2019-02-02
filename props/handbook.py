@@ -6,6 +6,9 @@ pet_handbook_dict={
     '005':('火恐龙',['fire'],[True]),
     #'026':('波波',['fly',False]),
     #'043':('走路草',['wood',False]),
+    #'072':('毒刺水母',['water',False]),
+    #'118':('角金鱼',['water',False]),
+
 }
 
 
@@ -76,6 +79,8 @@ def showProp(value):
             print('草', end=' ')
         elif k == 'fly':
             print('飞行',end=' ')
+        elif k == 'water':
+            print('水',end=' ')
         pass
 
 def setHandBook(key,name,prop,capture=[False]):

@@ -8,6 +8,10 @@ def explore(player,wild_pet):
     :return:
     '''
     #战斗前 清除
+    if player.can_battle == False:
+        print("自己是个什么鸟样没有B数吗？？？")
+        return False
+
     player.battle_pet_list.clear()
 
     if battering.battleing(player, wild_pet):
@@ -57,6 +61,9 @@ def trainerVS(player,trainer):
     :param trainer:
     :return:
     '''
+    if player.can_battle == False:
+        print("是什么给你的勇气还能挑衅？？？")
+        return False
     challenge_list = list(trainer.pet_list)
 
     if battering.vsBattleing(player,trainer,challenge_list):

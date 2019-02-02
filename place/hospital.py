@@ -17,6 +17,7 @@ class Hospital(placebase.Place):
 
             for key,skill in pet.skill_list.items():
                 skill.pp_value = skill._pp_value_max
+        player.can_battle = True
 
     def showMap(self,player):
         if player.map_run_list[-1] != self:
