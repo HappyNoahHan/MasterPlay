@@ -1,6 +1,6 @@
 import pets.propets
 
-class aiPidgey(pets.propets.Fly):
+class Pidgey(pets.propets.Fly):
     health_basic = 40
     attack_basic = 45
     defense_basic = 40

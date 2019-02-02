@@ -10,6 +10,14 @@ treasure_box_for_grass_no_1 ={
     '火焰之心':[1,'elite','prop'],
 }
 
+treasure_box_for_maelstrom_no_1 ={
+    '精灵球': [3,'normal','petball'],
+    '小型回复药剂': [2,'normal','drug'],
+    '灼伤解除剂': [2,'normal','drug'],
+    #'火焰果':[1,'normal','drug'],
+    '攻击之爪':[1,'elite','prop'],
+}
+
 
 def getTreasureBox(place):
 

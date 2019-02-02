@@ -4,6 +4,7 @@ petball_dict={
     '精灵球': petball.PetBall(show_name='精灵球'),
     '绿叶球': petball.ProptyPetBall(show_name='绿叶球',property='wood'),
     '火焰球': petball.ProptyPetBall(show_name='火焰球',property='fire'),
+    '激流球': petball.ProptyPetBall(show_name='激流球',property='water'),
     '厚土球': petball.ProptyPetBall(show_name='厚土球',property='earth'),
     '大师球': petball.MasterPetBall(),
 }

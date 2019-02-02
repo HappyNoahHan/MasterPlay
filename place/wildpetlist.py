@@ -39,13 +39,18 @@ def meetWildPet(dict):
 def getWildPet(pet_list):
     pet_no,place = meetWildPet(pet_list)
 
-    if pet_no == '043':
+
+    if pet_no == '026':
         if place == 'grass_no1':
-            return wood.aiOodish(level=random.randint(5, 7), skill_list={'1': skill.scream()})
-    elif pet_no == '026':
-        if place == 'grass_no1':
-            return fly.aiPidgey(level=random.randint(3, 5), skill_list={'1': skill.scream()})
+            return fly.Pidgey(level=random.randint(3, 5), skill_list={'1': skill.scream()})
             #return fly.aiPidgey(level=5,skill_list = skilltree.getSkillList('026',5))
+    elif pet_no == '043':
+        if place == 'grass_no1':
+            return wood.Oodish(level=random.randint(5, 7), skill_list={'1': skill.scream()})
+    elif pet_no == '069':
+        if place == 'grass_no2':
+            return wood.Bellsprout(level=random.randint(6,8),skill_list={'1':skill.azorLeaf(),'2':skill.StunSpore()})
+
     elif pet_no == '072':
         if place == 'maelstrom_no1':
             return water.Tentacool(level=random.randint(10,12),skill_list={'1':skill.WaterBall()})
