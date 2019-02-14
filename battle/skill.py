@@ -142,6 +142,8 @@ class strengthCre(buffSkill):
     buff_prop = 'Attack'
 
 class fireBall(damageSkill):
+    def __init__(self,pp=25):
+        super().__init__(pp)
     show_name = '火球'
     skill_code = 'A001'
     skill_power = 40
@@ -155,6 +157,15 @@ class fireBall(damageSkill):
             if 'ST001' not in obj.status:
                 obj.status.append('ST001')
                 print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict['ST001']))
+
+class JetFlame(fireBall):
+    def __init__(self):
+        super().__init__(pp=15)
+    show_name = '喷射火焰'
+    skill_code = 'A005'
+    skill_power = 90
+    skill_info = '火焰喷射，威力超绝,有5%的几率使对手进入灼伤状态'
+    hit_rate = 100
 
 class fireSpin(debuffSkill):
     def __init__(self,pp=15):

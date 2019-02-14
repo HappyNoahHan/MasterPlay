@@ -82,7 +82,7 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
 
     #计算属性相克关系
     attr_index_number = petattr.getAttrMap(skill,obj_defense)
-    print(attr_index_number)
+    print("属性克制关系: ",attr_index_number)
     #计算是否使用的是本属性的技能
     if skill.property in obj_attack.property:
         skill_prop_match_obj_prop = 1.5
@@ -96,7 +96,7 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
     spell_power = obj_attack.getSpellPower()
     spell_defense = obj_defense.getSpellDefense()
     speed = obj_attack.getSpeed()
-    print(power)
+    print("技能威力: ",power)
 
     #加入战斗前天赋计算  技能威力提升
     if obj_attack.talent != None:

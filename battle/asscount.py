@@ -16,7 +16,7 @@ def checkBuffBeforeBattle(obj_attack,obj_defense):
         buff.buffCount(obj_attack)
         buff.buffIndex(obj_attack)
     else:
-        print("没有buff")
+        print("目标没有buff")
 
     if obj_defense.buff_dict:
         buff.buffCount(obj_defense)

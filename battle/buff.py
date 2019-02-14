@@ -151,7 +151,7 @@ def proBuffCount(obj,skill):
 
         prop_buff_index += sum(prop_buff_list)
 
-    print(prop_buff_index)
+    print('本属性增幅倍数: ',prop_buff_index)
     return prop_buff_index
 
 

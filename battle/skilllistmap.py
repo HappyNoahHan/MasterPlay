@@ -7,6 +7,7 @@ import battle.skill
 skill_dict = {
     'A001': battle.skill.fireBall,
     'A004': battle.skill.fireSpin,
+    'A005': battle.skill.JetFlame,
     'A009': battle.skill.flameAffinity,
     'F001': battle.skill.scream,
     'N001': battle.skill.Strike,
