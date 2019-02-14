@@ -2,7 +2,7 @@ from players import npc
 import random
 
 class Trainer(npc.Npc):
-    def __init__(self,name = '',pet_list=(),can_challenge = False,prize={},info =None,
+    def __init__(self,name = None,pet_list=(),can_challenge = False,prize={},info =None,
                  has_riddle=False,is_npc=True,pet_change=None,change_condition=None):
         super().__init__(name=name,info=info,is_npc = is_npc)
         #self.name = name

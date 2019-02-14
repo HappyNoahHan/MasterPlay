@@ -1,5 +1,5 @@
 from players import trainer,npc
-from pets import fly,fire,wood,water,skilltree
+from pets import fly,fire,wood,water,skilltree,rock
 from battle import skill
 #has_trainter = None 指npc 精灵
 trainer_in_grass_no_1 = {
@@ -80,7 +80,7 @@ petgym_npc_list_for_green_town = {
                         prize={'money':150},
                         is_npc = False,
                         has_riddle = True,
-                        pet_list=(wood.Oodish(level=8,skill_list={'1':skill.azorLeaf()},has_trainer=None),)
+                        pet_list=(rock.Geodude(level=8,skill_list={'1':skill.DownRock(),'2':skill.Strike()},has_trainer=None),)
                         ),True],
     '2':[trainer.Trainer(name='绿叶学徒B',info='我和你练练',
                         can_challenge=True,
@@ -95,5 +95,5 @@ petgym_npc_list_for_green_town = {
                          is_npc=False,
                          pet_list=(wood.Oodish(level=9,skill_list={'1':skill.azorLeaf()},has_trainer=None),
                                    )),False],
-    '4':[trainer.Trainer(name='守馆老人',info="飞行系是大地力量的克星~"),True],
+    '4':[trainer.Trainer(name='守馆老人',info="别看岩石很坚硬,其实又怕火又怕电,还很怕鸟儿~"),True],
 }

@@ -1,5 +1,5 @@
 '''
-#skill_code 技能代号  A  火系  N 普通系 B 木系 C 虫系 D 水系 S 光  D 黑暗 E 大地 F 格斗 G 龙
+#skill_code 技能代号  A  火系  N 普通系 B 木系 C 虫系 D 水系 S 光  T 黑暗 E 地面 F 飞行 G 龙  R 岩石
 #skill_mode 技能类型   0001 伤害技能 0002 防御临时提升 003 debuff 技能
                      0004 施加状态技能  0005 移除状态技能
                      0008 生命恢复 0009 属性亲和，同属性技能伤害加成
@@ -110,10 +110,19 @@ class propSkill(skill):
 
 class scream(damageSkill):
     show_name = '尖叫'
-    skill_code = 'N001'
+    skill_code = 'F001'
     skill_power = 40
     property = 'fly'
     skill_info = '伤害加成20%'
+    spell_skill = False
+
+class Strike(damageSkill):
+    def __init__(self):
+        super().__init__(pp=35)
+    show_name = '撞击'
+    skill_code = 'N001'
+    skill_power = 40
+    skill_info = '用身体撞击对方'
     spell_skill = False
 
 class steadiness(buffSkill):
@@ -279,3 +288,15 @@ class WaterCannon(damageSkill):
     property = 'water'
     skill_info = '使用水炮术攻击，威力不一般'
     hit_rate = 95
+
+class DownRock(damageSkill):
+    def __init__(self,pp=35):
+        super().__init__(pp)
+
+    show_name = '落岩'
+    skill_code = 'R001'
+    skill_power = 40
+    property = 'rock'
+    skill_info = '使用落岩攻击，威力一般'
+    hit_rate = 100
+    spell_skill = False

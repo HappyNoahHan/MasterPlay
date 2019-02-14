@@ -25,13 +25,14 @@ def getBattleSuccessExp(player,obj,exp_basic = 1,ai_index=1):
     :return:
     '''
     if obj.autoAi == True:
-        if obj.has_trainer == True:
-            ai_index = 1.5
+        if obj.has_trainer == None:
+            ai_index = 10
 
     if len(player.battle_pet_list) > 1:
         exp_basic = 0.5
 
     print("经验基数",exp_basic)
+    print("调整基数",ai_index)
 
     #后续版本 随身道具
     #if withExpfruit == True:

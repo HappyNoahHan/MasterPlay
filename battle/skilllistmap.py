@@ -8,7 +8,8 @@ skill_dict = {
     'A001': battle.skill.fireBall,
     'A004': battle.skill.fireSpin,
     'A009': battle.skill.flameAffinity,
-    'N001': battle.skill.scream,
+    'F001': battle.skill.scream,
+    'N001': battle.skill.Strike,
     'N002': battle.skill.steadiness,
     'N003': battle.skill.strengthCre,
     'B002': battle.skill.azorLeaf,
@@ -24,6 +25,7 @@ skill_dict = {
     'D001': battle.skill.WaterJump,
     'D002': battle.skill.WaterBall,
     'D003': battle.skill.WaterCannon,
+    'R001': battle.skill.DownRock,
 
 }
 

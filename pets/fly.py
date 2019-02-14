@@ -9,7 +9,7 @@ class Pidgey(pets.propets.Fly):
     speed_basic = 56
 
     name = '比比'
-    basic_exp_value = 5400
+    basic_exp_value = 54
 
     can_get_base_point = 1
     can_get_base_point_type = 'speed'

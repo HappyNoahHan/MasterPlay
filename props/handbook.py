@@ -81,6 +81,10 @@ def showProp(value):
             print('飞行',end=' ')
         elif k == 'water':
             print('水',end=' ')
+        elif k == 'electricity':
+            print('电',end=' ')
+        elif k == 'rock':
+            print('岩石',end=' ')
         pass
 
 def setHandBook(key,name,prop,capture=[False]):

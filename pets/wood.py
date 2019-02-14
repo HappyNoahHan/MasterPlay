@@ -11,7 +11,7 @@ class Oodish(pets.propets.Wood):
 
     name = '走路草'
     talent = 'TA002'
-    basic_exp_value = 1000
+    basic_exp_value = 64
 
     can_get_base_point = 2
     can_get_base_point_type = 'attack'

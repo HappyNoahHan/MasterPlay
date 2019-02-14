@@ -1,8 +1,11 @@
 class Npc(object):
-    def __init__(self,name='',info=None,is_npc = True,is_special = False):
+    def __init__(self,name=None,info=None,is_npc = True,is_special = False):
         #is_npc 控制是否是有功能的
         self.is_npc = is_npc
-        self.name = name
+        if name is None:
+            self.name = '神秘人'
+        else:
+            self.name = name
         self.info = info
         self.is_special = is_special
 
@@ -10,7 +13,7 @@ class Npc(object):
         return self.info
 
 class NonPeopleNpc(Npc):
-    def __init__(self,name='',info=None,prize={}):
+    def __init__(self,name=None,info=None,prize={}):
         super().__init__(name=name,info=info)
         self.prize = prize
 
@@ -27,7 +30,7 @@ class ShopNpc(Npc):
             print(key,':',item[0],'  $',item[1])
 
 class Hosptial(Npc):
-    def __init__(self,name='',info=None,is_npc = False):
+    def __init__(self,name=None,info=None,is_npc = False):
         super().__init__(name=name,info=info,is_npc=is_npc,is_special = True)
 
 
