@@ -21,7 +21,7 @@ def getAttrMap(obj_skill,obj):
     '''
     restrain_amendment = []
     try:
-        for value in obj.property:
+        for value in obj.prop:
             if value not in attr_map_dict[obj_skill.property]:
                 restrain_amendment.append(int(1))
             else:

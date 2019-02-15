@@ -89,8 +89,6 @@ class Pet(object):
             self.captured = False
         self.autoAi = autoAi
 
-    canEvolve = True
-
 
     def getDefense(self):
         if self.carry_prop != None:

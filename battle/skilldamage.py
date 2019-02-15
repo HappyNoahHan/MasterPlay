@@ -84,7 +84,7 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
     attr_index_number = petattr.getAttrMap(skill,obj_defense)
     print("属性克制关系: ",attr_index_number)
     #计算是否使用的是本属性的技能
-    if skill.property in obj_attack.property:
+    if skill.property in obj_attack.prop:
         skill_prop_match_obj_prop = 1.5
     else:
         skill_prop_match_obj_prop = 1

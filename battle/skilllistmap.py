@@ -28,6 +28,7 @@ skill_dict = {
     'D003': battle.skill.WaterCannon,
     'R001': battle.skill.DownRock,
     'R002': battle.skill.RockFall,
+    'E001': battle.skill.Earthquake,
 
 }
 

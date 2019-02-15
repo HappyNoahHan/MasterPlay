@@ -3,12 +3,26 @@
     继承  技能列表  已领悟技能
 '''
 
-from pets import fire
+from pets import fire,rock
 from assist import  show
 
 evolve_dict={
-    '小火龙': fire.Charmeleon,
+    '小火龙': [fire.Charmeleon,11,'levelup'],
+    '小拳石': [rock.Graveler,16,'evolvestoneup']
 }
+def canEvolveOrNot(obj):
+    '''
+    判断是否又进化形态
+    :param obj:
+    :return:
+    '''
+    if obj.name in evolve_dict:
+        if evolve_dict[obj.name][2] == 'levelup':
+            if obj.level >= evolve_dict[obj.name][1]:
+                return True
+
+    return False
+
 
 def isEvolve(obj):
     '''
@@ -16,7 +30,7 @@ def isEvolve(obj):
     :param obj:
     :return:
     '''
-    new_obj = evolve_dict[obj.name](level= obj.level,
+    new_obj = evolve_dict[obj.name][0](level= obj.level,
                                     skill_list=obj.skill_list,
                                     exp_for_current=obj.exp_for_current,
                                     #realize_skill_list=obj.realize_skill_list,

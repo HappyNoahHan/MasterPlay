@@ -2,7 +2,7 @@ import pets.propets
 from battle import skill
 import random
 
-class Charmander(pets.propets.Fire):
+class Charmander(pets.propets.PropInit):
     health_basic = 39
     attack_basic = 52
     defense_basic = 43
@@ -14,11 +14,10 @@ class Charmander(pets.propets.Fire):
     talent = 'TA001' #天赋 eg：火属性技能伤害+10% 后续nnn版本 做一张map 天赋技能树 各种类型
 
     basic_exp_value = 51
-    evolve_level = 8
 
     #技能树
     skill_tree = {
-        9 : 'A004',
+        6 : 'R001',
         12 : 'S001',
     }
 
@@ -27,9 +26,7 @@ class Charmander(pets.propets.Fire):
 
     # 精灵编号
     pet_no = '004'
-
-    def __str__(self):
-        return super().__str__() + ':' + self.name
+    prop = 'fire'
 
 
 class Charmeleon(Charmander):
@@ -42,7 +39,6 @@ class Charmeleon(Charmander):
 
     name = '火恐龙'
     basic_exp_value = 134
-    evolve_level = 32
 
     # 精灵编号
     pet_no = '005'

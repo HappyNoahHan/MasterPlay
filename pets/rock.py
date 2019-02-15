@@ -1,6 +1,6 @@
 from pets import propets
 
-class Geodude(propets.Rock):
+class Geodude(propets.PropInit):
     health_basic = 40
     attack_basic = 80
     defense_basic = 100
@@ -9,6 +9,7 @@ class Geodude(propets.Rock):
     speed_basic = 20
 
     name = '小拳石'
+    style = '宝石'
     #talent = 'TA002'
     basic_exp_value = 60
 
@@ -17,12 +18,28 @@ class Geodude(propets.Rock):
     capture_rate = 255
     # 精灵编号
     pet_no = '074'
+    prop = ['rock','ground']
+
+class Graveler(Geodude):
+    health_basic = 55
+    attack_basic = 95
+    defense_basic = 115
+    spell_power_basic = 45
+    spell_defense_basic = 45
+    speed_basic = 35
+
+    name = '隆隆石'
+    #talent = 'TA002'
+    basic_exp_value = 137
+
+    can_get_base_point = 2
+    can_get_base_point_type = 'defense'
+    capture_rate = 120
+    # 精灵编号
+    pet_no = '075'
 
 
-    def __str__(self):
-        return super().__str__() + ':' + self.name
-
-class Onix(propets.Rock):
+class Onix(propets.PropInit):
     health_basic = 35
     attack_basic = 40
     defense_basic = 160
@@ -39,7 +56,4 @@ class Onix(propets.Rock):
     capture_rate = 45
     # 精灵编号
     pet_no = '095'
-
-
-    def __str__(self):
-        return super().__str__() + ':' + self.name
+    prop = ['rock', 'ground']

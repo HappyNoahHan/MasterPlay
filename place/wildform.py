@@ -29,18 +29,18 @@ class WildForm(placebase.Place):
                 if select_id == '1':
                     print("精灵在哪里呀...在哪里呀...")
                     time.sleep(3)
-                    try:
-                        wild_pet = wildpetlist.getWildPet(self.wild_pet_list)
-                        show.showPetStatus(wild_pet)
-                        print("你遇到了 %s ! lv: %s" % (wild_pet.name,wild_pet.level))
-                        if explore.explore(player,wild_pet):
-                            return self.showMap(player)
-                        else:
-                            print("无法继续战斗,请前往治疗")
-                            return self.showMap(player)
-                    except AttributeError:
-                        print("我在哪？我是谁？发生了什么？")
+                    #try:
+                    wild_pet = wildpetlist.getWildPet(self.wild_pet_list)
+                    show.showPetStatus(wild_pet)
+                    print("你遇到了 %s ! lv: %s" % (wild_pet.name,wild_pet.level))
+                    if explore.explore(player,wild_pet):
                         return self.showMap(player)
+                    else:
+                        print("无法继续战斗,请前往治疗")
+                        return self.showMap(player)
+                    #except AttributeError:
+                        #print("我在哪？我是谁？发生了什么？")
+                        #return self.showMap(player)
 
                 elif select_id == '2':
                     #训练师对战

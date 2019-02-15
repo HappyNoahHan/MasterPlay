@@ -81,10 +81,10 @@ def changePetWithNpc(player,condition,change_pet):
                     # 将交换的精灵加入图鉴
                     if change_pet.pet_no in handbook.pet_handbook_dict:
                         if handbook.pet_handbook_dict[change_pet.pet_no][2][0] == False:
-                            handbook.setHandBook(change_pet.pet_no, change_pet.name, change_pet.property,
+                            handbook.setHandBook(change_pet.pet_no, change_pet.name, change_pet.prop,
                                                  capture=[True])
                     else:
-                        handbook.setHandBook(change_pet.pet_no, change_pet.name, change_pet.property,
+                        handbook.setHandBook(change_pet.pet_no, change_pet.name, change_pet.prop,
                                              capture=[True])
                     return True
         else:

@@ -1,6 +1,6 @@
 from pets import propets
 
-class Magikarp(propets.Water):
+class Magikarp(propets.PropInit):
     health_basic = 20
     attack_basic = 10
     defense_basic = 55
@@ -17,11 +17,12 @@ class Magikarp(propets.Water):
     canEvolve = False
     # 精灵编号
     pet_no = '129'
+    prop = ['water']
 
     def __str__(self):
         return super().__str__() + ':' + self.name
 
-class Tentacool(propets.Water):
+class Tentacool(propets.PropInit):
     health_basic = 40
     attack_basic = 40
     defense_basic = 35
@@ -38,11 +39,12 @@ class Tentacool(propets.Water):
     canEvolve = False
     # 精灵编号
     pet_no = '072'
+    prop = ['water','poison']
 
     def __str__(self):
         return super().__str__() + ':' + self.name
 
-class Horsea(propets.Water):
+class Horsea(propets.PropInit):
     health_basic = 30
     attack_basic = 40
     defense_basic = 70
@@ -59,11 +61,12 @@ class Horsea(propets.Water):
     canEvolve = False
     # 精灵编号
     pet_no = '115'
+    prop = ['water']
 
     def __str__(self):
         return super().__str__() + ':' + self.name
 
-class Goldeen(propets.Water):
+class Goldeen(propets.PropInit):
     health_basic = 45
     attack_basic = 67
     defense_basic = 60
@@ -80,11 +83,12 @@ class Goldeen(propets.Water):
     canEvolve = False
     # 精灵编号
     pet_no = '118'
+    prop = ['water']
 
     def __str__(self):
         return super().__str__() + ':' + self.name
 
-class Staryu(propets.Water):
+class Staryu(propets.PropInit):
     health_basic = 30
     attack_basic = 45
     defense_basic = 55
@@ -101,6 +105,7 @@ class Staryu(propets.Water):
     canEvolve = False
     # 精灵编号
     pet_no = '120'
+    prop = ['water']
 
     def __str__(self):
         return super().__str__() + ':' + self.name

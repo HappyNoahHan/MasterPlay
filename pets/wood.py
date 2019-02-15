@@ -1,7 +1,7 @@
 import pets.propets
 import random
 
-class Oodish(pets.propets.Wood):
+class Oodish(pets.propets.PropInit):
     health_basic = 45
     attack_basic = 50
     defense_basic = 55
@@ -18,12 +18,10 @@ class Oodish(pets.propets.Wood):
     capture_rate = 255
     # 精灵编号
     pet_no = '043'
+    prop = ['wood','poison']
 
 
-    def __str__(self):
-        return super().__str__() + ':' + self.name
-
-class Bellsprout(pets.propets.Wood):
+class Bellsprout(pets.propets.PropInit):
     health_basic = 50
     attack_basic = 75
     defense_basic = 35
@@ -40,7 +38,4 @@ class Bellsprout(pets.propets.Wood):
     capture_rate = 255
     # 精灵编号
     pet_no = '069'
-
-
-    def __str__(self):
-        return super().__str__() + ':' + self.name
+    prop = [ 'wood','poison']

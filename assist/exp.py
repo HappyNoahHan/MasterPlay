@@ -68,12 +68,16 @@ def isLevelUp(obj):
         time.sleep(1)
 
         #判断是否学习可以学习新技能
-        if obj.level in obj.skill_tree:
-            realize_or_not =learnskill.learnSkill(obj,obj.skill_tree[obj.level])
+        try:
+            if obj.level in obj.skill_tree:
+                realize_or_not =learnskill.learnSkill(obj,obj.skill_tree[obj.level])
 
-            if realize_or_not == False:
-                print("技能已经领悟")
-                pass
+                if realize_or_not == False:
+                    print("技能已经领悟")
+                    pass
+        except AttributeError:
+            print("测试代码,该精灵未添加技能树")
+
 
         return isLevelUp(obj)
     else:

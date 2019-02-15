@@ -46,6 +46,7 @@ def detail(pet):
     print("="*30)
     print("%s 的详细信息:" % pet.name)
     #性格 等等等后续
+    print(pet)
     print("技能列表:")
     for key,skill in pet.skill_list.items():
         print(key,':',skill.show_name,'PP:',skill._pp_value_max, end=" || ")

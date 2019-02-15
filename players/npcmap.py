@@ -80,20 +80,21 @@ petgym_npc_list_for_green_town = {
                         prize={'money':150},
                         is_npc = False,
                         has_riddle = True,
-                        pet_list=(rock.Geodude(level=8,skill_list={'1':skill.DownRock(),'2':skill.Strike()},has_trainer=None),)
+                        pet_list=(rock.Geodude(level=8,skill_list={'1':skill.DownRock()},has_trainer=None),)
                         ),True],
     '2':[trainer.Trainer(name='绿叶学徒B',info='我和你练练',
                         can_challenge=True,
                         prize={'money':150},
                         is_npc = False,
                         has_riddle = True,
-                        pet_list=(wood.Oodish(level=8,skill_list={'1':skill.azorLeaf()},has_trainer=None),)
+                        pet_list=(rock.Geodude(level=9,skill_list={'1':skill.DownRock(),'2':skill.RockFall()},has_trainer=None),)
                         ),False],
     '3':[trainer.Trainer(name='绿叶馆长',info='我最讨厌鸟儿',
                          can_challenge=True,
                          prize={'money':150,'绿叶徽章': 1},
                          is_npc=False,
-                         pet_list=(wood.Oodish(level=9,skill_list={'1':skill.azorLeaf()},has_trainer=None),
+                         pet_list=(rock.Geodude(level=9,skill_list={'1':skill.DownRock(),'2':skill.RockFall()},has_trainer=None),
+                                   rock.Onix(level=10,skill_list={'1':skill.DownRock(),'2':skill.Strike(),'3':skill.Earthquake()},has_trainer=None)
                                    )),False],
     '4':[trainer.Trainer(name='守馆老人',info="带一个草系宝贝来,不然你会悲剧的~"),True],
 }

@@ -1,6 +1,6 @@
 import pets.propets
 
-class Pidgey(pets.propets.Fly):
+class Pidgey(pets.propets.PropInit):
     health_basic = 40
     attack_basic = 45
     defense_basic = 40
@@ -20,8 +20,4 @@ class Pidgey(pets.propets.Fly):
 
     # 精灵编号
     pet_no = '026'
-
-
-
-    def __str__(self):
-        return super().__str__() + ':' + self.name
+    prop = ['fly']

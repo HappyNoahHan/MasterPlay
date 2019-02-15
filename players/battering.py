@@ -8,7 +8,7 @@ import random,time
 def battleing(player,wild_pet,change_pet = False):
     #将未发现的精灵加入图鉴
     if wild_pet.pet_no not in handbook.pet_handbook_dict:
-        handbook.setHandBook(wild_pet.pet_no,wild_pet.name,wild_pet.property)
+        handbook.setHandBook(wild_pet.pet_no,wild_pet.name,wild_pet.prop)
     #谁获得基础点数
     wild_pet.basic_point_getter = player.pet_list['Master']
     print("=" * 30)

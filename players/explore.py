@@ -39,15 +39,14 @@ def explore(player,wild_pet):
                     if exp.isLevelUp(master_pet):
                         show.showPetStatus(master_pet)
                     # 进化判断
-                    if master_pet.canEvolve:
-                        if master_pet.level >= master_pet.evolve_level:
-                            print("精灵是否进化！ 1 yes  2 no ")
-                            isEvo = input(">")
-                            if int(isEvo) == 1:
-                                player.setPet('Master', evolve.isEvolve(master_pet))
+                    if evolve.canEvolveOrNot(master_pet):
+                        print("精灵是否进化！ 1 yes  2 no ")
+                        isEvo = input(">")
+                        if int(isEvo) == 1:
+                            player.setPet('Master', evolve.isEvolve(master_pet))
 
-                            else:
-                                print("精灵停止进化！")
+                        else:
+                            print("精灵停止进化！")
         else:
             player.battle_run_success = False
         return True
@@ -88,15 +87,16 @@ def trainerVS(player,trainer):
                 if exp.isLevelUp(get_exp_pet):
                     show.showPetStatus(get_exp_pet)
                 # 进化判断
-                if get_exp_pet.canEvolve:
-                    if get_exp_pet.level >= get_exp_pet.evolve_level:
-                        print("精灵是否进化！ 1 yes  2 no ")
-                        isEvo = input(">")
-                        if int(isEvo) == 1:
-                            player.setPet('Master', evolve.isEvolve(get_exp_pet))
+                if evolve.canEvolveOrNot(get_exp_pet):
 
-                        else:
-                            print("精灵停止进化！")
+                    print("精灵是否进化！ 1 yes  2 no ")
+                    isEvo = input(">")
+                    if int(isEvo) == 1:
+                        player.setPet('Master', evolve.isEvolve(get_exp_pet))
+
+                    else:
+                        print("精灵停止进化！")
+
         else:
             player.battle_run_success = False
     else:

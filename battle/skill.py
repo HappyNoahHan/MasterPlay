@@ -1,5 +1,5 @@
 '''
-#skill_code 技能代号  A  火系  N 普通系 B 木系 C 虫系 D 水系 S 光  T 黑暗 E 地面 F 飞行 G 龙  R 岩石
+#skill_code 技能代号  A  火系  N 普通系 B 木系 C 虫系 D 水系 S 光  T 黑暗 E 地面 F 飞行 G 龙  R 岩石 P 毒
 #skill_mode 技能类型   0001 伤害技能 0002 防御临时提升 003 debuff 技能
                      0004 施加状态技能  0005 移除状态技能
                      0008 生命恢复 0009 属性亲和，同属性技能伤害加成
@@ -324,9 +324,19 @@ class RockFall(damageSkill):
     hit_rate = 90
     spell_skill = False
 
-
     def addStatus(self,obj):
         if rancom.statusRandom(self.addition_status_rate):
             if 'ST004' not in obj.status:
                 obj.status.append('ST004')
                 print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict['ST004']))
+
+class Earthquake(damageSkill):
+    def __init__(self):
+        super().__init__(10)
+
+    show_name = '地震'
+    skill_code = 'E001'
+    skill_power = 100
+    property = 'ground'
+    skill_info = '引发地震攻击对面,威力超绝'
+    spell_skill = False
