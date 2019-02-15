@@ -44,6 +44,7 @@ class skill(object):
     effect_turns = 1
     property = 'normal'
     hit_rate = 100
+    addition_status_rate = 5
 
     def __str__(self):
         return self.skill_info
@@ -150,7 +151,6 @@ class fireBall(damageSkill):
     property = 'fire'
     skill_info = '使用火球术攻击，威力一般,有5%的几率使对手进入灼伤状态'
     hit_rate = 80
-    addition_status_rate = 5
 
     def addStatus(self,obj):
         if rancom.statusRandom(self.addition_status_rate):
@@ -311,3 +311,22 @@ class DownRock(damageSkill):
     skill_info = '使用落岩攻击，威力一般'
     hit_rate = 100
     spell_skill = False
+
+class RockFall(damageSkill):
+    def __init__(self):
+        super().__init__(10)
+
+    show_name = '岩崩'
+    skill_code = 'R002'
+    skill_power = 75
+    property = 'rock'
+    skill_info = '将大岩石撞向对面,有一定的几率会使对方畏惧'
+    hit_rate = 90
+    spell_skill = False
+
+
+    def addStatus(self,obj):
+        if rancom.statusRandom(self.addition_status_rate):
+            if 'ST004' not in obj.status:
+                obj.status.append('ST004')
+                print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict['ST004']))

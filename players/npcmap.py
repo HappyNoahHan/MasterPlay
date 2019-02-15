@@ -95,5 +95,5 @@ petgym_npc_list_for_green_town = {
                          is_npc=False,
                          pet_list=(wood.Oodish(level=9,skill_list={'1':skill.azorLeaf()},has_trainer=None),
                                    )),False],
-    '4':[trainer.Trainer(name='守馆老人',info="别看岩石很坚硬,其实又怕火又怕电,还很怕鸟儿~"),True],
+    '4':[trainer.Trainer(name='守馆老人',info="带一个草系宝贝来,不然你会悲剧的~"),True],
 }

@@ -21,6 +21,18 @@ def checkBuffBeforeBattle(obj_attack,obj_defense):
     if obj_defense.buff_dict:
         buff.buffCount(obj_defense)
 
+def checkBuffAfterBattle(obj_attack):
+    '''
+    战后buff 计算
+    :param obj_attack:
+    :param obj_defense:
+    :return:
+    '''
+    if obj_attack.debuff_dict:
+        buff.damageDebuffCount(obj_attack) #行动后debuff 计算
+
+    if obj_attack.property_buff:
+        buff.proBuffindex(obj_attack) #属性增强buff 次数计算
 
 def getBasePoint(obj_attack,obj_defense):
     '''

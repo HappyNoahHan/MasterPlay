@@ -7,12 +7,12 @@ from battle import skill
 if __name__ == '__main__':
     #for test
     a = fire.Charmander(level=1,skill_list={'1':skill.fireBall()},has_trainer=True,autoAi=False)
-    b = fire.Charmeleon(level=10,skill_list={'1':skill.fireBall()},has_trainer=True,autoAi=False)
-    c = fire.Charmeleon(level=15,skill_list={'1':skill.fireBall(),'2':skill.fireSpin(),'3':skill.JetFlame()},has_trainer=True,autoAi=False)
+    b = fire.Charmeleon(level=5,skill_list={'1':skill.RockFall()},has_trainer=True,autoAi=False)
+    c = fire.Charmeleon(level=5,skill_list={'1':skill.fireBall(),'2':skill.fireSpin(),'3':skill.JetFlame()},has_trainer=True,autoAi=False)
     pet_list = {
-        'Master': c,
+        'Master': b,
         '1': a,
-        '2': b,
+        '2': c,
     }
     player = play.Player(name='小智',pet_list=pet_list)
 

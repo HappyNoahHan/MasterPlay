@@ -8,6 +8,7 @@ status_dict={
     'ST001' : status.Cauma(),
     'ST002' : status.Paralysis(),
     'ST003' : status.Sleeping(),
+    'ST004' : status.Shrink(),
 }
 
 
@@ -29,6 +30,7 @@ def checkParalysisOrNot(obj):
     '''
     if 'ST002' in obj.status:
         if status_dict['ST002'].statusEffect():
+            print("%s 处于麻痹状态,无法做出行动!" % obj.name)
             return True
     return False
 
@@ -44,6 +46,30 @@ def checkSleepingOrNot(obj):
             removeStatus(obj,'ST003')
             return False
         return True
+    return False
+
+def checkShrinkaOrNot(obj):
+    '''
+    检查畏缩状态
+    :param obj:
+    :return:
+    '''
+    if 'ST004' in obj.status:
+        if status_dict['ST004'].statusEffect():
+            print("%s 畏缩不前,没有做出任何动作！" % obj.name)
+            return True
+    return False
+
+def checkStatusBeforeBattle(obj):
+    if obj.status:
+        if checkParalysisOrNot(obj):
+            return True
+        if checkSleepingOrNot(obj):
+            return True
+        if checkShrinkaOrNot(obj):
+            return True
+    else:
+        print("%s 没有处于任何状态！" % obj.name)
     return False
 
 

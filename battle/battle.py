@@ -26,7 +26,7 @@ def damageCount(obj_defense,obj_attack,obj_skill):
     :model : 0001:伤害加成  0002： 防御临时提高
     '''
     #战斗前的buff
-    asscount.checkBuffBeforeBattle(obj_attack,obj_defense)
+    #asscount.checkBuffBeforeBattle(obj_attack,obj_defense)
     #道具检查
 
     if obj_skill.skill_model == '0001':
@@ -71,11 +71,8 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         for key,value in obj_attack.property_buff.items():
             print(key.show_name, ':', value)
 
-    if obj_attack.debuff_dict:
-        battle.buff.damageDebuffCount(obj_attack) #行动后debuff 计算
-
-    if obj_attack.property_buff:
-        battle.buff.proBuffindex(obj_attack) #属性增强buff 次数计算
+    #debuff  增幅buff 次数
+    asscount.checkBuffAfterBattle(obj_attack)
 
 
     if obj_defense.health <= 0: #战斗结束  debuff不会死亡
@@ -137,18 +134,16 @@ def battleRun(player,obj1,obj2):
             if not assist.ppvalue.ppCount(obj1.skill_list[skill_number]):
                 print("指令失败,重新选择！")
                 return battleRun(player,obj1, obj2)
+        # 战斗前的buff
+        asscount.checkBuffBeforeBattle(obj1, obj2)
+        # 道具检查
         assist.show.useSkill(obj1,obj1.skill_list[skill_number])
         print(obj1.skill_list[skill_number]) #显示技能描述
-        #检查时否是睡眠状态
-        if statusmap.checkSleepingOrNot(obj1):
-            print("%s 处于睡眠状态，无法使用技能！" % obj1.name)
+        #检查状态
+        if statusmap.checkStatusBeforeBattle(obj1):
             assist.show.printTurn(obj2)
             return battleRun(player,obj2,obj1)
-        #状态判断是否可以行动
-        if statusmap.checkParalysisOrNot(obj1):
-            print("%s 没有成功使用技能" % obj1.name)
-            assist.show.printTurn(obj2)
-            return battleRun(player,obj2,obj1)
+
         #命中与否判断
         #判断命中是否提高
         hit_up = propmap.checkCarryPropForHit(obj1)
@@ -158,6 +153,7 @@ def battleRun(player,obj1,obj2):
 
 
         if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number].hit_rate + hit_up,obj1,obj2,obj2.dodge + dodge_up):
+            asscount.checkBuffAfterBattle(obj1)
             assist.show.printTurn(obj2.name)
             return battleRun(player,obj2,obj1)
 
