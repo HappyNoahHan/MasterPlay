@@ -110,12 +110,30 @@ class propSkill(skill):
 
 
 class scream(damageSkill):
-    show_name = '尖叫'
+    def __init__(self):
+        super().__init__(35)
+    show_name = '起风'
     skill_code = 'F001'
     skill_power = 40
     property = 'fly'
-    skill_info = '伤害加成20%'
+    skill_info = '用翅膀刮起风攻击对方'
     spell_skill = False
+
+class WingAttack(scream):
+    show_name = '翅膀攻击'
+    skill_code = 'F002'
+    skill_power = 60
+    skill_info = '用翅膀攻击对方'
+
+class AirCut(damageSkill):
+    def __init__(self):
+        super().__init__(15)
+    show_name = '空气斩'
+    skill_code = 'F003'
+    property = 'fly'
+    skill_power = 75
+    hit_rate = 95
+    skill_info = "将空气压缩成刀再攻击对面,威力强大"
 
 class Strike(damageSkill):
     def __init__(self):
@@ -126,9 +144,19 @@ class Strike(damageSkill):
     skill_info = '用身体撞击对方'
     spell_skill = False
 
+class Grab(damageSkill):
+    def __init__(self):
+        super().__init__(pp=35)
+    show_name = '抓'
+    skill_code = 'N002'
+    skill_power = 40
+    skill_info = '用爪子攻击对方'
+    spell_skill = False
+
+
 class steadiness(buffSkill):
     show_name = '稳固'
-    skill_code = 'N002'
+    skill_code = 'N099'
     index_per = 0.2
     effect_turns = 3
     skill_info = "防御临时上升20%，持续3回合"
@@ -136,7 +164,7 @@ class steadiness(buffSkill):
 
 class strengthCre(buffSkill):
     show_name = '力量增幅'
-    skill_code = 'N003'
+    skill_code = 'N100'
     index_per = 0.3
     effect_turns = 3
     skill_info = "力量增幅,持续3回合"

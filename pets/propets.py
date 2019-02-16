@@ -6,7 +6,7 @@ class PropInit(pets.pet.Pet):
         super().__init__(level=level,skill_list=skill_list,exp_for_current=exp_for_current,carry_prop=carry_prop,base_points_list=base_points_list,has_trainer=has_trainer,autoAi=autoAi)
 
     name = '未知'
-    style = '未知'
+    kind = '未知'
 
     def __str__(self):
-        return self.style + '神奇宝贝' + ':' + self.name
+        return self.kind + '神奇宝贝' + ':' + self.name

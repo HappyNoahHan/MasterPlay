@@ -11,6 +11,7 @@ class Charmander(pets.propets.PropInit):
     speed_basic = 65
 
     name = '小火龙'
+    style = '蜥蜴'
     talent = 'TA001' #天赋 eg：火属性技能伤害+10% 后续nnn版本 做一张map 天赋技能树 各种类型
 
     basic_exp_value = 51

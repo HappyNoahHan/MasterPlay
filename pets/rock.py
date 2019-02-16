@@ -9,7 +9,7 @@ class Geodude(propets.PropInit):
     speed_basic = 20
 
     name = '小拳石'
-    style = '宝石'
+    kind = '宝石'
     #talent = 'TA002'
     basic_exp_value = 60
 
@@ -33,7 +33,6 @@ class Graveler(Geodude):
     basic_exp_value = 137
 
     can_get_base_point = 2
-    can_get_base_point_type = 'defense'
     capture_rate = 120
     # 精灵编号
     pet_no = '075'
