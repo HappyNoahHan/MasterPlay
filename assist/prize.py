@@ -1,4 +1,4 @@
-from  props import petballmap,propmap,drugmap
+from  props import petballmap,propmap,drugmap,assmap
 from battle import skilllistmap
 import random
 
@@ -31,6 +31,8 @@ def putPrizeToBag(item):
         drugmap.getDrug(item)
     elif item in skilllistmap.skill_dict:
         skilllistmap.getSkill(item)
+    elif item in assmap.ass_dict:
+        assmap.getAss(item)
     else:
         print("未知物品！")
 
@@ -50,6 +52,8 @@ def getPrize(player,dict):
                 drugmap.getDrug(key)
             elif key in skilllistmap.skill_dict:
                 skilllistmap.getSkill(key)
+            elif key in assmap.ass_dict:
+                assmap.getAss(key)
             elif key in player.badge_dict:
                 print("获得了 %s ！" % key)
                 player.setBadge(key)

@@ -67,7 +67,7 @@ shop_npc_list_for_green_town = {
 
 hospital_npc_list_for_green_town = {
     '1': npc.Hosptial(name='小琪小姐',info='我是绿叶镇的治疗师,你可能见过我的很多姐妹。'),
-    '2': trainer.Trainer(name='年老的长者',info='我的孙子也像你这么大...',prize={'小型回复药剂':1}),
+    '2': trainer.Trainer(name='年老的长者',info='我的孙子也像你这么大...',prize={'火之石':1}),
     '3': trainer.Trainer(name='喷火龙爱好者',info='喷火龙Max！！！',
                      pet_change=fly.Pidgey(level=99,skill_list={'1': skill.scream()},has_trainer=True,autoAi=False),
                      change_condition='波波'),

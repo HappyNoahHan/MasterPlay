@@ -2,7 +2,7 @@
     背包
 '''
 from assist import show
-from props import propmap,drugmap,petballmap,handbook
+from props import propmap,drugmap,petballmap,handbook,assmap
 from battle import skilllistmap,learnskill
 from players import price
 
@@ -58,6 +58,8 @@ def showBag(player):
         return showDrugBag(player,drugmap.drug_bag_dict)
     elif select_id == '3':
         return showPetBallBag(player,petballmap.petball_bag_dict)
+    elif select_id == '5':
+        return showAssBag(player,assmap.ass_bag_dict)
     elif select_id == '0':
         return False
     else:
@@ -258,6 +260,36 @@ def showPetBallBag(player,dict):
         print("指令错误！")
         return showPetBallBag(player, dict)
 
+def showAssBag(player,dict):
+    print("=" * 30)
+    print("辅助界面")
+    print("=" * 30)
+    for key,value in dict.items():
+        print(key,value[0].name,value[1])
+    print('0','返回上级！')
+    print("请选择道具")
+    select_id = input(">")
+    try:
+        if int(select_id) in dict:
+            pet,pet_id = selectPetAndID(player)
+            if dict[int(select_id)][0].use(player,pet,pet_id):
+                dict[int(select_id)][1] -= 1
+                if dict[int(select_id)][1] == 0:
+                    dict.pop(int(select_id))
+            else:
+                print("%s 没有做出任何回应！" % pet.name)
+            return showBag(player)
+        elif select_id == '0':
+            print("返回上级")
+            return showBag(player)
+        else:
+            print("指令错误！")
+            return showAssBag(player,dict)
+    except ValueError:
+        print("指令错误！")
+        return showAssBag(player, dict)
+
+
 def selectPet(player):
     print("请选择使用的精灵！")
     for key, pet in player.pet_list.items():
@@ -270,6 +302,19 @@ def selectPet(player):
     else:
         print("指令错误！")
         return selectPet(player)
+
+def selectPetAndID(player):
+    print("请选择使用的精灵！")
+    for key, pet in player.pet_list.items():
+        print(key, ":", pet.name)
+    pet_id = input(">")
+    if pet_id == '0':
+        pet_id = 'Master'
+    if pet_id in player.pet_list:
+        return player.pet_list[pet_id],pet_id
+    else:
+        print("指令错误！")
+        return selectPetAndID(player)
 
 
 def useOrSell():

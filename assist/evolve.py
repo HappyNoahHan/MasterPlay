@@ -5,20 +5,24 @@
 
 from pets import fire,rock
 from assist import  show
+import time
 
 evolve_dict={
-    '小火龙': [fire.Charmeleon,11,'levelup'],
-    '小拳石': [rock.Graveler,16,'evolvestoneup']
+    '小火龙': [fire.Charmeleon,11,'level_up'],
+    '小拳石': [rock.Graveler,'岩之心','stone_up'],
 }
-def canEvolveOrNot(obj):
+def canEvolveOrNot(obj,stone=None):
     '''
     判断是否又进化形态
     :param obj:
     :return:
     '''
     if obj.name in evolve_dict:
-        if evolve_dict[obj.name][2] == 'levelup':
+        if evolve_dict[obj.name][2] == 'level_up':
             if obj.level >= evolve_dict[obj.name][1]:
+                return True
+        elif evolve_dict[obj.name][2] == 'stone_up':
+            if stone == evolve_dict[obj.name][1]:
                 return True
 
     return False
@@ -53,7 +57,10 @@ def isEvolve(obj):
     new_obj.spell_defense_indi = obj.spell_defense_indi
     new_obj.speed_indi = obj.speed_indi
 
+    print("你的 %s 进化成了 %s ！" % (obj.name, new_obj.name))
+    time.sleep(5)
     evolveUp(obj,new_obj)
+
     show.showPetStatus(new_obj)
     return new_obj
 
