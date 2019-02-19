@@ -6,7 +6,7 @@ from battle import skill
 
 if __name__ == '__main__':
     #for test
-    a = fire.Charmander(level=10,skill_list={'1':skill.Earthquake()},has_trainer=True,autoAi=False)
+    a = fire.Charmander(level=5,skill_list={'1':skill.fireBall()},has_trainer=True,autoAi=False)
     c = fire.Charmeleon(level=5,skill_list={'1':skill.RockFall()},has_trainer=True,autoAi=False)
     b = wood.Bellsprout(level=15,skill_list={'1':skill.Earthquake()},has_trainer=True,autoAi=False)
     pet_list = {

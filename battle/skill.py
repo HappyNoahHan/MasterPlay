@@ -3,6 +3,7 @@
 #skill_mode 技能类型   0001 伤害技能 0002 防御临时提升 003 debuff 技能
                      0004 施加状态技能  0005 移除状态技能
                      0008 生命恢复 0009 属性亲和，同属性技能伤害加成
+                     0010 伤害并恢复生命
                      --- 2.0
                      buff 类 与 debuff 类 集合
                      buff  标记attack denfense 法强 法防 提升 统一  0002 buff类技能
@@ -44,7 +45,7 @@ class skill(object):
     effect_turns = 1
     property = 'normal'
     hit_rate = 100
-    addition_status_rate = 5
+
 
     def __str__(self):
         return self.skill_info
@@ -53,14 +54,20 @@ class skill(object):
         return self.property
 
 class damageSkill(skill):
-    def __init__(self,pp=30):
+    def __init__(self,pp=30,status=None,addition_status_rate = 100,spell_skill=True):
         super().__init__(pp)
         self.skill_model = '0001'
-
-    spell_skill = True #特殊攻击类型 物理攻击类型
+        self.status = status
+        self.addition_status_rate = addition_status_rate
+        self.spell_skill = spell_skill #特殊攻击类型 True 默认 物理攻击类型 False
 
     def addStatus(self,obj):
-        pass
+        if self.status != None:
+            if rancom.statusRandom(self.addition_status_rate):
+                if self.status not in obj.status:
+                    obj.status.append('ST001')
+                    print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict[self.status]))
+
 
 class buffSkill(skill):
     def __init__(self,pp=30):
@@ -108,16 +115,20 @@ class propSkill(skill):
         super().__init__(pp)
         self.skill_model = '0009'
 
+class suckBloodSkill(skill):
+    def __init__(self,pp=15):
+        super().__init__(pp)
+        self.skill_model = '0010'
+
 
 class scream(damageSkill):
     def __init__(self):
-        super().__init__(35)
+        super().__init__(35,spell_skill=False)
     show_name = '起风'
     skill_code = 'F001'
     skill_power = 40
     property = 'fly'
     skill_info = '用翅膀刮起风攻击对方'
-    spell_skill = False
 
 class WingAttack(scream):
     show_name = '翅膀攻击'
@@ -137,21 +148,19 @@ class AirCut(damageSkill):
 
 class Strike(damageSkill):
     def __init__(self):
-        super().__init__(pp=35)
+        super().__init__(pp=35,spell_skill=False)
     show_name = '撞击'
     skill_code = 'N001'
     skill_power = 40
     skill_info = '用身体撞击对方'
-    spell_skill = False
 
 class Grab(damageSkill):
     def __init__(self):
-        super().__init__(pp=35)
+        super().__init__(pp=35,spell_skill=False)
     show_name = '抓'
     skill_code = 'N002'
     skill_power = 40
     skill_info = '用爪子攻击对方'
-    spell_skill = False
 
 
 class steadiness(buffSkill):
@@ -172,19 +181,13 @@ class strengthCre(buffSkill):
 
 class fireBall(damageSkill):
     def __init__(self,pp=25):
-        super().__init__(pp)
+        super().__init__(pp,status='ST001')
     show_name = '火球'
     skill_code = 'A001'
     skill_power = 40
     property = 'fire'
     skill_info = '使用火球术攻击，威力一般,有5%的几率使对手进入灼伤状态'
     hit_rate = 80
-
-    def addStatus(self,obj):
-        if rancom.statusRandom(self.addition_status_rate):
-            if 'ST001' not in obj.status:
-                obj.status.append('ST001')
-                print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict['ST001']))
 
 class JetFlame(fireBall):
     def __init__(self):
@@ -330,19 +333,18 @@ class WaterCannon(damageSkill):
 
 class DownRock(damageSkill):
     def __init__(self,pp=35):
-        super().__init__(pp)
+        super().__init__(pp,spell_skill=False)
 
     show_name = '落岩'
     skill_code = 'R001'
     skill_power = 40
     property = 'rock'
     skill_info = '使用落岩攻击，威力一般'
-    hit_rate = 100
-    spell_skill = False
+
 
 class RockFall(damageSkill):
     def __init__(self):
-        super().__init__(10)
+        super().__init__(10,status='ST004',addition_status_rate=5,spell_skill=False)
 
     show_name = '岩崩'
     skill_code = 'R002'
@@ -350,21 +352,13 @@ class RockFall(damageSkill):
     property = 'rock'
     skill_info = '将大岩石撞向对面,有一定的几率会使对方畏惧'
     hit_rate = 90
-    spell_skill = False
-
-    def addStatus(self,obj):
-        if rancom.statusRandom(self.addition_status_rate):
-            if 'ST004' not in obj.status:
-                obj.status.append('ST004')
-                print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict['ST004']))
 
 class Earthquake(damageSkill):
     def __init__(self):
-        super().__init__(10)
+        super().__init__(10,spell_skill=False)
 
     show_name = '地震'
     skill_code = 'E001'
     skill_power = 100
     property = 'ground'
     skill_info = '引发地震攻击对面,威力超绝'
-    spell_skill = False

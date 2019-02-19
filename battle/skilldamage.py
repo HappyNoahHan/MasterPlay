@@ -120,17 +120,17 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
 
 
     damage = round(basic_damage * pro_buff_index * attr_index_number * skill_prop_match_obj_prop)
-
+    print("基础伤害:",damage)
     #战斗中天赋计算
     if obj_attack.talent != None:
         if talentmap.checkTalent(obj_attack,'middle'):
             damage = talentmap.talentEffectMiddle(obj_attack,skill,damage)
-            print(damage)
+            print("天赋加成伤害",damage)
 
     #战斗后敌方状态加成
     if obj_defense.status:
         damage = statusmap.checkStatusAfterBattle(obj_defense,skill,damage)
-        print(damage)
+        print("状态加成伤害",damage)
 
     if damage > 0:
         obj_defense.health -= damage
