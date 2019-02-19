@@ -9,6 +9,7 @@ from props import propmap
 class Prop(object):
     show_name = '道具'
     info = '可携带道具'
+    up_type = None
 
     def __str__(self):
         return self.info
@@ -69,3 +70,13 @@ class SkillHitDownProp(Prop):
 
     def propCarry(self):
         return self.dodge
+
+class ExpUpMathine(Prop):
+    def __init__(self,show_name=None,up_rate=0.5):
+        self.info = '经验加成道具'
+        self.prop_type = 'exp'
+        self.up_rate = up_rate
+        self.show_name = show_name
+
+    def propCarry(self):
+        return self.up_rate

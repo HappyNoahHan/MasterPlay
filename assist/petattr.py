@@ -1,3 +1,4 @@
+from functools import reduce
 attr_map_dict ={
     #属性克制表
     'normal':{'rock':0.5,'steel':0.5,'ghost':0},
@@ -30,4 +31,5 @@ def getAttrMap(obj_skill,obj):
         print("测试代码,属性克制类型未添加！")
         restrain_amendment.append(1)
 
-    return max(restrain_amendment)
+    #匿名函数+reduce 得到个元素乘积
+    return reduce(lambda x,y:x*y,restrain_amendment)

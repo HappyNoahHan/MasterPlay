@@ -1,8 +1,5 @@
-from pets import pet, wood, fire, fly
-from assist import cap,evolve,show
+from assist import cap,show
 from battle import learnskill
-import math
-import random
 import time
 
 
@@ -18,7 +15,7 @@ def getExpForUp(lv):
         return 1
 
 
-def getBattleSuccessExp(player,obj,exp_basic = 1,ai_index=1):
+def getBattleSuccessExp(player,obj,exp_basic = 1,ai_index=1,carry_prop=1):
     '''
     战斗获胜经验
     :param lv:
@@ -33,6 +30,7 @@ def getBattleSuccessExp(player,obj,exp_basic = 1,ai_index=1):
 
     print("经验基数",exp_basic)
     print("调整基数",ai_index)
+    print("经验学习机器基数",carry_prop)
 
     #后续版本 随身道具
     #if withExpfruit == True:
@@ -40,7 +38,7 @@ def getBattleSuccessExp(player,obj,exp_basic = 1,ai_index=1):
     #else:
     #    fruit_index = 1
 
-    got_exp = int((obj.level * obj.basic_exp_value)/7 * ai_index * exp_basic)
+    got_exp = int((obj.level * obj.basic_exp_value)/7 * ai_index * exp_basic * carry_prop)
 
     return got_exp
 

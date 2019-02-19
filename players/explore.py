@@ -1,6 +1,7 @@
 from players import battering
 from assist import show,exp,evolve,life
 from battle import asscount
+from props import propmap
 def explore(player,wild_pet):
     '''
     野外探险
@@ -68,6 +69,8 @@ def trainerVS(player,trainer):
     if battering.vsBattleing(player,trainer,challenge_list):
         if player.battle_run_success == False:
             for get_exp_pet in player.battle_pet_list:
+                #检查是否携带学习机器
+                exp_up = propmap.checkCarryPropForExpUp(get_exp_pet)
                 # 清除buff
                 get_exp_pet.buff_dict.clear()
                 get_exp_pet.property_buff.clear()
@@ -80,7 +83,7 @@ def trainerVS(player,trainer):
                         asscount.getBasePoint(get_exp_pet, pet)
                     # 战斗结束之后结算
                     # 经验值计算
-                    got_exp += exp.getBattleSuccessExp(player, pet)
+                    got_exp += exp.getBattleSuccessExp(player, pet,carry_prop=exp_up)
                 print("%s 获得 %s 经验值" % (get_exp_pet.name, got_exp))
                 get_exp_pet.exp_for_current += got_exp
 

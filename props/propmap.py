@@ -5,12 +5,14 @@ prop_dict ={
     '火焰之心': prop.SkillPowerUpProp(pety='fire',power= 30,show_name='火焰之心'),
     '聚焦之眼': prop.SkillHitUpProp(hit_up=40,show_name='聚焦之眼'),
     '五彩迷光': prop.SkillHitDownProp(dodge=10,show_name='五彩迷光'),
+    '学习机器': prop.ExpUpMathine(show_name='学习机器'),
 }
 
 #背包概念 名称 数量
 prop_bag_dict={
     1:[prop_dict['攻击之爪'],1],
-    #2:[prop_dict['火焰之心'],2],
+    2:[prop_dict['学习机器'],1],
+    3:[prop_dict['五彩迷光'],1]
 }
 
 
@@ -56,6 +58,13 @@ def checkCarryPropFoeDodge(obj):
         if obj.carry_prop.prop_type == 'dodge':
             return obj.carry_prop.propCarry()
     return 0
+
+def checkCarryPropForExpUp(obj):
+    exp_up = 1
+    if obj.carry_prop != None:
+        if obj.carry_prop.prop_type == 'exp':
+            return obj.carry_prop.propCarry() + exp_up
+    return exp_up
 
 def getProp(prop_name,number = 1):
     print("获得了 %s X %d !" % (prop_name,number))
