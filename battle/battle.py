@@ -55,7 +55,7 @@ def damageCount(obj_defense,obj_attack,obj_skill):
 
     elif obj_skill.skill_model == '0004':
         if obj_skill.status.status_code not in obj_defense.status:
-            obj_defense.status.append(obj_skill.status.status_code)
+            obj_defense.setStatus(obj_skill.status.status_code)
             print(obj_defense.status)
 
     elif obj_skill.skill_model == '0005':
@@ -154,6 +154,11 @@ def battleRun(player,obj1,obj2):
             if not assist.ppvalue.ppCount(obj1.skill_list[skill_number]):
                 print("指令失败,重新选择！")
                 return battleRun(player,obj1, obj2)
+        #战斗前检查是否中毒  中毒死亡
+        if not statusmap.checkPoisoning(obj1):
+            assist.show.petDie(obj1.name)
+            assist.show.battleOver()
+            return True
         # 战斗前的buff
         asscount.checkBuffBeforeBattle(obj1, obj2)
         # 道具检查

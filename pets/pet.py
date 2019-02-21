@@ -66,7 +66,7 @@ class Pet(object):
         self.skill_list = skill_list
         self.exp_for_current = exp_for_current
         self.realize_skill_list = [] #已经领悟的技能表
-        self.status = [] #状态表
+        self.status = {} #状态表
         self.carry_prop = carry_prop
         #闪避
         self.dodge = 0
@@ -144,6 +144,12 @@ class Pet(object):
 
     def setProBuff(self,key,value):
         self.property_buff[key] = value
+
+    def setStatus(self,key,value=1):
+        self.status[key] = value
+
+    def removeStatus(self,key):
+        self.status.pop(key)
 
 
 

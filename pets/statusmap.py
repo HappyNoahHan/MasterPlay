@@ -9,6 +9,7 @@ status_dict={
     'ST002' : status.Paralysis(),
     'ST003' : status.Sleeping(),
     'ST004' : status.Shrink(),
+    'ST005' : status.Poisoning(),
 }
 
 
@@ -74,6 +75,23 @@ def checkStatusBeforeBattle(obj):
         print("%s 没有处于任何状态！" % obj.name)
     return False
 
+def checkPoisoning(obj):
+    '''
+    检查是否中毒
+    :param obj:
+    :return:
+    '''
+    if 'ST005' in obj.status:
+        damage = status_dict['ST005'].statusEffect(obj.status['ST005'],obj._max_health)
+        print("%s 中毒损失了 %s HP" % (obj.name,damage))
+        obj.health -= damage
+        if obj.health <= 0:
+            return False
+        #obj._max_health -= damage
+        obj.status['ST005'] += 1
+
+    return True
+
 
 def removeStatus(obj,status_code):
     '''
@@ -89,7 +107,7 @@ def removeStatus(obj,status_code):
             obj.status.clear()
 
         if status_code in obj.status:
-            obj.status.remove(status_code)
+            obj.removeStatus(status_code)
 
         print("%s 当前状态：" % obj.name, obj.status)
 

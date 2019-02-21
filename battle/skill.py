@@ -65,8 +65,8 @@ class damageSkill(skill):
         if self.status != None:
             if rancom.statusRandom(self.addition_status_rate):
                 if self.status not in obj.status:
-                    obj.status.append(self.status)
-                    print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict[self.status]))
+                    obj.setStatus(self.status)
+                    print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict[self.status].status_show_name))
 
 
 class buffSkill(skill):
