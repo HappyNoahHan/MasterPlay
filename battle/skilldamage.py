@@ -132,9 +132,4 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
         damage = statusmap.checkStatusAfterBattle(obj_defense,skill,damage)
         print("状态加成伤害",damage)
 
-    if damage > 0:
-        obj_defense.health -= damage
-        print("造成了%s 的伤害" % damage)
-    else:
-        obj_defense.health -= 1
-        show.noDamage()
+    return damage

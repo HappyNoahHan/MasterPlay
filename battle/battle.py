@@ -31,7 +31,13 @@ def damageCount(obj_defense,obj_attack,obj_skill):
 
     if obj_skill.skill_model == '0001':
         pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
-        skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index)
+        damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index)
+        if damage > 0:
+            obj_defense.health -= damage
+            print("造成了%s 的伤害" % damage)
+        else:
+            obj_defense.health -= 1
+            assist.show.noDamage()
         obj_skill.addStatus(obj_defense) #附加状态
         print(obj_defense.status)
 
@@ -70,6 +76,20 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         obj_attack.setProBuff(obj_skill,[obj_skill.effect_turns,obj_skill.index_per])
         for key,value in obj_attack.property_buff.items():
             print(key.show_name, ':', value)
+
+    elif obj_skill.skill_model == '0010':
+        pro_buff_index = battle.buff.proBuffCount(obj_attack, obj_skill)
+        damage = skilldamage.skillDamage(obj_attack, obj_defense, obj_skill, pro_buff_index)
+        if damage > 0:
+            obj_defense.health -= damage
+            print("造成了%s 的伤害" % damage)
+        else:
+            obj_defense.health -= 1
+            assist.show.noDamage()
+        #obj_skill.addStatus(obj_defense)  # 吸取技能无附加状态
+        #print(obj_defense.status)
+        #吸取血量
+        assist.life.healthRecoverFromDamage(obj_attack,damage,obj_skill.suck_per)
 
     #debuff  增幅buff 次数
     asscount.checkBuffAfterBattle(obj_attack)

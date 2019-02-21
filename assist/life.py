@@ -5,13 +5,13 @@ def healthRecoverBySkill(obj,obj_skill):
     :param obj_skill:
     :return:
     '''
-    obj.health += round(obj._max_health * obj_skill.index_per)
+    recover_health = round(obj._max_health * obj_skill.index_per)
+    obj.health += recover_health
 
     if obj.health >= obj._max_health:
         obj.health = obj._max_health
 
-    print("生命恢复1次")
-
+    print("%s 恢复了 %s 点生命!" % (obj.name, recover_health))
 
 def healthRecoverMax(obj):
     '''
@@ -55,3 +55,12 @@ def restore(pet):
 
     for key,skill in pet.skill_list.items():
         skill.pp_value = skill._pp_value_max
+
+def healthRecoverFromDamage(obj,damage,recover_per):
+    recover_health = round(damage * recover_per)
+
+    obj.health += recover_health
+    if obj.health >= obj._max_health:
+        obj.health = obj._max_health
+
+    print("%s 吸取了 %s 点生命！" % (obj.name,recover_health))

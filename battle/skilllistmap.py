@@ -19,6 +19,7 @@ skill_dict = {
     'B003': battle.skill.lifeRecovery,
     'B004': battle.skill.lifeChains,
     'B005': battle.skill.vinesTied,
+    'B006': battle.skill.Assimilate,
     'S001': battle.skill.illuminatiom,
     'S002': battle.skill.HolyLight,
     'T001': battle.skill.disperse,

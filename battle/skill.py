@@ -116,9 +116,12 @@ class propSkill(skill):
         self.skill_model = '0009'
 
 class suckBloodSkill(skill):
-    def __init__(self,pp=15):
+    def __init__(self,pp=15,spell_skill=True,suck_per = 0.5):
         super().__init__(pp)
         self.skill_model = '0010'
+        self.spell_skill = spell_skill
+        self.suck_per = suck_per
+        self.stauts = status
 
 
 class scream(damageSkill):
@@ -254,6 +257,16 @@ class vinesTied(debuffSkill):
     property = 'wood'
     effect_turns = 3
     skill_info = "捆绑，持续性收到10%气血的伤害"
+
+class Assimilate(suckBloodSkill):
+    def __init__(self,pp=15):
+        super().__init__(pp)
+
+    show_name = '吸取'
+    skill_code = 'B006'
+    property = 'wood'
+    skill_info = "吸取对方回复自己的生命"
+    skill_power = 40
 
 class illuminatiom(removeDebuffSkill):
     def __init__(self,pp=20):
