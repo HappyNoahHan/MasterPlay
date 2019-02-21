@@ -26,7 +26,7 @@ class Cauma(Status):
         return damage
 
 class Paralysis(Status):
-    status_show_name = '麻痹'
+    status_show_name = '麻痹/混乱'
     status_code = 'ST002'
     status_info = '麻痹，有一定的几率无法使用技能'
 

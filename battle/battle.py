@@ -59,7 +59,7 @@ def damageCount(obj_defense,obj_attack,obj_skill):
             print(obj_defense.status)
 
     elif obj_skill.skill_model == '0005':
-        obj_skill.useSkill(obj_attack)
+        obj_skill.useSkill(obj_attack=obj_attack,obj_defense=obj_defense)
         print(obj_attack.status)
 
     #0006 - 0007 移除buff debuff
@@ -172,7 +172,7 @@ def battleRun(player,obj1,obj2):
         print("闪避提高",dodge_up)
 
 
-        if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number].hit_rate + hit_up,obj1,obj2,obj2.dodge + dodge_up):
+        if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number],obj1.skill_list[skill_number].hit_rate + hit_up,obj1,obj2,obj2.dodge + dodge_up):
             asscount.checkBuffAfterBattle(obj1)
             assist.show.printTurn(obj2.name)
             return battleRun(player,obj2,obj1)

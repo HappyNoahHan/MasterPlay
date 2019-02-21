@@ -1,6 +1,10 @@
 import random
 
-def hitOrNot(rate,obj_attack,obj_defense,dodge):
+def hitOrNot(skill,rate,obj_attack,obj_defense,dodge):
+    if skill.skill_code in ['N004']:
+        print("%s 必定命中！" % skill.show_name)
+        return True
+
     if obj_attack.level > obj_defense.level:
         level_index = 1 + (obj_attack.level - obj_defense.level) / obj_attack.level
     else:

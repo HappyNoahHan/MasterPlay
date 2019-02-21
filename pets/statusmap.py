@@ -1,5 +1,5 @@
 from pets import status
-from assist import rancom
+import time
 '''
     eg:ST009   麻痹 技能无法使用
 '''
@@ -65,6 +65,8 @@ def checkStatusBeforeBattle(obj):
         if checkParalysisOrNot(obj):
             return True
         if checkSleepingOrNot(obj):
+            print("%s 睡眠中,无法使用技能~" % obj.name)
+            time.sleep(3)
             return True
         if checkShrinkaOrNot(obj):
             return True
@@ -82,13 +84,14 @@ def removeStatus(obj,status_code):
     '''
     #全能解状态药剂
     #print("使用解除剂")
-    if status_code == 'all':
-        obj.status.clear()
+    if status_code != None:
+        if status_code == 'all':
+            obj.status.clear()
 
-    if status_code in obj.status:
-        obj.status.remove(status_code)
+        if status_code in obj.status:
+            obj.status.remove(status_code)
 
-    print(obj.status)
+        print("%s 当前状态：" % obj.name, obj.status)
 
     return True
 

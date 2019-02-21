@@ -1,5 +1,5 @@
 '''
-#skill_code 技能代号  A  火系  N 普通系 B 木系 C 虫系 D 水系 S 光  T 黑暗 E 地面 F 飞行 G 龙  R 岩石 P 毒
+#skill_code 技能代号  A  火系  N 普通系 B 木系 C 虫系 D 水系 S 超能=光 I 冰 T 恶=黑暗 E 地面 F 飞行 G 龙  R 岩石 P 毒 Q鬼魂
 #skill_mode 技能类型   0001 伤害技能 0002 防御临时提升 003 debuff 技能
                      0004 施加状态技能  0005 移除状态技能
                      0008 生命恢复 0009 属性亲和，同属性技能伤害加成
@@ -65,7 +65,7 @@ class damageSkill(skill):
         if self.status != None:
             if rancom.statusRandom(self.addition_status_rate):
                 if self.status not in obj.status:
-                    obj.status.append('ST001')
+                    obj.status.append(self.status)
                     print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict[self.status]))
 
 
@@ -87,9 +87,20 @@ class statusSkill(skill):
         self.skill_model = '0004'
 
 class removeStatusSkill(skill):
-    def __init__(self,pp=30):
+    def __init__(self,pp=30,effecters='both',status=None):
         super().__init__(pp)
         self.skill_model = '0005'
+        self.effecters = effecters
+        self.status = status
+
+    def useSkill(self,obj_attack,obj_defense):
+        if self.effecters == 'attack':
+            statusmap.removeStatus(obj_attack, status_code=self.status)
+        elif self.effecters == 'defense':
+            statusmap.removeStatus(obj_defense,status_code=self.status)
+        else:
+            statusmap.removeStatus(obj_attack, status_code=self.status)
+            statusmap.removeStatus(obj_defense, status_code=self.status)
 
 class removeBuffSkill(skill):
     def __init__(self,pp=30):
@@ -165,6 +176,22 @@ class Grab(damageSkill):
     skill_power = 40
     skill_info = '用爪子攻击对方'
 
+class Chaos(statusSkill):
+    def __init__(self):
+        super().__init__(20)
+    skill_info = '使对方混乱，一定的几率无法成功使用技能'
+    skill_code = 'N003'
+    show_name = '混乱'
+    status = status.Paralysis()
+    hit_rate = 55
+
+class HighSpeedStar(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,spell_skill=False)
+    skill_info = "发射星星光线,攻击必定命中"
+    skill_code = 'N004'
+    show_name = '高速星星'
+    skill_power = 60
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -293,32 +320,48 @@ class threaten(debuffSkill):
     index_per = 0.1
     debuff_prop = 'SpellDefense'
 
+class Bite(damageSkill):
+    def __init__(self):
+        super().__init__(pp=25,status='ST004',spell_skill=False)
+
+    skill_info = "咬住对方,有一定的几率使对面畏缩"
+    skill_code = 'T003'
+    show_name = '咬住'
+    property = 'dark'
+    skill_power = 60
+
 class StunSpore(statusSkill):
     skill_info = '麻痹对手，使对手有一定的几率无法成功使用技能'
     skill_code = 'C001'
     show_name = '麻痹粉'
     status = status.Paralysis()
-    property = 'worm'
+    property = 'insect'
     hit_rate = 50
 
 class SleepingPowder(statusSkill):
-    skill_info = '是对手进入睡眠，无法行动，但有一定几率清醒'
+    skill_info = '使对手进入睡眠，无法行动，但有一定几率清醒'
     skill_code = 'C002'
     show_name = '睡眠粉'
     status = status.Sleeping()
-    property = 'worm'
+    property = 'insect'
     hit_rate = 85
 
-class HolyLight(removeStatusSkill):
+class StukBlood(suckBloodSkill):
     def __init__(self,pp=20):
-        super().__init__(pp)
-    show_name = '圣光'
-    skill_info = '移除所有状态'
-    skill_code = 'S002'
-    property = 'light'
+        super().__init__(pp,spell_skill=False)
+    skill_code = 'C003'
+    show_name = '吸血'
+    skill_power = 80
+    skill_info = "吸取对方,回复生命"
+    property = 'insect'
 
-    def useSkill(self,obj):
-        statusmap.removeStatus(obj,status_code='all')
+class BlackFog(removeStatusSkill):
+    def __init__(self):
+        super().__init__(status='all')
+    show_name = '黑雾'
+    skill_info = '移除所有状态'
+    skill_code = 'I001'
+    property = 'ice'
 
 class WaterJump(buffSkill):
     show_name = '水溅跃'
@@ -375,3 +418,12 @@ class Earthquake(damageSkill):
     skill_power = 100
     property = 'ground'
     skill_info = '引发地震攻击对面,威力超绝'
+
+class SingularLight(statusSkill):
+    def __init__(self):
+        super().__init__(20)
+    skill_code = 'Q001'
+    show_name = '奇异之光'
+    status = status.Paralysis()
+    property = 'ghost'
+    skill_info = '显示奇怪的光,使对面混乱'

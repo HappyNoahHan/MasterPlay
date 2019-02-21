@@ -14,16 +14,18 @@ skill_dict = {
     'F003': battle.skill.AirCut,
     'N001': battle.skill.Strike,
     'N002': battle.skill.Grab,
-    #'N003': battle.skill.strengthCre,
+    'N003': battle.skill.Chaos,
+    'N004': battle.skill.HighSpeedStar,
     'B002': battle.skill.azorLeaf,
     'B003': battle.skill.lifeRecovery,
     'B004': battle.skill.lifeChains,
     'B005': battle.skill.vinesTied,
     'B006': battle.skill.Assimilate,
     'S001': battle.skill.illuminatiom,
-    'S002': battle.skill.HolyLight,
+    'I001': battle.skill.BlackFog,
     'T001': battle.skill.disperse,
     'T002': battle.skill.threaten,
+    'T003': battle.skill.Bite,
     'C001': battle.skill.StunSpore,
     'C002': battle.skill.SleepingPowder,
     'D001': battle.skill.WaterJump,
@@ -32,6 +34,7 @@ skill_dict = {
     'R001': battle.skill.DownRock,
     'R002': battle.skill.RockFall,
     'E001': battle.skill.Earthquake,
+    'Q001': battle.skill.SingularLight,
 
 }
 
