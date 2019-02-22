@@ -2,6 +2,7 @@ from players import battering
 from assist import show,exp,evolve,life
 from battle import asscount
 from props import propmap
+from pets import statusmap
 def explore(player,wild_pet):
     '''
     野外探险
@@ -50,6 +51,7 @@ def explore(player,wild_pet):
                             print("精灵停止进化！")
         else:
             player.battle_run_success = False
+        statusmap.checkStatusEnd(player)
         return True
     else:
         return False
@@ -106,4 +108,5 @@ def trainerVS(player,trainer):
         return False
     for pet in trainer.pet_list:
         life.restore(pet)
+    statusmap.checkStatusEnd(player)
     return True

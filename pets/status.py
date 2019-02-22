@@ -46,14 +46,23 @@ class Shrink(Status):
     status_info = '精灵畏缩不前,没有做出任何动作'
     rate = 10
 
-class Poisoning(Status):
+class BigPoisoning(Status):
     status_show_name = '剧毒'
     status_code = 'ST005'
-    status_info = '陷入中毒状态,每回合收到的伤害更重'
-    index_per = 0.05
+    status_info = '陷入剧毒状态,每回合收到的伤害更重'
 
     def statusEffect(self,turns,health):
-        return round(health * self.index_per * turns)
+        if turns >= 16:
+            turns = 15
+        return round(health * turns / 16)
+
+class Poisoning(Status):
+    status_show_name = '中毒'
+    status_code = 'ST007'
+    status_info = '陷入中毒状态,每回合收到的伤害更重'
+
+    def statusEffect(self,health):
+        return round(health / 8)
 
 class Lock(Status):
     status_show_name = '锁定'

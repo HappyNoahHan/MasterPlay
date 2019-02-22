@@ -205,6 +205,7 @@ def battleRun(player,obj1,obj2):
     elif command == '2':
         #交换精灵模块
         if changepet.changePet(player):
+            statusmap.resetStatusAfterChange(obj1)
             #加一个经验状态减半的效果 ST999 经验减半
             #obj2.exp_status.append('ST999')
             #因未返回到explore层，换精灵结算顺序正常

@@ -11,8 +11,9 @@ status_dict={
     'ST002' : status.Paralysis(),
     'ST003' : status.Sleeping(),
     'ST004' : status.Shrink(),
-    'ST005' : status.Poisoning(),
+    'ST005' : status.BigPoisoning(),
     'ST006' : status.Chaos(),
+    'ST007' : status.Poisoning(),
 }
 
 
@@ -93,6 +94,13 @@ def checkPoisoning(obj):
         #obj._max_health -= damage
         obj.status['ST005'] += 1
 
+    if 'ST007' in obj.status:
+        damage = status_dict['ST007'].statusEffect(obj._max_health)
+        print("%s 中毒损失了 %s HP" % (obj.name, damage))
+        obj.health -= damage
+        if obj.health <= 0:
+            return False
+
     return True
 
 
@@ -140,3 +148,22 @@ def checkChaosOrNot(obj):
     return False
 
 
+def checkStatusEnd(player):
+    '''
+    战斗结束之后 检查状态 主要使将某些状态减弱 剧毒-->中毒
+    :param player:
+    :return:
+    '''
+    for key,pet in player.pet_list.items():
+        if 'ST005' in pet.status:
+            removeStatus(pet,'ST005')
+            pet.setStatus('ST007')
+
+def resetStatusAfterChange(pet):
+    '''
+    交换后重置剧毒状态回合
+    :param pet:
+    :return:
+    '''
+    if 'ST005' in pet.status:
+        pet.setStatus('ST005')

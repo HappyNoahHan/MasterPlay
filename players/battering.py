@@ -39,7 +39,11 @@ def battleing(player,wild_pet,change_pet = False):
         if wild_pet.captured == False or wild_pet.captured == None:
             if master_pet.health <= 0:
                 master_pet.alive = False
-                player.battle_pet_list.remove(master_pet)
+                try:
+                    #移除 死亡精灵无经验值
+                    player.battle_pet_list.remove(master_pet)
+                except ValueError:
+                    print("已经移除？？？")
                 if changepet.changePetAfterDie(player):
                     return battleing(player,wild_pet,change_pet=True)
                 else:
