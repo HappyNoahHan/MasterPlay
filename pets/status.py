@@ -59,7 +59,7 @@ class BigPoisoning(Status):
 class Poisoning(Status):
     status_show_name = '中毒'
     status_code = 'ST007'
-    status_info = '陷入中毒状态,每回合收到的伤害更重'
+    status_info = '陷入中毒状态,每回合受到HP/8的伤害'
 
     def statusEffect(self,health):
         return round(health / 8)

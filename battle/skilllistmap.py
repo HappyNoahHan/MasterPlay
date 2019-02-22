@@ -9,38 +9,39 @@ skill_dict = {
     'A004': battle.skill.fireSpin,
     'A005': battle.skill.JetFlame,
     'A009': battle.skill.flameAffinity,
-    'F001': battle.skill.scream,
-    'F002': battle.skill.WingAttack,
-    'F003': battle.skill.AirCut,
-    'F004': battle.skill.AirSword,
+    'F001': battle.skill.StartWind, #起风
+    'F002': battle.skill.WingAttack, #翅膀攻击
+    'F003': battle.skill.AirCut, #空气斩
+    'F004': battle.skill.AirSword, #空气利刃
     'N001': battle.skill.Strike,
     'N002': battle.skill.Grab,
     'N003': battle.skill.Supersonic, #超音波
-    'N004': battle.skill.HighSpeedStar,
-    'N005': battle.skill.BlackEye,
+    'N004': battle.skill.HighSpeedStar, #高速星星
+    'N005': battle.skill.BlackEye, #黑色目光
     'B002': battle.skill.azorLeaf,
     'B003': battle.skill.lifeRecovery,
     'B004': battle.skill.lifeChains,
     'B005': battle.skill.vinesTied,
     'B006': battle.skill.Assimilate, #吸取
     'S001': battle.skill.illuminatiom,
-    'I001': battle.skill.BlackFog,
+    'I001': battle.skill.BlackFog, #黑雾
     'T001': battle.skill.disperse,
     'T002': battle.skill.threaten,
-    'T003': battle.skill.Bite,
+    'T003': battle.skill.Bite, #咬住
     'C001': battle.skill.StunSpore,
     'C002': battle.skill.SleepingPowder,
+    'C003': battle.skill.StukBlood, #吸血
     'D001': battle.skill.WaterJump,
     'D002': battle.skill.WaterBall,
     'D003': battle.skill.WaterCannon,
     'R001': battle.skill.DownRock,
     'R002': battle.skill.RockFall,
     'E001': battle.skill.Earthquake,
-    'Q001': battle.skill.SingularLight,
-    'Q002': battle.skill.Scare,
-    'P001': battle.skill.Toxic,
-    'P002': battle.skill.ToxicFang,
-    'P003': battle.skill.VenomImpact,
+    'Q001': battle.skill.SingularLight, #奇异之光
+    'Q002': battle.skill.Scare, #惊吓
+    'P001': battle.skill.Toxic, #剧毒
+    'P002': battle.skill.ToxicFang, #剧毒牙
+    'P003': battle.skill.VenomImpact, #毒液冲击
 
 }
 

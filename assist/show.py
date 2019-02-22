@@ -1,4 +1,5 @@
 import battle.skilllistmap
+from pets import  statusmap
 from props import propmap
 
 def printTurn(name):
@@ -82,3 +83,12 @@ def checkSelectID(id,dict):
     else:
         print("指令错误!")
         return False
+
+def showPetErrorStatus(obj):
+    print("%s 当前状态: " % obj.name,end=" ")
+    if obj.status:
+        for status in obj.status:
+            print(statusmap.status_dict[status],end=' ')
+            print("%s 层!" % obj.status[status])
+    else:
+        print("None")

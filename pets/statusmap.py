@@ -120,7 +120,7 @@ def removeStatus(obj,status_code):
         if status_code in obj.status:
             obj.removeStatus(status_code)
 
-        print("%s 当前状态：" % obj.name, obj.status)
+        #print("%s 当前状态：" % obj.name, obj.status)
 
     return True
 

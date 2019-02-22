@@ -40,7 +40,7 @@ def damageCount(obj_defense,obj_attack,obj_skill):
             obj_defense.health -= 1
             assist.show.noDamage()
 
-        print(obj_defense.status)
+        assist.show.showPetErrorStatus(obj_defense)
 
     elif obj_skill.skill_model == '0002':
         obj_attack.setBuff(obj_skill,[obj_skill.effect_turns-1,obj_skill.index_per])

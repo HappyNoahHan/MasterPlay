@@ -152,7 +152,7 @@ class suckBloodSkill(skill):
         self.stauts = status
 
 
-class scream(damageSkill):
+class StartWind(damageSkill):
     def __init__(self):
         super().__init__(35,spell_skill=False)
     show_name = '起风'
@@ -161,7 +161,7 @@ class scream(damageSkill):
     property = 'fly'
     skill_info = '用翅膀刮起风攻击对方'
 
-class WingAttack(scream):
+class WingAttack(StartWind):
     show_name = '翅膀攻击'
     skill_code = 'F002'
     skill_power = 60
@@ -214,7 +214,7 @@ class Supersonic(statusSkill):
 
 class HighSpeedStar(damageSkill):
     def __init__(self):
-        super().__init__(pp=20,spell_skill=False)
+        super().__init__(pp=20)
     skill_info = "发射星星光线,攻击必定命中"
     skill_code = 'N004'
     show_name = '高速星星'

@@ -3,11 +3,12 @@ from props import handbook
 def changePet(player):
     print("请选择你要交换的精灵！")
     for key,value in player.pet_list.items():
-        print(key,':',value.name,' Lv%s' % value.level)
+        if value.alive == True and key != 'Master':
+            print(key,':',value.name,' Lv%s' % value.level)
     print("0 : 返回！")
     select_id = input(">")
 
-    if select_id in player.pet_list:
+    if select_id in player.pet_list and select_id != 'Master':
         #player.master_pet = player.pet_list[select_id]
         if player.pet_list[select_id].alive == True:
             backup_pet = player.pet_list['Master']
