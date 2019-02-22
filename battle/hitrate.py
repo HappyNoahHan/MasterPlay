@@ -1,7 +1,7 @@
 import random
 
 def hitOrNot(skill,rate,obj_attack,obj_defense,dodge):
-    if skill.skill_code in ['N004']:
+    if skill.skill_code in ['N004','N005']:
         print("%s 必定命中！" % skill.show_name)
         return True
 

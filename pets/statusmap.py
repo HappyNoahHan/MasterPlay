@@ -1,4 +1,6 @@
 from pets import status
+from assist import rancom
+
 import time
 '''
     eg:ST009   麻痹 技能无法使用
@@ -10,6 +12,7 @@ status_dict={
     'ST003' : status.Sleeping(),
     'ST004' : status.Shrink(),
     'ST005' : status.Poisoning(),
+    'ST006' : status.Chaos(),
 }
 
 
@@ -25,13 +28,13 @@ def checkStatusAfterBattle(obj,skill,damage):
 
 def checkParalysisOrNot(obj):
     '''
-    检查是否是麻痹状态 有一定几率无法成功使用技能
+    检查是否是麻痹状态 有1/4几率无法成功使用技能
     :param obj:
     :return:
     '''
     if 'ST002' in obj.status:
         if status_dict['ST002'].statusEffect():
-            print("%s 处于麻痹状态,无法做出行动!" % obj.name)
+            print("%s 处于麻痹状态,技能使用失败!" % obj.name)
             return True
     return False
 
@@ -112,5 +115,28 @@ def removeStatus(obj,status_code):
         print("%s 当前状态：" % obj.name, obj.status)
 
     return True
+
+def checkUnlockOrNot(obj):
+    if 'ST099' in obj.status:
+        return False
+    return True
+
+def checkChaosOrNot(obj):
+    if 'ST006' in obj.status:
+        if obj.status['ST006'] > 2 and obj.status['ST006'] < 5:
+            if rancom.statusRandom(25): #1/4 几率自我解除
+                print("%s 自行解除了混乱状态~" % obj.name)
+                removeStatus(obj,'ST006')
+                return False
+            else:
+                return True
+        if obj.status['ST006'] >= 5:
+            print("%s 自行解除了混乱状态~" % obj.name)
+            removeStatus(obj,'ST006')
+            return False
+        if status_dict['ST006'].statusEffect():
+            obj.status['ST006'] += 1
+            return True
+    return False
 
 

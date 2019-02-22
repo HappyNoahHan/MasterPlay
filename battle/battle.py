@@ -169,6 +169,18 @@ def battleRun(player,obj1,obj2):
         if statusmap.checkStatusBeforeBattle(obj1):
             assist.show.printTurn(obj2)
             return battleRun(player,obj2,obj1)
+        #检查是否混乱,会攻击自己
+        if statusmap.checkChaosOrNot(obj1):
+            damage = skilldamage.chaosDamage(obj1.level,obj1.getAttack(),obj1.getDefense())
+            print("%s 混乱中, 对自己造成了 %s 伤害" % (obj1.name,damage))
+            obj1.health -= damage
+            if obj1.health <= 0:
+                assist.show.petDie(obj1.name)
+                assist.show.battleOver()
+                return True
+            else:
+                assist.show.printTurn(obj2)
+                return battleRun(player,obj2,obj1)
 
         #命中与否判断
         #判断命中是否提高
@@ -201,15 +213,18 @@ def battleRun(player,obj1,obj2):
             return battleRun(player,obj1,obj2)
     elif command == '4':
         assist.show.petUseRun(obj1.name)
-        x = random.randint(1,100)
-        if x in range(1,100):
-            print("逃跑成功")
-            player.battle_run_success = True
-            return True
+        if statusmap.checkUnlockOrNot(obj1):
+            x = random.randint(1,100)
+            if x in range(1,100):
+                print("逃跑成功")
+                player.battle_run_success = True
+                return True
         else:
-            print("逃跑失败")
-            assist.show.printTurn(obj2.name)
-            return battleRun(player,obj2,obj1)
+            print("%s 被锁定了！ 无法脱逃 ~" % obj1.name)
+        print("逃跑失败")
+        assist.show.printTurn(obj2.name)
+        return battleRun(player,obj2,obj1)
+
     elif command == '3':
         #测试 得到一个道具
         #propmap.getProp(propmap.prop_dict['五彩迷光'])

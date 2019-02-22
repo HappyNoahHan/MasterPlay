@@ -2,7 +2,7 @@ from assist import rancom
 
 class Status(object):
     status_show_name = '未知'
-    rate = 30
+    rate = 25
     def __str__(self):
         return self.status_show_name
 
@@ -26,9 +26,13 @@ class Cauma(Status):
         return damage
 
 class Paralysis(Status):
-    status_show_name = '麻痹/混乱'
+    '''
+    麻痹状态只影响技能的会心等级计算时的速度 有1/4的几率使用技能失败
+    '''
+    status_show_name = '麻痹'
     status_code = 'ST002'
     status_info = '麻痹，有一定的几率无法使用技能'
+    rate = 25
 
 
 class Sleeping(Status):
@@ -43,13 +47,24 @@ class Shrink(Status):
     rate = 10
 
 class Poisoning(Status):
-    status_show_name = '猛毒'
+    status_show_name = '剧毒'
     status_code = 'ST005'
     status_info = '陷入中毒状态,每回合收到的伤害更重'
     index_per = 0.05
 
     def statusEffect(self,turns,health):
         return round(health * self.index_per * turns)
+
+class Lock(Status):
+    status_show_name = '锁定'
+    status_code = 'ST099'
+    status_info = '被锁定,无法逃脱'
+
+class Chaos(Status):
+    status_show_name = '混乱'
+    status_code = 'ST006'
+    status_info = '混乱,有一定的几率以威力40的无属性攻击自己,持续2~5回合'
+    rate = 33
 
 
 

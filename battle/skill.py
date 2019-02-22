@@ -54,13 +54,22 @@ class skill(object):
         return self.property
 
 class damageSkill(skill):
-    def __init__(self,pp=30,hit_status=None,addition_status = None,addition_status_rate = 100,spell_skill=True):
+    def __init__(self,pp=30,hit_status=None,addition_status = None,addition_status_rate = 100,spell_skill=True,lucky_level=1):
+        '''
+        :param pp: pp value
+        :param hit_status: 附加状态
+        :param addition_status: 状态威力加强
+        :param addition_status_rate: 状态几率
+        :param spell_skill: 技能类型 物理or特殊
+        :param lucky_level: 会心等级 默认=1
+        '''
         super().__init__(pp)
         self.skill_model = '0001'
         self.hit_status = hit_status #技能附加状态
         self.addition_status = addition_status #技能检查伤害加成状态
         self.addition_status_rate = addition_status_rate
         self.spell_skill = spell_skill #特殊攻击类型 True 默认 物理攻击类型 False
+        self.lucky_level = lucky_level
 
     def addStatus(self,obj):
         if self.hit_status != None:
@@ -72,7 +81,7 @@ class damageSkill(skill):
     def doublePowerOrNot(self,obj):
         if self.addition_status != None:
             #ST999 弱点攻击
-            if self.addition_status in obj.status or self.addition_status == 'ST999':
+            if self.addition_status in obj.status:
                 #print("%s 受到了双倍伤害" % obj.name)
                 return True
         return False
@@ -168,6 +177,16 @@ class AirCut(damageSkill):
     hit_rate = 95
     skill_info = "将空气压缩成刀再攻击对面,威力强大"
 
+class AirSword(damageSkill):
+    def __init__(self):
+        super().__init__(25,lucky_level=99)
+    show_name = '空气利刃'
+    skill_code = 'F004'
+    property = 'fly'
+    skill_power = 60
+    hit_rate = 95
+    skill_info = "用锐利的风切攻击,更容易会心一击~"
+
 class Strike(damageSkill):
     def __init__(self):
         super().__init__(pp=35,spell_skill=False)
@@ -184,12 +203,12 @@ class Grab(damageSkill):
     skill_power = 40
     skill_info = '用爪子攻击对方'
 
-class Chaos(statusSkill):
+class Supersonic(statusSkill):
     def __init__(self):
         super().__init__(20)
     skill_info = '使对方混乱，一定的几率无法成功使用技能'
     skill_code = 'N003'
-    show_name = '混乱'
+    show_name = '超音波'
     status = 'ST002'
     hit_rate = 55
 
@@ -200,6 +219,14 @@ class HighSpeedStar(damageSkill):
     skill_code = 'N004'
     show_name = '高速星星'
     skill_power = 60
+
+class BlackEye(statusSkill):
+    def __init__(self):
+        super().__init__(pp=5)
+    skill_info = '用目光紧紧盯住对方,使其无法逃脱'
+    skill_code = 'N005'
+    show_name = '黑色目光'
+    status = 'ST099'
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -257,6 +284,8 @@ class flameAffinity(propSkill):
     skill_info = "火焰亲和觉醒,接下来的一个回合，火属性技能伤害加成50%"
 
 class azorLeaf(damageSkill):
+    def __init__(self):
+        super().__init__(lucky_level=2)
     show_name = '飞叶快刀'
     skill_code = 'B002'
     skill_power = 55
@@ -435,6 +464,16 @@ class SingularLight(statusSkill):
     status = 'ST002'
     property = 'ghost'
     skill_info = '显示奇怪的光,使对面混乱'
+
+class Scare(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,hit_status='ST004',spell_skill=False)
+
+    skill_info = "惊吓,有一定的几率使对面畏缩"
+    skill_code = 'Q002'
+    show_name = '惊吓'
+    property = 'ghost'
+    skill_power = 30
 
 class Toxic(statusSkill):
     def __init__(self):

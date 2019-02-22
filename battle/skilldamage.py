@@ -58,8 +58,8 @@ def luckyAttack(speed,skill):
     if speed > 255:
         speed = 255
 
-    if skill.show_name == '飞叶快刀':
-        speed *= 4
+    if skill.lucky_level > 1:
+        speed *= (skill.lucky_level + 2)
         if speed > 255:
             speed = 255
         else:
@@ -101,6 +101,9 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
     spell_power = obj_attack.getSpellPower()
     spell_defense = obj_defense.getSpellDefense()
     speed = obj_attack.getSpeed()
+    #2.0 检查是否在麻痹状态下 速度减半
+    if 'ST002' in obj_attack.status:
+        speed = int(speed / 2)
     print("技能威力: ",power)
 
     #加入战斗前天赋计算  技能威力提升
@@ -138,3 +141,22 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
         print("状态加成伤害",damage)
 
     return damage
+
+def chaosDamage(level,attack_value,defense_value):
+    '''
+    混乱状态以40威力无属性攻击自己
+    :param level:
+    :param attack_value:
+    :param defense_value:
+    :return:
+    '''
+    basic_damage = ((level * 2) / 5 + 2) * 40 * attack_value / defense_value / 50
+    if basic_damage > 997:
+        basic_damage = 997
+    basic_damage += 2
+
+    random_index = random.randint(217, 255)
+
+    basic_damage = int(basic_damage * random_index / 255)
+
+    return basic_damage
