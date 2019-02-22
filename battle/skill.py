@@ -54,20 +54,28 @@ class skill(object):
         return self.property
 
 class damageSkill(skill):
-    def __init__(self,pp=30,status=None,addition_status_rate = 100,spell_skill=True):
+    def __init__(self,pp=30,hit_status=None,addition_status = None,addition_status_rate = 100,spell_skill=True):
         super().__init__(pp)
         self.skill_model = '0001'
-        self.status = status
+        self.hit_status = hit_status #技能附加状态
+        self.addition_status = addition_status #技能检查伤害加成状态
         self.addition_status_rate = addition_status_rate
         self.spell_skill = spell_skill #特殊攻击类型 True 默认 物理攻击类型 False
 
     def addStatus(self,obj):
-        if self.status != None:
+        if self.hit_status != None:
             if rancom.statusRandom(self.addition_status_rate):
-                if self.status not in obj.status:
-                    obj.setStatus(self.status)
-                    print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict[self.status].status_show_name))
+                if self.hit_status not in obj.status:
+                    obj.setStatus(self.hit_status)
+                    print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict[self.hit_status].status_show_name))
 
+    def doublePowerOrNot(self,obj):
+        if self.addition_status != None:
+            #ST999 弱点攻击
+            if self.addition_status in obj.status or self.addition_status == 'ST999':
+                #print("%s 受到了双倍伤害" % obj.name)
+                return True
+        return False
 
 class buffSkill(skill):
     def __init__(self,pp=30):
@@ -182,7 +190,7 @@ class Chaos(statusSkill):
     skill_info = '使对方混乱，一定的几率无法成功使用技能'
     skill_code = 'N003'
     show_name = '混乱'
-    status = status.Paralysis()
+    status = 'ST002'
     hit_rate = 55
 
 class HighSpeedStar(damageSkill):
@@ -211,7 +219,7 @@ class strengthCre(buffSkill):
 
 class fireBall(damageSkill):
     def __init__(self,pp=25):
-        super().__init__(pp,status='ST001')
+        super().__init__(pp,hit_status='ST001')
     show_name = '火球'
     skill_code = 'A001'
     skill_power = 40
@@ -322,7 +330,7 @@ class threaten(debuffSkill):
 
 class Bite(damageSkill):
     def __init__(self):
-        super().__init__(pp=25,status='ST004',spell_skill=False)
+        super().__init__(pp=25,hit_status='ST004',spell_skill=False)
 
     skill_info = "咬住对方,有一定的几率使对面畏缩"
     skill_code = 'T003'
@@ -334,7 +342,7 @@ class StunSpore(statusSkill):
     skill_info = '麻痹对手，使对手有一定的几率无法成功使用技能'
     skill_code = 'C001'
     show_name = '麻痹粉'
-    status = status.Paralysis()
+    status = 'ST002'
     property = 'insect'
     hit_rate = 50
 
@@ -342,7 +350,7 @@ class SleepingPowder(statusSkill):
     skill_info = '使对手进入睡眠，无法行动，但有一定几率清醒'
     skill_code = 'C002'
     show_name = '睡眠粉'
-    status = status.Sleeping()
+    status = 'ST003'
     property = 'insect'
     hit_rate = 85
 
@@ -400,7 +408,7 @@ class DownRock(damageSkill):
 
 class RockFall(damageSkill):
     def __init__(self):
-        super().__init__(10,status='ST004',addition_status_rate=5,spell_skill=False)
+        super().__init__(10,hit_status='ST004',addition_status_rate=5,spell_skill=False)
 
     show_name = '岩崩'
     skill_code = 'R002'
@@ -424,6 +432,35 @@ class SingularLight(statusSkill):
         super().__init__(20)
     skill_code = 'Q001'
     show_name = '奇异之光'
-    status = status.Paralysis()
+    status = 'ST002'
     property = 'ghost'
     skill_info = '显示奇怪的光,使对面混乱'
+
+class Toxic(statusSkill):
+    def __init__(self):
+        super().__init__(10)
+    skill_code = 'P001'
+    show_name = '剧毒'
+    status = 'ST005'
+    property = 'poison'
+    skill_info = "释放剧毒,使对方中毒"
+    hit_rate = 90
+
+class ToxicFang(damageSkill):
+    def __init__(self):
+        super().__init__(hit_status='ST005',pp=15,spell_skill=False)
+    skill_info = "使用有毒的牙齿攻击,有几率使对面中毒"
+    show_name = '剧毒牙'
+    property = 'poison'
+    skill_power = 50
+    skill_code = 'P002'
+
+class VenomImpact(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,addition_status='ST005')
+
+    show_name = '毒液冲击'
+    property = 'poison'
+    skill_power = 65
+    skill_info = '用特殊的毒液攻击,目标在中毒状态下威力加倍'
+    skill_code = 'P003'

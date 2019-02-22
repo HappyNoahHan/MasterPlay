@@ -46,7 +46,7 @@ class Poisoning(Status):
     status_show_name = '猛毒'
     status_code = 'ST005'
     status_info = '陷入中毒状态,每回合收到的伤害更重'
-    index_per = 0.1
+    index_per = 0.05
 
     def statusEffect(self,turns,health):
         return round(health * self.index_per * turns)

@@ -32,13 +32,14 @@ def damageCount(obj_defense,obj_attack,obj_skill):
     if obj_skill.skill_model == '0001':
         pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
         damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index)
+        obj_skill.addStatus(obj_defense)  # 附加状态
         if damage > 0:
             obj_defense.health -= damage
             print("造成了%s 的伤害" % damage)
         else:
             obj_defense.health -= 1
             assist.show.noDamage()
-        obj_skill.addStatus(obj_defense) #附加状态
+
         print(obj_defense.status)
 
     elif obj_skill.skill_model == '0002':
@@ -54,8 +55,8 @@ def damageCount(obj_defense,obj_attack,obj_skill):
             print(key.show_name, ':', value)
 
     elif obj_skill.skill_model == '0004':
-        if obj_skill.status.status_code not in obj_defense.status:
-            obj_defense.setStatus(obj_skill.status.status_code)
+        if obj_skill.status not in obj_defense.status:
+            obj_defense.setStatus(obj_skill.status)
             print(obj_defense.status)
 
     elif obj_skill.skill_model == '0005':

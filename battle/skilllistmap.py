@@ -35,6 +35,9 @@ skill_dict = {
     'R002': battle.skill.RockFall,
     'E001': battle.skill.Earthquake,
     'Q001': battle.skill.SingularLight,
+    'P001': battle.skill.Toxic,
+    'P002': battle.skill.ToxicFang,
+    'P003': battle.skill.VenomImpact,
 
 }
 

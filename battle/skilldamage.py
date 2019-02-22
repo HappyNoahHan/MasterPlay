@@ -91,6 +91,11 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
 
     # 检查战斗前天赋技能
     power = skill.skill_power
+    #2.0 检查技能威力翻倍
+    if skill.doublePowerOrNot(obj_defense):
+        power *= 2
+        print("技能威力翻倍")
+
     attack = obj_attack.getAttack()
     defense = obj_defense.getDefense()
     spell_power = obj_attack.getSpellPower()
