@@ -1,5 +1,6 @@
 from assist import cap,show
 from battle import learnskill
+from pets import  skilltree
 import time
 
 
@@ -67,8 +68,8 @@ def isLevelUp(obj):
 
         #判断是否学习可以学习新技能
         try:
-            if obj.level in obj.skill_tree:
-                realize_or_not =learnskill.learnSkill(obj,obj.skill_tree[obj.level])
+            if obj.level in skilltree.pet_skill_tree[obj.pet_no]:
+                realize_or_not =learnskill.learnSkill(obj,skilltree.pet_skill_tree[obj.pet_no][obj.level])
 
                 if realize_or_not == False:
                     print("技能已经领悟")

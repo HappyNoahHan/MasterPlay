@@ -27,6 +27,7 @@ def learnSkill(obj,skill_code,realize=True):
             return False
         else:
             print("%s 领悟了 %s 技能！" % (obj.name, battle.skilllistmap.skill_dict[skill_code].show_name))
+            #print(battle.skilllistmap.skill_dict[skill_code]())
     else:
         if not canLearnOrNot(skill_code[0],obj):
             print("属性不符合，无法学习该系别技能")

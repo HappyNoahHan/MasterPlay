@@ -54,7 +54,10 @@ def showPetStatus(obj):
 
 def showPetSkills(obj):
     for key,value in obj.skill_list.items():
-        print(key,':',value.show_name)
+        print(key,':',value.show_name,end=' || ')
+        print(value.skill_power,end=' || ')
+        print("技能描述：",value.skill_info,end=' || ')
+        print("类别: ",value.property)
 
 def learnSkill(code):
     print("%s 学习成功！" % battle.skilllistmap.skill_dict[code].show_name)

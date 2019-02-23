@@ -37,7 +37,6 @@ def showPets(player):
         print("是否需要把当前精灵设置为主战精灵? 1 yes other no")
         changer_or_not = input(">")
         if changer_or_not == '1':
-            print('ssdhskd')
             backup_pet = player.pet_list['Master']
             player.setPet('Master',player.pet_list[select_id])
             player.setPet(select_id,backup_pet)
@@ -51,7 +50,8 @@ def detail(pet):
     print("技能列表:")
     for key,skill in pet.skill_list.items():
         print(key,':',skill.show_name,'PP:',skill._pp_value_max, end=" || ")
-        print('技能描叙:',skill)
+        print('技能描述:',skill,end=" || ")
+        print("类别:",skill.property)
     print()
 
     print('携带物:')

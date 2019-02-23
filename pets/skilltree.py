@@ -10,37 +10,35 @@ pet_skill_tree = {
             '12': 'D003',
             },
     '041':{
-        'init': 'B006',
-        '5': 'N003',
-        '7': 'Q002',
-        '11': 'T003',
-        '13': 'F002',
-        '17': 'Q001',
-        '19': 'F004',
-        '23': 'N004',
-        '25': 'P002',
-        '29': 'N005',
-        '31': 'C003',
-        '35': 'I001',
-        '37': 'P003',
-        '41': 'F003',
+        'init': ['B006'],
+        5: 'N003',
+        7: 'Q002',
+        11: 'T003',
+        13: 'F002',
+        17: 'Q001',
+        19: 'F004',
+        23: 'N004',
+        25: 'P002',
+        29: 'N005',
+        31: 'C003',
+        35: 'I001',
+        37: 'P003',
+        41: 'F003',
     }
 
 }
 
 
-def getSkillList(pet_no,pet_level):
-    skill_code_list = []
-    #skill_init_list = []
-    pet_can_get_skill_list = pet_skill_tree[pet_no]
-    for key,value in pet_can_get_skill_list.items():
-        if pet_level >= int(key):
-            skill_code_list.append(value)
+def getInitSkillList(pet_no):
+    '''
+    野生精灵初始技能~
+    :param pet_no:
+    :return:
+    '''
+    skill_init_list = pet_skill_tree[pet_no]['init'].copy()
 
-    if skill_code_list.__len__() >= 4:
-        skill_init_list = random.sample(skill_code_list,4)
-    else:
-        skill_init_list = skill_code_list.copy()
+    if skill_init_list.__len__() >= 4:
+        skill_init_list = random.sample(skill_init_list,4)
 
     skill_list = {}
 

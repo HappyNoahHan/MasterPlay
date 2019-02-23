@@ -42,11 +42,10 @@ def getWildPet(pet_list):
 
     if pet_no == '026':
         if place == 'grass_no1':
-            return fly.Pidgey(level=random.randint(3, 5), skill_list={'1': skill.StartWind()})
-            #return fly.aiPidgey(level=5,skill_list = skilltree.getSkillList('026',5))
+            return fly.Pidgey(level=random.randint(2, 4),skill_list = skilltree.getInitSkillList('041'))
     elif pet_no == '043':
         if place == 'grass_no1':
-            return wood.Oodish(level=random.randint(5, 7), skill_list={'1': skill.StartWind()})
+            return wood.Oodish(level=random.randint(2, 4),skill_list = skilltree.getInitSkillList('041'))
     elif pet_no == '069':
         if place == 'grass_no2':
             return wood.Bellsprout(level=random.randint(6,8),skill_list={'1':skill.azorLeaf(),'2':skill.StunSpore()})

@@ -45,10 +45,11 @@ class skill(object):
     effect_turns = 1
     property = 'normal'
     hit_rate = 100
+    skill_power = None
 
 
     def __str__(self):
-        return self.skill_info
+        return self.skill_info + ' || Power: ' + str(self.skill_power)
 
     def getProp(self):
         return self.property
@@ -144,12 +145,15 @@ class propSkill(skill):
         self.skill_model = '0009'
 
 class suckBloodSkill(skill):
-    def __init__(self,pp=15,spell_skill=True,suck_per = 0.5):
+    def __init__(self,pp=15,spell_skill=True,suck_per = 0.5,lucky_level = 1):
         super().__init__(pp)
         self.skill_model = '0010'
         self.spell_skill = spell_skill
         self.suck_per = suck_per
-        self.stauts = status
+        self.lucky_level = lucky_level
+
+    def doublePowerOrNot(self,obj):
+        return False
 
 
 class StartWind(damageSkill):
