@@ -14,7 +14,7 @@ def battleing(player,wild_pet,change_pet = False):
     print("=" * 30)
     master_pet = player.pet_list['Master']
     print("%s 准备战斗！" % master_pet.name)
-    assist.show.showPetStatus(master_pet)
+    #assist.show.showPetStatus(master_pet)
     #加入战斗精灵列表
     if master_pet not in player.battle_pet_list:
         player.battle_pet_list.append(master_pet)
@@ -73,7 +73,7 @@ def vsBattleing(player,trainer,challenge_list):
     if player.battle_run_success == False:
         trainer_master_pet = random.choice(challenge_list)
         print("%s 准备使用 %s Lv%s 进行战斗！" % (trainer.name,trainer_master_pet.name,trainer_master_pet.level))
-        show.showPetStatus(trainer_master_pet)
+        #show.showPetStatus(trainer_master_pet)
 
         if battleing(player,trainer_master_pet):
             if player.battle_run_success != True:

@@ -17,13 +17,10 @@ class Status(object):
 class Cauma(Status):
     status_show_name = '灼伤'
     status_code = 'ST001'
-    status_info = '受到火属性伤害加成20%'
-    index_per = 1.2
+    status_info = '每回合受到最大Hp值/16的伤害'
 
-    def statusEffect(self,skill,damage):
-        if skill.property == 'fire':
-            return int(damage * self.index_per)
-        return damage
+    def statusEffect(self,health):
+        return round(health / 16)
 
 class Paralysis(Status):
     '''

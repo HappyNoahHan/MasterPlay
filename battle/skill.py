@@ -74,6 +74,7 @@ class damageSkill(skill):
 
     def addStatus(self,obj):
         if self.hit_status != None:
+            #检查特性与obj 属性 某些pet不会中某技能
             if rancom.statusRandom(self.addition_status_rate):
                 if self.hit_status not in obj.status:
                     obj.setStatus(self.hit_status)

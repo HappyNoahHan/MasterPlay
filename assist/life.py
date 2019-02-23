@@ -58,6 +58,8 @@ def restore(pet):
 
 def healthRecoverFromDamage(obj,damage,recover_per):
     recover_health = round(damage * recover_per)
+    if recover_health == 0:
+        recover_health = 1
 
     obj.health += recover_health
     if obj.health >= obj._max_health:

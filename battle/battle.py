@@ -112,10 +112,8 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         if obj_attack.talent != None:
             if talentmap.checkTalent(obj_attack,'after'):
                 talentmap.talentEffectAfter(obj_attack,obj_skill)
-
-        assist.show.showPetStatus(obj_defense)
-        assist.show.showPetStatus(obj_attack)
         return True
+
 
 def battleRun(player,obj1,obj2):
     '''
@@ -124,6 +122,10 @@ def battleRun(player,obj1,obj2):
     :param obj2:
     :return:
     '''
+    print("=" * 15 + '当前状态' + "=" * 15)
+    assist.show.showPetStatus(obj1)
+    assist.show.showPetStatus(obj2)
+    print("=" * 30)
     assist.show.showSelect()
     print("=" * 30)
     if obj1.autoAi:
@@ -155,11 +157,6 @@ def battleRun(player,obj1,obj2):
             if not assist.ppvalue.ppCount(obj1.skill_list[skill_number]):
                 print("指令失败,重新选择！")
                 return battleRun(player,obj1, obj2)
-        #战斗前检查是否中毒  中毒死亡
-        if not statusmap.checkPoisoning(obj1):
-            assist.show.petDie(obj1.name)
-            assist.show.battleOver()
-            return True
         # 战斗前的buff
         asscount.checkBuffBeforeBattle(obj1, obj2)
         # 道具检查
@@ -167,6 +164,12 @@ def battleRun(player,obj1,obj2):
         print(obj1.skill_list[skill_number]) #显示技能描述
         #检查状态
         if statusmap.checkStatusBeforeBattle(obj1):
+            # 回合结束检查是否中毒  中毒死亡
+            if not statusmap.checkStatusAfterTurn(obj1):
+                assist.show.petDie(obj1.name)
+                assist.show.battleOver()
+                return True
+
             assist.show.printTurn(obj2)
             return battleRun(player,obj2,obj1)
         #检查是否混乱,会攻击自己
@@ -179,6 +182,11 @@ def battleRun(player,obj1,obj2):
                 assist.show.battleOver()
                 return True
             else:
+                # 回合结束检查是否中毒  中毒死亡
+                if not statusmap.checkStatusAfterTurn(obj1):
+                    assist.show.petDie(obj1.name)
+                    assist.show.battleOver()
+                    return True
                 assist.show.printTurn(obj2)
                 return battleRun(player,obj2,obj1)
 
@@ -192,11 +200,21 @@ def battleRun(player,obj1,obj2):
 
         if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number],obj1.skill_list[skill_number].hit_rate + hit_up,obj1,obj2,obj2.dodge + dodge_up):
             asscount.checkBuffAfterBattle(obj1)
+            # 回合结束检查是否中毒  中毒死亡
+            if not statusmap.checkStatusAfterTurn(obj1):
+                assist.show.petDie(obj1.name)
+                assist.show.battleOver()
+                return True
             assist.show.printTurn(obj2.name)
             return battleRun(player,obj2,obj1)
 
         #改写结算 直接把技能扔进去
         if damageCount(obj2,obj1,obj1.skill_list[skill_number]):
+            # 回合结束检查是否中毒  中毒死亡
+            if not statusmap.checkStatusAfterTurn(obj1):
+                assist.show.petDie(obj1.name)
+                assist.show.battleOver()
+                return True
             assist.show.printTurn(obj2.name)
             return battleRun(player,obj2,obj1)
         else:
@@ -232,6 +250,11 @@ def battleRun(player,obj1,obj2):
         use_or_not = bag.showBattleBagOrNot(player,obj2)
         if use_or_not == True:
             if obj2.captured == False:
+                # 回合结束检查是否中毒  中毒死亡
+                if not statusmap.checkStatusAfterTurn(obj1):
+                    assist.show.petDie(obj1.name)
+                    assist.show.battleOver()
+                    return True
                 assist.show.printTurn(obj2)
                 return battleRun(player,obj2,obj1)
             else:

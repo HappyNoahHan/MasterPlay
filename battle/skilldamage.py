@@ -135,10 +135,10 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
             damage = talentmap.talentEffectMiddle(obj_attack,skill,damage)
             print("天赋加成伤害",damage)
 
-    #战斗后敌方状态加成
-    if obj_defense.status:
-        damage = statusmap.checkStatusAfterBattle(obj_defense,skill,damage)
-        print("状态加成伤害",damage)
+    #攻击方状态加成
+    if obj_attack.status:
+        damage = statusmap.checkStatusAfterBattle(obj_attack,skill,damage)
+        #print("状态加成伤害",damage)
 
     return damage
 

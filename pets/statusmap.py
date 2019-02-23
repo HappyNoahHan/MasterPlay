@@ -19,9 +19,11 @@ status_dict={
 
 def checkStatusAfterBattle(obj,skill,damage):
     damage_index = damage
-    for value in obj.status:
-        if value == 'ST001':
-            damage_index = status_dict[value].statusEffect(skill,damage)
+    for key,value in obj.status.items():
+        if key == 'ST001':
+            if not skill.spell_skill:
+                print("物理招式，伤害减半")
+                damage_index = round(damage_index / 2)
 
     return damage_index
 
@@ -79,9 +81,9 @@ def checkStatusBeforeBattle(obj):
         print("%s 没有处于任何状态！" % obj.name)
     return False
 
-def checkPoisoning(obj):
+def checkStatusAfterTurn(obj):
     '''
-    检查是否中毒
+    检查回合结束 中毒 灼伤 伤害
     :param obj:
     :return:
     '''
@@ -97,6 +99,13 @@ def checkPoisoning(obj):
     if 'ST007' in obj.status:
         damage = status_dict['ST007'].statusEffect(obj._max_health)
         print("%s 中毒损失了 %s HP" % (obj.name, damage))
+        obj.health -= damage
+        if obj.health <= 0:
+            return False
+
+    if 'ST001' in obj.status:
+        damage = status_dict['ST001'].statusEffect(obj._max_health)
+        print("%s 因灼伤损失了 %s HP" % (obj.name, damage))
         obj.health -= damage
         if obj.health <= 0:
             return False

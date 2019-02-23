@@ -39,7 +39,7 @@ def showSystem(player,select_id):
             print("你正在钓鱼...")
             time.sleep(3)
             fished_pet = fish.fishing(player.map_run_list[-1].name)
-            show.showPetStatus(fished_pet)
+            #show.showPetStatus(fished_pet)
             print("你遇到了 %s ! lv: %s" % (fished_pet.name, fished_pet.level))
             if explore.explore(player, fished_pet):
                 return player.map_run_list[-1].showMap(player)
