@@ -74,7 +74,7 @@ class Pet(object):
         self.basic_point_getter = None
         #self.exp_status = []
         #遇见随机数
-        self.talent = None
+        self.talent = 'TA002'
         #是否存活
         self.alive = True
         #是否玩家所有

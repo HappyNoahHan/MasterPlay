@@ -55,9 +55,8 @@ def damageCount(obj_defense,obj_attack,obj_skill):
             print(key.show_name, ':', value)
 
     elif obj_skill.skill_model == '0004':
-        if obj_skill.status not in obj_defense.status:
-            obj_defense.setStatus(obj_skill.status)
-            print(obj_defense.status)
+        obj_skill.addStatus(obj_defense)
+        print(obj_defense.status)
 
     elif obj_skill.skill_model == '0005':
         obj_skill.useSkill(obj_attack=obj_attack,obj_defense=obj_defense)
@@ -110,9 +109,9 @@ def damageCount(obj_defense,obj_attack,obj_skill):
 
     else:
         #检查战斗后特性检查
-        if obj_attack.talent != None:
-            if talentmap.checkTalent(obj_attack,'after'):
-                talentmap.talentEffectAfter(obj_attack,obj_skill)
+        #if obj_attack.talent != None:
+        #    if talentmap.checkTalent(obj_attack,'after'):
+        #        talentmap.talentEffectAfter(obj_attack,obj_skill)
         return True
 
 

@@ -34,7 +34,7 @@ ready 睡眠粉 毒buff
 '''
 
 from assist import  rancom
-from pets import statusmap,status
+from pets import statusmap,talentmap
 
 class skill(object):
     def __init__(self,pp=30):
@@ -74,11 +74,14 @@ class damageSkill(skill):
 
     def addStatus(self,obj):
         if self.hit_status != None:
-            #检查特性与obj 属性 某些pet不会中某技能
             if rancom.statusRandom(self.addition_status_rate):
                 if self.hit_status not in obj.status:
-                    obj.setStatus(self.hit_status)
-                    print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict[self.hit_status].status_show_name))
+                    # 检查特性与obj 属性 某些pet不会中某技能
+                    if talentmap.addStatusOrNot(obj,self.hit_status):
+                        obj.setStatus(self.hit_status)
+                        print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict[self.hit_status].status_show_name))
+                    else:
+                        print("%s 免疫 %s 状态" % (obj.name,statusmap.status_dict[self.hit_status].status_show_name))
 
     def doublePowerOrNot(self,obj):
         if self.addition_status != None:
@@ -101,9 +104,17 @@ class debuffSkill(skill):
     damage_debuff = False
 
 class statusSkill(skill):
-    def __init__(self,pp=30):
+    def __init__(self,pp=30,status=None):
         super().__init__(pp)
         self.skill_model = '0004'
+        self.status = status
+
+    def addStatus(self,obj):
+        if talentmap.addStatusOrNot(obj,self.status):
+            obj.setStatus(self.status)
+            print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
+        else:
+            print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
 
 class removeStatusSkill(skill):
     def __init__(self,pp=30,effecters='both',status=None):
@@ -210,11 +221,10 @@ class Grab(damageSkill):
 
 class Supersonic(statusSkill):
     def __init__(self):
-        super().__init__(20)
+        super().__init__(20,status = 'ST002')
     skill_info = '使对方混乱，一定的几率无法成功使用技能'
     skill_code = 'N003'
     show_name = '超音波'
-    status = 'ST002'
     hit_rate = 55
 
 class HighSpeedStar(damageSkill):
@@ -227,11 +237,11 @@ class HighSpeedStar(damageSkill):
 
 class BlackEye(statusSkill):
     def __init__(self):
-        super().__init__(pp=5)
+        super().__init__(pp=5,status = 'ST099')
     skill_info = '用目光紧紧盯住对方,使其无法逃脱'
     skill_code = 'N005'
     show_name = '黑色目光'
-    status = 'ST099'
+
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -373,18 +383,20 @@ class Bite(damageSkill):
     skill_power = 60
 
 class StunSpore(statusSkill):
+    def __init__(self):
+        super().__init__(status = 'ST002')
     skill_info = '麻痹对手，使对手有一定的几率无法成功使用技能'
     skill_code = 'C001'
     show_name = '麻痹粉'
-    status = 'ST002'
     property = 'insect'
     hit_rate = 50
 
 class SleepingPowder(statusSkill):
+    def __init__(self):
+        super().__init__(status = 'ST003')
     skill_info = '使对手进入睡眠，无法行动，但有一定几率清醒'
     skill_code = 'C002'
     show_name = '睡眠粉'
-    status = 'ST003'
     property = 'insect'
     hit_rate = 85
 
@@ -463,10 +475,9 @@ class Earthquake(damageSkill):
 
 class SingularLight(statusSkill):
     def __init__(self):
-        super().__init__(20)
+        super().__init__(20,status = 'ST002')
     skill_code = 'Q001'
     show_name = '奇异之光'
-    status = 'ST002'
     property = 'ghost'
     skill_info = '显示奇怪的光,使对面混乱'
 
@@ -482,10 +493,9 @@ class Scare(damageSkill):
 
 class Toxic(statusSkill):
     def __init__(self):
-        super().__init__(10)
+        super().__init__(10,status = 'ST005')
     skill_code = 'P001'
     show_name = '剧毒'
-    status = 'ST005'
     property = 'poison'
     skill_info = "释放剧毒,使对方中毒"
     hit_rate = 90

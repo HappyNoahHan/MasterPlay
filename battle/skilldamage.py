@@ -106,18 +106,18 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
         speed = int(speed / 2)
     print("技能威力: ",power)
 
-    #加入战斗前天赋计算  技能威力提升
-    if obj_attack.talent != None:
-        if talentmap.checkTalent(obj_attack, 'before'):
-            if talentmap.talent_dict[obj_attack.talent].talent_type == '技能威力类型':
-                power = talentmap.talent_dict[obj_attack.talent].talentEffect(power)
-
+    #加入战斗前天赋计算  各 能力技能威力提升
+    attack,defense,spell_power,spell_defense,speed,power = talentmap.checkTalentBeforeBattle(
+        obj_attack,skill,attack,defense,spell_power,spell_defense,speed,power
+    )
+    print("特性技能威力Up: ", power)
 
     #print("技能威力",power)
     # 检查是否有威力加强的道具
     tmp_power_up = propmap.checkCarryPropForSkill(obj_attack, skill)
     #print("威力提升", tmp_power_up)
     power += tmp_power_up
+    print("道具技能威力Up: ", power)
     #print("技能威力", power)
     #判断是物理攻击还是元素攻击
     if skill.spell_skill == True:
@@ -130,10 +130,10 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
     damage = round(basic_damage * pro_buff_index * attr_index_number * skill_prop_match_obj_prop)
     print("基础伤害:",damage)
     #战斗中天赋计算
-    if obj_attack.talent != None:
-        if talentmap.checkTalent(obj_attack,'middle'):
-            damage = talentmap.talentEffectMiddle(obj_attack,skill,damage)
-            print("天赋加成伤害",damage)
+    #if obj_attack.talent != None:
+    #    if talentmap.checkTalent(obj_attack,'middle'):
+    #        damage = talentmap.talentEffectMiddle(obj_attack,skill,damage)
+    #        print("天赋加成伤害",damage)
 
     #攻击方状态加成
     if obj_attack.status:
