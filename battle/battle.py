@@ -91,6 +91,7 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         #print(obj_defense.status)
         #吸取血量
         assist.life.healthRecoverFromDamage(obj_attack,damage,obj_skill.suck_per)
+        assist.show.showPetErrorStatus(obj_defense)
 
     #debuff  增幅buff 次数
     asscount.checkBuffAfterBattle(obj_attack)
@@ -258,12 +259,17 @@ def battleRun(player,obj1,obj2):
                 assist.show.printTurn(obj2)
                 return battleRun(player,obj2,obj1)
             else:
+                #捕获成功 战斗结束
                 return True
         elif use_or_not == None:
             return battleRun(player,obj1, obj2)
         else:
             #print("重新选择！")
             #assist.show.printTurn(obj2)
+            if not statusmap.checkStatusAfterTurn(obj1):
+                assist.show.petDie(obj1.name)
+                assist.show.battleOver()
+                return True
             return battleRun(player,obj2, obj1)
 
     else:

@@ -72,6 +72,11 @@ class Chaos(Status):
     status_info = '混乱,有一定的几率以威力40的无属性攻击自己,持续2~5回合'
     rate = 33
 
+class Frozen(Status):
+    status_show_name = '冰冻'
+    status_code = 'ST008'
+    status_info = '冰冻,有一定的几率自我清醒,无法使用技能'
+
 
 
 

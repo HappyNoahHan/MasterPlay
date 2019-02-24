@@ -47,10 +47,19 @@ def showPetStatus(obj):
     '''
     #propmap.checkCarryPropForObj(obj)
     if obj.autoAi == True:
-        show_tag = '|O|'
+        show_tag = 'WildPet'
     else:
         show_tag = ' '
-    print("%s   生命值：%s  攻击值 %s 防御值 %s 法攻值 %s 法防值 %s  速度 %s 等级: Lv%s  %s" % (obj.name,obj.health,obj.getAttack(),obj.getDefense(),obj.getSpellPower(),obj.getSpellDefense(),obj.getSpeed(),obj.level,show_tag))
+    print("%s  ||  生命值：%s  攻击值 %s 防御值 %s 法攻值 %s 法防值 %s  速度 %s ||  等级: Lv%s  %s" %
+          (obj.name,obj.health,obj.getAttack(),obj.getDefense(),
+           obj.getSpellPower(),obj.getSpellDefense(),
+           obj.getSpeed(),obj.level,show_tag)
+          ,end=' || ')
+    if obj.status:
+        for status in obj.status:
+            print(statusmap.status_dict[status])
+    else:
+        print()
 
 def showPetSkills(obj):
     for key,value in obj.skill_list.items():

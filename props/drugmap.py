@@ -9,6 +9,7 @@ drug_dict = {
     '大型PP回复剂': drug.PPRestoreDrug(restore_value=20,show_name='大型pp回复剂'),
     '完美pp回复剂': drug.ppRestoreMaxDrug(),
     '灼伤解除剂': drug.RemoveStatusDrug(status_code='ST001',show_name='灼伤解除剂'),
+    '麻痹解除剂': drug.RemoveStatusDrug(status_code='ST003',show_name='麻痹解除剂'),
     '完美解除剂': drug.RemoveStatusDrug(show_name='完美解除剂'),
     '小型解毒剂': drug.RemoveDebuffDrug(remove_number=1,show_name='小型解毒剂'),
     '完美解毒剂': drug.RemoveDebuffDrug(remove_number=99,show_name='完美解毒剂'),
@@ -16,7 +17,7 @@ drug_dict = {
 
 #背包概念 名称 数量
 drug_bag_dict={
-    #1:[drug_dict['小型回复药剂'],1],
+    1:[drug_dict['灼伤解除剂'],1],
     #2:[drug_dict['中型回复药剂'],2],
     #3:[drug_dict['大型回复药剂'],3],
 }

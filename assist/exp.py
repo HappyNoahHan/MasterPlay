@@ -74,7 +74,7 @@ def isLevelUp(obj):
                 if realize_or_not == False:
                     print("技能已经领悟")
                     pass
-        except AttributeError:
+        except AttributeError and KeyError:
             print("测试代码,该精灵未添加技能树")
 
 
