@@ -19,6 +19,7 @@ skill_dict = {
     'N004': battle.skill.HighSpeedStar, #高速星星
     'N005': battle.skill.BlackEye, #黑色目光
     'N006': battle.skill.Screech,#刺耳声
+    'N007': battle.skill.Wrap,#紧束
     'B002': battle.skill.azorLeaf,
     'B003': battle.skill.lifeRecovery,
     'B004': battle.skill.lifeChains,

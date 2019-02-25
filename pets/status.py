@@ -83,7 +83,17 @@ class ArmorBreak(Status):
     status_info = '破甲,使对方防御降低'
 
     def statusEffect(self,defense,turns):
-        return round(defense * 0.1 * turns)
+        return round(defense *(1 - 0.1 * turns))
+
+class Bound(Status):
+    status_show_name = '束缚'
+    status_code = 'ST010'
+    status_info = '束缚状态持续4~5回合,处于束缚状态的宝可梦无法替换或逃走,' \
+                  '处于束缚状态的宝可梦每回合结束时损失1⁄8的最大ＨＰ.'
+
+    def statusEffect(self,health):
+        return round(health / 8 )
+
 
 
 

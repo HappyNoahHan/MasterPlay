@@ -16,6 +16,7 @@ status_dict={
     'ST007' : status.Poisoning(),
     'ST008' : status.Frozen(),
     'ST009' : status.ArmorBreak(),
+    'ST010' : status.Bound(),
 }
 
 
@@ -125,6 +126,20 @@ def checkStatusAfterTurn(obj):
         if obj.health <= 0:
             return False
 
+    if 'ST010' in obj.status:
+        if obj.status['ST010'] > 4:
+            removeStatus(obj,'ST010')
+            return True
+        elif obj.status['ST010'] == 4:
+            if rancom.statusRandom(50):
+                removeStatus(obj,'ST010')
+                return True
+        obj.status['ST010'] += 1
+        damage = status_dict['ST010'].statusEffect(obj._max_health)
+        print("%s 因束缚损失了 %s HP" % (obj.name, damage))
+        obj.health -= damage
+        if obj.health <= 0:
+            return False
     return True
 
 
@@ -149,7 +164,12 @@ def removeStatus(obj,status_code):
     return True
 
 def checkUnlockOrNot(obj):
-    if 'ST099' in obj.status:
+    '''
+    lock bound 状态下无法逃走
+    :param obj:
+    :return:
+    '''
+    if 'ST099' in obj.status or 'ST010' in obj.status:
         return False
     return True
 
@@ -217,4 +237,10 @@ def checkArmorBreakOrNot(obj,defense):
         return status_dict['ST009'].statusEffect(defense,obj.status['ST009'])
 
     return defense
+
+def checkNoChange(obj):
+    if 'ST010' in obj.status:
+        return False
+
+    return True
 

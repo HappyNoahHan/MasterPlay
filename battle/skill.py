@@ -256,6 +256,15 @@ class Screech(statusSkill):
     show_name = '刺耳声'
     hit_rate = 85
 
+class Wrap(damageSkill):
+    def __init__(self):
+        super().__init__(20,hit_status='ST010',addition_status_rate=100,spell_skill=False)
+    skill_info = '攻击目标造成伤害。使目标陷入束缚状态'
+    skill_code = 'N007'
+    show_name = '紧束'
+    skill_power = 15
+    hit_rate = 90
+
 
 class steadiness(buffSkill):
     show_name = '稳固'

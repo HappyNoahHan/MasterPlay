@@ -222,14 +222,19 @@ def battleRun(player,obj1,obj2):
 
     elif command == '2':
         #交换精灵模块
-        if changepet.changePet(player):
-            statusmap.resetStatusAfterChange(obj1)
-            #加一个经验状态减半的效果 ST999 经验减半
-            #obj2.exp_status.append('ST999')
-            #因未返回到explore层，换精灵结算顺序正常
-            return battering.battleing(player,obj2,change_pet=True)
+        if statusmap.checkNoChange(obj1):
+            if changepet.changePet(player):
+                statusmap.resetStatusAfterChange(obj1)
+                #加一个经验状态减半的效果 ST999 经验减半
+                #obj2.exp_status.append('ST999')
+                #因未返回到explore层，换精灵结算顺序正常
+                return battering.battleing(player,obj2,change_pet=True)
+            else:
+                return battleRun(player,obj1,obj2)
         else:
+            print("%s 无法被替换的状态" % obj1.name)
             return battleRun(player,obj1,obj2)
+
     elif command == '4':
         assist.show.petUseRun(obj1.name)
         if statusmap.checkUnlockOrNot(obj1):
