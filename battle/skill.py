@@ -55,7 +55,9 @@ class skill(object):
         return self.property
 
 class damageSkill(skill):
-    def __init__(self,pp=30,hit_status=None,addition_status = None,addition_status_rate = 100,spell_skill=True,lucky_level=1):
+    def __init__(self,pp=30,hit_status=None,addition_status = None,
+                 addition_status_rate = 5,spell_skill=True,lucky_level=1,
+                 turns=1):
         '''
         :param pp: pp value
         :param hit_status: 附加状态
@@ -63,6 +65,7 @@ class damageSkill(skill):
         :param addition_status_rate: 状态几率
         :param spell_skill: 技能类型 物理or特殊
         :param lucky_level: 会心等级 默认=1
+        :param truns: status层数
         '''
         super().__init__(pp)
         self.skill_model = '0001'
@@ -71,6 +74,8 @@ class damageSkill(skill):
         self.addition_status_rate = addition_status_rate
         self.spell_skill = spell_skill #特殊攻击类型 True 默认 物理攻击类型 False
         self.lucky_level = lucky_level
+        self.turns = turns
+
 
     def addStatus(self,obj):
         if self.hit_status != None:
@@ -78,7 +83,7 @@ class damageSkill(skill):
                 if self.hit_status not in obj.status:
                     # 检查特性与obj 属性 某些pet不会中某技能
                     if talentmap.addStatusOrNot(obj,self.hit_status):
-                        obj.setStatus(self.hit_status)
+                        obj.setStatus(self.hit_status,self.turns)
                         print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict[self.hit_status].status_show_name))
                     else:
                         print("%s 免疫 %s 状态" % (obj.name,statusmap.status_dict[self.hit_status].status_show_name))
@@ -104,14 +109,15 @@ class debuffSkill(skill):
     damage_debuff = False
 
 class statusSkill(skill):
-    def __init__(self,pp=30,status=None):
+    def __init__(self,pp=30,status=None,turns = 1):
         super().__init__(pp)
         self.skill_model = '0004'
         self.status = status
+        self.turns = turns
 
     def addStatus(self,obj):
         if talentmap.addStatusOrNot(obj,self.status):
-            obj.setStatus(self.status)
+            obj.setStatus(self.status,self.turns)
             print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
         else:
             print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
@@ -241,6 +247,14 @@ class BlackEye(statusSkill):
     skill_info = '用目光紧紧盯住对方,使其无法逃脱'
     skill_code = 'N005'
     show_name = '黑色目光'
+
+class Screech(statusSkill):
+    def __init__(self):
+        super().__init__(40,status='ST009',turns=2)
+    skill_info = "令目标的防御降低2级"
+    skill_code = 'N006'
+    show_name = '刺耳声'
+    hit_rate = 85
 
 
 class steadiness(buffSkill):
@@ -381,6 +395,15 @@ class Bite(damageSkill):
     show_name = '咬住'
     property = 'dark'
     skill_power = 60
+
+class Crunch(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,hit_status='ST009',spell_skill=False,addition_status_rate=20)
+    skill_info = "攻击目标造成伤害20%几率令目标的防御降低1级"
+    skill_code = 'T004',
+    show_name = '咬碎'
+    property = 'dark'
+    skill_power = 80
 
 class StunSpore(statusSkill):
     def __init__(self):

@@ -98,6 +98,9 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
 
     attack = obj_attack.getAttack()
     defense = obj_defense.getDefense()
+    #2.0检查是否破甲
+    defense = statusmap.checkArmorBreakOrNot(obj_defense,defense)
+
     spell_power = obj_attack.getSpellPower()
     spell_defense = obj_defense.getSpellDefense()
     speed = obj_attack.getSpeed()

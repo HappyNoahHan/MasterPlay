@@ -77,6 +77,14 @@ class Frozen(Status):
     status_code = 'ST008'
     status_info = '冰冻,有一定的几率自我清醒,无法使用技能'
 
+class ArmorBreak(Status):
+    status_show_name = '破甲'
+    status_code = 'ST009'
+    status_info = '破甲,使对方防御降低'
+
+    def statusEffect(self,defense,turns):
+        return round(defense * 0.1 * turns)
+
 
 
 

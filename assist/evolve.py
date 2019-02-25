@@ -3,13 +3,15 @@
     继承  技能列表  已领悟技能
 '''
 
-from pets import fire,rock
+from pets import fire,rock,poison,skilltree
 from assist import  show
+from battle import learnskill
 import time
 
 evolve_dict={
     '小火龙': [fire.Charmeleon,11,'level_up'],
     '小拳石': [rock.Graveler,'岩之心','stone_up'],
+    '超音蝠': [poison.Golbat,22,'level_up'],
 }
 def canEvolveOrNot(obj,stone=None):
     '''
@@ -60,6 +62,11 @@ def isEvolve(obj):
     print("你的 %s 进化成了 %s ！" % (obj.name, new_obj.name))
     time.sleep(5)
     evolveUp(obj,new_obj)
+    #判断是否获得进化技能～
+    if new_obj.pet_no in skilltree.pet_skill_tree:
+        if 'evolve' in skilltree.pet_skill_tree[new_obj.pet_no]:
+            for skill_code in skilltree.pet_skill_tree[new_obj.pet_no]['evolve']:
+                learnskill.learnSkill(new_obj,skill_code)
 
     show.showPetStatus(new_obj)
     return new_obj

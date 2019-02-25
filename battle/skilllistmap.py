@@ -18,6 +18,7 @@ skill_dict = {
     'N003': battle.skill.Supersonic, #超音波
     'N004': battle.skill.HighSpeedStar, #高速星星
     'N005': battle.skill.BlackEye, #黑色目光
+    'N006': battle.skill.Screech,#刺耳声
     'B002': battle.skill.azorLeaf,
     'B003': battle.skill.lifeRecovery,
     'B004': battle.skill.lifeChains,
@@ -28,6 +29,7 @@ skill_dict = {
     'T001': battle.skill.disperse,
     'T002': battle.skill.threaten,
     'T003': battle.skill.Bite, #咬住
+    'T004': battle.skill.Crunch,#咬碎
     'C001': battle.skill.StunSpore,
     'C002': battle.skill.SleepingPowder,
     'C003': battle.skill.StukBlood, #吸血

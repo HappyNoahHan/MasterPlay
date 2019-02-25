@@ -15,6 +15,7 @@ status_dict={
     'ST006' : status.Chaos(),
     'ST007' : status.Poisoning(),
     'ST008' : status.Frozen(),
+    'ST009' : status.ArmorBreak(),
 }
 
 
@@ -205,3 +206,15 @@ def checkFrozenOrNot(obj):
             return False
         return True
     return False
+
+def checkArmorBreakOrNot(obj,defense):
+    '''
+    检查是否破甲
+    :param obj:
+    :return:
+    '''
+    if 'ST009' in obj.status:
+        return status_dict['ST009'].statusEffect(defense,obj.status['ST009'])
+
+    return defense
+

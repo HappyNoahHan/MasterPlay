@@ -20,7 +20,7 @@ def showPets(player):
             print('0',end=':  ') , show.showPetStatus(pet)
         else:
             print(key,end=':  ') , show.showPetStatus(pet)
-        print(pet.status)
+        #print(pet.status)
     print()
     print("请选择你要详细查看的精灵或者退出(其他输入)!")
     select_id = input(">")
