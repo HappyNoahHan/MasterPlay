@@ -17,6 +17,8 @@ status_dict={
     'ST008' : status.Frozen(),
     'ST009' : status.ArmorBreak(),
     'ST010' : status.Bound(),
+    'ST011' : status.GuardBreak(),
+    'ST012' : status.Stockpile(),
 }
 
 
@@ -255,4 +257,32 @@ def checkGuardBreakOrNot(obj,spell_defense):
         return status_dict['ST011'].statusEffect(spell_defense,obj.status['ST011'])
 
     return spell_defense
+
+def checkStockpile(obj,defense,spell_defense):
+    '''
+    检查 蓄力
+    :param obj:
+    :param defense:
+    :param spell_defense:
+    :return:
+    '''
+    if 'ST012' in obj.status:
+        return status_dict['ST012'].statusEffect(defense,spell_defense)
+    return defense,spell_defense
+
+def checkPropBeforeBattle(obj_attack,obj_defense,attack,defense,spell_power,spell_defense,speed):
+
+    # 2.0检查是否破甲
+    defense = checkArmorBreakOrNot(obj_defense, defense)
+    # 2.0检查破防
+    spell_defense = checkGuardBreakOrNot(obj_defense, spell_defense)
+    # 2.1 检查蓄力
+    defense,spell_defense = checkStockpile(obj_defense,defense,spell_defense)
+
+    #2.0 检查是否在麻痹状态下 速度减半
+    if 'ST002' in obj_attack.status:
+        speed = int(speed / 2)
+
+
+    return attack,defense,spell_power,spell_defense,speed
 

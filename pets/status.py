@@ -102,6 +102,14 @@ class GuardBreak(Status):
     def statusEffect(self,spell_defense,turns):
         return round(spell_defense * (1 - 0.1 * turns))
 
+class Stockpile(Status):
+    status_show_name = '蓄力'
+    status_code = 'ST012'
+    status_info = '防御,特防提升一级'
+
+    def statusEffect(self,defense,spell_defense):
+        return round(defense * 1.1),round(spell_defense * 1.1)
+
 
 
 

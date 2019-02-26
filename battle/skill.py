@@ -4,6 +4,7 @@
                      0004 施加状态技能  0005 移除状态技能
                      0008 生命恢复 0009 属性亲和，同属性技能伤害加成
                      0010 伤害并恢复生命
+                     0011 印记类技能 和印记多少有关 印记以状态显示
                      --- 2.0
                      buff 类 与 debuff 类 集合
                      buff  标记attack denfense 法强 法防 提升 统一  0002 buff类技能
@@ -116,11 +117,14 @@ class statusSkill(skill):
         self.turns = turns
 
     def addStatus(self,obj):
-        if talentmap.addStatusOrNot(obj,self.status):
-            obj.setStatus(self.status,self.turns)
-            print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
+        if self.status not in obj.status:
+            if talentmap.addStatusOrNot(obj,self.status):
+                obj.setStatus(self.status,self.turns)
+                print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
+            else:
+                print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
         else:
-            print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
+            print("%s 已经陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
 
 class removeStatusSkill(skill):
     def __init__(self,pp=30,effecters='both',status=None):
@@ -172,6 +176,27 @@ class suckBloodSkill(skill):
 
     def doublePowerOrNot(self,obj):
         return False
+
+class ImprintSkill(skill):
+    def __init__(self,pp=30,lucky_level= 1,status=None,imprint_level = 1,imprint_type = None):
+        super().__init__(pp)
+        self.skill_model = '0011'
+        self.lucky_level = lucky_level
+        self.status = status
+        #self.turns = turns
+        self.imprint_level = imprint_level
+        self.imprint_type = imprint_type
+
+    def addStatus(self,obj):
+        if self.status in obj.status:
+            obj.status[self.status] += 1
+            if obj.status[self.status] > 3:
+                obj.status[self.status] = 3
+            print("%s %s 状态 %s 层" % (obj.name, statusmap.status_dict[self.status].status_show_name,obj.status[self.status]))
+        else:
+            obj.setStatus(self.status)
+            print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
+
 
 
 class StartWind(damageSkill):
@@ -240,6 +265,7 @@ class HighSpeedStar(damageSkill):
     skill_code = 'N004'
     show_name = '高速星星'
     skill_power = 60
+    hit_rate = 0
 
 class BlackEye(statusSkill):
     def __init__(self):
@@ -247,6 +273,7 @@ class BlackEye(statusSkill):
     skill_info = '用目光紧紧盯住对方,使其无法逃脱'
     skill_code = 'N005'
     show_name = '黑色目光'
+    hit_rate = 0
 
 class Screech(statusSkill):
     def __init__(self):
@@ -278,6 +305,16 @@ class Glare(statusSkill):
     skill_info = '使目标陷入麻痹状态'
     skill_code = 'N009'
     show_name = '大蛇瞪眼'
+
+class Stockpile(ImprintSkill):
+    def __init__(self):
+        super().__init__(pp=20,status='ST012')
+
+    skill_info = '陷入蓄力状态,在蓄力的时候，防御和特防会提高'
+    skill_code = 'N010'
+    show_name = '蓄力'
+    hit_rate = 0
+
 
 
 class steadiness(buffSkill):
@@ -462,6 +499,7 @@ class BlackFog(removeStatusSkill):
     skill_info = '移除所有状态'
     skill_code = 'I001'
     property = 'ice'
+    hit_rate = 0
 
 class WaterJump(buffSkill):
     show_name = '水溅跃'

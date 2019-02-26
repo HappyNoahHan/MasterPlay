@@ -71,7 +71,7 @@ def luckyAttack(speed,skill):
         return False
 
 
-def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
+def skillDamage(obj_attack,obj_defense,skill,pro_buff_index,power):
     '''
     伤害计算
     :param obj_attack:
@@ -90,7 +90,7 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
         skill_prop_match_obj_prop = 1
 
     # 检查战斗前天赋技能
-    power = skill.skill_power
+    #power = skill.skill_power
     #2.0 检查技能威力翻倍
     if skill.doublePowerOrNot(obj_defense):
         power *= 2
@@ -98,18 +98,14 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
 
     attack = obj_attack.getAttack()
     defense = obj_defense.getDefense()
-    #2.0检查是否破甲
-    defense = statusmap.checkArmorBreakOrNot(obj_defense,defense)
-
     spell_power = obj_attack.getSpellPower()
     spell_defense = obj_defense.getSpellDefense()
-    #2.0检查破防
-    spell_defense = statusmap.checkGuardBreakOrNot(obj_defense,spell_defense)
     speed = obj_attack.getSpeed()
-    #2.0 检查是否在麻痹状态下 速度减半
-    if 'ST002' in obj_attack.status:
-        speed = int(speed / 2)
-    print("技能威力: ",power)
+    print("技能威力: ", power)
+    #状态属性的提升或降低
+    attack,defense,spell_power,spell_defense,speed = statusmap.checkPropBeforeBattle(
+        obj_attack,obj_defense,attack,defense,spell_power,spell_defense,speed
+    )
 
     #加入战斗前天赋计算  各 能力技能威力提升
     attack,defense,spell_power,spell_defense,speed,power = talentmap.checkTalentBeforeBattle(

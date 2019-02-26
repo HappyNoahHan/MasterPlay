@@ -31,7 +31,7 @@ def damageCount(obj_defense,obj_attack,obj_skill):
 
     if obj_skill.skill_model == '0001':
         pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
-        damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index)
+        damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.skill_power)
         obj_skill.addStatus(obj_defense)  # 附加状态
         if damage > 0:
             obj_defense.health -= damage
@@ -79,7 +79,7 @@ def damageCount(obj_defense,obj_attack,obj_skill):
 
     elif obj_skill.skill_model == '0010':
         pro_buff_index = battle.buff.proBuffCount(obj_attack, obj_skill)
-        damage = skilldamage.skillDamage(obj_attack, obj_defense, obj_skill, pro_buff_index)
+        damage = skilldamage.skillDamage(obj_attack, obj_defense, obj_skill, pro_buff_index,obj_skill.skill_power)
         if damage > 0:
             obj_defense.health -= damage
             print("造成了%s 的伤害" % damage)
@@ -91,6 +91,12 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         #吸取血量
         assist.life.healthRecoverFromDamage(obj_attack,damage,obj_skill.suck_per)
         assist.show.showPetErrorStatus(obj_defense)
+
+    elif obj_skill.skill_model == '0011':
+        pro_buff_index = battle.buff.proBuffCount(obj_attack, obj_skill)
+        if obj_skill.imprint_level == 1:
+            obj_skill.addStatus(obj_attack)
+
 
     #debuff  增幅buff 次数
     asscount.checkBuffAfterBattle(obj_attack)
