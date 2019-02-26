@@ -20,6 +20,8 @@ skill_dict = {
     'N005': battle.skill.BlackEye, #黑色目光
     'N006': battle.skill.Screech,#刺耳声
     'N007': battle.skill.Wrap,#紧束
+    'N008': battle.skill.Leer,#瞪眼
+    'N009': battle.skill.Glare,#大蛇瞪眼
     'B002': battle.skill.azorLeaf,
     'B003': battle.skill.lifeRecovery,
     'B004': battle.skill.lifeChains,
@@ -45,6 +47,8 @@ skill_dict = {
     'P001': battle.skill.Toxic, #剧毒
     'P002': battle.skill.ToxicFang, #剧毒牙
     'P003': battle.skill.VenomImpact, #毒液冲击
+    'P004': battle.skill.PoisonSting, #毒针
+    'P005': battle.skill.Acid, #溶解液
 
 }
 

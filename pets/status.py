@@ -94,6 +94,14 @@ class Bound(Status):
     def statusEffect(self,health):
         return round(health / 8 )
 
+class GuardBreak(Status):
+    status_show_name = '破防'
+    status_code = 'ST011'
+    status_info = '破防,使对方特防降低'
+
+    def statusEffect(self,spell_defense,turns):
+        return round(spell_defense * (1 - 0.1 * turns))
+
 
 
 

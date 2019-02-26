@@ -244,3 +244,15 @@ def checkNoChange(obj):
 
     return True
 
+def checkGuardBreakOrNot(obj,spell_defense):
+    '''
+    检查特防降低
+    :param obj:
+    :param spell_defense:
+    :return:
+    '''
+    if 'ST011' in obj.status:
+        return status_dict['ST011'].statusEffect(spell_defense,obj.status['ST011'])
+
+    return spell_defense
+

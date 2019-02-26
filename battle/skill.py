@@ -265,6 +265,20 @@ class Wrap(damageSkill):
     skill_power = 15
     hit_rate = 90
 
+class Leer(statusSkill):
+    def __init__(self):
+        super().__init__(status='ST009')
+    skill_info = '令目标的防御降低1级'
+    skill_code = 'N008'
+    show_name = '瞪眼'
+
+class Glare(statusSkill):
+    def __init__(self):
+        super().__init__(status='ST002')
+    skill_info = '使目标陷入麻痹状态'
+    skill_code = 'N009'
+    show_name = '大蛇瞪眼'
+
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -550,3 +564,23 @@ class VenomImpact(damageSkill):
     skill_power = 65
     skill_info = '用特殊的毒液攻击,目标在中毒状态下威力加倍'
     skill_code = 'P003'
+
+class PoisonSting(damageSkill):
+    def __init__(self):
+        super().__init__(pp=35,addition_status_rate=30,spell_skill=False,hit_status='ST007')
+
+    show_name = '毒针'
+    property = 'poison'
+    skill_power = 15
+    skill_code = 'P004'
+    skill_info = '攻击目标造成伤害,有30%的几率使目标陷入中毒状态'
+
+class Acid(damageSkill):
+    def __init__(self):
+        super().__init__(hit_status='ST011',addition_status_rate=10)
+
+    show_name = '溶解液'
+    property = 'poison'
+    skill_power = 40
+    skill_code = 'P005'
+    skill_info = '攻击目标造成伤害,10%几率令目标的特防降低1级'

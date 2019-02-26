@@ -103,6 +103,8 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index):
 
     spell_power = obj_attack.getSpellPower()
     spell_defense = obj_defense.getSpellDefense()
+    #2.0检查破防
+    spell_defense = statusmap.checkGuardBreakOrNot(obj_defense,spell_defense)
     speed = obj_attack.getSpeed()
     #2.0 检查是否在麻痹状态下 速度减半
     if 'ST002' in obj_attack.status:
