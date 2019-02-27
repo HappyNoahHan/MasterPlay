@@ -1,5 +1,6 @@
 '''
-#skill_code 技能代号  A  火系  N 普通系 B 木系 C 虫系 D 水系 S 超能=光 I 冰 T 恶=黑暗 E 地面 F 飞行 G 龙  R 岩石 P 毒 Q鬼魂
+#skill_code 技能代号  A  火系  N 普通系 B 木系 C 虫系 D 水系 S 超能=光 I 冰 T 恶=黑暗 E 地面 F 飞行 G 龙
+                     R 岩石 P 毒 Q鬼魂 H 电
 #skill_mode 技能类型   0001 伤害技能 0002 防御临时提升 003 debuff 技能
                      0004 施加状态技能  0005 移除状态技能
                      0008 生命恢复 0009 属性亲和，同属性技能伤害加成
@@ -99,6 +100,19 @@ class damageSkill(skill):
                 #print("%s 受到了双倍伤害" % obj.name)
                 return True
         return False
+
+class MultipleDamageSkill(damageSkill):
+    def addStatus(self,obj):
+        if self.hit_status != None:
+            for status in self.hit_status:
+                if rancom.statusRandom(self.addition_status_rate):
+                    if status not in obj.status:
+                        # 检查特性与obj 属性 某些pet不会中某技能
+                        if talentmap.addStatusOrNot(obj,status):
+                            obj.setStatus(status,self.turns)
+                            print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict[status].status_show_name))
+                        else:
+                            print("%s 免疫 %s 状态" % (obj.name,statusmap.status_dict[status].status_show_name))
 
 class buffSkill(skill):
     def __init__(self,pp=30):
@@ -398,6 +412,16 @@ class fireBall(damageSkill):
     skill_info = '使用火球术攻击，威力一般,有5%的几率使对手进入灼伤状态'
     hit_rate = 80
 
+class FireFang(MultipleDamageSkill):
+    def __init__(self):
+        super().__init__(pp=15,hit_status=['ST001','ST004'],addition_status_rate=10,spell_skill=False)
+    show_name = '火焰牙'
+    skill_code = 'A002'
+    property = 'fire'
+    hit_rate = 95
+    skill_power = 65
+    skill_info = '攻击目标造成伤害,有10%的几率使目标陷入灼伤/畏缩状态'
+
 class JetFlame(fireBall):
     def __init__(self):
         super().__init__(pp=15)
@@ -555,6 +579,16 @@ class Haze(removeStatusSkill):
     skill_code = 'I001'
     property = 'ice'
     hit_rate = 0
+
+class IceFang(MultipleDamageSkill):
+    def __init__(self):
+        super().__init__(pp=15,hit_status=['ST004','ST008'],addition_status_rate=10,spell_skill=False)
+    show_name = '冰冻牙'
+    skill_code = 'I002'
+    property = 'ice'
+    hit_rate = 95
+    skill_power = 65
+    skill_info = '攻击目标造成伤害,有10%的几率使目标陷入冰冻/畏缩状态'
 
 class WaterJump(buffSkill):
     show_name = '水溅跃'
@@ -727,3 +761,23 @@ class Coil(GainStatusUpSkill):
     skill_code = 'P009'
     hit_rate = 0
     skill_info = '攻击者命中,攻击,防御提升1级'
+
+class GunkShot(damageSkill):
+    def __init__(self):
+        super().__init__(pp=5,hit_status='ST007',addition_status_rate=30,spell_skill=False)
+    show_name = '垃圾射击'
+    property = 'poison'
+    skill_code = 'P010'
+    hit_rate = 80
+    skill_power = 120
+    skill_info = '攻击目标造成伤害,有30%的几率使目标陷入中毒状态'
+
+class ThunderFang(MultipleDamageSkill):
+    def __init__(self):
+        super().__init__(pp=15,hit_status=['ST002','ST004'],addition_status_rate=10,spell_skill=False)
+    show_name = '雷电牙'
+    skill_code = 'H001'
+    property = 'electric'
+    hit_rate = 95
+    skill_power = 65
+    skill_info = '攻击目标造成伤害,有10%的几率使目标陷入麻痹/畏缩状态'

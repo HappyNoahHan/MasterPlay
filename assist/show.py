@@ -103,6 +103,7 @@ def showPetErrorStatus(obj):
     if obj.status:
         for status in obj.status:
             print(statusmap.status_dict[status],end=' ')
-            print("%s 层!" % obj.status[status])
+            print("%s 层!" % obj.status[status],end=' ')
+        print()
     else:
         print("None")

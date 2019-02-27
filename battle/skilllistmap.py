@@ -6,6 +6,7 @@ import battle.skill
 
 skill_dict = {
     'A001': battle.skill.fireBall,
+    'A002': battle.skill.FireFang,#火焰牙
     'A004': battle.skill.fireSpin,
     'A005': battle.skill.JetFlame,
     'A009': battle.skill.flameAffinity,
@@ -32,6 +33,7 @@ skill_dict = {
     'B006': battle.skill.Absorb, #吸取
     'S001': battle.skill.illuminatiom,
     'I001': battle.skill.Haze, #黑雾
+    'I002': battle.skill.IceFang,#冰冻牙
     'T001': battle.skill.disperse,
     'T002': battle.skill.threaten,
     'T003': battle.skill.Bite, #咬住
@@ -57,6 +59,8 @@ skill_dict = {
     'P007': battle.skill.GastroAcid,#胃液
     'P008': battle.skill.Belch,#打嗝
     'P009': battle.skill.Coil,#盘蜷
+    'P010': battle.skill.GunkShot,#垃圾射击
+    'H001': battle.skill.ThunderFang,#雷电牙
 
 }
 

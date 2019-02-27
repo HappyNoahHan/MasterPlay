@@ -70,14 +70,10 @@ def isLevelUp(obj):
         try:
             if obj.level in skilltree.pet_skill_tree[obj.pet_no]:
                 if not isinstance(skilltree.pet_skill_tree[obj.pet_no][obj.level],list):
-                    realize_or_not =learnskill.learnSkill(obj,skilltree.pet_skill_tree[obj.pet_no][obj.level])
-                    if realize_or_not == False:
-                        print("技能已经领悟")
+                    learnskill.learnSkill(obj,skilltree.pet_skill_tree[obj.pet_no][obj.level])
                 else:
                     for skill_code in skilltree.pet_skill_tree[obj.pet_no][obj.level]:
-                        realize_or_not = learnskill.learnSkill(obj,skill_code)
-                        if realize_or_not == False:
-                            print("技能已经领悟")
+                        learnskill.learnSkill(obj,skill_code)
 
         except AttributeError and KeyError:
             print("测试代码,该精灵未添加技能树")
