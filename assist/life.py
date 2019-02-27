@@ -11,7 +11,7 @@ def healthRecoverBySkill(obj,obj_skill):
     if obj.health >= obj._max_health:
         obj.health = obj._max_health
 
-    print("%s 恢复了 %s 点生命!" % (obj.name, recover_health))
+    print("%s 回复了 %s 点HP!" % (obj.name, recover_health))
 
 def healthRecoverMax(obj):
     '''
@@ -65,4 +65,17 @@ def healthRecoverFromDamage(obj,damage,recover_per):
     if obj.health >= obj._max_health:
         obj.health = obj._max_health
 
-    print("%s 吸取了 %s 点生命！" % (obj.name,recover_health))
+    print("%s 吸取了 %s 点HP！" % (obj.name,recover_health))
+
+def healthRecoverFromImprintSkill(obj,turns):
+    if turns == 1:
+        recover_health = round(obj._max_health * 0.25)
+    elif turns == 2:
+        recover_health = round(obj._max_health * 0.5)
+    else:
+        recover_health = obj._max_health
+
+    obj.health += recover_health
+    if obj.health >= obj._max_health:
+        obj.health = obj._max_health
+    print("%s 回复 %s 点HP！" % (obj.name, recover_health))

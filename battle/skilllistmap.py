@@ -23,6 +23,8 @@ skill_dict = {
     'N008': battle.skill.Leer,#瞪眼
     'N009': battle.skill.Glare,#大蛇瞪眼
     'N010': battle.skill.Stockpile,#蓄力
+    'N011': battle.skill.Swallow,#吞下
+    'N012': battle.skill.SpitUp,#喷出
     'B002': battle.skill.azorLeaf,
     'B003': battle.skill.lifeRecovery,
     'B004': battle.skill.lifeChains,

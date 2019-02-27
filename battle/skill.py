@@ -178,7 +178,16 @@ class suckBloodSkill(skill):
         return False
 
 class ImprintSkill(skill):
-    def __init__(self,pp=30,lucky_level= 1,status=None,imprint_level = 1,imprint_type = None):
+    def __init__(self,pp=30,lucky_level= 1,status=None,imprint_level = 1,imprint_type = None,spell_skill = None):
+        '''
+        印记技能
+        :param pp:
+        :param lucky_level:
+        :param status:
+        :param imprint_level: 印记收集 1 还是使用 2
+        :param imprint_type: 使用模式 输出 治疗
+        :param spell_skill: 技能类型 None 变化 True 特殊 False 物理
+        '''
         super().__init__(pp)
         self.skill_model = '0011'
         self.lucky_level = lucky_level
@@ -186,6 +195,7 @@ class ImprintSkill(skill):
         #self.turns = turns
         self.imprint_level = imprint_level
         self.imprint_type = imprint_type
+        self.spell_skill = spell_skill
 
     def addStatus(self,obj):
         if self.status in obj.status:
@@ -196,6 +206,9 @@ class ImprintSkill(skill):
         else:
             obj.setStatus(self.status)
             print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
+
+    def doublePowerOrNot(self,obj):
+        return False
 
 
 
@@ -313,6 +326,22 @@ class Stockpile(ImprintSkill):
     skill_info = '陷入蓄力状态,在蓄力的时候，防御和特防会提高'
     skill_code = 'N010'
     show_name = '蓄力'
+    hit_rate = 0
+
+class Swallow(ImprintSkill):
+    def __init__(self):
+        super().__init__(pp=10,imprint_level=2,imprint_type='restore',status='ST012')
+    skill_info = '将储存的力量吞入,恢复HP'
+    skill_code = 'N011'
+    show_name = '吞下'
+    hit_rate = 0
+
+class SpitUp(ImprintSkill):
+    def __init__(self):
+        super().__init__(pp=10,imprint_level=2,imprint_type='damage',status='ST012',lucky_level=2,spell_skill=True)
+    skill_info = '将储存的力量喷出,造成伤害,威力为次数×100'
+    skill_code = 'N012'
+    show_name = '喷出'
     hit_rate = 0
 
 
