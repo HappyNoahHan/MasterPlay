@@ -58,6 +58,10 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         obj_skill.addStatus(obj_defense)
         print(obj_defense.status)
 
+    elif obj_skill.skill_model == '0012':
+        obj_skill.addStatus(obj_attack)
+        print(obj_attack.status)
+
     elif obj_skill.skill_model == '0005':
         obj_skill.useSkill(obj_attack=obj_attack,obj_defense=obj_defense)
         print(obj_attack.status)
@@ -180,6 +184,10 @@ def battleRun(player,obj1,obj2):
             if not assist.ppvalue.ppCount(obj1.skill_list[skill_number]):
                 print("指令失败,重新选择！")
                 return battleRun(player,obj1, obj2)
+            if obj1.skill_list[skill_number].use_condition != None:
+                if obj1.skill_list[skill_number].use_condition not in obj1.status:
+                    print("技能无法使用！")
+                    return battleRun(player,obj1,obj2)
         # 战斗前的buff
         asscount.checkBuffBeforeBattle(obj1, obj2)
         # 道具检查
@@ -214,14 +222,18 @@ def battleRun(player,obj1,obj2):
                 return battleRun(player,obj2,obj1)
 
         #命中与否判断
-        #判断命中是否提高
+        hit = obj1.skill_list[skill_number].hit_rate
+        #判断命中是否提高 携带物品
         hit_up = propmap.checkCarryPropForHit(obj1)
-        print("命中提高",hit_up)
+        print("命中提高: ",hit_up)
         dodge_up = propmap.checkCarryPropFoeDodge(obj2)
-        print("闪避提高",dodge_up)
+        print("闪避提高: ",dodge_up)
+        #状态检查 命中降低或者提高
+        hit = statusmap.checkStatusHitIndexBeforeBattle(obj1,hit)
+        print("真实命中: ",hit+hit_up)
 
 
-        if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number],obj1.skill_list[skill_number].hit_rate + hit_up,obj1,obj2,obj2.dodge + dodge_up):
+        if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number],hit + hit_up,obj1,obj2,obj2.dodge + dodge_up):
             asscount.checkBuffAfterBattle(obj1)
             # 回合结束检查是否中毒  中毒死亡
             if not statusmap.checkStatusAfterTurn(obj1):

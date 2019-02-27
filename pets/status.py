@@ -66,6 +66,11 @@ class Lock(Status):
     status_code = 'ST099'
     status_info = '被锁定,无法逃脱'
 
+class NoTalent(Status):
+    status_show_name = '无天赋'
+    status_code = 'ST100'
+    status_info = '天赋失效'
+
 class Chaos(Status):
     status_show_name = '混乱'
     status_code = 'ST006'
@@ -109,6 +114,42 @@ class PowerSave(Status):
 
     def statusEffect(self,defense,spell_defense):
         return round(defense * 1.1),round(spell_defense * 1.1)
+
+class HitDown(Status):
+    status_show_name = '命中降低'
+    status_code = 'ST013'
+    status_info = '技能命中降低'
+
+    def statusEffect(self,hit_rate,turns):
+        print("命中降低 %s 层" % turns)
+        return round(hit_rate * (1 - 0.1 * turns))
+
+class Satiate(Status):
+    status_show_name = '吃饱'
+    status_code = 'ST014'
+    status_info = '吃饱状态,吃树果进入该状态'
+
+class PropUp(Status):
+    def __init__(self,status_show_name=None,status_info=None,status_code=None):
+        self.status_show_name = status_show_name
+        self.status_info = status_info
+        self.status_code = status_code
+
+    def statusEffect(self,value,turns):
+        #print("命中提高 %s 层" % turns)
+        return round(value * (1 + 0.1 * turns))
+
+class PropDown(Status):
+    def __init__(self,status_show_name=None,status_info=None,status_code=None):
+        self.status_show_name = status_show_name
+        self.status_info = status_info
+        self.status_code = status_code
+
+    def statusEffect(self,value,turns):
+        #print("命中提高 %s 层" % turns)
+        return round(value * (1 - 0.1 * turns))
+
+
 
 
 

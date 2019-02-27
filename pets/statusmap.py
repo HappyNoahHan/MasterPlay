@@ -15,10 +15,17 @@ status_dict={
     'ST006' : status.Chaos(),
     'ST007' : status.Poisoning(),
     'ST008' : status.Frozen(),
-    'ST009' : status.ArmorBreak(),
+    'ST009' : status.ArmorBreak(), #破甲
     'ST010' : status.Bound(),
-    'ST011' : status.GuardBreak(),
+    'ST011' : status.GuardBreak(), #特防降低
     'ST012' : status.PowerSave(),
+    'ST013' : status.HitDown(), #命中降低
+    'ST014' : status.Satiate(),
+    'ST015' : status.PropUp(status_show_name='命中提升',status_code='ST015',status_info='攻击者技能命中提升'),
+    'ST016' : status.PropUp(status_show_name='攻击提升',status_code='ST016',status_info='攻击者攻击能力提升'),
+    'ST017' : status.PropUp(status_show_name='防御提升',status_code='ST017',status_info='攻击者防御能力提升'),
+    'ST100' : status.NoTalent(),
+    'ST099' : status.Lock(),
 }
 
 
@@ -142,6 +149,8 @@ def checkStatusAfterTurn(obj):
         obj.health -= damage
         if obj.health <= 0:
             return False
+
+
     return True
 
 
@@ -205,6 +214,9 @@ def checkStatusEnd(player):
         if 'ST005' in pet.status:
             removeStatus(pet,'ST005')
             pet.setStatus('ST007')
+
+        if 'ST014' in pet.status:
+            removeStatus(pet,'ST014')
 
 def resetStatusAfterChange(pet):
     '''
@@ -271,18 +283,44 @@ def checkPowerSave(obj,defense,spell_defense):
     return defense,spell_defense
 
 def checkPropBeforeBattle(obj_attack,obj_defense,attack,defense,spell_power,spell_defense,speed):
+    if obj_attack.status:
+        # 2.2 检查攻击提升
+        attack = checkPropUpOrDown(obj_attack, attack, 'ST016')
+        # 2.0 检查是否在麻痹状态下 速度减半
+        if 'ST002' in obj_attack.status:
+            speed = int(speed / 2)
 
-    # 2.0检查是否破甲
-    defense = checkArmorBreakOrNot(obj_defense, defense)
-    # 2.0检查破防
-    spell_defense = checkGuardBreakOrNot(obj_defense, spell_defense)
-    # 2.1 检查蓄力
-    defense,spell_defense = checkPowerSave(obj_defense,defense,spell_defense)
+    if obj_defense.status:
+        # 2.0检查是否破甲
+        defense = checkArmorBreakOrNot(obj_defense, defense)
+        # 2.0检查破防
+        spell_defense = checkGuardBreakOrNot(obj_defense, spell_defense)
+        # 2.1 检查是否蓄力
+        defense,spell_defense = checkPowerSave(obj_defense,defense,spell_defense)
 
-    #2.0 检查是否在麻痹状态下 速度减半
-    if 'ST002' in obj_attack.status:
-        speed = int(speed / 2)
-
+        # 2.2 检查防御提升
+        defense = checkPropUpOrDown(obj_defense,defense,'ST017')
 
     return attack,defense,spell_power,spell_defense,speed
+
+def checkHitDown(obj,hit):
+    if 'ST013' in obj.status:
+        return status_dict['ST013'].statusEffect(hit,obj.status['ST013'])
+    return hit
+
+def checkStatusHitIndexBeforeBattle(obj_attack,hit):
+    #检查命中降低
+    hit = checkPropUpOrDown(obj_attack,hit,'ST013')
+    #检查命中提高
+    hit = checkPropUpOrDown(obj_attack,hit,'ST015')
+
+    return hit
+
+
+def checkPropUpOrDown(obj,value,status_code):
+    if status_code in obj.status:
+        return status_dict[status_code].statusEffect(value,obj.status[status_code])
+    return value
+
+
 

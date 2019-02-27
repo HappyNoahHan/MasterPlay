@@ -5,6 +5,7 @@
                      0008 生命恢复 0009 属性亲和，同属性技能伤害加成
                      0010 伤害并恢复生命
                      0011 印记类技能 和印记多少有关 印记以状态显示
+                     0012 增益状态技能
                      --- 2.0
                      buff 类 与 debuff 类 集合
                      buff  标记attack denfense 法强 法防 提升 统一  0002 buff类技能
@@ -47,6 +48,8 @@ class skill(object):
     property = 'normal'
     hit_rate = 100
     skill_power = None
+    use_condition = None  #使用条件
+
 
 
     def __str__(self):
@@ -125,6 +128,29 @@ class statusSkill(skill):
                 print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
         else:
             print("%s 已经陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
+
+class GainStatusUpSkill(skill):
+    '''
+    多重加增益状态技能
+    '''
+
+    def __init__(self, pp=30, status=None, turns=1):
+        super().__init__(pp)
+        self.skill_model = '0012'
+        self.status = status
+        self.turns = turns
+
+    def addStatus(self,obj):
+        for status in self.status:
+            if status not in obj.status:
+                if talentmap.addStatusOrNot(obj, status):
+                    obj.setStatus(status,self.turns)
+                    print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
+                else:
+                    print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
+            else:
+                print("%s 已经陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
+
 
 class removeStatusSkill(skill):
     def __init__(self,pp=30,effecters='both',status=None):
@@ -227,19 +253,19 @@ class WingAttack(StartWind):
     skill_power = 60
     skill_info = '用翅膀攻击对方'
 
-class AirCut(damageSkill):
+class AirSlash(damageSkill):
     def __init__(self):
-        super().__init__(15)
+        super().__init__(15,hit_status='ST004',addition_status_rate=30)
     show_name = '空气斩'
     skill_code = 'F003'
     property = 'fly'
     skill_power = 75
     hit_rate = 95
-    skill_info = "将空气压缩成刀再攻击对面,威力强大"
+    skill_info = "攻击目标造成伤害,有30%的几率使目标陷入畏缩状态"
 
-class AirSword(damageSkill):
+class AirCutter(damageSkill):
     def __init__(self):
-        super().__init__(25,lucky_level=99)
+        super().__init__(25,lucky_level=2)
     show_name = '空气利刃'
     skill_code = 'F004'
     property = 'fly'
@@ -271,7 +297,7 @@ class Supersonic(statusSkill):
     show_name = '超音波'
     hit_rate = 55
 
-class HighSpeedStar(damageSkill):
+class Swift(damageSkill):
     def __init__(self):
         super().__init__(pp=20)
     skill_info = "发射星星光线,攻击必定命中"
@@ -280,7 +306,7 @@ class HighSpeedStar(damageSkill):
     skill_power = 60
     hit_rate = 0
 
-class BlackEye(statusSkill):
+class MeanLook(statusSkill):
     def __init__(self):
         super().__init__(pp=5,status = 'ST099')
     skill_info = '用目光紧紧盯住对方,使其无法逃脱'
@@ -440,14 +466,14 @@ class vinesTied(debuffSkill):
     effect_turns = 3
     skill_info = "捆绑，持续性收到10%气血的伤害"
 
-class Assimilate(suckBloodSkill):
+class Absorb(suckBloodSkill):
     def __init__(self,pp=15):
         super().__init__(pp)
 
     show_name = '吸取'
     skill_code = 'B006'
     property = 'wood'
-    skill_info = "吸取对方回复自己的生命"
+    skill_info = "攻击目标造成伤害，自身的ＨＰ恢复“造成的伤害×50%"
     skill_power = 40
 
 class illuminatiom(removeDebuffSkill):
@@ -477,9 +503,9 @@ class threaten(debuffSkill):
 
 class Bite(damageSkill):
     def __init__(self):
-        super().__init__(pp=25,hit_status='ST004',spell_skill=False)
+        super().__init__(pp=25,hit_status='ST004',spell_skill=False,addition_status_rate=30)
 
-    skill_info = "咬住对方,有一定的几率使对面畏缩"
+    skill_info = "攻击目标造成伤害,有30%的几率使目标陷入畏缩状态"
     skill_code = 'T003'
     show_name = '咬住'
     property = 'dark'
@@ -512,7 +538,7 @@ class SleepingPowder(statusSkill):
     property = 'insect'
     hit_rate = 85
 
-class StukBlood(suckBloodSkill):
+class LeechLife(suckBloodSkill):
     def __init__(self,pp=20):
         super().__init__(pp,spell_skill=False)
     skill_code = 'C003'
@@ -521,7 +547,7 @@ class StukBlood(suckBloodSkill):
     skill_info = "吸取对方,回复生命"
     property = 'insect'
 
-class BlackFog(removeStatusSkill):
+class Haze(removeStatusSkill):
     def __init__(self):
         super().__init__(status='all')
     show_name = '黑雾'
@@ -586,7 +612,17 @@ class Earthquake(damageSkill):
     property = 'ground'
     skill_info = '引发地震攻击对面,威力超绝'
 
-class SingularLight(statusSkill):
+class MudBomb(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,hit_status='ST013',addition_status_rate=30)
+    show_name = '泥巴炸弹'
+    skill_code = 'E002'
+    skill_power = 65
+    property = 'ground'
+    skill_info = '攻击目标造成伤害,30%几率令目标的命中率降低1级'
+    hit_rate = 85
+
+class ConfuseRay(statusSkill):
     def __init__(self):
         super().__init__(20,status = 'ST002')
     skill_code = 'Q001'
@@ -594,11 +630,11 @@ class SingularLight(statusSkill):
     property = 'ghost'
     skill_info = '显示奇怪的光,使对面混乱'
 
-class Scare(damageSkill):
+class Astonish(damageSkill):
     def __init__(self):
-        super().__init__(pp=15,hit_status='ST004',spell_skill=False)
+        super().__init__(pp=15,hit_status='ST004',spell_skill=False,addition_status_rate=30)
 
-    skill_info = "惊吓,有一定的几率使对面畏缩"
+    skill_info = "惊吓,有30%几率使对面畏缩"
     skill_code = 'Q002'
     show_name = '惊吓'
     property = 'ghost'
@@ -613,16 +649,16 @@ class Toxic(statusSkill):
     skill_info = "释放剧毒,使对方中毒"
     hit_rate = 90
 
-class ToxicFang(damageSkill):
+class PoisonFang(damageSkill):
     def __init__(self):
-        super().__init__(hit_status='ST005',pp=15,spell_skill=False)
-    skill_info = "使用有毒的牙齿攻击,有几率使对面中毒"
+        super().__init__(hit_status='ST005',pp=15,spell_skill=False,addition_status_rate=50)
+    skill_info = "使用有毒的牙齿攻击,有50几率使对面中毒"
     show_name = '剧毒牙'
     property = 'poison'
     skill_power = 50
     skill_code = 'P002'
 
-class VenomImpact(damageSkill):
+class Venoshock(damageSkill):
     def __init__(self):
         super().__init__(pp=10,addition_status='ST005')
 
@@ -651,3 +687,43 @@ class Acid(damageSkill):
     skill_power = 40
     skill_code = 'P005'
     skill_info = '攻击目标造成伤害,10%几率令目标的特防降低1级'
+
+class AcidSpray(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,hit_status='ST011',addition_status_rate=100,turns=2)
+    show_name = '酸液炸弹'
+    property = 'poison'
+    skill_power = 40
+    skill_code = 'P006'
+    skill_info = '攻击目标造成伤害,100%几率令目标的特防降低2级'
+
+class GastroAcid(statusSkill):
+    def __init__(self):
+        super().__init__(pp=10,status='ST100')
+
+    show_name = '胃液'
+    property = 'poison'
+    skill_code = 'P007'
+    skill_info = '使目标陷入无特性状态'
+
+class Belch(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10)
+
+    show_name = '打嗝'
+    property = 'poison'
+    skill_code = 'P008'
+    skill_power = 120
+    hit_rate = 90
+    skill_info = '攻击目标造成伤害,如果自身没有处于吃饱状态则招式无法选择'
+    use_condition = 'ST014'
+
+class Coil(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(pp=20,status=['ST015','ST016','ST017'])
+
+    show_name = '盘蜷'
+    property = 'poison'
+    skill_code = 'P009'
+    hit_rate = 0
+    skill_info = '攻击者命中,攻击,防御提升1级'

@@ -58,7 +58,8 @@ def showPetStatus(obj):
     print("天赋: %s" % talentmap.talent_dict[obj.talent].name,end=' || ')
     if obj.status:
         for status in obj.status:
-            print(statusmap.status_dict[status])
+            print(statusmap.status_dict[status],end=' ')
+        print()
     else:
         print()
 
