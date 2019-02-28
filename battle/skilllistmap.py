@@ -10,12 +10,12 @@ skill_dict = {
     'A004': battle.skill.fireSpin,
     'A005': battle.skill.JetFlame,
     'A009': battle.skill.flameAffinity,
-    'F001': battle.skill.StartWind, #起风
+    'F001': battle.skill.Gust, #起风
     'F002': battle.skill.WingAttack, #翅膀攻击
     'F003': battle.skill.AirSlash, #空气斩
     'F004': battle.skill.AirCutter, #空气利刃
-    'N001': battle.skill.Strike,
-    'N002': battle.skill.Grab,
+    'N001': battle.skill.Tackle,#撞击
+    'N002': battle.skill.Grab,#抓
     'N003': battle.skill.Supersonic, #超音波
     'N004': battle.skill.Swift, #高速星星
     'N005': battle.skill.MeanLook, #黑色目光
@@ -26,6 +26,8 @@ skill_dict = {
     'N010': battle.skill.Stockpile,#蓄力
     'N011': battle.skill.Swallow,#吞下
     'N012': battle.skill.SpitUp,#喷出
+    'N013': battle.skill.QuickAttack,#电光一闪
+    'N014': battle.skill.Whirlwind,#吹飞
     'B002': battle.skill.azorLeaf,
     'B003': battle.skill.lifeRecovery,
     'B004': battle.skill.lifeChains,
@@ -48,6 +50,7 @@ skill_dict = {
     'R002': battle.skill.RockFall,
     'E001': battle.skill.Earthquake,#地震
     'E002': battle.skill.MudBomb,#泥巴炸弹
+    'E003': battle.skill.SandAttack,#泼沙
     'Q001': battle.skill.ConfuseRay, #奇异之光
     'Q002': battle.skill.Astonish, #惊吓
     'P001': battle.skill.Toxic, #剧毒

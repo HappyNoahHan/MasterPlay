@@ -15,7 +15,7 @@ status_dict={
     'ST006' : status.Chaos(),
     'ST007' : status.Poisoning(),
     'ST008' : status.Frozen(),
-    'ST009' : status.ArmorBreak(), #破甲
+    'ST009' : status.ArmorBreak(), #破甲 防御降低
     'ST010' : status.Bound(),
     'ST011' : status.GuardBreak(), #特防降低
     'ST012' : status.PowerSave(),
@@ -24,8 +24,15 @@ status_dict={
     'ST015' : status.PropUp(status_show_name='命中提升',status_code='ST015',status_info='攻击者技能命中提升'),
     'ST016' : status.PropUp(status_show_name='攻击提升',status_code='ST016',status_info='攻击者攻击能力提升'),
     'ST017' : status.PropUp(status_show_name='防御提升',status_code='ST017',status_info='攻击者防御能力提升'),
+    'ST018' : status.PropUp(status_show_name='特攻提升',status_code='ST018',status_info='攻击者特攻能力提升'),
+    'ST019' : status.PropUp(status_show_name='特防提升',status_code='ST019',status_info='攻击者特防能力提升'),
+    'ST020' : status.PropUp(status_show_name='速度提升',status_code='ST020',status_info='攻击者速度能力提升'),
+    'ST021' : status.PropDown(status_show_name='攻击降低',status_code='ST021',status_info='攻击者攻击能力降低'),
+    'ST022' : status.PropDown(status_show_name='特攻降低',status_code='ST022',status_info='攻击者特攻能力降低'),
+    'ST023' : status.PropDown(status_show_name='速度降低',status_code='ST023',status_info='攻击者速度能力降低'),
     'ST100' : status.NoTalent(),
     'ST099' : status.Lock(),
+    'ST101' : status.Whirlwind(),
 }
 
 
@@ -286,6 +293,13 @@ def checkPropBeforeBattle(obj_attack,obj_defense,attack,defense,spell_power,spel
     if obj_attack.status:
         # 2.2 检查攻击提升
         attack = checkPropUpOrDown(obj_attack, attack, 'ST016')
+        attack = checkPropUpOrDown(obj_attack,attack,'ST021')
+        # 2.2 检查特攻击
+        spell_power = checkPropUpOrDown(obj_attack,spell_power,'ST018')
+        spell_power = checkPropUpOrDown(obj_attack,spell_power,'ST022')
+        #2.2 检查速度降低或提高
+        speed = checkPropUpOrDown(obj_attack,attack,'ST020')
+        speed = checkPropUpOrDown(obj_attack,attack,'ST023')
         # 2.0 检查是否在麻痹状态下 速度减半
         if 'ST002' in obj_attack.status:
             speed = int(speed / 2)
@@ -295,11 +309,13 @@ def checkPropBeforeBattle(obj_attack,obj_defense,attack,defense,spell_power,spel
         defense = checkArmorBreakOrNot(obj_defense, defense)
         # 2.0检查破防
         spell_defense = checkGuardBreakOrNot(obj_defense, spell_defense)
+        # 2.2 检查防御提升 特防
+        defense = checkPropUpOrDown(obj_defense, defense, 'ST017')
+        spell_defense = checkPropUpOrDown(obj_defense,spell_defense,'ST019')
         # 2.1 检查是否蓄力
         defense,spell_defense = checkPowerSave(obj_defense,defense,spell_defense)
 
-        # 2.2 检查防御提升
-        defense = checkPropUpOrDown(obj_defense,defense,'ST017')
+
 
     return attack,defense,spell_power,spell_defense,speed
 

@@ -22,9 +22,10 @@ def addStatusOrNot(pet,status_code):
         return False
 
 def checkTalentBeforeBattle(pet,skill,attack, defense, spell_power, spell_defense, speed, power):
-    if 'ST100' not in pet.status:
-        if talent_dict[pet.talent].up_type == 'power':
-            power = talent_dict[pet.talent].checkTalent(power,pet.health,pet._max_health,skill.property)
-    else:
-        print("天赋失效～")
+    if pet.talent != None:
+        if 'ST100' not in pet.status:
+            if talent_dict[pet.talent].up_type == 'power':
+                power = talent_dict[pet.talent].checkTalent(power,pet.health,pet._max_health,skill.property)
+        else:
+            print("天赋失效～")
     return attack,defense,spell_power,spell_defense,speed,power

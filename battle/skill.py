@@ -7,6 +7,7 @@
                      0010 伤害并恢复生命
                      0011 印记类技能 和印记多少有关 印记以状态显示
                      0012 增益状态技能
+                     0013 特殊状态技能 eg.吹飞
                      --- 2.0
                      buff 类 与 debuff 类 集合
                      buff  标记attack denfense 法强 法防 提升 统一  0002 buff类技能
@@ -250,9 +251,23 @@ class ImprintSkill(skill):
     def doublePowerOrNot(self,obj):
         return False
 
+class SpecialStatusSkill(skill):
+    def __init__(self,pp=30,status=None,turns =1 ):
+        super().__init__(pp)
+        self.skill_model = '0013'
+        self.status = status
+        self.turns = turns
+
+    def addStatus(self,obj_attack,obj_defense):
+        if obj_attack.level >= obj_defense.level:
+            if obj_defense.has_trainer == False:
+                obj_defense.setStatus(self.status)
+                print("%s 陷入 %s 状态 ！" % (obj_defense.name, statusmap.status_dict[self.status].status_show_name))
+                return True
+        return False
 
 
-class StartWind(damageSkill):
+class Gust(damageSkill):
     def __init__(self):
         super().__init__(35,spell_skill=False)
     show_name = '起风'
@@ -261,7 +276,7 @@ class StartWind(damageSkill):
     property = 'fly'
     skill_info = '用翅膀刮起风攻击对方'
 
-class WingAttack(StartWind):
+class WingAttack(Gust):
     show_name = '翅膀攻击'
     skill_code = 'F002'
     skill_power = 60
@@ -287,7 +302,7 @@ class AirCutter(damageSkill):
     hit_rate = 95
     skill_info = "用锐利的风切攻击,更容易会心一击~"
 
-class Strike(damageSkill):
+class Tackle(damageSkill):
     def __init__(self):
         super().__init__(pp=35,spell_skill=False)
     show_name = '撞击'
@@ -384,7 +399,21 @@ class SpitUp(ImprintSkill):
     show_name = '喷出'
     hit_rate = 0
 
+class QuickAttack(damageSkill):
+    def __init__(self):
+        super().__init__(spell_skill=False)
+    skill_info = '攻击目标造成伤害'
+    show_name = '电光一闪'
+    skill_code = 'N013'
+    skill_power = 40
 
+class Whirlwind(SpecialStatusSkill):
+    def __init__(self):
+        super().__init__(pp=20,status='ST101')
+    show_name = '吹飞'
+    skill_code = 'N014'
+    hit_rate = 0
+    skill_info = '吹飞对手'
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -655,6 +684,14 @@ class MudBomb(damageSkill):
     property = 'ground'
     skill_info = '攻击目标造成伤害,30%几率令目标的命中率降低1级'
     hit_rate = 85
+
+class SandAttack(statusSkill):
+    def __init__(self):
+        super().__init__(pp=15,status='ST013')
+    show_name = '泼沙'
+    skill_code = 'E003'
+    skill_info = '令目标的命中率降低1级'
+    property = 'ground'
 
 class ConfuseRay(statusSkill):
     def __init__(self):

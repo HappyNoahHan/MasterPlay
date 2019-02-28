@@ -17,6 +17,10 @@ def explore(player,wild_pet):
     player.battle_pet_list.clear()
 
     if battering.battleing(player, wild_pet):
+        if 'ST101' in wild_pet.status:
+            print("%s 被吹飞"% wild_pet.name)
+            return True
+
         if player.battle_run_success == False:
             if wild_pet.captured == False:
                 for master_pet in player.battle_pet_list:

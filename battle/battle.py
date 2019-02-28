@@ -117,6 +117,12 @@ def damageCount(obj_defense,obj_attack,obj_skill):
             else:
                 print("无蓄力,没有任何效果")
 
+    elif obj_skill.skill_model == '0013':
+        if obj_skill.addStatus(obj_attack,obj_defense):
+            return False
+        else:
+            print("没有任何效果")
+
 
 
     #debuff  增幅buff 次数

@@ -13,6 +13,8 @@
 from assist import cap,rancom
 
 class Pet(object):
+    #天赋
+    talent = None
     #能力值 每个精灵属性皆不同
     health_basic = 1
     attack_basic = 1
@@ -74,7 +76,7 @@ class Pet(object):
         self.basic_point_getter = None
         #self.exp_status = []
         #遇见随机数
-        self.talent = 'TA002'
+        #self.talent = 'TA002'
         #是否存活
         self.alive = True
         #是否玩家所有

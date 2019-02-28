@@ -71,6 +71,11 @@ class NoTalent(Status):
     status_code = 'ST100'
     status_info = '天赋失效'
 
+class Whirlwind(Status):
+    status_show_name = '吹飞'
+    status_code = 'ST101'
+    status_info = '吹跑精灵'
+
 class Chaos(Status):
     status_show_name = '混乱'
     status_code = 'ST006'

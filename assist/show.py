@@ -55,7 +55,8 @@ def showPetStatus(obj):
            obj.getSpellPower(),obj.getSpellDefense(),
            obj.getSpeed(),obj.level,show_tag)
           ,end=' || ')
-    print("天赋: %s" % talentmap.talent_dict[obj.talent].name,end=' || ')
+    if obj.talent:
+        print("天赋: %s" % talentmap.talent_dict[obj.talent].name,end=' || ')
     if obj.status:
         for status in obj.status:
             print(statusmap.status_dict[status],end=' ')
