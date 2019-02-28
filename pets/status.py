@@ -159,6 +159,11 @@ class Fly(Status):
     status_info = '飞上天空'
     status_code = 'ST024'
 
+class Vulnerability(Status):
+    status_show_name = '易受伤'
+    status_info = '容易伤害'
+    status_code = 'ST025'
+
 
 
 

@@ -52,6 +52,8 @@ class skill(object):
     hit_rate = 100
     skill_power = None
     use_condition = None  #使用条件
+    multi_step = False #多段技能 默认False
+
 
 
 
@@ -274,7 +276,7 @@ class CopySkill(skill):
 
     def useOrNot(self,obj):
         if obj.last_used_skill != None:
-            if obj.last_used_skill.skill_model != '0014':
+            if obj.last_used_skill.skill_model != '0014' and obj.last_used_skill.multi_step == False:
                 return obj.last_used_skill
         return None
 
@@ -352,6 +354,25 @@ class MirrorMove(CopySkill):
     hit_rate = 0
     property = 'fly'
     skill_info = '使用目标最后使用过的招式'
+
+class Hurricane(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,hit_status='ST006',addition_status_rate=30)
+    show_name = '暴风'
+    skill_code = 'F009'
+    hit_rate = 70
+    skill_power = 110
+    property = 'fly'
+    skill_info = '攻击目标造成伤害,有30%的几率使目标陷入混乱状态'
+
+
+class Peck(damageSkill):
+    def __init__(self):
+        super().__init__(pp=35,spell_skill=False)
+    show_name = '啄'
+    skill_code = 'F010'
+    skill_power = 35
+    skill_info = '啄对方,造成伤害'
 
 class Tackle(damageSkill):
     def __init__(self):
@@ -465,6 +486,23 @@ class Whirlwind(SpecialStatusSkill):
     skill_code = 'N014'
     hit_rate = 0
     skill_info = '吹飞对手'
+
+class Growl(statusSkill):
+    def __init__(self):
+        super().__init__(pp=40,status='ST021')
+    show_name = '叫声'
+    skill_code = 'N015'
+    skill_info = '令目标的攻击降低1级'
+
+class FuryAttack(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,spell_skill=False)
+    show_name = '乱击'
+    skill_info = '攻击目标造成伤害，一回合内连续攻击2～5次'
+    skill_power = 15
+    hit_rate = 85
+    skill_code = 'N016'
+    multi_step = True
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -586,7 +624,15 @@ class illuminatiom(removeDebuffSkill):
     show_name = '光照'
     skill_info = "驱散一个debuff效果"
     skill_code = 'S001'
-    property = 'light'
+    property = 'psychic'
+
+class Agility(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(status=['ST020'],turns=2)
+    show_name = '高速移动'
+    skill_info = '使用者的速度提升2级'
+    skill_code = 'S002'
+    property = 'psychic'
 
 class disperse(removeBuffSkill):
     def __init__(self,pp=20):
@@ -623,6 +669,15 @@ class Crunch(damageSkill):
     show_name = '咬碎'
     property = 'dark'
     skill_power = 80
+
+class Pursuit(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,spell_skill=False,addition_status='ST025')
+    skill_power = 40
+    skill_code = 'T005'
+    show_name = '追打'
+    property = 'dark'
+    skill_info = '攻击目标造成伤害,如果对方易受伤,威力加倍'
 
 class StunSpore(statusSkill):
     def __init__(self):

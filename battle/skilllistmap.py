@@ -1,4 +1,5 @@
 import battle.skill
+import random
 #old verson skill setting
 #技能列表与代号
 #当实例里面有参数有使用次数 用同一个类实例会出现问题
@@ -18,6 +19,8 @@ skill_dict = {
     'F006': battle.skill.Roost,#羽栖
     'F007': battle.skill.Tailwind,#顺风
     'F008': battle.skill.MirrorMove,#鹦鹉学舌
+    'F009': battle.skill.Hurricane,#暴风
+    'F010': battle.skill.Peck,#啄
     'N001': battle.skill.Tackle,#撞击
     'N002': battle.skill.Grab,#抓
     'N003': battle.skill.Supersonic, #超音波
@@ -32,18 +35,22 @@ skill_dict = {
     'N012': battle.skill.SpitUp,#喷出
     'N013': battle.skill.QuickAttack,#电光一闪
     'N014': battle.skill.Whirlwind,#吹飞
+    'N015': battle.skill.Growl,#叫声
+    'N016': battle.skill.FuryAttack,#乱击
     'B002': battle.skill.azorLeaf,
     'B003': battle.skill.lifeRecovery,
     'B004': battle.skill.lifeChains,
     'B005': battle.skill.vinesTied,
     'B006': battle.skill.Absorb, #吸取
     'S001': battle.skill.illuminatiom,
+    'S002': battle.skill.Agility,#高速移动
     'I001': battle.skill.Haze, #黑雾
     'I002': battle.skill.IceFang,#冰冻牙
     'T001': battle.skill.disperse,
     'T002': battle.skill.threaten,
     'T003': battle.skill.Bite, #咬住
     'T004': battle.skill.Crunch,#咬碎
+    'T005': battle.skill.Pursuit,#追打
     'C001': battle.skill.StunSpore,
     'C002': battle.skill.SleepingPowder,
     'C003': battle.skill.LeechLife, #吸血

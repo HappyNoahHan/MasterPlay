@@ -234,6 +234,7 @@ def battleRun(player,obj1,obj2):
                 assist.show.printTurn(obj2)
                 return battleRun(player,obj2,obj1)
 
+
         #命中与否判断
         hit = obj1.skill_list[skill_number].hit_rate
         #判断命中是否提高 携带物品
@@ -244,29 +245,47 @@ def battleRun(player,obj1,obj2):
         #状态检查 命中降低或者提高
         hit = statusmap.checkStatusHitIndexBeforeBattle(obj1,hit)
         print("真实命中: ",hit+hit_up)
-
-
-        if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number],hit + hit_up,obj1,obj2,obj2.dodge + dodge_up):
-            asscount.checkBuffAfterBattle(obj1)
-            # 回合结束检查是否中毒  中毒死亡
-            if not statusmap.checkStatusAfterTurn(obj1):
-                assist.show.petDie(obj1.name)
-                assist.show.battleOver()
+        #多段技能结算
+        if obj1.skill_list[skill_number].multi_step == False:
+            if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number],hit + hit_up,obj1,obj2,obj2.dodge + dodge_up):
+                asscount.checkBuffAfterBattle(obj1)
+                # 回合结束检查是否中毒  中毒死亡
+                if not statusmap.checkStatusAfterTurn(obj1):
+                    assist.show.petDie(obj1.name)
+                    assist.show.battleOver()
+                    return True
+                assist.show.printTurn(obj2.name)
+                return battleRun(player,obj2,obj1)
+            #改写结算 直接把技能扔进去
+            if damageCount(obj2,obj1,obj1.skill_list[skill_number]):
+                # 回合结束检查是否中毒  中毒死亡
+                if not statusmap.checkStatusAfterTurn(obj1):
+                    assist.show.petDie(obj1.name)
+                    assist.show.battleOver()
+                    return True
+                assist.show.printTurn(obj2.name)
+                return battleRun(player,obj2,obj1)
+            else:
                 return True
-            assist.show.printTurn(obj2.name)
-            return battleRun(player,obj2,obj1)
-
-        #改写结算 直接把技能扔进去
-        if damageCount(obj2,obj1,obj1.skill_list[skill_number]):
-            # 回合结束检查是否中毒  中毒死亡
-            if not statusmap.checkStatusAfterTurn(obj1):
-                assist.show.petDie(obj1.name)
-                assist.show.battleOver()
-                return True
-            assist.show.printTurn(obj2.name)
-            return battleRun(player,obj2,obj1)
+        #多段
         else:
-            return True
+            counts = rancom.getStepOfSkill()
+            for count in range(counts):
+                print("第 %s 次 攻击 " % (count+1))
+                print("=" * 30)
+                if battle.hitrate.hitOrNot(obj1.skill_list[skill_number], hit + hit_up, obj1, obj2,obj2.dodge + dodge_up):
+                    if not damageCount(obj2, obj1, obj1.skill_list[skill_number]):
+                        return True
+                else:
+                    continue
+                time.sleep(1)
+
+            if not statusmap.checkStatusAfterTurn(obj1):
+                assist.show.petDie(obj1.name)
+                assist.show.battleOver()
+                return True
+            assist.show.printTurn(obj2.name)
+            return battleRun(player, obj2, obj1)
 
     elif command == '2':
         #交换精灵模块

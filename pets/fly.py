@@ -11,13 +11,14 @@ class Pidgey(pets.propets.PropInit):
     name = '波波'
     kind = '鸟'
     basic_exp_value = 54
+    talent = 'TA001'
 
     can_get_base_point = 1
     can_get_base_point_type = 'speed'
 
     capture_rate = 255
     # 精灵编号
-    pet_no = '026'
+    pet_no = '016'
     prop = ['fly','normal']
 
 class Pidgeotto(Pidgey):
@@ -35,7 +36,7 @@ class Pidgeotto(Pidgey):
 
     capture_rate = 120
     # 精灵编号
-    pet_no = '027'
+    pet_no = '017'
 
 
 class Pidgeot(Pidgey):
@@ -53,4 +54,25 @@ class Pidgeot(Pidgey):
 
     capture_rate = 45
     # 精灵编号
-    pet_no = '028'
+    pet_no = '018'
+
+class Spearow(pets.propets.PropInit):
+    health_basic = 40
+    attack_basic = 60
+    defense_basic = 30
+    spell_power_basic = 31
+    spell_defense_basic = 31
+    speed_basic = 70
+
+    name = '烈雀'
+    kind = '鸟'
+    basic_exp_value = 52
+    #talent = 'TA001'
+
+    can_get_base_point = 1
+    can_get_base_point_type = 'speed'
+
+    capture_rate = 255
+    # 精灵编号
+    pet_no = '021'
+    prop = ['fly','normal']

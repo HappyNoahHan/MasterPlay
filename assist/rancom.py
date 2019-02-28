@@ -43,3 +43,16 @@ def canChoiceList(obj):
             choice_list.append(key)
 
     return choice_list
+
+#多段技能触发几段
+def getStepOfSkill():
+    num = random.randint(1,100)
+
+    if num < 34:
+        return 2
+    elif 33 < num < 67:
+        return 3
+    elif 66 < num < 84:
+        return 4
+    else:
+        return 5
