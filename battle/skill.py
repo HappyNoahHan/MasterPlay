@@ -8,6 +8,7 @@
                      0011 印记类技能 和印记多少有关 印记以状态显示
                      0012 增益状态技能
                      0013 特殊状态技能 eg.吹飞
+                     0014 复制类技能
                      --- 2.0
                      buff 类 与 debuff 类 集合
                      buff  标记attack denfense 法强 法防 提升 统一  0002 buff类技能
@@ -266,6 +267,17 @@ class SpecialStatusSkill(skill):
                 return True
         return False
 
+class CopySkill(skill):
+    def __init__(self,pp=30):
+        super().__init__(pp)
+        self.skill_model = '0014'
+
+    def useOrNot(self,obj):
+        if obj.last_used_skill != None:
+            if obj.last_used_skill.skill_model != '0014':
+                return obj.last_used_skill
+        return None
+
 
 class Gust(damageSkill):
     def __init__(self):
@@ -301,6 +313,45 @@ class AirCutter(damageSkill):
     skill_power = 60
     hit_rate = 95
     skill_info = "用锐利的风切攻击,更容易会心一击~"
+
+class FeatherDance(statusSkill):
+    def __init__(self):
+        super().__init__(pp=15,status='ST021',turns=2)
+
+    show_name = '羽毛舞'
+    skill_info = '令目标的攻击降低2级'
+    property = 'fly'
+    skill_code = 'F005'
+
+class Roost(lifeRecoreSkill):
+    def __init__(self,pp=10):
+        super().__init__(pp)
+    show_name = '羽栖'
+    skill_code = 'F006'
+    index_per = 0.5
+    property = 'fly'
+    skill_info = "恢复使用者的1⁄2的ＨＰ值"
+
+class Tailwind(buffSkill):
+    def __init__(self):
+        super().__init__(15)
+    show_name = '顺风'
+    skill_code = 'F007'
+    index_per = 1
+    effect_turns = 4
+    skill_info = "己方场地上全部的宝可梦的速度加倍。持续时间为4回合，包括使用的当回合"
+    buff_prop = 'Speed'
+    property = 'fly'
+
+class MirrorMove(CopySkill):
+    def __init__(self):
+        super().__init__(pp=20)
+
+    show_name = '鹦鹉学舌'
+    skill_code = 'F008'
+    hit_rate = 0
+    property = 'fly'
+    skill_info = '使用目标最后使用过的招式'
 
 class Tackle(damageSkill):
     def __init__(self):
@@ -818,3 +869,13 @@ class ThunderFang(MultipleDamageSkill):
     hit_rate = 95
     skill_power = 65
     skill_info = '攻击目标造成伤害,有10%的几率使目标陷入麻痹/畏缩状态'
+
+class Twister(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,hit_status='ST004',addition_status='ST024',addition_status_rate=20)
+
+    show_name = '龙卷风'
+    skill_code = 'G001'
+    property = 'dragon'
+    skill_power = 40
+    skill_info = '攻击目标造成伤害,如果目标处于飞翔状态，威力翻倍,有20%的几率使目标陷入畏缩状态'

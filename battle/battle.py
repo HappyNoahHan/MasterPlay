@@ -9,7 +9,7 @@ import battle.buff
 import assist.ppvalue
 import assist.life
 import assist.petattr
-from assist import exp,evolve,changepet
+from assist import exp,evolve,changepet,rancom
 from battle import skilldamage,asscount
 from pets import pettalent,talentmap,status,statusmap
 from props import propmap,bag
@@ -123,7 +123,12 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         else:
             print("没有任何效果")
 
-
+    elif obj_skill.skill_model == '0014':
+        copy_skill = obj_skill.useOrNot(obj_defense)
+        if copy_skill != None:
+            return damageCount(obj_defense,obj_attack,copy_skill)
+        else:
+            print("没有任何效果")
 
     #debuff  增幅buff 次数
     asscount.checkBuffAfterBattle(obj_attack)
@@ -173,7 +178,7 @@ def battleRun(player,obj1,obj2):
         if obj1.autoAi:
             assist.show.petSelectSkill(obj1.name)
             time.sleep(3)
-            skill_number = str(random.randint(1,len(obj1.skill_list)))
+            skill_number = random.choice(rancom.canChoiceList(obj1))
         else:
             for key, value in obj1.skill_list.items():
                 if value != None:
@@ -194,6 +199,8 @@ def battleRun(player,obj1,obj2):
                 if obj1.skill_list[skill_number].use_condition not in obj1.status:
                     print("技能无法使用！")
                     return battleRun(player,obj1,obj2)
+        #记录最后使用的技能
+        obj1.last_used_skill = obj1.skill_list[skill_number]
         # 战斗前的buff
         asscount.checkBuffBeforeBattle(obj1, obj2)
         # 道具检查

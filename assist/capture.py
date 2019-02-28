@@ -48,6 +48,7 @@ def addPetOrNot(player,wild_pet):
     wild_pet.autoAi = False
     wild_pet.captured = True
     wild_pet.basic_point_getter = None
+    wild_pet.last_used_skill = None
 
     print("是否给新精灵命名 1 yes 2 no")
     select_id = input(">")

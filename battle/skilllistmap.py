@@ -14,6 +14,10 @@ skill_dict = {
     'F002': battle.skill.WingAttack, #翅膀攻击
     'F003': battle.skill.AirSlash, #空气斩
     'F004': battle.skill.AirCutter, #空气利刃
+    'F005': battle.skill.FeatherDance,#羽毛舞
+    'F006': battle.skill.Roost,#羽栖
+    'F007': battle.skill.Tailwind,#顺风
+    'F008': battle.skill.MirrorMove,#鹦鹉学舌
     'N001': battle.skill.Tackle,#撞击
     'N002': battle.skill.Grab,#抓
     'N003': battle.skill.Supersonic, #超音波
@@ -64,6 +68,7 @@ skill_dict = {
     'P009': battle.skill.Coil,#盘蜷
     'P010': battle.skill.GunkShot,#垃圾射击
     'H001': battle.skill.ThunderFang,#雷电牙
+    'G001': battle.skill.Twister,#龙卷风
 
 }
 

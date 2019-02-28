@@ -154,6 +154,10 @@ class PropDown(Status):
         #print("命中提高 %s 层" % turns)
         return round(value * (1 - 0.1 * turns))
 
+class Fly(Status):
+    status_show_name = '飞翔'
+    status_info = '飞上天空'
+    status_code = 'ST024'
 
 
 

@@ -45,7 +45,11 @@ def buffCount(obj):
             else:
                 buff_remove_list.append(key)
         else:
-            pass
+            if value[0] == 0:
+                value[1] = 0
+                buff_remove_list.append(key)
+            obj.tmp_speed += round(obj.speed * value[1])
+
     if buff_remove_list:
         for key in buff_remove_list:
             obj.buff_dict.pop(key)

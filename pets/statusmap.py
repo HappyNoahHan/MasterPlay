@@ -30,6 +30,7 @@ status_dict={
     'ST021' : status.PropDown(status_show_name='攻击降低',status_code='ST021',status_info='攻击者攻击能力降低'),
     'ST022' : status.PropDown(status_show_name='特攻降低',status_code='ST022',status_info='攻击者特攻能力降低'),
     'ST023' : status.PropDown(status_show_name='速度降低',status_code='ST023',status_info='攻击者速度能力降低'),
+    'ST024' : status.Fly(),
     'ST100' : status.NoTalent(),
     'ST099' : status.Lock(),
     'ST101' : status.Whirlwind(),
@@ -89,9 +90,8 @@ def checkShrinkaOrNot(obj):
     :return:
     '''
     if 'ST004' in obj.status:
-        if status_dict['ST004'].statusEffect():
-            print("%s 畏缩不前,没有做出任何动作！" % obj.name)
-            return True
+        print("%s 畏缩不前,没有做出任何动作！" % obj.name)
+        return True
     return False
 
 def checkStatusBeforeBattle(obj):
@@ -104,7 +104,7 @@ def checkStatusBeforeBattle(obj):
             time.sleep(3)
             return True
         if checkShrinkaOrNot(obj):
-            print("%s 畏缩不前,没有成功使用技能~" % obj.name)
+            #print("%s 畏缩不前,没有成功使用技能~" % obj.name)
             return True
         if checkFrozenOrNot(obj):
             print("%s 冰冻中, 无法使用任何技能" % obj.name)
@@ -156,6 +156,9 @@ def checkStatusAfterTurn(obj):
         obj.health -= damage
         if obj.health <= 0:
             return False
+
+    if 'ST004' in obj.status:
+        removeStatus(obj,'ST004')
 
 
     return True
@@ -224,6 +227,11 @@ def checkStatusEnd(player):
 
         if 'ST014' in pet.status:
             removeStatus(pet,'ST014')
+
+        if 'ST004' in pet.status:
+            removeStatus(pet,'ST004')
+
+        pet.last_used_skill = None
 
 def resetStatusAfterChange(pet):
     '''

@@ -90,6 +90,8 @@ class Pet(object):
             #self.autoAi = True
             self.captured = False
         self.autoAi = autoAi
+        #最后使用过的技能
+        self.last_used_skill = None
 
 
     def getDefense(self):
