@@ -171,7 +171,7 @@ class GainStatusUpSkill(skill):
                 print("%s 已经陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
 
     def doubleEffect(self,weather):
-        if self.weather_condition != None:
+        if self.weather_condition != None and weather != None:
             if weather.code in self.weather_condition:
                 return True
         return False

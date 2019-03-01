@@ -38,6 +38,14 @@ status_dict={
     'ST101' : status.Whirlwind(),
 }
 
+clear_list = []
+for key,value in status_dict.items():
+    clear_list.append(key)
+
+clear_list.remove('ST005')
+clear_list.remove('ST007')
+
+
 
 def checkStatusAfterBattle(obj,skill,damage):
     damage_index = damage
@@ -227,11 +235,9 @@ def checkStatusEnd(player):
             removeStatus(pet,'ST005')
             pet.setStatus('ST007')
 
-        if 'ST014' in pet.status:
-            removeStatus(pet,'ST014')
-
-        if 'ST004' in pet.status:
-            removeStatus(pet,'ST004')
+        for status in clear_list:
+            if status in pet.status:
+                removeStatus(pet,status)
 
         pet.last_used_skill = None
 
