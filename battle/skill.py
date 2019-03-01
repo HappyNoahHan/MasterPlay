@@ -1,6 +1,6 @@
 '''
 #skill_code 技能代号  A  火系  N 普通系 B 木系 C 虫系 D 水系 S 超能=光 I 冰 T 恶=黑暗 E 地面 F 飞行 G 龙
-                     R 岩石 P 毒 Q鬼魂 H 电
+                     R 岩石 P 毒 Q鬼魂 H 电     Y 妖精 fairy
 #skill_mode 技能类型   0001 伤害技能 0002 防御临时提升 003 debuff 技能
                      0004 施加状态技能  0005 移除状态技能
                      0008 生命恢复 0009 属性亲和，同属性技能伤害加成
@@ -152,22 +152,29 @@ class GainStatusUpSkill(skill):
     多重加增益状态技能
     '''
 
-    def __init__(self, pp=30, status=None, turns=1):
+    def __init__(self, pp=30, status=None, turns=1,weather_condition = None):
         super().__init__(pp)
         self.skill_model = '0012'
         self.status = status
         self.turns = turns
+        self.weather_condition = weather_condition
 
-    def addStatus(self,obj):
+    def addStatus(self,obj,double=1):
         for status in self.status:
             if status not in obj.status:
                 if talentmap.addStatusOrNot(obj, status):
-                    obj.setStatus(status,self.turns)
+                    obj.setStatus(status,self.turns * double)
                     print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
                 else:
                     print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
             else:
                 print("%s 已经陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
+
+    def doubleEffect(self,weather):
+        if self.weather_condition != None:
+            if weather.code in self.weather_condition:
+                return True
+        return False
 
 
 class removeStatusSkill(skill):
@@ -539,6 +546,13 @@ class FocusEnergy(GainStatusUpSkill):
     show_name = '聚气'
     skill_code = 'N017'
     skill_info = '使自身进入易中要害状态'
+
+class Growth(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(pp=20,status=['ST016','ST018'],weather_condition=['W001','W002'])
+    show_name = '生长'
+    skill_code = 'N018'
+    skill_info = '令使用者的攻击提升1级,令使用者的特攻提升1级,在大晴天或大日照天气下等级提升数量翻倍'
 
 class steadiness(buffSkill):
     show_name = '稳固'

@@ -1,6 +1,6 @@
 from place import hospital,town,village,wildform,wildpetlist,treasure,shop,petgym
 from players import  npcmap
-from assist import prize
+from assist import prize,weathermap
 map_basic={
         '1':['野外探险',True],
         '2':['搜索玩家',True],
@@ -40,6 +40,7 @@ village_map_for_start={
                                     maplist=dict(map_basic,**grassfrom_map_for_no_1),
                                  wild_pet_list=wildpetlist.wild_pet_list_in_grass_no_1,
                                  treasure_box_list=treasure.treasure_box_for_maelstrom_no_1,
+                                    weather=weathermap.weather_dict['W001'],
                                  npc_list = npcmap.trainer_in_grass_no_1),True],
 }
 

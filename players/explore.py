@@ -3,7 +3,7 @@ from assist import show,exp,evolve,life
 from battle import asscount
 from props import propmap
 from pets import statusmap
-def explore(player,wild_pet):
+def explore(player,wild_pet,weather):
     '''
     野外探险
     :param player:
@@ -16,7 +16,7 @@ def explore(player,wild_pet):
 
     player.battle_pet_list.clear()
 
-    if battering.battleing(player, wild_pet):
+    if battering.battleing(player, wild_pet,weather=weather):
         if 'ST101' in wild_pet.status:
             print("%s 被吹飞"% wild_pet.name)
             return True

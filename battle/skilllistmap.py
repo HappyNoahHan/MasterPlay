@@ -41,6 +41,7 @@ skill_dict = {
     'N015': battle.skill.Growl,#叫声
     'N016': battle.skill.FuryAttack,#乱击
     'N017': battle.skill.FocusEnergy,#聚气
+    'N018': battle.skill.Growth,#生长
     'B002': battle.skill.azorLeaf,
     'B003': battle.skill.lifeRecovery,
     'B004': battle.skill.lifeChains,

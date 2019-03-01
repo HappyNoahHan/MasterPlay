@@ -5,9 +5,10 @@ from props import bag
 import random,time,os
 
 class WildForm(placebase.Place):
-    def __init__(self,name='',maplist={},wild_pet_list={},treasure_box_list={},npc_list={},block=None):
+    def __init__(self,name='',maplist={},wild_pet_list={},treasure_box_list={},npc_list={},block=None,weather=None):
         super().__init__(name=name,maplist=maplist,treasure_box_list=treasure_box_list,npc_list=npc_list,block=block)
         self.wild_pet_list = wild_pet_list
+        self.weather = weather
 
 
 
@@ -33,7 +34,7 @@ class WildForm(placebase.Place):
                     wild_pet = wildpetlist.getWildPet(self.wild_pet_list)
                     #show.showPetStatus(wild_pet)
                     print("你遇到了 %s ! lv: %s" % (wild_pet.name,wild_pet.level))
-                    if explore.explore(player,wild_pet):
+                    if explore.explore(player,wild_pet,self.weather):
                         return self.showMap(player)
                     else:
                         print("无法继续战斗,请前往治疗")

@@ -16,7 +16,7 @@ from props import propmap,bag
 from players import battering
 import props.drug
 
-def damageCount(obj_defense,obj_attack,obj_skill):
+def damageCount(obj_defense,obj_attack,obj_skill,weather):
     '''
     伤害计算模块
     :param obj_defense: 2P
@@ -59,7 +59,10 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         print(obj_defense.status)
 
     elif obj_skill.skill_model == '0012':
-        obj_skill.addStatus(obj_attack)
+        if obj_skill.doubleEffect(weather):
+            obj_skill.addStatus(obj_attack,double=2)
+        else:
+            obj_skill.addStatus(obj_attack)
         print(obj_attack.status)
 
     elif obj_skill.skill_model == '0005':
@@ -126,7 +129,7 @@ def damageCount(obj_defense,obj_attack,obj_skill):
     elif obj_skill.skill_model == '0014':
         copy_skill = obj_skill.useOrNot(obj_defense)
         if copy_skill != None:
-            return damageCount(obj_defense,obj_attack,copy_skill)
+            return damageCount(obj_defense,obj_attack,copy_skill,weather)
         else:
             print("没有任何效果")
 
@@ -153,7 +156,7 @@ def damageCount(obj_defense,obj_attack,obj_skill):
         return True
 
 
-def battleRun(player,obj1,obj2):
+def battleRun(player,obj1,obj2,weather):
     '''
     攻击模块
     :param obj1:
@@ -188,17 +191,17 @@ def battleRun(player,obj1,obj2):
             skill_number = input(">>")
             if skill_number == '0':
                 print("返回上级")
-                return battleRun(player,obj1,obj2)
+                return battleRun(player,obj1,obj2,weather)
             if skill_number not in obj1.skill_list:
                 print("指令错误！")
-                return battleRun(player,obj1,obj2)
+                return battleRun(player,obj1,obj2,weather)
             if not assist.ppvalue.ppCount(obj1.skill_list[skill_number]):
                 print("指令失败,重新选择！")
-                return battleRun(player,obj1, obj2)
+                return battleRun(player,obj1, obj2,weather)
             if obj1.skill_list[skill_number].use_condition != None:
                 if obj1.skill_list[skill_number].use_condition not in obj1.status:
                     print("技能无法使用！")
-                    return battleRun(player,obj1,obj2)
+                    return battleRun(player,obj1,obj2,weather)
         #记录最后使用的技能
         obj1.last_used_skill = obj1.skill_list[skill_number]
         # 战斗前的buff
@@ -215,7 +218,7 @@ def battleRun(player,obj1,obj2):
                 return True
 
             assist.show.printTurn(obj2)
-            return battleRun(player,obj2,obj1)
+            return battleRun(player,obj2,obj1,weather)
         #检查是否混乱,会攻击自己
         if statusmap.checkChaosOrNot(obj1):
             damage = skilldamage.chaosDamage(obj1.level,obj1.getAttack(),obj1.getDefense())
@@ -232,7 +235,7 @@ def battleRun(player,obj1,obj2):
                     assist.show.battleOver()
                     return True
                 assist.show.printTurn(obj2)
-                return battleRun(player,obj2,obj1)
+                return battleRun(player,obj2,obj1,weather)
 
 
         #命中与否判断
@@ -255,16 +258,16 @@ def battleRun(player,obj1,obj2):
                     assist.show.battleOver()
                     return True
                 assist.show.printTurn(obj2.name)
-                return battleRun(player,obj2,obj1)
+                return battleRun(player,obj2,obj1,weather)
             #改写结算 直接把技能扔进去
-            if damageCount(obj2,obj1,obj1.skill_list[skill_number]):
+            if damageCount(obj2,obj1,obj1.skill_list[skill_number],weather):
                 # 回合结束检查是否中毒  中毒死亡
                 if not statusmap.checkStatusAfterTurn(obj1):
                     assist.show.petDie(obj1.name)
                     assist.show.battleOver()
                     return True
                 assist.show.printTurn(obj2.name)
-                return battleRun(player,obj2,obj1)
+                return battleRun(player,obj2,obj1,weather)
             else:
                 return True
         #多段
@@ -274,7 +277,7 @@ def battleRun(player,obj1,obj2):
                 print("第 %s 次 攻击 " % (count+1))
                 print("=" * 30)
                 if battle.hitrate.hitOrNot(obj1.skill_list[skill_number], hit + hit_up, obj1, obj2,obj2.dodge + dodge_up):
-                    if not damageCount(obj2, obj1, obj1.skill_list[skill_number]):
+                    if not damageCount(obj2, obj1, obj1.skill_list[skill_number],weather):
                         return True
                 else:
                     continue
@@ -285,7 +288,7 @@ def battleRun(player,obj1,obj2):
                 assist.show.battleOver()
                 return True
             assist.show.printTurn(obj2.name)
-            return battleRun(player, obj2, obj1)
+            return battleRun(player, obj2, obj1,weather)
 
     elif command == '2':
         #交换精灵模块
@@ -297,10 +300,10 @@ def battleRun(player,obj1,obj2):
                 #因未返回到explore层，换精灵结算顺序正常
                 return battering.battleing(player,obj2,change_pet=True)
             else:
-                return battleRun(player,obj1,obj2)
+                return battleRun(player,obj1,obj2,weather)
         else:
             print("%s 无法被替换的状态" % obj1.name)
-            return battleRun(player,obj1,obj2)
+            return battleRun(player,obj1,obj2,weather)
 
     elif command == '4':
         assist.show.petUseRun(obj1.name)
@@ -314,7 +317,7 @@ def battleRun(player,obj1,obj2):
             print("%s 被锁定了！ 无法脱逃 ~" % obj1.name)
         print("逃跑失败")
         assist.show.printTurn(obj2.name)
-        return battleRun(player,obj2,obj1)
+        return battleRun(player,obj2,obj1,weather)
 
     elif command == '3':
         #测试 得到一个道具
@@ -328,12 +331,12 @@ def battleRun(player,obj1,obj2):
                     assist.show.battleOver()
                     return True
                 assist.show.printTurn(obj2)
-                return battleRun(player,obj2,obj1)
+                return battleRun(player,obj2,obj1,weather)
             else:
                 #捕获成功 战斗结束
                 return True
         elif use_or_not == None:
-            return battleRun(player,obj1, obj2)
+            return battleRun(player,obj1, obj2,weather)
         else:
             #print("重新选择！")
             #assist.show.printTurn(obj2)
@@ -341,9 +344,9 @@ def battleRun(player,obj1,obj2):
                 assist.show.petDie(obj1.name)
                 assist.show.battleOver()
                 return True
-            return battleRun(player,obj2, obj1)
+            return battleRun(player,obj2, obj1,weather)
 
     else:
         print("指令错误!")
-        return battleRun(player,obj1,obj2)
+        return battleRun(player,obj1,obj2,weather)
 
