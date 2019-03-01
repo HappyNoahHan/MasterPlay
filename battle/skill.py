@@ -373,6 +373,35 @@ class Peck(damageSkill):
     skill_code = 'F010'
     skill_power = 35
     skill_info = '啄对方,造成伤害'
+    property = 'fly'
+
+class AerialAce(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,spell_skill=False)
+    show_name = '燕返'
+    skill_code = 'F011'
+    skill_power = 60
+    skill_info = '攻击目标造成伤害,一定会命中'
+    hit_rate = 0
+    property = 'fly'
+
+class DrillPeck(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,spell_skill=False)
+    show_name = '啄钻'
+    skill_code = 'F012'
+    skill_power = 80
+    skill_info = '攻击目标造成伤害'
+    property = 'fly'
+
+class Pluck(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,spell_skill=False)
+    show_name = '啄食'
+    skill_code = 'F013'
+    skill_power = 60
+    skill_info = '攻击目标造成伤害。如果目标携带了树果，消耗掉目标的树果'#后续功能，暂时是个伤害技能
+    property = 'fly'
 
 class Tackle(damageSkill):
     def __init__(self):
@@ -503,6 +532,13 @@ class FuryAttack(damageSkill):
     hit_rate = 85
     skill_code = 'N016'
     multi_step = True
+
+class FocusEnergy(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(status=['ST026'])
+    show_name = '聚气'
+    skill_code = 'N017'
+    skill_info = '使自身进入易中要害状态'
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -679,6 +715,15 @@ class Pursuit(damageSkill):
     property = 'dark'
     skill_info = '攻击目标造成伤害,如果对方易受伤,威力加倍'
 
+class Assurance(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,spell_skill=False,addition_status='ST025')
+    skill_power = 60
+    skill_code = 'T006'
+    show_name = '恶意追击'
+    property = 'dark'
+    skill_info = '攻击目标造成伤害,如果对方易受伤,威力加倍'
+
 class StunSpore(statusSkill):
     def __init__(self):
         super().__init__(status = 'ST002')
@@ -798,6 +843,16 @@ class SandAttack(statusSkill):
     skill_code = 'E003'
     skill_info = '令目标的命中率降低1级'
     property = 'ground'
+
+class DrillRun(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,spell_skill=False,lucky_level=2)
+    show_name = '直冲钻'
+    skill_code = 'E004'
+    skill_info = '攻击目标造成伤害,击中要害率比普通招式高1级'
+    property = 'ground'
+    skill_power = 80
+    hit_rate = 90
 
 class ConfuseRay(statusSkill):
     def __init__(self):

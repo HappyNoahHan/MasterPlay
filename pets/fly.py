@@ -76,3 +76,22 @@ class Spearow(pets.propets.PropInit):
     # 精灵编号
     pet_no = '021'
     prop = ['fly','normal']
+
+class Fearow(Spearow):
+    health_basic = 65
+    attack_basic = 90
+    defense_basic = 65
+    spell_power_basic = 61
+    spell_defense_basic = 61
+    speed_basic = 100
+
+    name = '大嘴雀'
+    kind = '鸟'
+    basic_exp_value = 155
+    #talent = 'TA001'
+
+    can_get_base_point = 2
+
+    capture_rate = 90
+    # 精灵编号
+    pet_no = '022'

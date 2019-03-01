@@ -15,6 +15,7 @@ evolve_dict={
     '阿柏蛇': [poison.Arbok,22,'level_up'],
     '波波' : [fly.Pidgeotto,18,'level_up'],
     '比比鸟': [fly.Pidgeot,36,'level_up'],
+    '烈雀': [fly.Fearow,20,'level_up'],
 }
 def canEvolveOrNot(obj,stone=None):
     '''

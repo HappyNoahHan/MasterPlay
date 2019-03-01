@@ -21,6 +21,9 @@ skill_dict = {
     'F008': battle.skill.MirrorMove,#鹦鹉学舌
     'F009': battle.skill.Hurricane,#暴风
     'F010': battle.skill.Peck,#啄
+    'F011': battle.skill.AerialAce,#燕返
+    'F012': battle.skill.DrillPeck,#啄钻
+    'F013': battle.skill.Pluck,#啄食
     'N001': battle.skill.Tackle,#撞击
     'N002': battle.skill.Grab,#抓
     'N003': battle.skill.Supersonic, #超音波
@@ -37,6 +40,7 @@ skill_dict = {
     'N014': battle.skill.Whirlwind,#吹飞
     'N015': battle.skill.Growl,#叫声
     'N016': battle.skill.FuryAttack,#乱击
+    'N017': battle.skill.FocusEnergy,#聚气
     'B002': battle.skill.azorLeaf,
     'B003': battle.skill.lifeRecovery,
     'B004': battle.skill.lifeChains,
@@ -51,6 +55,7 @@ skill_dict = {
     'T003': battle.skill.Bite, #咬住
     'T004': battle.skill.Crunch,#咬碎
     'T005': battle.skill.Pursuit,#追打
+    'T006': battle.skill.Assurance,#恶意追击
     'C001': battle.skill.StunSpore,
     'C002': battle.skill.SleepingPowder,
     'C003': battle.skill.LeechLife, #吸血
@@ -62,6 +67,7 @@ skill_dict = {
     'E001': battle.skill.Earthquake,#地震
     'E002': battle.skill.MudBomb,#泥巴炸弹
     'E003': battle.skill.SandAttack,#泼沙
+    'E004': battle.skill.DrillRun,#直冲钻
     'Q001': battle.skill.ConfuseRay, #奇异之光
     'Q002': battle.skill.Astonish, #惊吓
     'P001': battle.skill.Toxic, #剧毒

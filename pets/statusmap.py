@@ -32,6 +32,7 @@ status_dict={
     'ST023' : status.PropDown(status_show_name='速度降低',status_code='ST023',status_info='攻击者速度能力降低'),
     'ST024' : status.Fly(),
     'ST025' : status.Vulnerability(),
+    'ST026' : status.LuckyUp(),
     'ST100' : status.NoTalent(),
     'ST099' : status.Lock(),
     'ST101' : status.Whirlwind(),

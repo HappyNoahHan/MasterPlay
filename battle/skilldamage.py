@@ -30,8 +30,13 @@ def basicDamage(obj,level,skill,skill_power,attack_value,defense_value,speed):
     :param defense_value:
     :return:
     '''
+    #容易击中要害
+    if 'ST026' in obj.status:
+        lucky_up = 2
+    else:
+        lucky_up = 0
 
-    if luckyAttack(speed,skill):
+    if luckyAttack(speed,skill,lucky_up):
         print("%s 会心一击" % obj.name )
         level *= 2
 
@@ -49,7 +54,7 @@ def basicDamage(obj,level,skill,skill_power,attack_value,defense_value,speed):
 
     return basic_damage
 
-def luckyAttack(speed,skill):
+def luckyAttack(speed,skill,lucky_up):
     '''
     判断会心一击
     :param speed:
@@ -59,7 +64,7 @@ def luckyAttack(speed,skill):
         speed = 255
 
     if skill.lucky_level > 1:
-        speed *= (skill.lucky_level + 2)
+        speed *= (skill.lucky_level + lucky_up + 2)
         if speed > 255:
             speed = 255
         else:

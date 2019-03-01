@@ -164,6 +164,10 @@ class Vulnerability(Status):
     status_info = '容易伤害'
     status_code = 'ST025'
 
+class LuckyUp(Status):
+    status_show_name = '易击要害'
+    status_info = '容易击中要害,lucky_level +2'
+    status_code = 'ST026'
 
 
 
