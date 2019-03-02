@@ -77,7 +77,12 @@ def damageCount(obj_defense,obj_attack,obj_skill,weather):
         battle.buff.removeOwnDebuff(obj_attack,obj_skill.remove_num)
 
     elif obj_skill.skill_model == '0008':
-        assist.life.healthRecoverBySkill(obj_attack,obj_skill)
+        index_per = 0
+        if obj_skill.weather_condition == None:
+            index_per = obj_skill.getIndexPer()
+        else:
+            index_per = obj_skill.getIndexPer(weather)
+        assist.life.healthRecoverBySkill(obj_attack, index_per)
 
     elif obj_skill.skill_model == '0009':
         obj_attack.setProBuff(obj_skill,[obj_skill.effect_turns,obj_skill.index_per])

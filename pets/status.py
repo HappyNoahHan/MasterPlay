@@ -191,6 +191,11 @@ class HealBlock(Status):
     status_info = '无法恢复生命值5回合'
     status_code = 'ST029'
 
+class NoLucky(Status):
+    status_show_name = '幸运咒语'
+    status_info = '5回合内无法被击中要害'
+    status_code = 'ST030'
+
 
 
 

@@ -41,7 +41,7 @@ def buffCount(obj):
 
         elif key.buff_prop == 'Health':
             if value[0] > 0:
-                assist.life.healthRecoverBySkill(obj,key) #调用回复技能
+                assist.life.healthRecoverBySkill(obj,key.getIndexPer()) #调用回复技能
             else:
                 buff_remove_list.append(key)
         else:

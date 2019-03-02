@@ -20,7 +20,7 @@ from pets import talentmap,pettalent,statusmap,status
 from props import propmap
 import random
 
-def basicDamage(obj,level,skill,skill_power,attack_value,defense_value,speed):
+def basicDamage(obj,obj_d,level,skill,skill_power,attack_value,defense_value,speed):
     '''
     基础伤害
     :param obj:
@@ -36,9 +36,12 @@ def basicDamage(obj,level,skill,skill_power,attack_value,defense_value,speed):
     else:
         lucky_up = 0
 
-    if luckyAttack(speed,skill,lucky_up):
-        print("%s 会心一击" % obj.name )
-        level *= 2
+    if 'ST030' not in obj_d.status:
+        if luckyAttack(speed,skill,lucky_up):
+            print("%s 会心一击" % obj.name )
+            level *= 2
+    else:
+        print("%s 无法被击中要害~" % obj_d.name)
 
 
     basic_damage = ((level * 2)/5 + 2)*skill_power * attack_value / defense_value / 50
@@ -127,10 +130,10 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index,power):
     #print("技能威力", power)
     #判断是物理攻击还是元素攻击
     if skill.spell_skill == True:
-        basic_damage = basicDamage(obj_attack,obj_attack.level,skill,power,spell_power,spell_defense,speed)
+        basic_damage = basicDamage(obj_attack,obj_defense,obj_attack.level,skill,power,spell_power,spell_defense,speed)
 
     else:
-        basic_damage = basicDamage(obj_attack,obj_attack.level,skill,power,attack,defense,speed)
+        basic_damage = basicDamage(obj_attack,obj_defense,obj_attack.level,skill,power,attack,defense,speed)
 
 
     damage = round(basic_damage * pro_buff_index * attr_index_number * skill_prop_match_obj_prop)

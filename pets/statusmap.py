@@ -36,6 +36,7 @@ status_dict={
     'ST025' : status.Vulnerability(),
     'ST026' : status.LuckyUp(),
     'ST029' : status.HealBlock(),
+    'ST030' : status.NoLucky(),
     'ST100' : status.NoTalent(),
     'ST099' : status.Lock(),
     'ST101' : status.Whirlwind(),
@@ -48,6 +49,7 @@ for key,value in status_dict.items():
 clear_list.remove('ST005')
 clear_list.remove('ST007')
 
+count_index_list=['ST029','ST030']
 
 
 def checkStatusAfterBattle(obj,skill,damage):
@@ -173,11 +175,12 @@ def checkStatusAfterTurn(obj):
     if 'ST004' in obj.status:
         removeStatus(obj,'ST004')
 
-    if 'ST029' in obj.status:
-        obj.status['ST029'] -= 1
-        if obj.status['ST029'] == 0:
-            removeStatus(obj,'ST029')
-
+    #回合生效的状态-1
+    for status in count_index_list:
+        if status in obj.status:
+            obj.status[status] -= 1
+            if obj.status[status] == 0:
+                removeStatus(obj,status)
 
     return True
 

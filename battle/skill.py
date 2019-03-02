@@ -42,9 +42,10 @@ from assist import  rancom
 from pets import statusmap,talentmap
 
 class skill(object):
-    def __init__(self,pp=30):
+    def __init__(self,pp=30,weather_condition=None):
         self._pp_value_max = pp
         self.pp_value = self._pp_value_max
+        self.weather_condition = weather_condition
 
     skill_info = '使用技能'
     effect_turns = 1
@@ -152,12 +153,12 @@ class GainStatusUpSkill(skill):
     多重加增益状态技能
     '''
 
-    def __init__(self, pp=30, status=None, turns=1,weather_condition = None):
-        super().__init__(pp)
+    def __init__(self, pp=30, status=None, turns=1,weather_condition=None):
+        super().__init__(pp,weather_condition)
         self.skill_model = '0012'
         self.status = status
         self.turns = turns
-        self.weather_condition = weather_condition
+        #self.weather_condition = weather_condition
 
     def addStatus(self,obj,double=1):
         for status in self.status:
@@ -208,9 +209,14 @@ class removeDebuffSkill(skill):
     remove_num = 1
 
 class lifeRecoreSkill(skill):
-    def __init__(self,pp=30):
-        super().__init__(pp)
+    def __init__(self,pp=30,index_per=0.5,weather_condition=None):
+        super().__init__(pp,weather_condition)
         self.skill_model = '0008'
+        self.index_per = index_per
+
+    def getIndexPer(self):
+        return self.index_per
+
 
 class propSkill(skill):
     def __init__(self,pp=30):
@@ -337,7 +343,7 @@ class Roost(lifeRecoreSkill):
         super().__init__(pp)
     show_name = '羽栖'
     skill_code = 'F006'
-    index_per = 0.5
+    #index_per = 0.5
     property = 'fly'
     skill_info = "恢复使用者的1⁄2的ＨＰ值"
 
@@ -561,6 +567,13 @@ class SweetScent(statusSkill):
     skill_code = 'N019'
     skill_info = '令目标的闪避率降低2级'
 
+class LuckyChant(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(status=['ST030'],turns=5)
+    show_name = '幸运咒语'
+    skill_code = 'N020'
+    skill_info = '会陷入幸运咒语状态，５回合内，变得不会被对手的招式击中要害'
+
 class steadiness(buffSkill):
     show_name = '稳固'
     skill_code = 'N099'
@@ -651,7 +664,6 @@ class lifeRecovery(lifeRecoreSkill):
         super().__init__(pp)
     show_name = '生命复苏'
     skill_code = 'B003'
-    index_per = 0.5
     property = 'wood'
     skill_info = "恢复技能，恢复最大生命值50%"
 
@@ -1040,3 +1052,20 @@ class Twister(damageSkill):
     property = 'dragon'
     skill_power = 40
     skill_info = '攻击目标造成伤害,如果目标处于飞翔状态，威力翻倍,有20%的几率使目标陷入畏缩状态'
+
+class Moonlight(lifeRecoreSkill):
+    def __init__(self):
+        super().__init__(pp=5,weather_condition=True)
+
+    show_name = '月光'
+    skill_code = 'Y001'
+    property = 'fairy'
+    skill_info = '月光恢复使用者的ＨＰ值。恢复量由当前天气决定'
+
+    def getIndexPer(self,weather):
+        if weather.code in ['W001','W002']:
+            return 0.66
+        if weather.code in ['W002']:
+            return 0.5
+        if weather.code in ['W003']:
+            return 0.25

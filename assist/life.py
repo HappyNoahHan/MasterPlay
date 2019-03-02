@@ -8,14 +8,14 @@ def checkStatus(func):
     return wrapper
 
 @checkStatus
-def healthRecoverBySkill(obj,obj_skill):
+def healthRecoverBySkill(obj,index_per):
     '''
     生命恢复
     :param obj:
     :param obj_skill:
     :return:
     '''
-    recover_health = round(obj._max_health * obj_skill.index_per)
+    recover_health = round(obj._max_health * index_per)
     obj.health += recover_health
 
     if obj.health >= obj._max_health:
