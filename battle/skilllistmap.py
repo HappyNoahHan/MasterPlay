@@ -53,6 +53,7 @@ skill_dict = {
     'B007': battle.skill.SleepPowder,  # 催眠粉
     'B008': battle.skill.MegaDrain,#超级吸取
     'B009': battle.skill.GigaDrain,#终极吸取
+    'B010': battle.skill.GrassyTerrain,#青草场地
     'S001': battle.skill.illuminatiom,
     'S002': battle.skill.Agility,#高速移动
     'I001': battle.skill.Haze, #黑雾
@@ -88,6 +89,8 @@ skill_dict = {
     'P011': battle.skill.PoisonPowder,#毒粉
     'H001': battle.skill.ThunderFang,#雷电牙
     'G001': battle.skill.Twister,#龙卷风
+    'Y001': battle.skill.Moonlight,#月光
+    'Y002': battle.skill.Moonblast,#月亮之力
 
 }
 

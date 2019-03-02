@@ -6,8 +6,8 @@ weather_dict = {
     'W003': weather.Weather(name='晴天',code='W003'),
     'W004': weather.Weather(name='沙暴',code='W004'),
     'W005': weather.Weather(name='冰雹',code='W005'),
-'W005': weather.Weather(name='下雨',code='W005'),
-'W005': weather.Weather(name='大雨',code='W005'),
-'W005': weather.Weather(name='冰雹',code='W005'),
+    'W006': weather.Weather(name='下雨',code='W006'),
+    'W007': weather.Weather(name='大雨',code='W007'),
+    'W008': weather.Weather(name='雾气',code='W008'),
 
 }

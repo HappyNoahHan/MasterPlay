@@ -1,5 +1,5 @@
 from pets import status
-from assist import rancom
+from assist import rancom,life
 
 import time
 '''
@@ -37,6 +37,9 @@ status_dict={
     'ST026' : status.LuckyUp(),
     'ST029' : status.HealBlock(),
     'ST030' : status.NoLucky(),
+    'ST031' : status.Place(status_show_name='青草场地',status_code='ST031',
+                           status_info='5回合内所有站地面上的宝可梦每回合回复少许体力。草属性招式的威力提升50%',
+                           place_property='wood'),
     'ST100' : status.NoTalent(),
     'ST099' : status.Lock(),
     'ST101' : status.Whirlwind(),
@@ -49,7 +52,7 @@ for key,value in status_dict.items():
 clear_list.remove('ST005')
 clear_list.remove('ST007')
 
-count_index_list=['ST029','ST030']
+count_index_list=['ST029','ST030','ST031']
 
 
 def checkStatusAfterBattle(obj,skill,damage):
@@ -174,6 +177,10 @@ def checkStatusAfterTurn(obj):
 
     if 'ST004' in obj.status:
         removeStatus(obj,'ST004')
+
+    if 'ST031' in obj.status:
+        life.healthRecoverBySkill(obj,1/16)
+
 
     #回合生效的状态-1
     for status in count_index_list:
@@ -378,3 +385,11 @@ def checkHealBlockOrNot(obj_attack):
     if 'ST029' in obj_attack.status:
         return True
     return False
+
+place_status_list = ['ST031']
+def placeStatusPowerUp(obj,skill,power):
+    for status_code in place_status_list:
+        if status_code in obj.status:
+            return status_dict[status_code].statusEffect(skill,power)
+
+    return power

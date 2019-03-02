@@ -725,6 +725,14 @@ class GigaDrain(suckBloodSkill):
     skill_info = "攻击目标造成伤害，自身的ＨＰ恢复“造成的伤害×50%"
     skill_power = 75
 
+class GrassyTerrain(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(pp=20,status=['ST031'],turns=5)
+    show_name = '青草场地'
+    skill_code = 'B010'
+    property = 'wood'
+    skill_info = '5回合内所有站地面上的宝可梦每回合回复少许体力。草属性招式的威力提升50%。'
+
 
 class illuminatiom(removeDebuffSkill):
     def __init__(self,pp=20):
@@ -1065,7 +1073,17 @@ class Moonlight(lifeRecoreSkill):
     def getIndexPer(self,weather):
         if weather.code in ['W001','W002']:
             return 0.66
-        if weather.code in ['W002']:
-            return 0.5
         if weather.code in ['W003']:
+            return 0.5
+        if weather.code in ['W004','W005','W006','W007','W008']:
             return 0.25
+
+class Moonblast(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,hit_status='ST021',addition_status_rate=30)
+
+    show_name = '月亮之力'
+    skill_code = 'Y002'
+    property = 'fairy'
+    skill_info = '攻击目标造成伤害,30%几率令目标的特攻降低1级'
+    skill_power = 95

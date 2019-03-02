@@ -196,6 +196,26 @@ class NoLucky(Status):
     status_info = '5回合内无法被击中要害'
     status_code = 'ST030'
 
+class Place(Status):
+    def __init__(self,status_code=None,status_show_name=None,status_info=None,place_property='normal'):
+        self.status_code = status_code
+        self.status_show_name = status_show_name
+        self.status_info = status_info
+        self.place_property = place_property
+
+    def statusEffect(self,skill,power):
+        '''
+        技能属性与场地属性一致 威力加强50%
+        :param skill:
+        :param power:
+        :return:
+        '''
+        if skill.property == self.place_property:
+            return round(power * 1.5)
+        return power
+
+
+
 
 
 
