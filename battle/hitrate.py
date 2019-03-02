@@ -1,4 +1,5 @@
 import random
+from pets import statusmap
 
 def hitOrNot(skill,rate,obj_attack,obj_defense,dodge):
     #if skill.skill_code in ['N004','N005']:
@@ -6,11 +7,14 @@ def hitOrNot(skill,rate,obj_attack,obj_defense,dodge):
         print("%s 必定命中！" % skill.show_name)
         return True
 
+    dodge = statusmap.checkDogeBeforHitCount(obj_defense,dodge)
+    print("闪避等级 %s 级" % dodge)
+
     if obj_attack.level > obj_defense.level:
         level_index = 1 + (obj_attack.level - obj_defense.level) / obj_attack.level
     else:
         level_index = obj_attack.level / obj_defense.level
-    real_rate = int((rate * level_index - dodge) * 2.55)
+    real_rate = int((rate * level_index - dodge * 10) * 2.55)
     print("真实命中率:",real_rate)
 
     if real_rate >= 255:

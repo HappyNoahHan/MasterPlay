@@ -554,6 +554,13 @@ class Growth(GainStatusUpSkill):
     skill_code = 'N018'
     skill_info = '令使用者的攻击提升1级,令使用者的特攻提升1级,在大晴天或大日照天气下等级提升数量翻倍'
 
+class SweetScent(statusSkill):
+    def __init__(self):
+        super().__init__(pp=20,status='ST028')
+    show_name = '甜甜香气'
+    skill_code = 'N019'
+    skill_info = '令目标的闪避率降低2级'
+
 class steadiness(buffSkill):
     show_name = '稳固'
     skill_code = 'N099'
@@ -619,6 +626,15 @@ class flameAffinity(propSkill):
     property = 'fire'
     skill_info = "火焰亲和觉醒,接下来的一个回合，火属性技能伤害加成50%"
 
+class StunSpore(statusSkill):
+    def __init__(self):
+        super().__init__(status = 'ST002')
+    skill_info = '使目标陷入麻痹状态'
+    skill_code = 'B001'
+    show_name = '麻痹粉'
+    property = 'wood'
+    hit_rate = 75
+
 class azorLeaf(damageSkill):
     def __init__(self):
         super().__init__(lucky_level=2)
@@ -659,14 +675,44 @@ class vinesTied(debuffSkill):
     skill_info = "捆绑，持续性收到10%气血的伤害"
 
 class Absorb(suckBloodSkill):
-    def __init__(self,pp=15):
+    def __init__(self,pp=25):
         super().__init__(pp)
 
     show_name = '吸取'
     skill_code = 'B006'
     property = 'wood'
     skill_info = "攻击目标造成伤害，自身的ＨＰ恢复“造成的伤害×50%"
+    skill_power = 20
+
+class SleepPowder(statusSkill):
+    def __init__(self):
+        super().__init__(status = 'ST003',pp=15)
+    skill_info = '使目标陷入睡眠状态'
+    skill_code = 'B007'
+    show_name = '催眠粉'
+    property = 'wood'
+    hit_rate = 75
+
+class MegaDrain(suckBloodSkill):
+    def __init__(self,pp=15):
+        super().__init__(pp)
+
+    show_name = '超级吸取'
+    skill_code = 'B008'
+    property = 'wood'
+    skill_info = "攻击目标造成伤害，自身的ＨＰ恢复“造成的伤害×50%"
     skill_power = 40
+
+class GigaDrain(suckBloodSkill):
+    def __init__(self,pp=10):
+        super().__init__(pp)
+
+    show_name = '终极吸取'
+    skill_code = 'B009'
+    property = 'wood'
+    skill_info = "攻击目标造成伤害，自身的ＨＰ恢复“造成的伤害×50%"
+    skill_power = 75
+
 
 class illuminatiom(removeDebuffSkill):
     def __init__(self,pp=20):
@@ -737,24 +783,6 @@ class Assurance(damageSkill):
     show_name = '恶意追击'
     property = 'dark'
     skill_info = '攻击目标造成伤害,如果对方易受伤,威力加倍'
-
-class StunSpore(statusSkill):
-    def __init__(self):
-        super().__init__(status = 'ST002')
-    skill_info = '麻痹对手，使对手有一定的几率无法成功使用技能'
-    skill_code = 'C001'
-    show_name = '麻痹粉'
-    property = 'insect'
-    hit_rate = 50
-
-class SleepingPowder(statusSkill):
-    def __init__(self):
-        super().__init__(status = 'ST003')
-    skill_info = '使对手进入睡眠，无法行动，但有一定几率清醒'
-    skill_code = 'C002'
-    show_name = '睡眠粉'
-    property = 'insect'
-    hit_rate = 85
 
 class LeechLife(suckBloodSkill):
     def __init__(self,pp=20):
@@ -983,6 +1011,15 @@ class GunkShot(damageSkill):
     hit_rate = 80
     skill_power = 120
     skill_info = '攻击目标造成伤害,有30%的几率使目标陷入中毒状态'
+
+class PoisonPowder(statusSkill):
+    def __init__(self):
+        super().__init__(status = 'ST007',pp=35)
+    skill_info = '使目标陷入中毒状态'
+    skill_code = 'P011'
+    show_name = '毒粉'
+    property = 'poison'
+    hit_rate = 75
 
 class ThunderFang(MultipleDamageSkill):
     def __init__(self):

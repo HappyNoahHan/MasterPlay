@@ -1,3 +1,13 @@
+from pets import statusmap
+def checkStatus(func):
+    def wrapper(*args,**kwargs):
+        if statusmap.checkHealBlockOrNot(args[0]):
+            print("%s 无法被治疗~" % args[0].name)
+            return True
+        return func(*args,**kwargs)
+    return wrapper
+
+@checkStatus
 def healthRecoverBySkill(obj,obj_skill):
     '''
     生命恢复
@@ -13,6 +23,7 @@ def healthRecoverBySkill(obj,obj_skill):
 
     print("%s 回复了 %s 点HP!" % (obj.name, recover_health))
 
+@checkStatus
 def healthRecoverMax(obj):
     '''
     生命恢复到最大值
@@ -22,6 +33,7 @@ def healthRecoverMax(obj):
     obj.health = obj._max_health
     return True
 
+@checkStatus
 def healthRecoverByTalent(obj,per):
 
     obj.health += round(obj._max_health * per)
@@ -30,6 +42,7 @@ def healthRecoverByTalent(obj,per):
         obj.health = obj._max_health
     return True
 
+@checkStatus
 def healthRecoreByDrug(obj,value):
     print("%s 回复了 %s HP" % (obj.name,value))
     obj.health += value
@@ -56,6 +69,7 @@ def restore(pet):
     for key,skill in pet.skill_list.items():
         skill.pp_value = skill._pp_value_max
 
+@checkStatus
 def healthRecoverFromDamage(obj,damage,recover_per):
     recover_health = round(damage * recover_per)
     if recover_health == 0:
@@ -67,6 +81,7 @@ def healthRecoverFromDamage(obj,damage,recover_per):
 
     print("%s 吸取了 %s 点HP！" % (obj.name,recover_health))
 
+@checkStatus
 def healthRecoverFromImprintSkill(obj,turns):
     if turns == 1:
         recover_health = round(obj._max_health * 0.25)

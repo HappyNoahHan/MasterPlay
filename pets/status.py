@@ -169,6 +169,28 @@ class LuckyUp(Status):
     status_info = '容易击中要害,lucky_level +2'
     status_code = 'ST026'
 
+class DodgeUp(Status):
+    status_show_name = '闪避提高'
+    status_info = '使用者闪避能力提高'
+    status_code = 'ST027'
+
+    def statusEffect(self,value,turns):
+        return value + turns
+
+
+class DodgeDown(Status):
+    status_show_name = '闪避降低'
+    status_info = '使用者闪避能力降低'
+    status_code = 'ST028'
+
+    def statusEffect(self,value,turns):
+        return value - turns
+
+class HealBlock(Status):
+    status_show_name = '回复封锁'
+    status_info = '无法恢复生命值5回合'
+    status_code = 'ST029'
+
 
 
 

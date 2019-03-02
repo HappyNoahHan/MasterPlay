@@ -42,11 +42,16 @@ skill_dict = {
     'N016': battle.skill.FuryAttack,#乱击
     'N017': battle.skill.FocusEnergy,#聚气
     'N018': battle.skill.Growth,#生长
+    'N019': battle.skill.SweetScent,#甜甜香气
+    'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,
     'B003': battle.skill.lifeRecovery,
     'B004': battle.skill.lifeChains,
     'B005': battle.skill.vinesTied,
     'B006': battle.skill.Absorb, #吸取
+    'B007': battle.skill.SleepPowder,  # 催眠粉
+    'B008': battle.skill.MegaDrain,#超级吸取
+    'B009': battle.skill.GigaDrain,#终极吸取
     'S001': battle.skill.illuminatiom,
     'S002': battle.skill.Agility,#高速移动
     'I001': battle.skill.Haze, #黑雾
@@ -57,8 +62,6 @@ skill_dict = {
     'T004': battle.skill.Crunch,#咬碎
     'T005': battle.skill.Pursuit,#追打
     'T006': battle.skill.Assurance,#恶意追击
-    'C001': battle.skill.StunSpore,
-    'C002': battle.skill.SleepingPowder,
     'C003': battle.skill.LeechLife, #吸血
     'D001': battle.skill.WaterJump,
     'D002': battle.skill.WaterBall,
@@ -81,6 +84,7 @@ skill_dict = {
     'P008': battle.skill.Belch,#打嗝
     'P009': battle.skill.Coil,#盘蜷
     'P010': battle.skill.GunkShot,#垃圾射击
+    'P011': battle.skill.PoisonPowder,#毒粉
     'H001': battle.skill.ThunderFang,#雷电牙
     'G001': battle.skill.Twister,#龙卷风
 
@@ -89,7 +93,7 @@ skill_dict = {
 #背包概念 名称 数量
 skill_bag_dict={
     1:[skill_dict['A001'],99],
-    2:[skill_dict['C002'],99],
+    2:[skill_dict['B001'],99],
 }
 
 #得到技能道具

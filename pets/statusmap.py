@@ -30,9 +30,12 @@ status_dict={
     'ST021' : status.PropDown(status_show_name='攻击降低',status_code='ST021',status_info='攻击者攻击能力降低'),
     'ST022' : status.PropDown(status_show_name='特攻降低',status_code='ST022',status_info='攻击者特攻能力降低'),
     'ST023' : status.PropDown(status_show_name='速度降低',status_code='ST023',status_info='攻击者速度能力降低'),
+    'ST027' : status.DodgeUp(),
+    'ST028' : status.DodgeDown(),
     'ST024' : status.Fly(),
     'ST025' : status.Vulnerability(),
     'ST026' : status.LuckyUp(),
+    'ST029' : status.HealBlock(),
     'ST100' : status.NoTalent(),
     'ST099' : status.Lock(),
     'ST101' : status.Whirlwind(),
@@ -169,6 +172,11 @@ def checkStatusAfterTurn(obj):
 
     if 'ST004' in obj.status:
         removeStatus(obj,'ST004')
+
+    if 'ST029' in obj.status:
+        obj.status['ST029'] -= 1
+        if obj.status['ST029'] == 0:
+            removeStatus(obj,'ST029')
 
 
     return True
@@ -355,4 +363,15 @@ def checkPropUpOrDown(obj,value,status_code):
     return value
 
 
+def checkDogeBeforHitCount(obj_defense,dodge):
 
+    dodge = checkPropUpOrDown(obj_defense,dodge,'ST027')
+
+    dodge = checkPropUpOrDown(obj_defense,dodge,'ST028')
+
+    return dodge
+
+def checkHealBlockOrNot(obj_attack):
+    if 'ST029' in obj_attack.status:
+        return True
+    return False
