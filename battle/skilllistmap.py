@@ -44,6 +44,7 @@ skill_dict = {
     'N018': battle.skill.Growth,#生长
     'N019': battle.skill.SweetScent,#甜甜香气
     'N020': battle.skill.LuckyChant,#幸运咒语
+    'N021': battle.skill.NaturalGift,#自然之恩
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,
     'B003': battle.skill.lifeRecovery,

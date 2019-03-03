@@ -158,10 +158,16 @@ def damageCount(obj_defense,obj_attack,obj_skill,weather):
 
     elif obj_skill.skill_model == '0016':
         if obj_skill.skill_code == 'N021':
+            if obj_attack.berry == None:
+                print("没有任何效果~~")
+                return True
             obj_skill.skill_power,obj_skill.property= obj_skill.getPowerAndProperty(obj_attack.berry)
+            # 消耗树果
+            print("%s 使用%s 消耗了 一枚 %s " % (obj_attack.name, obj_skill.show_name, obj_attack.berry.show_name))
+            obj_attack.berry = None
         pro_buff_index = battle.buff.proBuffCount(obj_attack, obj_skill)
         damage = skilldamage.skillDamage(obj_attack, obj_defense, obj_skill, pro_buff_index, obj_skill.skill_power)
-        # obj_skill.addStatus(obj_defense)  # 附加状态
+            # obj_skill.addStatus(obj_defense)  # 附加状态
         if damage > 0:
             obj_defense.health -= damage
             print("造成了%s 的伤害" % damage)
@@ -169,8 +175,8 @@ def damageCount(obj_defense,obj_attack,obj_skill,weather):
             obj_defense.health -= 1
             assist.show.noDamage()
 
-        assist.show.showPetErrorStatus(obj_defense)
 
+        assist.show.showPetErrorStatus(obj_defense)
 
 
     #debuff  增幅buff 次数
