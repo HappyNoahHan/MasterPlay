@@ -70,6 +70,7 @@ class Pet(object):
         self.realize_skill_list = [] #已经领悟的技能表
         self.status = {} #状态表
         self.carry_prop = carry_prop
+        self.berry = None #树果
         #闪避
         self.dodge = 0
         #基础点数获得者，经验减半状态

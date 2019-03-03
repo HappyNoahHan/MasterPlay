@@ -9,6 +9,8 @@
                      0012 增益状态技能
                      0013 特殊状态技能 eg.吹飞
                      0014 复制类技能
+                     0015 延时类技能  eg. 挖地 飞天
+                     0016 树果类技能  技能效果随树果的种类而变化
                      --- 2.0
                      buff 类 与 debuff 类 集合
                      buff  标记attack denfense 法强 法防 提升 统一  0002 buff类技能
@@ -40,6 +42,7 @@ ready 睡眠粉 毒buff
 
 from assist import  rancom
 from pets import statusmap,talentmap
+from props import berrymap
 
 class skill(object):
     def __init__(self,pp=30,weather_condition=None):
@@ -327,6 +330,15 @@ class DelayedSkill(skill):
     def doublePowerOrNot(self,obj):
         return False
 
+class BerryEffectSkill(skill):
+    def __init__(self,pp=30,spell_skill=True,lucky_level=1):
+        super().__init__(pp)
+        self.skill_model = '0016'
+        self.spell_skill = spell_skill
+        self.lucky_level = lucky_level
+
+    def doublePowerOrNot(self,obj):
+        return False
 
 
 class Gust(damageSkill):
@@ -608,6 +620,20 @@ class LuckyChant(GainStatusUpSkill):
     show_name = '幸运咒语'
     skill_code = 'N020'
     skill_info = '会陷入幸运咒语状态，５回合内，变得不会被对手的招式击中要害'
+
+class NaturalGift(BerryEffectSkill):
+    def __init__(self):
+        super().__init__(pp=15,spell_skill=False)
+
+    show_name = '自然之恩'
+    skill_code = 'N021'
+    skill_info = '攻击目标造成伤害,威力和属性取决于这只宝可梦身上的树果,树果在使用后会消失'
+    #use_condition = 'berry'
+
+    def getPowerAndProperty(self,berry):
+        return berrymap.berry_effect_for_NaturalGift[berry.code][0],berrymap.berry_effect_for_NaturalGift[berry.code][1]
+
+
 
 class steadiness(buffSkill):
     show_name = '稳固'

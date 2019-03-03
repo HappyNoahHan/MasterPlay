@@ -156,6 +156,22 @@ def damageCount(obj_defense,obj_attack,obj_skill,weather):
 
         assist.show.showPetErrorStatus(obj_defense)
 
+    elif obj_skill.skill_model == '0016':
+        if obj_skill.skill_code == 'N021':
+            obj_skill.skill_power,obj_skill.property= obj_skill.getPowerAndProperty(obj_attack.berry)
+        pro_buff_index = battle.buff.proBuffCount(obj_attack, obj_skill)
+        damage = skilldamage.skillDamage(obj_attack, obj_defense, obj_skill, pro_buff_index, obj_skill.skill_power)
+        # obj_skill.addStatus(obj_defense)  # 附加状态
+        if damage > 0:
+            obj_defense.health -= damage
+            print("造成了%s 的伤害" % damage)
+        else:
+            obj_defense.health -= 1
+            assist.show.noDamage()
+
+        assist.show.showPetErrorStatus(obj_defense)
+
+
 
     #debuff  增幅buff 次数
     asscount.checkBuffAfterBattle(obj_attack)
