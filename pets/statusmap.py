@@ -43,6 +43,7 @@ status_dict={
     'ST100' : status.NoTalent(),
     'ST099' : status.Lock(),
     'ST101' : status.Whirlwind(),
+    'ST102' : status.PetalDance(),
 }
 
 clear_list = []
@@ -51,6 +52,7 @@ for key,value in status_dict.items():
 
 clear_list.remove('ST005')
 clear_list.remove('ST007')
+clear_list.remove('ST102')
 
 count_index_list=['ST029','ST030','ST031']
 
@@ -253,6 +255,10 @@ def checkStatusEnd(player):
             removeStatus(pet,'ST005')
             pet.setStatus('ST007')
 
+        if 'ST102' in pet.status:
+            removeStatus(pet,'ST102')
+            pet.autoAi = False
+
         for status in clear_list:
             if status in pet.status:
                 removeStatus(pet,status)
@@ -393,3 +399,14 @@ def placeStatusPowerUp(obj,skill,power):
             return status_dict[status_code].statusEffect(skill,power)
 
     return power
+
+def checkDelayStatus(obj_attack):
+    if 'ST102' in obj_attack.status:
+        if status_dict['ST102'].statusEffect(obj_attack.status['ST102']):
+            #obj_attack.status['ST102'] += 1
+            return False
+        else:
+            obj_attack.status['ST102'] += 1
+            return True
+    else:
+        return None

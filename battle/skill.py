@@ -54,6 +54,8 @@ class skill(object):
     skill_power = None
     use_condition = None  #使用条件
     multi_step = False #多段技能 默认False
+    show_name = None
+    skill_code = '0000'
 
 
 
@@ -292,6 +294,39 @@ class CopySkill(skill):
             if obj.last_used_skill.skill_model != '0014' and obj.last_used_skill.multi_step == False:
                 return obj.last_used_skill
         return None
+
+class DelayedSkill(skill):
+    def __init__(self,pp=30,add_status_begin=None,add_status_end=None,spell_skill=True,lucky_level=1):
+        super().__init__(pp)
+        self.skill_model = '0015'
+        self.add_status_begin = add_status_begin
+        self.add_status_end = add_status_end
+        self.spell_skill = spell_skill #特殊攻击类型 True 默认 物理攻击类型 False
+        self.lucky_level = lucky_level
+
+    def setDelayedSkill(self,pet):
+        pet.setSkills('delay',self)
+
+    def addStatus(self,pet):
+        pet.setStatus(self.add_status_begin)
+        pet.autoAi = 'lost'
+
+    def removeStatus(self,pet):
+        pet.removeStatus(self.add_status_begin)
+        pet.removeSkills('delay')
+        pet.autoAi = False
+        if self.add_status_end != None:
+            pet.setStatus(self.add_status_end)
+
+    def useSkill(self,pet):
+        if self.add_status_begin not in pet.status:
+            self.setDelayedSkill(pet)
+            self.addStatus(pet)
+
+
+    def doublePowerOrNot(self,obj):
+        return False
+
 
 
 class Gust(damageSkill):
@@ -731,7 +766,17 @@ class GrassyTerrain(GainStatusUpSkill):
     show_name = '青草场地'
     skill_code = 'B010'
     property = 'wood'
-    skill_info = '5回合内所有站地面上的宝可梦每回合回复少许体力。草属性招式的威力提升50%。'
+    skill_info = '5回合内所有站地面上的宝可梦每回合回复少许体力。草属性招式的威力提升50%'
+
+class PetalDance(DelayedSkill):
+    def __init__(self):
+        super().__init__(pp=10,add_status_begin='ST102',add_status_end='ST006')
+
+    show_name = '花瓣舞'
+    skill_code = 'B011'
+    property = 'wood'
+    skill_power = 120
+    skill_info = '攻击目标造成伤害,陷入花瓣舞状态,在２～３回合内,乱打一气地进行攻,大闹一番后自己会陷入混乱'
 
 
 class illuminatiom(removeDebuffSkill):

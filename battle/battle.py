@@ -138,6 +138,25 @@ def damageCount(obj_defense,obj_attack,obj_skill,weather):
         else:
             print("没有任何效果")
 
+    elif obj_skill.skill_model == '0015':
+        result = statusmap.checkDelayStatus(obj_attack)
+        if result == None:
+            obj_skill.useSkill(obj_attack)
+        elif result == False:
+            obj_skill.removeStatus(obj_attack)
+        pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
+        damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.skill_power)
+        #obj_skill.addStatus(obj_defense)  # 附加状态
+        if damage > 0:
+            obj_defense.health -= damage
+            print("造成了%s 的伤害" % damage)
+        else:
+            obj_defense.health -= 1
+            assist.show.noDamage()
+
+        assist.show.showPetErrorStatus(obj_defense)
+
+
     #debuff  增幅buff 次数
     asscount.checkBuffAfterBattle(obj_attack)
 
@@ -174,22 +193,28 @@ def battleRun(player,obj1,obj2,weather):
     print("=" * 30)
     assist.show.showSelect()
     print("=" * 30)
-    if obj1.autoAi:
+    if obj1.autoAi == True:
         #为测试方便，都指定为1
         command = '1'
         assist.show.petThink(obj1.name)
+        time.sleep(3)
+    elif obj1.autoAi == 'lost':
+        command = '1'
+        print("%s 正处于某种强大的状态,从而暂时失去控制" % obj1.name)
         time.sleep(3)
     else:
         print("玩家请选择指令：")
         command = input(">>")
     if command == '1':
-        if obj1.autoAi:
+        if obj1.autoAi == True:
             assist.show.petSelectSkill(obj1.name)
             time.sleep(3)
             skill_number = random.choice(rancom.canChoiceList(obj1))
+        elif obj1.autoAi == 'lost':
+            skill_number = 'delay'
         else:
             for key, value in obj1.skill_list.items():
-                if value != None:
+                if value != None and key != 'delay':
                     print("技能" + key, ":", value.show_name, ' PP:', value.pp_value)
             print('0','返回上级！')
             print("请选择使用的技能：")

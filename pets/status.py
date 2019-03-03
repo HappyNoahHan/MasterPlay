@@ -214,6 +214,20 @@ class Place(Status):
             return round(power * 1.5)
         return power
 
+class PetalDance(Status):
+    status_show_name = '花瓣舞'
+    status_info = '花瓣舞状态里,2-3回合使用花瓣舞攻击'
+    status_code = 'ST102'
+
+    def statusEffect(self,turns):
+        if turns == 2:
+            if rancom.statusRandom(50):
+                return True
+            return False
+        elif turns > 2:
+            return True
+        else:
+            return False
 
 
 

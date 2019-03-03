@@ -134,6 +134,9 @@ class Pet(object):
     def setSkills(self,key,value):
         self.skill_list[key] = value
 
+    def removeSkills(self,key):
+        self.skill_list.pop(key)
+
     def setDebuff(self,key,value):
         self.debuff_dict[key] = value
 

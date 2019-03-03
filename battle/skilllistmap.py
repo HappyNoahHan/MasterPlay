@@ -54,6 +54,7 @@ skill_dict = {
     'B008': battle.skill.MegaDrain,#超级吸取
     'B009': battle.skill.GigaDrain,#终极吸取
     'B010': battle.skill.GrassyTerrain,#青草场地
+    'B011': battle.skill.PetalDance,#花瓣舞
     'S001': battle.skill.illuminatiom,
     'S002': battle.skill.Agility,#高速移动
     'I001': battle.skill.Haze, #黑雾
