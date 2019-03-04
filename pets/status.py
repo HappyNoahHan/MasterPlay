@@ -220,16 +220,19 @@ class PetalDance(Status):
     status_code = 'ST102'
 
     def statusEffect(self,turns):
-        if turns == 2:
+        if turns == 1:
             if rancom.statusRandom(50):
                 return True
             return False
-        elif turns > 2:
+        elif turns > 1:
             return True
         else:
             return False
 
-
+class SolarBeam(Status):
+    status_show_name = '日光束'
+    status_info = '蓄力攻击,第二回合攻击'
+    status_code = 'ST103'
 
 
 

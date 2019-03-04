@@ -86,7 +86,6 @@ class Fearow(Spearow):
     speed_basic = 100
 
     name = '大嘴雀'
-    kind = '鸟'
     basic_exp_value = 155
     #talent = 'TA001'
 

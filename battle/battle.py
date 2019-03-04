@@ -140,21 +140,23 @@ def damageCount(obj_defense,obj_attack,obj_skill,weather):
 
     elif obj_skill.skill_model == '0015':
         result = statusmap.checkDelayStatus(obj_attack)
-        if result == None:
+        if result == 0:
             obj_skill.useSkill(obj_attack)
-        elif result == False:
+        elif result == 2 or result == 3:
             obj_skill.removeStatus(obj_attack)
-        pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
-        damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.skill_power)
-        #obj_skill.addStatus(obj_defense)  # 附加状态
-        if damage > 0:
-            obj_defense.health -= damage
-            print("造成了%s 的伤害" % damage)
-        else:
-            obj_defense.health -= 1
-            assist.show.noDamage()
 
-        assist.show.showPetErrorStatus(obj_defense)
+        if not obj_skill.delay_effect or result == 3:
+            pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
+            damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.skill_power)
+            #obj_skill.addStatus(obj_defense)  # 附加状态
+            if damage > 0:
+                obj_defense.health -= damage
+                print("造成了%s 的伤害" % damage)
+            else:
+                obj_defense.health -= 1
+                assist.show.noDamage()
+
+            assist.show.showPetErrorStatus(obj_defense)
 
     elif obj_skill.skill_model == '0016':
         if obj_skill.skill_code == 'N021':
@@ -261,8 +263,18 @@ def battleRun(player,obj1,obj2,weather):
         # 道具检查
         assist.show.useSkill(obj1,obj1.skill_list[skill_number])
         print(obj1.skill_list[skill_number]) #显示技能描述
-        #检查状态
-        if statusmap.checkStatusBeforeBattle(obj1):
+        #检查畏缩 优先级最高
+        if statusmap.checkShrinkaOrNot(obj1):
+            # 回合结束检查是否中毒  中毒死亡
+            if not statusmap.checkStatusAfterTurn(obj1):
+                assist.show.petDie(obj1.name)
+                assist.show.battleOver()
+                return True
+
+            assist.show.printTurn(obj2)
+            return battleRun(player,obj2,obj1,weather)
+        #异常状态
+        if statusmap.checkStatusBeforeBattle(obj1,obj1.skill_list[skill_number]):
             # 回合结束检查是否中毒  中毒死亡
             if not statusmap.checkStatusAfterTurn(obj1):
                 assist.show.petDie(obj1.name)

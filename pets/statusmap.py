@@ -44,8 +44,10 @@ status_dict={
     'ST099' : status.Lock(),
     'ST101' : status.Whirlwind(),
     'ST102' : status.PetalDance(),
+    'ST103' : status.SolarBeam(),
 }
 
+#清理清单
 clear_list = []
 for key,value in status_dict.items():
     clear_list.append(key)
@@ -54,7 +56,12 @@ clear_list.remove('ST005')
 clear_list.remove('ST007')
 clear_list.remove('ST102')
 
+#回合递减
 count_index_list=['ST029','ST030','ST031']
+
+#异常状态
+abnormal_list = ['ST001','ST002','ST003',
+                 'ST005','ST007','ST008']
 
 
 def checkStatusAfterBattle(obj,skill,damage):
@@ -114,7 +121,10 @@ def checkShrinkaOrNot(obj):
         return True
     return False
 
-def checkStatusBeforeBattle(obj):
+def checkStatusBeforeBattle(obj,skill):
+    if skill.skill_code in ['B013']:
+        return False
+
     if obj.status:
         if checkParalysisOrNot(obj):
             print("%s 被麻痹,没有成功使用技能~" % obj.name)
@@ -123,9 +133,9 @@ def checkStatusBeforeBattle(obj):
             print("%s 睡眠中,无法使用技能~" % obj.name)
             time.sleep(3)
             return True
-        if checkShrinkaOrNot(obj):
+        #if checkShrinkaOrNot(obj):
             #print("%s 畏缩不前,没有成功使用技能~" % obj.name)
-            return True
+        #    return True
         if checkFrozenOrNot(obj):
             print("%s 冰冻中, 无法使用任何技能" % obj.name)
             return True
@@ -206,12 +216,21 @@ def removeStatus(obj,status_code):
     if status_code != None:
         if status_code == 'all':
             obj.status.clear()
+            return True
+
+        if status_code == 'abnormal':
+            for st in abnormal_list:
+                if st in obj.status:
+                    obj.removeStatus(st)
+                    print("%s 解除了 %s 状态：" % (obj.name, status_dict[st].status_show_name))
+            return True
 
         if status_code in obj.status:
             obj.removeStatus(status_code)
             print("%s 解除了 %s 状态：" % (obj.name, status_dict[status_code].status_show_name))
         else:
             print("并没有什么效果~")
+
     return True
 
 def checkUnlockOrNot(obj):
@@ -257,6 +276,10 @@ def checkStatusEnd(player):
 
         if 'ST102' in pet.status:
             removeStatus(pet,'ST102')
+            pet.autoAi = False
+
+        if 'ST103' in pet.status:
+            removeStatus(pet,'ST103')
             pet.autoAi = False
 
         for status in clear_list:
@@ -401,12 +424,20 @@ def placeStatusPowerUp(obj,skill,power):
     return power
 
 def checkDelayStatus(obj_attack):
+    '''
+    0: 检查不到 1：true 状态中 正常结算 2：false 状态结束 正常结算 3：第一次 下回合结算
+    :param obj_attack:
+    :return:
+    '''
     if 'ST102' in obj_attack.status:
         if status_dict['ST102'].statusEffect(obj_attack.status['ST102']):
             #obj_attack.status['ST102'] += 1
-            return False
+            return 2
         else:
             obj_attack.status['ST102'] += 1
-            return True
+            return 1
+    elif 'ST103' in obj_attack.status:
+        return 3
     else:
-        return None
+        return 0
+

@@ -3,7 +3,7 @@
     继承  技能列表  已领悟技能
 '''
 
-from pets import fire,rock,poison,skilltree,fly
+from pets import fire,rock,poison,skilltree,fly,wood
 from assist import  show
 from battle import learnskill
 import time
@@ -16,6 +16,8 @@ evolve_dict={
     '波波' : [fly.Pidgeotto,18,'level_up'],
     '比比鸟': [fly.Pidgeot,36,'level_up'],
     '烈雀': [fly.Fearow,20,'level_up'],
+    '走路草': [wood.Gloom,21,'level_up'],
+    '臭臭花': [wood.Vileplume,'叶之翠','stone_up'],
 }
 def canEvolveOrNot(obj,stone=None):
     '''

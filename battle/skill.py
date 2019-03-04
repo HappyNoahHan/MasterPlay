@@ -299,13 +299,15 @@ class CopySkill(skill):
         return None
 
 class DelayedSkill(skill):
-    def __init__(self,pp=30,add_status_begin=None,add_status_end=None,spell_skill=True,lucky_level=1):
+    def __init__(self,pp=30,add_status_begin=None,add_status_end=None,spell_skill=True,
+                 lucky_level=1,delay_effect=True):
         super().__init__(pp)
         self.skill_model = '0015'
         self.add_status_begin = add_status_begin
         self.add_status_end = add_status_end
         self.spell_skill = spell_skill #特殊攻击类型 True 默认 物理攻击类型 False
         self.lucky_level = lucky_level
+        self.delay_effect = delay_effect
 
     def setDelayedSkill(self,pet):
         pet.setSkills('delay',self)
@@ -796,13 +798,42 @@ class GrassyTerrain(GainStatusUpSkill):
 
 class PetalDance(DelayedSkill):
     def __init__(self):
-        super().__init__(pp=10,add_status_begin='ST102',add_status_end='ST006')
+        super().__init__(pp=10,add_status_begin='ST102',add_status_end='ST006',delay_effect=False)
 
     show_name = '花瓣舞'
     skill_code = 'B011'
     property = 'wood'
     skill_power = 120
     skill_info = '攻击目标造成伤害,陷入花瓣舞状态,在２～３回合内,乱打一气地进行攻,大闹一番后自己会陷入混乱'
+
+class PetalBlizzard(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,spell_skill=False)
+
+    show_name = '落英缤纷'
+    skill_code = 'B012'
+    property = 'wood'
+    skill_power = 90
+    skill_info = '攻击目标造成伤害,全场攻击'
+
+class Aromatherapy(removeStatusSkill):
+    def __init__(self):
+        super().__init__(status='abnormal',pp=5,effecters='attack')
+    show_name = '芳香治疗'
+    skill_info = '治愈己方队伍所有宝可梦的异常状态'
+    skill_code = 'B013'
+    property = 'wood'
+    hit_rate = 0
+
+class SolarBeam(DelayedSkill):
+    def __init__(self):
+        super().__init__(pp=10,add_status_begin='ST103')
+
+    show_name = '日光束'
+    skill_code = 'B014'
+    skill_power = 200
+    property = 'wood'
+    skill_info = '使用日光束的宝可梦在第一回合进行蓄力,第二回合发动攻击'
 
 
 class illuminatiom(removeDebuffSkill):
