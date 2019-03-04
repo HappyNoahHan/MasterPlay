@@ -234,6 +234,11 @@ class SolarBeam(Status):
     status_info = '蓄力攻击,第二回合攻击'
     status_code = 'ST103'
 
+class KnockOff(Status):
+    status_show_name = '拍落'
+    status_info = '携带物视为不带'
+    status_code = 'ST098'
+
 
 
 

@@ -94,37 +94,36 @@ class Pet(object):
         #最后使用过的技能
         self.last_used_skill = None
 
-
     def getDefense(self):
-        if self.carry_prop != None:
+        if self.carry_prop != None and 'ST098' not in self.status:
             if self.carry_prop.up_type == 'defense':
                 prop_defense_up = self.carry_prop.propCarry(self.defense)
                 return self.defense + self.tmp_defense + prop_defense_up
         return self.defense + self.tmp_defense
 
     def getAttack(self):
-        if self.carry_prop != None:
+        if self.carry_prop != None and 'ST098' not in self.status:
             if self.carry_prop.up_type == 'attack':
                 prop_attack_up = self.carry_prop.propCarry(self.attack)
                 return self.attack + self.tmp_attack + prop_attack_up
         return self.attack + self.tmp_attack
 
     def getSpellPower(self):
-        if self.carry_prop != None:
+        if self.carry_prop != None and 'ST098' not in self.status:
             if self.carry_prop.up_type == 'spell_power':
                 prop_spell_power_up = self.carry_prop.propCarry(self.spell_power)
                 return self.spell_power + self.tmp_spell_power + prop_spell_power_up
         return self.spell_power + self.tmp_spell_power
 
     def getSpellDefense(self):
-        if self.carry_prop != None:
+        if self.carry_prop != None and 'ST098' not in self.status:
             if self.carry_prop.up_type == 'spell_defense':
                 prop_spell_defense_up = self.carry_prop.propCarry(self.spell_defense)
                 return self.spell_defense + self.tmp_spell_defense + prop_spell_defense_up
         return self.spell_defense + self.tmp_spell_defense
 
     def getSpeed(self):
-        if self.carry_prop != None:
+        if self.carry_prop != None and 'ST098' not in self.status:
             if self.carry_prop.up_type == 'speed':
                 prop_speed_up = self.carry_prop.propCarry(self.speed)
                 return self.speed + self.tmp_speed + prop_speed_up

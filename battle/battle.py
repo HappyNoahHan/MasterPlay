@@ -31,6 +31,9 @@ def damageCount(obj_defense,obj_attack,obj_skill,weather):
 
     if obj_skill.skill_model == '0001':
         pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
+        # 拿到变化威力技能的 威力值
+        if obj_skill.power_changed:
+            obj_skill.skill_power = obj_skill.getPower(obj_defense)
         damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.skill_power)
         obj_skill.addStatus(obj_defense)  # 附加状态
         if damage > 0:

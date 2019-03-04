@@ -72,7 +72,7 @@ class skill(object):
 class damageSkill(skill):
     def __init__(self,pp=30,hit_status=None,addition_status = None,
                  addition_status_rate = 5,spell_skill=True,lucky_level=1,
-                 turns=1):
+                 turns=1,power_changed=False):
         '''
         :param pp: pp value
         :param hit_status: 附加状态
@@ -90,6 +90,7 @@ class damageSkill(skill):
         self.spell_skill = spell_skill #特殊攻击类型 True 默认 物理攻击类型 False
         self.lucky_level = lucky_level
         self.turns = turns
+        self.power_changed = power_changed
 
 
     def addStatus(self,obj):
@@ -635,7 +636,28 @@ class NaturalGift(BerryEffectSkill):
     def getPowerAndProperty(self,berry):
         return berrymap.berry_effect_for_NaturalGift[berry.code][0],berrymap.berry_effect_for_NaturalGift[berry.code][1]
 
+class Slam(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,spell_skill=False)
+    show_name = '摔打'
+    skill_code = 'N022'
+    skill_power = 80
+    hit_rate = 75
+    skill_info = '摔打目标造成伤害'
 
+class WringOut(damageSkill):
+    def __init__(self):
+        super().__init__(pp=5,power_changed=True)
+
+    show_name = '绞紧'
+    skill_code = 'N023'
+    skill_info = '攻击目标造成伤害,威力与对手剩余HP有关，公式为 1 + 120 × 当前HP ÷ 满HP,最大为121'
+
+    def getPower(self,obj):
+        power = 1 + 120 * obj.health / obj._max_health
+        if power > 121:
+            power = 121
+        return round(power)
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -713,7 +735,7 @@ class StunSpore(statusSkill):
 
 class azorLeaf(damageSkill):
     def __init__(self):
-        super().__init__(lucky_level=2)
+        super().__init__(lucky_level=2,pp=25,spell_skill=False)
     show_name = '飞叶快刀'
     skill_code = 'B002'
     skill_power = 55
@@ -835,6 +857,14 @@ class SolarBeam(DelayedSkill):
     property = 'wood'
     skill_info = '使用日光束的宝可梦在第一回合进行蓄力,第二回合发动攻击'
 
+class VineWhip(damageSkill):
+    def __init__(self):
+        super().__init__(pp=25,spell_skill=False)
+    show_name = '藤鞭'
+    skill_code = 'B015'
+    skill_power = 45
+    property = 'wood'
+    skill_info = '攻击技能,造成伤害'
 
 class illuminatiom(removeDebuffSkill):
     def __init__(self,pp=20):
@@ -905,6 +935,15 @@ class Assurance(damageSkill):
     show_name = '恶意追击'
     property = 'dark'
     skill_info = '攻击目标造成伤害,如果对方易受伤,威力加倍'
+
+class KnockOff(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,hit_status='ST098',addition_status_rate=100,spell_skill=False)
+    skill_power = 65
+    skill_code = 'T007'
+    show_name = '拍落'
+    property = 'dark'
+    skill_info = '攻击目标造成伤害,使目标陷入拍落状态'
 
 class LeechLife(suckBloodSkill):
     def __init__(self,pp=20):
@@ -1142,6 +1181,15 @@ class PoisonPowder(statusSkill):
     show_name = '毒粉'
     property = 'poison'
     hit_rate = 75
+
+class PoisonJab(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,hit_status='ST007',addition_status_rate=30,spell_skill=False)
+    skill_code = 'P012'
+    skill_power = 80
+    show_name = '毒击'
+    property = 'poison'
+    skill_info = '攻击目标造成伤害,有30%的几率使目标陷入中毒状态'
 
 class ThunderFang(MultipleDamageSkill):
     def __init__(self):

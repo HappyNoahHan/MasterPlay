@@ -42,6 +42,7 @@ status_dict={
                            place_property='wood'),
     'ST100' : status.NoTalent(),
     'ST099' : status.Lock(),
+    'ST098' : status.KnockOff(),
     'ST101' : status.Whirlwind(),
     'ST102' : status.PetalDance(),
     'ST103' : status.SolarBeam(),

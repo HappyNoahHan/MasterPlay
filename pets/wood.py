@@ -61,9 +61,9 @@ class Bellsprout(pets.propets.PropInit):
     speed_basic = 40
 
     name = '喇叭芽'
-    kind = 'None'
+    kind = '花'
     #talent = 'TA002'
-    basic_exp_value = 84
+    basic_exp_value = 60
 
     can_get_base_point = 1
     can_get_base_point_type = 'attack'

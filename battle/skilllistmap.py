@@ -45,8 +45,10 @@ skill_dict = {
     'N019': battle.skill.SweetScent,#甜甜香气
     'N020': battle.skill.LuckyChant,#幸运咒语
     'N021': battle.skill.NaturalGift,#自然之恩
+    'N022': battle.skill.Slam,#摔打
+    'N023': battle.skill.WringOut,#绞紧
     'B001': battle.skill.StunSpore,#麻痹粉
-    'B002': battle.skill.azorLeaf,
+    'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
     'B004': battle.skill.lifeChains,
     'B005': battle.skill.vinesTied,
@@ -59,6 +61,7 @@ skill_dict = {
     'B012': battle.skill.PetalBlizzard,#落英缤纷
     'B013': battle.skill.Aromatherapy,#芳香治疗
     'B014': battle.skill.SolarBeam,#日光束
+    'B015': battle.skill.VineWhip,#藤鞭
     'S001': battle.skill.illuminatiom,
     'S002': battle.skill.Agility,#高速移动
     'I001': battle.skill.Haze, #黑雾
@@ -69,6 +72,7 @@ skill_dict = {
     'T004': battle.skill.Crunch,#咬碎
     'T005': battle.skill.Pursuit,#追打
     'T006': battle.skill.Assurance,#恶意追击
+    'T007': battle.skill.KnockOff,#拍落
     'C003': battle.skill.LeechLife, #吸血
     'D001': battle.skill.WaterJump,
     'D002': battle.skill.WaterBall,
@@ -92,6 +96,7 @@ skill_dict = {
     'P009': battle.skill.Coil,#盘蜷
     'P010': battle.skill.GunkShot,#垃圾射击
     'P011': battle.skill.PoisonPowder,#毒粉
+    'P012': battle.skill.PoisonJab,#毒击
     'H001': battle.skill.ThunderFang,#雷电牙
     'G001': battle.skill.Twister,#龙卷风
     'Y001': battle.skill.Moonlight,#月光
