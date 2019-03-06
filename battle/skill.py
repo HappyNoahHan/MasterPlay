@@ -107,11 +107,17 @@ class damageSkill(skill):
                         print("%s 免疫 %s 状态" % (obj.name,statusmap.status_dict[self.hit_status].status_show_name))
 
     def doublePowerOrNot(self,obj):
+        '''
+        改写成多种状态
+        :param obj:
+        :return:
+        '''
         if self.addition_status != None:
             #ST999 弱点攻击
-            if self.addition_status in obj.status:
+            for status in self.addition_status:
+                if status in obj.status:
                 #print("%s 受到了双倍伤害" % obj.name)
-                return True
+                    return True
         return False
 
     def getSideEffect(self,obj):
@@ -669,6 +675,14 @@ class WringOut(damageSkill):
             power = 121
         return round(power)
 
+class Constrict(damageSkill):
+    def __init__(self):
+        super().__init__(pp=35,hit_status='ST023',addition_status_rate=10)
+    show_name = '缠绕'
+    skill_code = 'N024'
+    skill_power = 10
+    skill_info = '攻击目标造成伤害,10%几率令目标的速度降低1级'
+
 class steadiness(buffSkill):
     show_name = '稳固'
     skill_code = 'N099'
@@ -921,6 +935,15 @@ class Agility(GainStatusUpSkill):
     skill_code = 'S002'
     property = 'psychic'
 
+class Barrier(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(pp=20,status=['ST017'],turns=2)
+    show_name = '屏障'
+    skill_info = '制造坚固的壁障,从而大幅提高自己的防御'
+    skill_code = 'S003'
+    property = 'psychic'
+    hit_rate = 0
+
 class disperse(removeBuffSkill):
     def __init__(self,pp=20):
         super().__init__(pp)
@@ -959,7 +982,7 @@ class Crunch(damageSkill):
 
 class Pursuit(damageSkill):
     def __init__(self):
-        super().__init__(pp=20,spell_skill=False,addition_status='ST025')
+        super().__init__(pp=20,spell_skill=False,addition_status=['ST025'])
     skill_power = 40
     skill_code = 'T005'
     show_name = '追打'
@@ -968,7 +991,7 @@ class Pursuit(damageSkill):
 
 class Assurance(damageSkill):
     def __init__(self):
-        super().__init__(pp=10,spell_skill=False,addition_status='ST025')
+        super().__init__(pp=10,spell_skill=False,addition_status=['ST025'])
     skill_power = 60
     skill_code = 'T006'
     show_name = '恶意追击'
@@ -1028,13 +1051,48 @@ class WaterBall(damageSkill):
     skill_info = '使用水球术攻击，威力一般'
     hit_rate = 100
 
-class WaterCannon(damageSkill):
+class HydroPump(damageSkill):
+    def __init__(self):
+        super().__init__(pp=5)
     show_name = '水炮'
     skill_code = 'D003'
-    skill_power = 80
+    skill_power = 110
     property = 'water'
-    skill_info = '使用水炮术攻击，威力不一般'
-    hit_rate = 95
+    skill_info = '向对手猛烈地喷射大量水流进行攻击'
+    hit_rate = 80
+
+class WaterPulse(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,hit_status='ST006',addition_status_rate=20)
+    show_name = '水之波动'
+    skill_code = 'D004'
+    skill_power = 60
+    property = 'water'
+    skill_info = '用水的震动攻击对手,有时会使对手混乱'
+
+class BubbleBeam(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,hit_status='ST023',addition_status_rate=10)
+    show_name = '泡沫光线'
+    skill_code = 'D005'
+    skill_power = 65
+    property = 'water'
+    skill_info = '向对手猛烈地喷射泡沫进行攻击,有时会降低对手的速度'
+
+class Brine(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,power_changed=True)
+    show_name = '盐水'
+    skill_code = 'D006'
+    skill_power = 65
+    property = 'water'
+    skill_info = '当对手的ＨＰ负伤到一半左右时,招式威力会变成２倍'
+
+    def getPower(self,obj):
+        if (obj.health / obj._max_health) <= 0.5:
+            return self.skill_power * 2
+        else:
+            return self.skill_power
 
 class DownRock(damageSkill):
     def __init__(self,pp=35):
@@ -1114,6 +1172,15 @@ class Astonish(damageSkill):
     property = 'ghost'
     skill_power = 30
 
+class Hex(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,addition_status=['ST001','ST002','ST003','ST005','ST007','ST008'])
+    skill_info = '接二连三地进行攻击,对处于异常状态的对手给予较大的伤'
+    skill_code = 'Q003'
+    show_name = '祸不单行'
+    property = 'ghost'
+    skill_power = 65
+
 class Toxic(statusSkill):
     def __init__(self):
         super().__init__(10,status = 'ST005')
@@ -1134,7 +1201,7 @@ class PoisonFang(damageSkill):
 
 class Venoshock(damageSkill):
     def __init__(self):
-        super().__init__(pp=10,addition_status='ST005')
+        super().__init__(pp=10,addition_status=['ST005'])
 
     show_name = '毒液冲击'
     property = 'poison'
@@ -1230,6 +1297,24 @@ class PoisonJab(damageSkill):
     property = 'poison'
     skill_info = '攻击目标造成伤害,有30%的几率使目标陷入中毒状态'
 
+class ToxicSpikes(statusSkill):
+    def __init__(self):
+        super().__init__(pp=20,status='ST025')
+    show_name = '毒菱'
+    property = 'poison'
+    skill_info = '在对手的脚下撒毒菱,容易受伤'
+    hit_rate = 0
+    skill_code = 'P013'
+
+class SludgeWave(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,hit_status='ST007',addition_status_rate=10)
+    show_name = '污泥波'
+    property = 'poison'
+    skill_code = 'P014'
+    skill_power = 95
+    skill_info = '用污泥波攻击自己周围所有的宝可梦,有时会陷入中毒状'
+
 class ThunderFang(MultipleDamageSkill):
     def __init__(self):
         super().__init__(pp=15,hit_status=['ST002','ST004'],addition_status_rate=10,spell_skill=False)
@@ -1242,7 +1327,7 @@ class ThunderFang(MultipleDamageSkill):
 
 class Twister(damageSkill):
     def __init__(self):
-        super().__init__(pp=20,hit_status='ST004',addition_status='ST024',addition_status_rate=20)
+        super().__init__(pp=20,hit_status='ST004',addition_status=['ST024'],addition_status_rate=20)
 
     show_name = '龙卷风'
     skill_code = 'G001'

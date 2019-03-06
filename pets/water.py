@@ -30,19 +30,16 @@ class Tentacool(propets.PropInit):
     spell_defense_basic = 100
     speed_basic = 70
 
-    name = '毒刺水母'
+    name = '玛瑙水母'
+    kind = '水母'
     basic_exp_value = 105
 
     can_get_base_point = 1
     can_get_base_point_type = 'spell_defense'
     capture_rate = 190
-    canEvolve = False
     # 精灵编号
     pet_no = '072'
     prop = ['water','poison']
-
-    def __str__(self):
-        return super().__str__() + ':' + self.name
 
 class Horsea(propets.PropInit):
     health_basic = 30
