@@ -18,6 +18,8 @@ evolve_dict={
     '烈雀': [fly.Fearow,20,'level_up'],
     '走路草': [wood.Gloom,21,'level_up'],
     '臭臭花': [wood.Vileplume,'叶之翠','stone_up'],
+    '喇叭芽': [wood.Weepinbell,21,'level_up'],
+    '口呆花': [wood.Victreebel,'叶之翠','stone_up']
 }
 def canEvolveOrNot(obj,stone=None):
     '''

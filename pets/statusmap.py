@@ -383,6 +383,7 @@ def checkPropBeforeBattle(obj_attack,obj_defense,attack,defense,spell_power,spel
 
     return attack,defense,spell_power,spell_defense,speed
 
+#被替代
 def checkHitDown(obj,hit):
     if 'ST013' in obj.status:
         return status_dict['ST013'].statusEffect(hit,obj.status['ST013'])

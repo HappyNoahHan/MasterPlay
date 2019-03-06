@@ -72,7 +72,7 @@ class skill(object):
 class damageSkill(skill):
     def __init__(self,pp=30,hit_status=None,addition_status = None,
                  addition_status_rate = 5,spell_skill=True,lucky_level=1,
-                 turns=1,power_changed=False):
+                 turns=1,power_changed=False,side_effect=None):
         '''
         :param pp: pp value
         :param hit_status: 附加状态
@@ -81,6 +81,7 @@ class damageSkill(skill):
         :param spell_skill: 技能类型 物理or特殊
         :param lucky_level: 会心等级 默认=1
         :param truns: status层数
+        :param side_effect: 副作用 默认None  数据形式(status turns)
         '''
         super().__init__(pp)
         self.skill_model = '0001'
@@ -91,6 +92,7 @@ class damageSkill(skill):
         self.lucky_level = lucky_level
         self.turns = turns
         self.power_changed = power_changed
+        self.side_effect = side_effect
 
 
     def addStatus(self,obj):
@@ -111,6 +113,14 @@ class damageSkill(skill):
                 #print("%s 受到了双倍伤害" % obj.name)
                 return True
         return False
+
+    def getSideEffect(self,obj):
+        '''
+        为pet 加上技能的副作用
+        :param obj:
+        :return:
+        '''
+        obj.setStatus(self.side_effect[0],self.side_effect[1])
 
 class MultipleDamageSkill(damageSkill):
     def addStatus(self,obj):
@@ -865,6 +875,35 @@ class VineWhip(damageSkill):
     skill_power = 45
     property = 'wood'
     skill_info = '攻击技能,造成伤害'
+
+class LeafTornado(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,hit_status='ST013',addition_status_rate=50)
+    show_name = '青草搅拌器'
+    skill_code = 'B016'
+    skill_power = 65
+    hit_rate = 90
+    property = 'wood'
+    skill_info = '攻击目标造成伤害,50%几率令目标的命中率降低1级'
+
+class LeafStorm(damageSkill):
+    def __init__(self):
+        super().__init__(pp=5,side_effect=('ST022',2))
+    show_name = '飞叶风暴'
+    skill_code = 'B017'
+    skill_power = 130
+    hit_rate = 90
+    property = 'wood'
+    skill_info = '攻击目标造成伤害,令使用者的特攻降低2级'
+
+class LeafBlade(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,spell_skill=False,lucky_level=2)
+    show_name = '叶刃'
+    skill_code = 'B018'
+    skill_power = 90
+    property = 'wood'
+    skill_info = '攻击目标造成伤害,击中要害率比普通招式高1级'
 
 class illuminatiom(removeDebuffSkill):
     def __init__(self,pp=20):

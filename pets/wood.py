@@ -71,3 +71,38 @@ class Bellsprout(pets.propets.PropInit):
     # 精灵编号
     pet_no = '069'
     prop = [ 'wood','poison']
+
+class Weepinbell(Bellsprout):
+    health_basic = 65
+    attack_basic = 90
+    defense_basic = 50
+    spell_power_basic = 85
+    spell_defense_basic = 45
+    speed_basic = 55
+
+    name = '口呆花'
+    kind = '捕蝇'
+    #talent = 'TA002'
+    basic_exp_value = 137
+
+    can_get_base_point = 2
+    capture_rate = 120
+    # 精灵编号
+    pet_no = '070'
+
+class Victreebel(Bellsprout):
+    health_basic = 80
+    attack_basic = 105
+    defense_basic = 65
+    spell_power_basic = 100
+    spell_defense_basic = 70
+    speed_basic = 70
+
+    name = '大食花'
+    #talent = 'TA002'
+    basic_exp_value = 221
+
+    can_get_base_point = 3
+    capture_rate = 45
+    # 精灵编号
+    pet_no = '071'

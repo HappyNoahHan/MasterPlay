@@ -36,6 +36,9 @@ def damageCount(obj_defense,obj_attack,obj_skill,weather):
             obj_skill.skill_power = obj_skill.getPower(obj_defense)
         damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.skill_power)
         obj_skill.addStatus(obj_defense)  # 附加状态
+        if obj_skill.side_effect != None:
+            obj_skill.getSideEffect(obj_attack) #副作用
+
         if damage > 0:
             obj_defense.health -= damage
             print("造成了%s 的伤害" % damage)

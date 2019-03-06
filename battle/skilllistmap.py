@@ -62,6 +62,9 @@ skill_dict = {
     'B013': battle.skill.Aromatherapy,#芳香治疗
     'B014': battle.skill.SolarBeam,#日光束
     'B015': battle.skill.VineWhip,#藤鞭
+    'B016': battle.skill.LeafTornado,#青草搅拌器
+    'B017': battle.skill.LeafStorm,#飞叶风暴
+    'B018': battle.skill.LeafBlade,#叶刃
     'S001': battle.skill.illuminatiom,
     'S002': battle.skill.Agility,#高速移动
     'I001': battle.skill.Haze, #黑雾
