@@ -33,7 +33,7 @@ def explore(player,wild_pet,weather):
                     # print(master_pet.attack_base_point)
                     # print("基础点数获得者",wild_pet.basic_point_getter)
                     if wild_pet.basic_point_getter == master_pet:
-                        asscount.getBasePoint(master_pet, wild_pet)
+                        asscount.getBasePoint(master_pet, wild_pet.can_get_base_point_type,wild_pet.can_get_base_point)
                     # print(master_pet.attack_base_point)
 
                     # 战斗结束之后结算
@@ -86,7 +86,7 @@ def trainerVS(player,trainer):
                     # 计算获得的基础点数
                     if pet.basic_point_getter == get_exp_pet:
                         print("基础点数获得者", pet.basic_point_getter)
-                        asscount.getBasePoint(get_exp_pet, pet)
+                        asscount.getBasePoint(get_exp_pet,pet.can_get_base_point_type,pet.can_get_base_point)
                     # 战斗结束之后结算
                     # 经验值计算
                     got_exp += exp.getBattleSuccessExp(player, pet,carry_prop=exp_up)

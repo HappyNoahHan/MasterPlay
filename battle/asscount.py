@@ -34,39 +34,43 @@ def checkBuffAfterBattle(obj_attack):
     if obj_attack.property_buff:
         buff.proBuffindex(obj_attack) #属性增强buff 次数计算
 
-def getBasePoint(obj_attack,obj_defense):
+def getBasePoint(obj_attack,point_type,point):
     '''
     计算获得的基础点数
     :param obj_attack:
     :param obj_defense:
     :return:
     '''
-    if obj_defense.can_get_base_point_type == 'health':
-        obj_attack.health_base_point += obj_defense.can_get_base_point
+    if isinstance(point_type,list):
+        for type in point_type:
+            getBasePoint(obj_attack,type,point)
+
+    if point_type == 'health':
+        obj_attack.health_base_point += point
         if obj_attack.health_base_point > 255:
             obj_attack.health_base_point = 255
 
-    if obj_defense.can_get_base_point_type == 'attack':
-        obj_attack.attack_base_point += obj_defense.can_get_base_point
+    if point_type == 'attack':
+        obj_attack.attack_base_point += point
         if obj_attack.attack_base_point > 255:
             obj_attack.attack_base_point = 255
 
-    if obj_defense.can_get_base_point_type == 'defense':
-        obj_attack.defense_base_point += obj_defense.can_get_base_point
+    if point_type == 'defense':
+        obj_attack.defense_base_point += point
         if obj_attack.defense_base_point > 255:
             obj_attack.defense_base_point = 255
 
-    if obj_defense.can_get_base_point_type == 'spell_power':
-        obj_attack.spell_power_base_point += obj_defense.can_get_base_point
+    if point_type == 'spell_power':
+        obj_attack.spell_power_base_point += point
         if obj_attack.spell_power_base_point > 255:
             obj_attack.spell_power_base_point = 255
 
-    if obj_defense.can_get_base_point_type == 'spell_defense':
-        obj_attack.spell_defense_base_point += obj_defense.can_get_base_point
+    if point_type == 'spell_defense':
+        obj_attack.spell_defense_base_point += point
         if obj_attack.spell_defense_base_point > 255:
             obj_attack.spell_defense_base_point = 255
 
-    if obj_defense.can_get_base_point_type == 'speed':
-        obj_attack.speed_base_point += obj_defense.can_get_base_point
+    if point_type == 'speed':
+        obj_attack.speed_base_point += point
         if obj_attack.speed_base_point > 255:
             obj_attack.speed_base_point = 255

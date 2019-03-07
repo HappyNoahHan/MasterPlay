@@ -89,7 +89,7 @@ class Seadra(Horsea):
     basic_exp_value = 154
 
     can_get_base_point = 1
-    can_get_base_point_type = 'spell_power'
+    can_get_base_point_type = ['spell_power','defense']
     capture_rate = 75
     # 精灵编号
     pet_no = '117'
