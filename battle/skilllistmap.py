@@ -51,6 +51,9 @@ skill_dict = {
     'N025': battle.skill.ReflectType,#镜面属性
     'N026': battle.skill.Smokescreen,#烟幕
     'N027': battle.skill.TailWhip,#摇尾巴
+    'N028': battle.skill.HornAttack,#角撞
+    'N029': battle.skill.Flail,#抓狂
+    'N030': battle.skill.HornDrill,#角钻
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -81,6 +84,7 @@ skill_dict = {
     'T005': battle.skill.Pursuit,#追打
     'T006': battle.skill.Assurance,#恶意追击
     'T007': battle.skill.KnockOff,#拍落
+    'C001': battle.skill.Megahorn,#超级角击
     'C003': battle.skill.LeechLife, #吸血
     'D001': battle.skill.WaterJump,
     'D002': battle.skill.Bubble,#泡沫
@@ -89,6 +93,10 @@ skill_dict = {
     'D005': battle.skill.BubbleBeam,#泡沫光线
     'D006': battle.skill.Brine,#盐水
     'D007': battle.skill.WaterGun,#水枪
+    'D008': battle.skill.WaterSport,#玩水
+    'D009': battle.skill.AquaRing,#水流环
+    'D010': battle.skill.Waterfall,#攀瀑
+    'D011': battle.skill.Soak,#浸水
     'R001': battle.skill.DownRock,
     'R002': battle.skill.RockFall,
     'E001': battle.skill.Earthquake,#地震

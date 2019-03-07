@@ -2,8 +2,8 @@ import random
 from pets import statusmap
 
 def hitOrNot(skill,rate,obj_attack,obj_defense,dodge):
-    #if skill.skill_code in ['N004','N005']:
-    if skill.hit_rate == 0:
+    #ST104 锁定状态 技能必定命中
+    if skill.hit_rate == 0 or 'ST104' in obj_defense.status:
         print("%s 必定命中！" % skill.show_name)
         return True
 
@@ -32,3 +32,31 @@ def hitOrNot(skill,rate,obj_attack,obj_defense,dodge):
     else:
         print("技能未命中！")
         return False
+
+
+def hitForOneHitKill(obj_attack,obj_defense):
+    if obj_attack.level < obj_defense.level:
+        return False
+    else:
+        if 'ST104' in obj_defense.status:
+            return True
+        else:
+            hit = 30+obj_attack.level-obj_defense.level
+            real_rate = int(hit * 2.55)
+            print("真实命中率:", real_rate)
+
+            if real_rate >= 255:
+                print("技能命中！")
+                return True
+
+            random_number = random.randint(1, 255)
+
+            # 测试
+            # print(random_number)
+
+            if random_number <= real_rate:
+                print("技能命中！")
+                return True
+            else:
+                print("技能未命中！")
+                return False

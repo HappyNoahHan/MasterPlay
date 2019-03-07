@@ -12,6 +12,7 @@
                      0015 延时类技能  eg. 挖地 飞天
                      0016 树果类技能  技能效果随树果的种类而变化
                      0017 改变场地的技能 eg 青草场地 玩水
+                     0018 一击必杀  eg 角钻
                      --- 2.0
                      buff 类 与 debuff 类 集合
                      buff  标记attack denfense 法强 法防 提升 统一  0002 buff类技能
@@ -367,6 +368,11 @@ class PlaceStatusSkill(skill):
         self.status = status
         self.turns = turns
 
+class OneHitKillSkill(skill):
+    def __init__(self,pp=30,spell_skill=True):
+        super().__init__(pp)
+        self.skill_model = '0018'
+
 class Gust(damageSkill):
     def __init__(self):
         super().__init__(35,spell_skill=False)
@@ -613,7 +619,7 @@ class FuryAttack(damageSkill):
     def __init__(self):
         super().__init__(pp=20,spell_skill=False)
     show_name = '乱击'
-    skill_info = '攻击目标造成伤害，一回合内连续攻击2～5次'
+    skill_info = '用角或喙刺向对手进行攻击，一回合内连续攻击2～5次'
     skill_power = 15
     hit_rate = 85
     skill_code = 'N016'
@@ -677,8 +683,8 @@ class WringOut(damageSkill):
     skill_code = 'N023'
     skill_info = '攻击目标造成伤害,威力与对手剩余HP有关，公式为 1 + 120 × 当前HP ÷ 满HP,最大为121'
 
-    def getPower(self,obj):
-        power = 1 + 120 * obj.health / obj._max_health
+    def getPower(self,obj_attack,obj_defense):
+        power = 1 + 120 * obj_defense.health / obj_defense._max_health
         if power > 121:
             power = 121
         return round(power)
@@ -712,6 +718,45 @@ class TailWhip(statusSkill):
     show_name = '摇尾巴'
     skill_code = 'N027'
     skill_info = '可爱地左右摇晃尾巴,诱使对手疏忽大意,会降低对手的防御'
+
+class HornAttack(damageSkill):
+    def __init__(self):
+        super().__init__(pp=25,spell_skill=False)
+    show_name = '角撞'
+    skill_code = 'N028'
+    skill_info = '用尖锐的角攻击对手'
+    skill_power = 65
+
+class Flail(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,power_changed=True,spell_skill=False)
+    show_name = '抓狂'
+    skill_code = 'N029'
+    skill_info = '抓狂般乱打进行攻击,自己的ＨＰ越少.招式的威力越大'
+
+    def getPower(self,obj_attack,obj_defense):
+        health_per = round(obj_attack.health/obj_attack._max_health,4) * 100
+        if 0 < health_per < 4.17:
+            power = 200
+        elif 4.17 <= health_per < 10.42:
+            power = 150
+        elif 10.42 <= health_per < 20.83:
+            power = 100
+        elif 20.83 <= health_per < 35.42:
+            power = 80
+        elif 35.42 <= health_per < 68.75:
+            power = 40
+        else:
+            power = 20
+        return power
+
+class HornDrill(OneHitKillSkill):
+    def __init__(self):
+        super().__init__(pp=5,spell_skill=False)
+    show_name = '角钻'
+    skill_code = 'N030'
+    hit_rate = 30
+    skill_info = '用旋转的角刺入对手进行攻击,只要命中就会一击濒死'
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -1039,6 +1084,16 @@ class KnockOff(damageSkill):
     property = 'dark'
     skill_info = '攻击目标造成伤害,使目标陷入拍落状态'
 
+class Megahorn(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,spell_skill=False)
+    skill_code = 'C001'
+    show_name = '超级角击'
+    skill_info = '用坚硬且华丽的角狠狠地刺入对手进行攻击'
+    skill_power = 120
+    hit_rate = 85
+    property = 'insect'
+
 class LeechLife(suckBloodSkill):
     def __init__(self,pp=20):
         super().__init__(pp,spell_skill=False)
@@ -1121,8 +1176,8 @@ class Brine(damageSkill):
     property = 'water'
     skill_info = '当对手的ＨＰ负伤到一半左右时,招式威力会变成２倍'
 
-    def getPower(self,obj):
-        if (obj.health / obj._max_health) <= 0.5:
+    def getPower(self,obj_attack,obj_defense):
+        if (obj_defense.health / obj_defense._max_health) <= 0.5:
             return self.skill_power * 2
         else:
             return self.skill_power
@@ -1144,6 +1199,32 @@ class WaterSport(PlaceStatusSkill):
     property = 'water'
     hit_rate = 0
     skill_code = 'D008'
+
+class AquaRing(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(pp=20,status=['ST096'])
+    show_name = '水流环'
+    skill_code = 'D009'
+    property = 'water'
+    hit_rate = 0
+    skill_info = '在自己身体的周围覆盖用水制造的幕,每回合回复ＨＰ'
+
+class Waterfall(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,hit_status='ST004',addition_status_rate=20,spell_skill=False)
+    show_name = '攀瀑'
+    skill_code = 'D010'
+    skill_power = 80
+    skill_info = '以惊人的气势扑向对手,有时会使对手畏缩'
+    property = 'water'
+
+class Soak(statusSkill):
+    def __init__(self):
+        super().__init__(pp=20,status='ST095')
+    show_name = '浸水'
+    skill_info = '将大量的水泼向对手，从而使其变成水属性'
+    property = 'water'
+    skill_code = 'D011'
 
 class DownRock(damageSkill):
     def __init__(self,pp=35):

@@ -62,7 +62,7 @@ class Poisoning(Status):
         return round(health / 8)
 
 class Lock(Status):
-    status_show_name = '锁定'
+    status_show_name = '盯住'
     status_code = 'ST099'
     status_info = '被锁定,无法逃脱'
 
@@ -250,4 +250,20 @@ class WaterSport(Place):
             return round(skill.skill_power * 0.5)
         return power
 
+class AquaRing(Status):
+    status_show_name = '水流环'
+    status_info = '在自己身体的周围覆盖用水制造的幕,每回合回复ＨＰ'
+    status_code = 'ST096'
+
+class Lockon(Status):
+    status_show_name = '锁定'
+    status_info = '在锁定的下一回合,招式必定会击中'
+    status_code = 'ST104'
+
+class PropChangeTemp(Status):
+    def __init__(self,status_show_name,status_info,status_code,change_prop):
+        self.status_show_name = status_show_name
+        self.status_info = status_info
+        self.status_code = status_code
+        self.change_prop = change_prop
 

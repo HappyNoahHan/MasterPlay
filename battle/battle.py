@@ -33,7 +33,7 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
         pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
         # 拿到变化威力技能的 威力值
         if obj_skill.power_changed:
-            obj_skill.skill_power = obj_skill.getPower(obj_defense)
+            obj_skill.skill_power = obj_skill.getPower(obj_attack,obj_defense)
         damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.skill_power,place)
         obj_skill.addStatus(obj_defense)  # 附加状态
         if obj_skill.side_effect != None:
@@ -322,6 +322,24 @@ def battleRun(player,obj1,obj2,place):
         print("真实命中: ",hit+hit_up)
         #多段技能结算
         if obj1.skill_list[skill_number].multi_step == False:
+            if obj1.skill_list[skill_number].skill_model == '0018':
+                if battle.hitrate.hitForOneHitKill(obj1,obj2):
+                    print("%s 一击必杀" % obj1.name)
+                    obj2.health = 0
+                    assist.show.petDie(obj2.name)
+                    assist.show.battleOver()
+                    return True
+                else:
+                    print("%s 技能使用失败！" % obj1.name)
+                    # 回合结束检查是否中毒  中毒死亡
+                    if not statusmap.checkStatusAfterTurn(obj1, place):
+                        assist.show.petDie(obj1.name)
+                        assist.show.battleOver()
+                        return True
+
+                    assist.show.printTurn(obj2.name)
+                    return battleRun(player, obj2, obj1, place)
+
             if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number],hit + hit_up,obj1,obj2,obj2.dodge + dodge_up):
                 asscount.checkBuffAfterBattle(obj1)
                 # 回合结束检查是否中毒  中毒死亡

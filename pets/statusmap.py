@@ -47,9 +47,14 @@ status_dict={
     'ST099' : status.Lock(),
     'ST098' : status.KnockOff(),
     'ST097' : status.ChangePro(),
+    'ST096' : status.AquaRing(),
+    'ST095' : status.PropChangeTemp(status_show_name='浸水',status_code='ST095',
+                                    status_info='将大量的水泼向对手,从而使其变成水属性',
+                                    change_prop='water'),
     'ST101' : status.Whirlwind(),
     'ST102' : status.PetalDance(),
     'ST103' : status.SolarBeam(),
+    'ST104' : status.Lockon(),
 }
 
 #清理清单
@@ -151,6 +156,7 @@ def checkStatusBeforeBattle(obj,skill):
 def checkStatusAfterTurn(obj,place):
     '''
     检查回合结束 中毒 灼伤 伤害
+    水流环 等回复HP 状态
     :param obj:
     :return:
     '''
@@ -195,10 +201,15 @@ def checkStatusAfterTurn(obj,place):
     if 'ST004' in obj.status:
         removeStatus(obj,'ST004')
 
+    if 'ST104' in obj.status:
+        removeStatus(obj,'ST104')
+
     if place.place_status:
         if place.place_status[0] == 'ST031':
             life.healthRecoverBySkill(obj,1/16)
 
+    if 'ST096' in obj.status:
+        life.healthRecoverBySkill(obj,1/16)
 
     #回合生效的状态-1
     for status in count_index_list:
@@ -308,6 +319,9 @@ def resetStatusAfterChange(pet):
     '''
     if 'ST005' in pet.status:
         pet.setStatus('ST005')
+
+    if 'ST095' in pet.status:
+        removeStatus(pet,'ST095')
 
 def checkFrozenOrNot(obj):
     '''
