@@ -40,6 +40,9 @@ status_dict={
     'ST031' : status.Place(status_show_name='青草场地',status_code='ST031',
                            status_info='5回合内所有站地面上的宝可梦每回合回复少许体力。草属性招式的威力提升50%',
                            place_property='wood'),
+    'ST032' : status.WaterSport(status_show_name='玩水',status_code='ST032',
+                           status_info='玩水状态持续5回合。全场宝可梦使用的火属性招式威力×1⁄2',
+                           place_property='water'),
     'ST100' : status.NoTalent(),
     'ST099' : status.Lock(),
     'ST098' : status.KnockOff(),
@@ -59,7 +62,7 @@ clear_list.remove('ST007')
 clear_list.remove('ST102')
 
 #回合递减
-count_index_list=['ST029','ST030','ST031']
+count_index_list=['ST029','ST030']
 
 #异常状态
 abnormal_list = ['ST001','ST002','ST003',
@@ -145,7 +148,7 @@ def checkStatusBeforeBattle(obj,skill):
         print("%s 没有处于任何状态！" % obj.name)
     return False
 
-def checkStatusAfterTurn(obj):
+def checkStatusAfterTurn(obj,place):
     '''
     检查回合结束 中毒 灼伤 伤害
     :param obj:
@@ -192,8 +195,9 @@ def checkStatusAfterTurn(obj):
     if 'ST004' in obj.status:
         removeStatus(obj,'ST004')
 
-    if 'ST031' in obj.status:
-        life.healthRecoverBySkill(obj,1/16)
+    if place.place_status:
+        if place.place_status[0] == 'ST031':
+            life.healthRecoverBySkill(obj,1/16)
 
 
     #回合生效的状态-1
@@ -202,6 +206,12 @@ def checkStatusAfterTurn(obj):
             obj.status[status] -= 1
             if obj.status[status] == 0:
                 removeStatus(obj,status)
+
+    if place.place_status:
+        place.place_status[1] -= 1
+        if place.place_status[1] == 0:
+            place.place_status = None
+
 
     return True
 
@@ -418,13 +428,10 @@ def checkHealBlockOrNot(obj_attack):
         return True
     return False
 
-place_status_list = ['ST031']
-def placeStatusPowerUp(obj,skill,power):
-    for status_code in place_status_list:
-        if status_code in obj.status:
-            return status_dict[status_code].statusEffect(skill,power)
 
-    return power
+def placeStatusPowerUp(skill,power,place):
+    return status_dict[place.place_status[0]].statusEffect(skill,power)
+
 
 def checkDelayStatus(obj_attack):
     '''

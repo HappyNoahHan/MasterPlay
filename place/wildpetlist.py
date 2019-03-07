@@ -45,19 +45,20 @@ def getWildPet(pet_list):
             return fly.Pidgey(level=random.randint(2, 4),skill_list = skilltree.getInitSkillList('041'))
     elif pet_no == '043':
         if place == 'grass_no1':
-            return wood.Oodish(level=random.randint(2, 4),skill_list = skilltree.getInitSkillList('041'))
+            #return wood.Oodish(level=random.randint(2, 4),skill_list = skilltree.getInitSkillList('041'))
+            return water.Seadra(level=random.randint(2, 4), skill_list=skilltree.getInitSkillList('041'))
     elif pet_no == '069':
         if place == 'grass_no2':
             return wood.Bellsprout(level=random.randint(6,8),skill_list={'1':skill.azorLeaf(),'2':skill.StunSpore()})
 
     elif pet_no == '072':
         if place == 'maelstrom_no1':
-            return water.Tentacool(level=random.randint(10,12),skill_list={'1':skill.WaterBall()})
+            return water.Tentacool(level=random.randint(10,12),skill_list={'1':skill.WaterGun()})
 
     elif pet_no == '118':
         if place == 'maelstrom_no1':
-            return water.Goldeen(level=random.randint(11,13),skill_list={'1':skill.WaterBall(),'2':skill.WaterCannon()})
+            return water.Goldeen(level=random.randint(11,13),skill_list={'1':skill.WaterGun(),'2':skill.WaterGun()})
 
     elif pet_no == '120':
         if place == 'maelstrom_no1':
-            return water.Staryu(level=random.randint(11, 13),skill_list={'1': skill.WaterBall(), '2': skill.WaterCannon()})
+            return water.Staryu(level=random.randint(11, 13),skill_list={'1': skill.WaterGun(), '2': skill.WaterGun()})

@@ -244,6 +244,10 @@ class ChangePro(Status):
     status_info = '使用者属性变为对方属性'
     status_code = 'ST097'
 
-
+class WaterSport(Place):
+    def statusEffect(self,skill,power):
+        if skill.property == 'fire':
+            return round(skill.skill_power * 0.5)
+        return power
 
 

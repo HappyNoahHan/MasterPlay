@@ -103,18 +103,15 @@ class Goldeen(propets.PropInit):
     speed_basic = 63
 
     name = '角金鱼'
-    basic_exp_value = 111
+    kind = '金鱼'
+    basic_exp_value = 64
 
     can_get_base_point = 1
     can_get_base_point_type = 'attack'
     capture_rate = 225
-    canEvolve = False
     # 精灵编号
     pet_no = '118'
     prop = ['water']
-
-    def __str__(self):
-        return super().__str__() + ':' + self.name
 
 class Staryu(propets.PropInit):
     health_basic = 30

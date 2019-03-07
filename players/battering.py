@@ -5,7 +5,7 @@ from props import handbook
 from battle import asscount,skilllistmap,battle,learnskill
 import random,time
 
-def battleing(player,wild_pet,change_pet = False,weather = None):
+def battleing(player,wild_pet,change_pet = False,place=None):
     #将未发现的精灵加入图鉴
     if wild_pet.pet_no not in handbook.pet_handbook_dict:
         handbook.setHandBook(wild_pet.pet_no,wild_pet.name,wild_pet.prop)
@@ -27,11 +27,11 @@ def battleing(player,wild_pet,change_pet = False,weather = None):
     if change_pet == False:
         if master_pet.getSpeed() > wild_pet.getSpeed():
             print("%s 优先进攻" % master_pet.name)
-            battle_end = battle.battleRun(player,master_pet, wild_pet,weather)
+            battle_end = battle.battleRun(player,master_pet, wild_pet,place)
         else:
-            battle_end = battle.battleRun(player,wild_pet, master_pet,weather)
+            battle_end = battle.battleRun(player,wild_pet, master_pet,place)
     else:
-        battle_end = battle.battleRun(player,wild_pet, master_pet,weather)
+        battle_end = battle.battleRun(player,wild_pet, master_pet,place)
 
 
     if battle_end == True:
@@ -45,7 +45,7 @@ def battleing(player,wild_pet,change_pet = False,weather = None):
                 except ValueError:
                     print("已经移除？？？")
                 if changepet.changePetAfterDie(player):
-                    return battleing(player,wild_pet,change_pet=True)
+                    return battleing(player,wild_pet,change_pet=True,place=place)
                 else:
                     print("没有可以使用的精灵")
                     #无法出战

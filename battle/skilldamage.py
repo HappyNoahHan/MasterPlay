@@ -79,7 +79,7 @@ def luckyAttack(speed,skill,lucky_up):
         return False
 
 
-def skillDamage(obj_attack,obj_defense,skill,pro_buff_index,power):
+def skillDamage(obj_attack,obj_defense,skill,pro_buff_index,power,place):
     '''
     伤害计算
     :param obj_attack:
@@ -115,7 +115,8 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index,power):
     attack,defense,spell_power,spell_defense,speed = statusmap.checkPropBeforeBattle(
         obj_attack,obj_defense,attack,defense,spell_power,spell_defense,speed
     )
-    power = statusmap.placeStatusPowerUp(obj_attack,skill,power)
+    if place.place_status != None:
+        power = statusmap.placeStatusPowerUp(skill,power,place)
     print("场地技能威力Up: ", power)
 
     #加入战斗前天赋计算  各 能力技能威力提升

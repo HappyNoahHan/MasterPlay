@@ -5,12 +5,25 @@ from props import bag
 import random,time,os
 
 class WildForm(placebase.Place):
-    def __init__(self,name='',maplist={},wild_pet_list={},treasure_box_list={},npc_list={},block=None,weather=None):
+    def __init__(self,name='',maplist={},wild_pet_list={},treasure_box_list={},npc_list={},block=None,weather=None,place_status=None):
+        '''
+
+        :param name:
+        :param maplist:
+        :param wild_pet_list:
+        :param treasure_box_list:
+        :param npc_list:
+        :param block:
+        :param weather: 天气
+        :param place_status:  场地
+        '''
         super().__init__(name=name,maplist=maplist,treasure_box_list=treasure_box_list,npc_list=npc_list,block=block)
         self.wild_pet_list = wild_pet_list
         self.weather = weather
+        self.place_status = place_status
 
-
+    def setPlaceStatus(self,key,value):
+        self.place_status = [key,value]
 
     def showMap(self,player):
         if player.map_run_list[-1] != self:
@@ -34,7 +47,7 @@ class WildForm(placebase.Place):
                     wild_pet = wildpetlist.getWildPet(self.wild_pet_list)
                     #show.showPetStatus(wild_pet)
                     print("你遇到了 %s ! lv: %s" % (wild_pet.name,wild_pet.level))
-                    if explore.explore(player,wild_pet,self.weather):
+                    if explore.explore(player,wild_pet,self):
                         return self.showMap(player)
                     else:
                         print("无法继续战斗,请前往治疗")

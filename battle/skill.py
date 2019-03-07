@@ -11,6 +11,7 @@
                      0014 复制类技能
                      0015 延时类技能  eg. 挖地 飞天
                      0016 树果类技能  技能效果随树果的种类而变化
+                     0017 改变场地的技能 eg 青草场地 玩水
                      --- 2.0
                      buff 类 与 debuff 类 集合
                      buff  标记attack denfense 法强 法防 提升 统一  0002 buff类技能
@@ -359,6 +360,12 @@ class BerryEffectSkill(skill):
     def doublePowerOrNot(self,obj):
         return False
 
+class PlaceStatusSkill(skill):
+    def __init__(self,pp=30,status=None,turns=5):
+        super().__init__(pp)
+        self.skill_model = '0017'
+        self.status = status
+        self.turns = turns
 
 class Gust(damageSkill):
     def __init__(self):
@@ -699,6 +706,13 @@ class Smokescreen(statusSkill):
     skill_code = 'N026'
     skill_info = '向对手喷出烟或墨汁等,从而降低对手的命中'
 
+class TailWhip(statusSkill):
+    def __init__(self):
+        super().__init__(status='ST009')
+    show_name = '摇尾巴'
+    skill_code = 'N027'
+    skill_info = '可爱地左右摇晃尾巴,诱使对手疏忽大意,会降低对手的防御'
+
 class steadiness(buffSkill):
     show_name = '稳固'
     skill_code = 'N099'
@@ -850,13 +864,14 @@ class GigaDrain(suckBloodSkill):
     skill_info = "攻击目标造成伤害，自身的ＨＰ恢复“造成的伤害×50%"
     skill_power = 75
 
-class GrassyTerrain(GainStatusUpSkill):
+class GrassyTerrain(PlaceStatusSkill):
     def __init__(self):
-        super().__init__(pp=20,status=['ST031'],turns=5)
+        super().__init__(pp=20,status='ST031')
     show_name = '青草场地'
     skill_code = 'B010'
     property = 'wood'
     skill_info = '5回合内所有站地面上的宝可梦每回合回复少许体力。草属性招式的威力提升50%'
+    hit_rate = 0
 
 class PetalDance(DelayedSkill):
     def __init__(self):
@@ -1120,6 +1135,15 @@ class WaterGun(damageSkill):
     skill_info = '向对手猛烈地喷射水流进行攻击'
     skill_name = '水枪'
     property = 'water'
+
+class WaterSport(PlaceStatusSkill):
+    def __init__(self):
+        super().__init__(pp=15,status='ST032')
+    show_name = '玩水'
+    skill_info = '用水湿透周围,在５回合内减弱火属性的招式'
+    property = 'water'
+    hit_rate = 0
+    skill_code = 'D008'
 
 class DownRock(damageSkill):
     def __init__(self,pp=35):

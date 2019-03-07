@@ -50,6 +50,7 @@ skill_dict = {
     'N024': battle.skill.Constrict,#缠绕
     'N025': battle.skill.ReflectType,#镜面属性
     'N026': battle.skill.Smokescreen,#烟幕
+    'N027': battle.skill.TailWhip,#摇尾巴
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
