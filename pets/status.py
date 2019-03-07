@@ -239,6 +239,11 @@ class KnockOff(Status):
     status_info = '携带物视为不带'
     status_code = 'ST098'
 
+class ChangePro(Status):
+    status_show_name = '属性转变'
+    status_info = '使用者属性变为对方属性'
+    status_code = 'ST097'
+
 
 
 

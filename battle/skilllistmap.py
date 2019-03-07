@@ -48,6 +48,8 @@ skill_dict = {
     'N022': battle.skill.Slam,#摔打
     'N023': battle.skill.WringOut,#绞紧
     'N024': battle.skill.Constrict,#缠绕
+    'N025': battle.skill.ReflectType,#镜面属性
+    'N026': battle.skill.Smokescreen,#烟幕
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -80,11 +82,12 @@ skill_dict = {
     'T007': battle.skill.KnockOff,#拍落
     'C003': battle.skill.LeechLife, #吸血
     'D001': battle.skill.WaterJump,
-    'D002': battle.skill.WaterBall,
+    'D002': battle.skill.Bubble,#泡沫
     'D003': battle.skill.HydroPump,#水炮
     'D004': battle.skill.WaterPulse,#水之波动
     'D005': battle.skill.BubbleBeam,#泡沫光线
     'D006': battle.skill.Brine,#盐水
+    'D007': battle.skill.WaterGun,#水枪
     'R001': battle.skill.DownRock,
     'R002': battle.skill.RockFall,
     'E001': battle.skill.Earthquake,#地震
@@ -110,6 +113,8 @@ skill_dict = {
     'P014': battle.skill.SludgeWave,#污泥波
     'H001': battle.skill.ThunderFang,#雷电牙
     'G001': battle.skill.Twister,#龙卷风
+    'G002': battle.skill.DragonPulse,#龙之波动
+    'G003': battle.skill.DragonDance,#龙之舞
     'Y001': battle.skill.Moonlight,#月光
     'Y002': battle.skill.Moonblast,#月亮之力
 

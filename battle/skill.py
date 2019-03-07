@@ -618,6 +618,7 @@ class FocusEnergy(GainStatusUpSkill):
     show_name = '聚气'
     skill_code = 'N017'
     skill_info = '使自身进入易中要害状态'
+    hit_rate = 0
 
 class Growth(GainStatusUpSkill):
     def __init__(self):
@@ -682,6 +683,21 @@ class Constrict(damageSkill):
     skill_code = 'N024'
     skill_power = 10
     skill_info = '攻击目标造成伤害,10%几率令目标的速度降低1级'
+
+class ReflectType(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(pp=15,status=['ST097'])
+    show_name = '镜面属性'
+    skill_code = 'N025'
+    skill_info = '反射对手的属性,让自己也变成一样的属性'
+    hit_rate = 0
+
+class Smokescreen(statusSkill):
+    def __init__(self):
+        super().__init__(pp=20,status='ST013')
+    show_name = '烟幕'
+    skill_code = 'N026'
+    skill_info = '向对手喷出烟或墨汁等,从而降低对手的命中'
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -934,6 +950,7 @@ class Agility(GainStatusUpSkill):
     skill_info = '使用者的速度提升2级'
     skill_code = 'S002'
     property = 'psychic'
+    hit_rate = 0
 
 class Barrier(GainStatusUpSkill):
     def __init__(self):
@@ -1043,13 +1060,14 @@ class WaterJump(buffSkill):
     skill_info = "防御临时上升10%，持续2回合"
     buff_prop = 'Defense'
 
-class WaterBall(damageSkill):
-    show_name = '水球'
+class Bubble(damageSkill):
+    def __init__(self):
+        super().__init__(hit_status='ST023',addition_status_rate=10)
+    show_name = '泡沫'
     skill_code = 'D002'
     skill_power = 40
     property = 'water'
-    skill_info = '使用水球术攻击，威力一般'
-    hit_rate = 100
+    skill_info = '向对手用力吹起无数泡泡进行攻击,有时会降低对手的速度'
 
 class HydroPump(damageSkill):
     def __init__(self):
@@ -1093,6 +1111,15 @@ class Brine(damageSkill):
             return self.skill_power * 2
         else:
             return self.skill_power
+
+class WaterGun(damageSkill):
+    def __init__(self):
+        super().__init__(pp=25)
+    skill_code = 'D007'
+    skill_power = 40
+    skill_info = '向对手猛烈地喷射水流进行攻击'
+    skill_name = '水枪'
+    property = 'water'
 
 class DownRock(damageSkill):
     def __init__(self,pp=35):
@@ -1334,6 +1361,24 @@ class Twister(damageSkill):
     property = 'dragon'
     skill_power = 40
     skill_info = '攻击目标造成伤害,如果目标处于飞翔状态，威力翻倍,有20%的几率使目标陷入畏缩状态'
+
+class DragonPulse(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10)
+    show_name = '龙之波动'
+    skill_code = 'G002'
+    property = 'dragon'
+    skill_power = 85
+    skill_info = '从大大的口中掀起冲击波攻击对手'
+
+class DragonDance(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(pp=20,status=['ST016','ST020'])
+    show_name = '龙之舞'
+    skill_code = 'G003'
+    property = 'dragon'
+    skill_info = '激烈地跳起神秘且强有力的舞蹈,从而提高自己的攻击和速度'
+    hit_rate = 0
 
 class Moonlight(lifeRecoreSkill):
     def __init__(self):

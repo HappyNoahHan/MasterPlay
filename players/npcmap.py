@@ -24,22 +24,22 @@ trainer_in_maelstrom_no_1 = {
                             info='游泳更健康',
                             can_challenge=True,
                             is_npc = False,
-                            pet_list=(water.Tentacool(level=12,skill_list={'1':skill.WaterBall()},has_trainer=None),),
+                            pet_list=(water.Tentacool(level=12,skill_list={'1':skill.Bubble()},has_trainer=None),),
                             ),
     '金鱼妹妹':trainer.Trainer(name='金鱼妹妹',
                            prize={'money':700},
                            info='我的金鱼最可爱',
                            can_challenge=True,
                            is_npc=False,
-                           pet_list=(water.Goldeen(level=11,skill_list={'1':skill.WaterBall()},has_trainer=None),
-                                     water.Goldeen(level=12,skill_list={'1':skill.WaterBall(),'2':skill.WaterCannon()},has_trainer=None))
+                           pet_list=(water.Goldeen(level=11,skill_list={'1':skill.Bubble()},has_trainer=None),
+                                     water.Goldeen(level=12,skill_list={'1':skill.Bubble(),'2':skill.WaterJump()},has_trainer=None))
                            ),
     '游泳健将': trainer.Trainer(name="游泳健将",
                             prize={'money':700,'激流球':1},
                             info='看我这肌肉!你羡慕吗？跟我学吧！！！',
                             can_challenge=True,
                             is_npc=False,
-                            pet_list=(water.Horsea(level=12,skill_list={'1':skill.WaterCannon()},has_trainer=None),)
+                            pet_list=(water.Horsea(level=12,skill_list={'1':skill.Bubble()},has_trainer=None),)
                             ),
     '岸边游客A':trainer.Trainer(name='岸边游客A',info='听说这里是水系宝贝的天堂'),
     '岸边游客B':trainer.Trainer(name='岸边游客B',info='我是不会下水的,太危险了'),

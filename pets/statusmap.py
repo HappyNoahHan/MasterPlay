@@ -43,6 +43,7 @@ status_dict={
     'ST100' : status.NoTalent(),
     'ST099' : status.Lock(),
     'ST098' : status.KnockOff(),
+    'ST097' : status.ChangePro(),
     'ST101' : status.Whirlwind(),
     'ST102' : status.PetalDance(),
     'ST103' : status.SolarBeam(),
