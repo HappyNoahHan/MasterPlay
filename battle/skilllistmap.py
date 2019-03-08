@@ -54,6 +54,11 @@ skill_dict = {
     'N028': battle.skill.HornAttack,#角撞
     'N029': battle.skill.Flail,#抓狂
     'N030': battle.skill.HornDrill,#角钻
+    'N031': battle.skill.Harden,#变硬
+    'N032': battle.skill.RapidSpin,#高速旋转
+    'N033': battle.skill.Recover,#自我再生
+    'N034': battle.skill.Camouflage,#保护色
+    'N035': battle.skill.Minimize,#变小
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -75,6 +80,10 @@ skill_dict = {
     'S001': battle.skill.illuminatiom,
     'S002': battle.skill.Agility,#高速移动
     'S003': battle.skill.Barrier,#屏障
+    'S004': battle.skill.Psywave,#精神波
+    'S005': battle.skill.Psychic,#精神强念
+    'S006': battle.skill.LightScreen,#光墙
+    'S007': battle.skill.CosmicPower,#宇宙力量
     'I001': battle.skill.Haze, #黑雾
     'I002': battle.skill.IceFang,#冰冻牙
     'T001': battle.skill.disperse,
@@ -99,6 +108,7 @@ skill_dict = {
     'D011': battle.skill.Soak,#浸水
     'R001': battle.skill.DownRock,
     'R002': battle.skill.RockFall,
+    'R003': battle.skill.PowerGem,#力量宝石
     'E001': battle.skill.Earthquake,#地震
     'E002': battle.skill.MudBomb,#泥巴炸弹
     'E003': battle.skill.SandAttack,#泼沙
@@ -126,6 +136,7 @@ skill_dict = {
     'G003': battle.skill.DragonDance,#龙之舞
     'Y001': battle.skill.Moonlight,#月光
     'Y002': battle.skill.Moonblast,#月亮之力
+    'X001': battle.skill.GyroBall,#陀螺球
 
 }
 

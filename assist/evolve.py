@@ -22,6 +22,8 @@ evolve_dict={
     '口呆花': [wood.Victreebel,'叶之翠','stone_up'],
     '玛瑙水母':[water.Tentacruel,30,'level_up'],
     '墨海马':[water.Seadra,32,'level_up'],
+    '角金鱼':[water.Seaking,33,'level_up'],
+    '海星星':[water.Starmie,'水之滴','stone_up'],
 }
 def canEvolveOrNot(obj,stone=None):
     '''

@@ -39,10 +39,13 @@ status_dict={
     'ST030' : status.NoLucky(),
     'ST031' : status.Place(status_show_name='青草场地',status_code='ST031',
                            status_info='5回合内所有站地面上的宝可梦每回合回复少许体力。草属性招式的威力提升50%',
-                           place_property='wood'),
+                           place_property='wood',place_type='power'),
     'ST032' : status.WaterSport(status_show_name='玩水',status_code='ST032',
                            status_info='玩水状态持续5回合。全场宝可梦使用的火属性招式威力×1⁄2',
-                           place_property='water'),
+                           place_property='water',place_type='power'),
+    'ST033' : status.LightScreen(status_show_name='光墙',status_code='ST033',
+                                 status_info='在５回合内，受到的特殊攻击威力会减半',
+                                 place_type='damage'),
     'ST100' : status.NoTalent(),
     'ST099' : status.Lock(),
     'ST098' : status.KnockOff(),
@@ -51,10 +54,14 @@ status_dict={
     'ST095' : status.PropChangeTemp(status_show_name='浸水',status_code='ST095',
                                     status_info='将大量的水泼向对手,从而使其变成水属性',
                                     change_prop='water'),
+    'ST094' : status.PropChangeTemp(status_show_name='保护色',status_code='ST094',
+                                    status_info='根据所在场所不同,改变属性',
+                                    change_prop='water'),#后续 加一个根据场地的变化的函数
     'ST101' : status.Whirlwind(),
     'ST102' : status.PetalDance(),
     'ST103' : status.SolarBeam(),
     'ST104' : status.Lockon(),
+    'ST105' : status.Minimize(),
 }
 
 #清理清单
@@ -445,6 +452,10 @@ def checkHealBlockOrNot(obj_attack):
 
 def placeStatusPowerUp(skill,power,place):
     return status_dict[place.place_status[0]].statusEffect(skill,power)
+
+def placeStatusDamageCheck(skill,place):
+    #检查伤害
+    return status_dict[place.place_status[0]].statusEffect(skill)
 
 
 def checkDelayStatus(obj_attack):

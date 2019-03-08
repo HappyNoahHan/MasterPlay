@@ -1,6 +1,6 @@
 '''
 #skill_code 技能代号  A  火系  N 普通系 B 木系 C 虫系 D 水系 S 超能=光 I 冰 T 恶=黑暗 E 地面 F 飞行 G 龙
-                     R 岩石 P 毒 Q鬼魂 H 电     Y 妖精 fairy
+                     R 岩石 P 毒 Q鬼魂 H 电     Y 妖精 fairy    X 钢 steel
 #skill_mode 技能类型   0001 伤害技能 0002 防御临时提升 003 debuff 技能
                      0004 施加状态技能  0005 移除状态技能
                      0008 生命恢复 0009 属性亲和，同属性技能伤害加成
@@ -45,6 +45,7 @@ ready 睡眠粉 毒buff
 from assist import  rancom
 from pets import statusmap,talentmap
 from props import berrymap
+import random
 
 class skill(object):
     def __init__(self,pp=30,weather_condition=None):
@@ -74,7 +75,8 @@ class skill(object):
 class damageSkill(skill):
     def __init__(self,pp=30,hit_status=None,addition_status = None,
                  addition_status_rate = 5,spell_skill=True,lucky_level=1,
-                 turns=1,power_changed=False,side_effect=None):
+                 turns=1,power_changed=False,side_effect=None,
+                 clean_status=None,fixed_damage=False):
         '''
         :param pp: pp value
         :param hit_status: 附加状态
@@ -84,6 +86,8 @@ class damageSkill(skill):
         :param lucky_level: 会心等级 默认=1
         :param truns: status层数
         :param side_effect: 副作用 默认None  数据形式(status turns)
+        :param clean_status: 清除某些状态
+        :param fixed_damage: 固定伤害值技能
         '''
         super().__init__(pp)
         self.skill_model = '0001'
@@ -95,6 +99,8 @@ class damageSkill(skill):
         self.turns = turns
         self.power_changed = power_changed
         self.side_effect = side_effect
+        self.clean_status = clean_status
+        self.fixed_damage = fixed_damage
 
 
     def addStatus(self,obj):
@@ -129,6 +135,10 @@ class damageSkill(skill):
         :return:
         '''
         obj.setStatus(self.side_effect[0],self.side_effect[1])
+
+    def cleanStatus(self,obj):
+        for status in self.clean_status:
+            obj.removeStatus(status)
 
 class MultipleDamageSkill(damageSkill):
     def addStatus(self,obj):
@@ -758,6 +768,49 @@ class HornDrill(OneHitKillSkill):
     hit_rate = 30
     skill_info = '用旋转的角刺入对手进行攻击,只要命中就会一击濒死'
 
+class Harden(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(status=['ST017'])
+    show_name = '变硬'
+    skill_code = 'N031'
+    hit_rate = 0
+    skill_info = '全身使劲,让身体变硬,从而提高自己的防御'
+
+class RapidSpin(damageSkill):
+    def __init__(self):
+        super().__init__(pp=40,spell_skill=False,clean_status=['ST025'])
+    show_name = '高速旋转'
+    skill_code = 'N032'
+    skill_info = '通过旋转来攻击对手,还可以摆脱绑紧、紧束、寄生种子和撒菱等招式'
+    skill_power = 20
+
+class Recover(lifeRecoreSkill):
+    def __init__(self):
+        super().__init__(pp=10)
+    show_name = '自我再生'
+    skill_code = 'N033'
+    skill_info = '让全身的细胞获得再生,回复一半HP'
+    hit_rate = 0
+
+class Camouflage(GainStatusUpSkill):
+    def __init__(self):
+        super(Camouflage, self).__init__(pp=20,status=['ST094'])
+
+    show_name = '保护色'
+    skill_code = 'N034'
+    skill_info = '根据所在场所不同以改变自己的属性'
+    hit_rate = 0
+
+class Minimize(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(pp=10,status=['ST105','ST027'],turns=2)
+
+    show_name = '变小'
+    skill_code = 'N035'
+    skill_info = '蜷缩身体显得很小,从而大幅提高自己的闪避率'
+    hit_rate = 0
+
+
 class steadiness(buffSkill):
     show_name = '稳固'
     skill_code = 'N099'
@@ -1021,6 +1074,44 @@ class Barrier(GainStatusUpSkill):
     property = 'psychic'
     hit_rate = 0
 
+class Psywave(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,fixed_damage=True)
+    show_name = '精神波'
+    skill_code = 'S004'
+    skill_info = '向对手发射神奇的念波进行攻击,每次使用,伤害都会改变'
+    property = 'psychic'
+
+    def getDamage(self,level):
+        return round(level * random.randint(5,15) / 10 )
+
+class Psychic(damageSkill):
+    def __init__(self):
+        super(Psychic, self).__init__(pp=10,hit_status='ST011',addition_status_rate=10)
+    show_name = '精神强念'
+    skill_code = 'S005'
+    skill_info = '向对手发送强大的念力进行攻击,有时会降低对手的特防'
+    property = 'psychic'
+    skill_power = 90
+
+class LightScreen(PlaceStatusSkill):
+    def __init__(self):
+        super().__init__(status='ST033')
+    show_name = '光墙'
+    skill_code = 'S006'
+    skill_info = '在５回合内使用神奇的墙,减弱从对手那受到的特殊攻击的伤害'
+    property = 'psychic'
+    hit_rate = 0
+
+class CosmicPower(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(pp=20,status=['ST017','ST019'])
+    show_name = '宇宙力量'
+    skill_code = 'S007'
+    skill_info = '汲取宇宙中神秘的力量,从而提高自己的防御和特防'
+    property = 'psychic'
+    hit_rate = 0
+
 class disperse(removeBuffSkill):
     def __init__(self,pp=20):
         super().__init__(pp)
@@ -1247,6 +1338,15 @@ class RockFall(damageSkill):
     property = 'rock'
     skill_info = '将大岩石撞向对面,有一定的几率会使对方畏惧'
     hit_rate = 90
+
+class PowerGem(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20)
+    show_name = '力量宝石'
+    skill_code = 'R003'
+    skill_power = 80
+    property = 'rock'
+    skill_info = '发射如宝石般闪耀的光芒攻击对手'
 
 class Earthquake(damageSkill):
     def __init__(self):
@@ -1511,3 +1611,20 @@ class Moonblast(damageSkill):
     property = 'fairy'
     skill_info = '攻击目标造成伤害,30%几率令目标的特攻降低1级'
     skill_power = 95
+
+class GyroBall(damageSkill):
+    def __init__(self):
+        super().__init__(pp=5,spell_skill=False,power_changed=True)
+
+    show_name = '陀螺球'
+    skill_code = 'X001'
+    property = 'steel'
+    skill_info = '让身体高速旋转并撞击对手,速度比对手越慢威力越大'
+
+    def getPower(self,obj_attack,obj_defense):
+        power = round(25 * obj_defense.getSpeed() / obj_attack.getSpeed())
+
+        if power > 150:
+            power =150
+
+        return power

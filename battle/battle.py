@@ -31,13 +31,20 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
 
     if obj_skill.skill_model == '0001':
         pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
-        # 拿到变化威力技能的 威力值
-        if obj_skill.power_changed:
-            obj_skill.skill_power = obj_skill.getPower(obj_attack,obj_defense)
-        damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.skill_power,place)
-        obj_skill.addStatus(obj_defense)  # 附加状态
-        if obj_skill.side_effect != None:
-            obj_skill.getSideEffect(obj_attack) #副作用
+        if obj_skill.fixed_damage == False:
+            # 拿到变化威力技能的 威力值
+            if obj_skill.power_changed:
+                obj_skill.skill_power = obj_skill.getPower(obj_attack,obj_defense)
+            damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.skill_power,place)
+            obj_skill.addStatus(obj_defense)  # 附加状态
+            if obj_skill.side_effect != None:
+                obj_skill.getSideEffect(obj_attack) #副作用
+
+            if obj_skill.clean_status and damage > 0:
+                obj_skill.cleanStatus(obj_attack)
+
+        else:
+            damage = obj_skill.getDamage(obj_attack.level)
 
         if damage > 0:
             obj_defense.health -= damage

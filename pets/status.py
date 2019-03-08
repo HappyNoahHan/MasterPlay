@@ -197,11 +197,12 @@ class NoLucky(Status):
     status_code = 'ST030'
 
 class Place(Status):
-    def __init__(self,status_code=None,status_show_name=None,status_info=None,place_property='normal'):
+    def __init__(self,status_code=None,status_show_name=None,status_info=None,place_property='normal',place_type = None):
         self.status_code = status_code
         self.status_show_name = status_show_name
         self.status_info = status_info
         self.place_property = place_property
+        self.place_type = place_type
 
     def statusEffect(self,skill,power):
         '''
@@ -266,4 +267,16 @@ class PropChangeTemp(Status):
         self.status_info = status_info
         self.status_code = status_code
         self.change_prop = change_prop
+
+class Minimize(Status):
+    status_show_name = '变小'
+    status_info = '状态变化~变小'
+    status_code = 'ST105'
+
+class LightScreen(Place):
+    def statusEffect(self,skill):
+        if skill.spell_skill == True:
+            return True
+        else:
+            return False
 

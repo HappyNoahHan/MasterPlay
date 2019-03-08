@@ -113,6 +113,22 @@ class Goldeen(propets.PropInit):
     pet_no = '118'
     prop = ['water']
 
+class Seaking(Goldeen):
+    health_basic = 80
+    attack_basic = 92
+    defense_basic = 65
+    spell_power_basic = 65
+    spell_defense_basic = 80
+    speed_basic = 68
+
+    name = '金鱼王'
+    basic_exp_value = 158
+
+    can_get_base_point = 2
+    capture_rate = 60
+    # 精灵编号
+    pet_no = '119'
+
 class Staryu(propets.PropInit):
     health_basic = 30
     attack_basic = 45
@@ -122,16 +138,32 @@ class Staryu(propets.PropInit):
     speed_basic = 80
 
     name = '海星星'
-    basic_exp_value = 106
+    kind = '星形'
+    basic_exp_value = 68
 
     can_get_base_point = 1
     can_get_base_point_type = 'speed'
     capture_rate = 225
-    canEvolve = False
+
     # 精灵编号
     pet_no = '120'
     prop = ['water']
 
-    def __str__(self):
-        return super().__str__() + ':' + self.name
+class Starmie(propets.PropInit):
+    health_basic = 60
+    attack_basic = 75
+    defense_basic = 85
+    spell_power_basic = 100
+    spell_defense_basic = 85
+    speed_basic = 115
 
+    name = '海星星'
+    kind = '谜'
+    basic_exp_value = 182
+
+    can_get_base_point = 2
+    capture_rate = 60
+
+    # 精灵编号
+    pet_no = '120'
+    prop = ['water','psychic']

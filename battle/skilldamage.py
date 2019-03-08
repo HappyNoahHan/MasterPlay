@@ -115,8 +115,9 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index,power,place):
     attack,defense,spell_power,spell_defense,speed = statusmap.checkPropBeforeBattle(
         obj_attack,obj_defense,attack,defense,spell_power,spell_defense,speed
     )
-    if place.place_status != None:
-        power = statusmap.placeStatusPowerUp(skill,power,place)
+    if place.place_status:
+        if statusmap.status_dict[place.place_status[0]].place_type == 'power':
+            power = statusmap.placeStatusPowerUp(skill,power,place)
     print("场地技能威力Up: ", power)
 
     #加入战斗前天赋计算  各 能力技能威力提升
@@ -152,6 +153,11 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index,power,place):
     if obj_attack.status:
         damage = statusmap.checkStatusAfterBattle(obj_attack,skill,damage)
         #print("状态加成伤害",damage)
+
+    if place.place_status:
+        if statusmap.status_dict[place.place_status[0]].place_type == 'damage':
+            if statusmap.placeStatusDamageCheck(skill,place):
+                damage = round(damage / 2)
 
     return damage
 
