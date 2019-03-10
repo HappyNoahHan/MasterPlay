@@ -59,6 +59,8 @@ skill_dict = {
     'N033': battle.skill.Recover,#自我再生
     'N034': battle.skill.Camouflage,#保护色
     'N035': battle.skill.Minimize,#变小
+    'N036': battle.skill.Pound,#拍击
+    'N037': battle.skill.Disable,#定身法
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -93,6 +95,8 @@ skill_dict = {
     'T005': battle.skill.Pursuit,#追打
     'T006': battle.skill.Assurance,#恶意追击
     'T007': battle.skill.KnockOff,#拍落
+    'T008': battle.skill.Fling,#投掷
+    'T009': battle.skill.Memento,#临别礼物
     'C001': battle.skill.Megahorn,#超级角击
     'C003': battle.skill.LeechLife, #吸血
     'D001': battle.skill.WaterJump,
@@ -113,6 +117,7 @@ skill_dict = {
     'E002': battle.skill.MudBomb,#泥巴炸弹
     'E003': battle.skill.SandAttack,#泼沙
     'E004': battle.skill.DrillRun,#直冲钻
+    'E005': battle.skill.MudSlap,#掷泥
     'Q001': battle.skill.ConfuseRay, #奇异之光
     'Q002': battle.skill.Astonish, #惊吓
     'Q003': battle.skill.Hex,#祸不单行
@@ -130,6 +135,11 @@ skill_dict = {
     'P012': battle.skill.PoisonJab,#毒击
     'P013': battle.skill.ToxicSpikes,#毒菱
     'P014': battle.skill.SludgeWave,#污泥波
+    'P015': battle.skill.PoisonGas,#毒瓦斯
+    'P016': battle.skill.Sludge,#污泥攻击
+    'P017': battle.skill.SludgeBomb,#污泥炸弹
+    'P018': battle.skill.AcidArmor,#溶化
+    'P019': battle.skill.VenomDrench,#毒液陷阱
     'H001': battle.skill.ThunderFang,#雷电牙
     'G001': battle.skill.Twister,#龙卷风
     'G002': battle.skill.DragonPulse,#龙之波动

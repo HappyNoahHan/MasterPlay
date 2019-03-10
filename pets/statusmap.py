@@ -62,6 +62,7 @@ status_dict={
     'ST103' : status.SolarBeam(),
     'ST104' : status.Lockon(),
     'ST105' : status.Minimize(),
+    'ST106' : status.Disable(),
 }
 
 #清理清单
@@ -74,7 +75,7 @@ clear_list.remove('ST007')
 clear_list.remove('ST102')
 
 #回合递减
-count_index_list=['ST029','ST030']
+count_index_list=['ST029','ST030','ST106']
 
 #异常状态
 abnormal_list = ['ST001','ST002','ST003',
@@ -223,7 +224,12 @@ def checkStatusAfterTurn(obj,place):
         if status in obj.status:
             obj.status[status] -= 1
             if obj.status[status] == 0:
-                removeStatus(obj,status)
+
+                if status == 'ST106': #定身法效果解除
+                    for key,skill in obj.skill_list.items():
+                        skill.lock = False
+
+                removeStatus(obj, status)
 
     if place.place_status:
         place.place_status[1] -= 1

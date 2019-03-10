@@ -13,6 +13,7 @@
                      0016 树果类技能  技能效果随树果的种类而变化
                      0017 改变场地的技能 eg 青草场地 玩水
                      0018 一击必杀  eg 角钻
+                     0019 锁资源技能 eg 定身法
                      --- 2.0
                      buff 类 与 debuff 类 集合
                      buff  标记attack denfense 法强 法防 提升 统一  0002 buff类技能
@@ -62,6 +63,7 @@ class skill(object):
     multi_step = False #多段技能 默认False
     show_name = None
     skill_code = '0000'
+    lock = False
 
 
 
@@ -166,11 +168,13 @@ class debuffSkill(skill):
     damage_debuff = False
 
 class statusSkill(skill):
-    def __init__(self,pp=30,status=None,turns = 1):
+    def __init__(self,pp=30,status=None,turns = 1,side_effect=False,add_condition=None):
         super().__init__(pp)
         self.skill_model = '0004'
         self.status = status
         self.turns = turns
+        self.side_effect = side_effect
+        self.add_condition = add_condition #中状态条件
 
     def addStatus(self,obj):
         if self.status not in obj.status:
@@ -181,6 +185,24 @@ class statusSkill(skill):
                 print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
         else:
             print("%s 已经陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
+
+class MutlipleStatusSkill(statusSkill):
+    def addStatus(self,obj,double=1):
+        if self.add_condition != None:
+            if self.add_condition not in obj.status:
+                print("没有任何效果~")
+                return True
+        for status in self.status:
+            if status not in obj.status:
+                if talentmap.addStatusOrNot(obj, status):
+                    obj.setStatus(status,self.turns * double)
+                    print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
+                else:
+                    print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
+            else:
+                print("%s 已经陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
+
+
 
 class GainStatusUpSkill(skill):
     '''
@@ -382,6 +404,23 @@ class OneHitKillSkill(skill):
     def __init__(self,pp=30,spell_skill=True):
         super().__init__(pp)
         self.skill_model = '0018'
+        self.spell_skill = spell_skill
+
+class LockSkill(skill):
+    def __init__(self,pp=30,status=None,turns = 5):
+        super(LockSkill, self).__init__(pp)
+        self.status = status
+        self.turns = turns
+        self.skill_model = '0019'
+
+    def addStatus(self,pet):
+        if pet.last_used_skill:
+            pet.setStatus(self.status, self.turns)
+            pet.last_used_skill.lock = True
+            print("%s 被限制使用 %s ！"%(pet.name,pet.last_used_skill.show_name))
+        else:
+            print("没有任何效果~")
+
 
 class Gust(damageSkill):
     def __init__(self):
@@ -810,6 +849,21 @@ class Minimize(GainStatusUpSkill):
     skill_info = '蜷缩身体显得很小,从而大幅提高自己的闪避率'
     hit_rate = 0
 
+class Pound(damageSkill):
+    def __init__(self):
+        super(Pound, self).__init__(pp=35,spell_skill=False)
+    show_name = '拍击'
+    skill_code = 'N036'
+    skill_power = 40
+    skill_info = '使用长长的尾巴或手等拍打对手进行攻击'
+
+class Disable(LockSkill):
+    def __init__(self):
+        super(Disable, self).__init__(pp=20,status='ST106',turns=4)
+    show_name = '定身法'
+    skill_code = 'N037'
+    skill_info = '使目标陷入定身法状态,在此期间目标不能使用陷入定身法状态前最后使用的招式'
+
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -1175,6 +1229,28 @@ class KnockOff(damageSkill):
     property = 'dark'
     skill_info = '攻击目标造成伤害,使目标陷入拍落状态'
 
+class Fling(damageSkill):
+    def __init__(self):
+        super(Fling, self).__init__(pp=10,power_changed=True)
+    skill_code = 'T008'
+    show_name = '投掷'
+    skill_info = '快速投掷携带的道具进行攻击,根据道具不同,威力和效果会改变'
+    property = 'dark'
+
+    def getPower(self):
+        return 60  #后续开发 暂时给一个定值
+
+class Memento(MutlipleStatusSkill):
+    def __init__(self):
+        super().__init__(pp=10,side_effect=True,status=['ST021','ST022'],turns=2)
+    show_name = '临别礼物'
+    property = 'dark'
+    skill_info = '虽然会使自己陷入濒死,但是能够大幅降低对手的攻击和特攻'
+    skill_code = 'T009'
+
+    def sideEffect(self,obj):
+        obj.health = 0
+
 class Megahorn(damageSkill):
     def __init__(self):
         super().__init__(pp=10,spell_skill=False)
@@ -1386,6 +1462,15 @@ class DrillRun(damageSkill):
     skill_power = 80
     hit_rate = 90
 
+class MudSlap(damageSkill):
+    def __init__(self):
+        super(MudSlap, self).__init__(pp=10,hit_status='ST013',addition_status_rate=100)
+    show_name = '掷泥'
+    skill_code = 'E005'
+    skill_power = 20
+    property = 'ground'
+    skill_info = '向对手的脸等投掷泥块进行攻击,会降低对手的命中率'
+
 class ConfuseRay(statusSkill):
     def __init__(self):
         super().__init__(20,status = 'ST002')
@@ -1546,6 +1631,50 @@ class SludgeWave(damageSkill):
     skill_code = 'P014'
     skill_power = 95
     skill_info = '用污泥波攻击自己周围所有的宝可梦,有时会陷入中毒状'
+
+class PoisonGas(statusSkill):
+    def __init__(self):
+        super(PoisonGas, self).__init__(pp=40,status='ST007')
+    show_name = '毒瓦斯'
+    property = 'poison'
+    skill_code = 'P015'
+    hit_rate = 90
+    skill_info = '将毒瓦斯吹到对手的脸上,从而让对手陷入中毒状态'
+
+class Sludge(damageSkill):
+    def __init__(self):
+        super(Sludge, self).__init__(pp=20,hit_status='ST007',addition_status_rate=30)
+    show_name = '污泥攻击'
+    property = 'poison'
+    skill_code = 'P016'
+    skill_power = 65
+    skill_info = '用污泥投掷对手进行攻击,有时会让对手陷入中毒状态'
+
+class SludgeBomb(damageSkill):
+    def __init__(self):
+        super(SludgeBomb, self).__init__(pp=10,hit_status='ST007',addition_status_rate=30)
+    show_name = '污泥炸弹'
+    property = 'poison'
+    skill_code = 'P017'
+    skill_power = 90
+    skill_info = '用污泥投掷对手进行攻击,有时会让对手陷入中毒状态'
+
+class AcidArmor(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(pp=20,status=['ST017'],turns=2)
+    show_name = '溶化'
+    property = 'poison'
+    skill_code = 'P018'
+    hit_rate = 0
+    skill_info = '通过细胞的变化进行液化,从而大幅提高自己的防御'
+
+class VenomDrench(MutlipleStatusSkill):
+    def __init__(self):
+        super(VenomDrench, self).__init__(pp=20,status=['ST011','ST021','ST023'],add_condition='ST007')
+    show_name = '毒液陷阱'
+    property = 'poison'
+    skill_code = 'P019'
+    skill_info = '将特殊的毒液泼向对手,对处于中毒状态的对手,其攻击、特攻和速度都会降低'
 
 class ThunderFang(MultipleDamageSkill):
     def __init__(self):

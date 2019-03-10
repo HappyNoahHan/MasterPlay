@@ -280,3 +280,8 @@ class LightScreen(Place):
         else:
             return False
 
+class Disable(Status):
+    status_show_name = '定身法'
+    status_info = '定身法状态持续4个回合,处于定身法状态的宝可梦不能使用在进入定身法状态前最后使用的招式'
+    status_code = 'ST106'
+

@@ -40,7 +40,8 @@ def canChoiceList(obj):
             if obj.skill_list[key].use_condition in obj.status:
                 choice_list.append(key)
         else:
-            choice_list.append(key)
+            if not skill.lock:
+                choice_list.append(key)
 
     return choice_list
 

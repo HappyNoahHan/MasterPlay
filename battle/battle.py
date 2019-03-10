@@ -69,6 +69,9 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
 
     elif obj_skill.skill_model == '0004':
         obj_skill.addStatus(obj_defense)
+
+        if obj_skill.side_effect:
+            obj_skill.sideEffect(obj_attack)
         print(obj_defense.status)
 
     elif obj_skill.skill_model == '0012':
@@ -195,6 +198,9 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
 
     elif obj_skill.skill_model == '0017':
         place.setPlaceStatus(obj_skill.status,obj_skill.turns)
+
+    elif obj_skill.skill_model == '0019':
+        obj_skill.addStatus(obj_defense)
     #debuff  增幅buff 次数
     asscount.checkBuffAfterBattle(obj_attack)
 
@@ -248,7 +254,14 @@ def battleRun(player,obj1,obj2,place):
         if obj1.autoAi == True:
             assist.show.petSelectSkill(obj1.name)
             time.sleep(3)
-            skill_number = random.choice(rancom.canChoiceList(obj1))
+            try:
+                skill_number = random.choice(rancom.canChoiceList(obj1))
+            except IndexError:
+                print("%s 陷入了自我挣扎~" % obj1.name)
+                obj1.health = 0
+                assist.show.petDie(obj1.name)
+                assist.show.battleOver()
+                return True
         elif obj1.autoAi == 'lost':
             skill_number = 'delay'
         else:
@@ -271,6 +284,9 @@ def battleRun(player,obj1,obj2,place):
                 if obj1.skill_list[skill_number].use_condition not in obj1.status:
                     print("技能无法使用！")
                     return battleRun(player,obj1,obj2,place)
+            if obj1.skill_list[skill_number].lock:
+                print("技能被锁,无法使用！")
+                return battleRun(player,obj1,obj2,place)
         #记录最后使用的技能
         obj1.last_used_skill = obj1.skill_list[skill_number]
         # 战斗前的buff

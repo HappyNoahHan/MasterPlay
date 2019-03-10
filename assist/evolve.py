@@ -24,6 +24,7 @@ evolve_dict={
     '墨海马':[water.Seadra,32,'level_up'],
     '角金鱼':[water.Seaking,33,'level_up'],
     '海星星':[water.Starmie,'水之滴','stone_up'],
+    '臭泥':[poison.Muk,38,'level_up'],
 }
 def canEvolveOrNot(obj,stone=None):
     '''
