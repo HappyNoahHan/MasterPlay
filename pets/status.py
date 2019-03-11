@@ -285,3 +285,8 @@ class Disable(Status):
     status_info = '定身法状态持续4个回合,处于定身法状态的宝可梦不能使用在进入定身法状态前最后使用的招式'
     status_code = 'ST106'
 
+class MagnetRise(Status):
+    status_show_name = '电磁飘浮'
+    status_info = '电磁飘浮状态的宝可梦免疫地面属性招式'
+    status_code = 'ST107'
+

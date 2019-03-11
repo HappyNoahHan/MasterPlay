@@ -2,6 +2,10 @@ import random
 from pets import statusmap
 
 def hitOrNot(skill,rate,obj_attack,obj_defense,dodge):
+    #ST107 电磁飘浮 免疫地面
+    if skill.property == 'ground' and  'ST107' in obj_defense.status:
+        print("电磁飘浮 免疫地面属性技能")
+        return False
     #ST104 锁定状态 技能必定命中
     if skill.hit_rate == 0 or 'ST104' in obj_defense.status:
         print("%s 必定命中！" % skill.show_name)

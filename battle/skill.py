@@ -43,7 +43,7 @@ ready 睡眠粉 毒buff
 #hit_rate    命中  100 = 100% 命中
 '''
 
-from assist import  rancom
+from assist import  rancom,petattr
 from pets import statusmap,talentmap
 from props import berrymap
 import random
@@ -105,12 +105,12 @@ class damageSkill(skill):
         self.fixed_damage = fixed_damage
 
 
-    def addStatus(self,obj):
+    def addStatus(self,obj,place):
         if self.hit_status != None:
             if rancom.statusRandom(self.addition_status_rate):
                 if self.hit_status not in obj.status:
                     # 检查特性与obj 属性 某些pet不会中某技能
-                    if talentmap.addStatusOrNot(obj,self.hit_status):
+                    if talentmap.addStatusOrNot(obj,self.hit_status,place):
                         obj.setStatus(self.hit_status,self.turns)
                         print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict[self.hit_status].status_show_name))
                     else:
@@ -143,13 +143,13 @@ class damageSkill(skill):
             obj.removeStatus(status)
 
 class MultipleDamageSkill(damageSkill):
-    def addStatus(self,obj):
+    def addStatus(self,obj,place):
         if self.hit_status != None:
             for status in self.hit_status:
                 if rancom.statusRandom(self.addition_status_rate):
                     if status not in obj.status:
                         # 检查特性与obj 属性 某些pet不会中某技能
-                        if talentmap.addStatusOrNot(obj,status):
+                        if talentmap.addStatusOrNot(obj,status,place):
                             obj.setStatus(status,self.turns)
                             print("%s 陷入了 %s 状态！" % (obj.name,statusmap.status_dict[status].status_show_name))
                         else:
@@ -176,9 +176,9 @@ class statusSkill(skill):
         self.side_effect = side_effect
         self.add_condition = add_condition #中状态条件
 
-    def addStatus(self,obj):
+    def addStatus(self,obj,place):
         if self.status not in obj.status:
-            if talentmap.addStatusOrNot(obj,self.status):
+            if talentmap.addStatusOrNot(obj,self.status,place):
                 obj.setStatus(self.status,self.turns)
                 print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
             else:
@@ -187,14 +187,14 @@ class statusSkill(skill):
             print("%s 已经陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
 
 class MutlipleStatusSkill(statusSkill):
-    def addStatus(self,obj,double=1):
+    def addStatus(self,obj,place,double=1):
         if self.add_condition != None:
             if self.add_condition not in obj.status:
                 print("没有任何效果~")
                 return True
         for status in self.status:
             if status not in obj.status:
-                if talentmap.addStatusOrNot(obj, status):
+                if talentmap.addStatusOrNot(obj, status,place):
                     obj.setStatus(status,self.turns * double)
                     print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
                 else:
@@ -216,10 +216,10 @@ class GainStatusUpSkill(skill):
         self.turns = turns
         #self.weather_condition = weather_condition
 
-    def addStatus(self,obj,double=1):
+    def addStatus(self,obj,place,double=1):
         for status in self.status:
             if status not in obj.status:
-                if talentmap.addStatusOrNot(obj, status):
+                if talentmap.addStatusOrNot(obj, status,place):
                     obj.setStatus(status,self.turns * double)
                     print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
                 else:
@@ -864,6 +864,32 @@ class Disable(LockSkill):
     skill_code = 'N037'
     skill_info = '使目标陷入定身法状态,在此期间目标不能使用陷入定身法状态前最后使用的招式'
 
+class SonicBoom(damageSkill):
+    def __init__(self):
+        super(SonicBoom, self).__init__(pp=20,fixed_damage=True)
+    show_name = '音爆'
+    skill_code = 'N038'
+    hit_rate = 90
+    skill_info = '将冲击波撞向对手进行攻击,必定会给予２０的伤害'
+
+    def getDamage(self):
+        return  20
+
+class Lockon(statusSkill):
+    def __init__(self):
+        super().__init__(pp=5,status='ST104',turns=2)
+    show_name = '锁定'
+    hit_rate = 0
+    skill_code = 'N039'
+    skill_info = '紧紧瞄准对手,下次攻击必定会打中'
+
+class TriAttack(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,hit_status=random.choice(['ST001','ST002','ST008']),addition_status_rate=20)
+    show_name = '三重攻击'
+    skill_power = 80
+    skill_code = 'N040'
+    skill_info = '用３种光线进行攻击,有时会让对手陷入麻痹、灼伤或冰冻的状态'
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -1686,6 +1712,104 @@ class ThunderFang(MultipleDamageSkill):
     skill_power = 65
     skill_info = '攻击目标造成伤害,有10%的几率使目标陷入麻痹/畏缩状态'
 
+class ThunderShock(damageSkill):
+    def __init__(self):
+        super(ThunderShock, self).__init__(hit_status='ST002',addition_status_rate=10)
+    show_name = '电击'
+    skill_code = 'H002'
+    property = 'electric'
+    skill_power = 40
+    skill_info = '发出电流刺激对手进行攻击,有时会让对手陷入麻痹状态'
+
+class ThunderWave(statusSkill):
+    def __init__(self):
+        super(ThunderWave, self).__init__(pp=20,status='ST002')
+    show_name = '电磁波'
+    skill_code = 'H003'
+    property = 'electric'
+    hit_rate = 90
+    skill_info = '向对手发出微弱的电击,从而让对手陷入麻痹状态'
+
+    def addStatus(self,obj,place):
+        if self.status not in obj.status:
+            if petattr.getAttrMap(self,obj) != 0:
+                if talentmap.addStatusOrNot(obj, self.status,place):
+                    obj.setStatus(self.status, self.turns)
+                    print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
+                    return True
+            print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
+        else:
+            print("%s 已经陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
+
+class Spark(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,spell_skill=False,hit_status='ST002',addition_status_rate=30)
+    show_name = '电光'
+    skill_code = 'H004'
+    skill_power = 65
+    skill_info = '让电流覆盖全身,猛撞向对手进行攻击,有时会让对手陷入麻痹状态'
+    property = 'electric'
+
+class ElectroBall(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,power_changed=True)
+    show_name = '电球'
+    skill_code = 'H005'
+    skill_info = '用电气团撞向对手,自己比对手速度越快,威力越大'
+    property = 'electric'
+
+    def getPower(self,obj_attack,obj_defense):
+        speed_ratio = obj_attack.getSpeed() / obj_defense.getSpeed()
+        if  0 < speed_ratio < 1:
+            power = 40
+        elif  1 <= speed_ratio < 2:
+            power = 60
+        elif  2 <= speed_ratio < 3:
+            power = 80
+        elif 3 <= speed_ratio < 4:
+            power = 120
+        else:
+            power = 150
+        return power
+
+class Discharge(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,hit_status='ST002',addition_status_rate=30)
+    show_name = '放电'
+    skill_code = 'H006'
+    skill_power = 80
+    skill_info = '用耀眼的电击攻击自己周围所有的宝可梦,有时会陷入麻痹状态'
+    property = 'electric'
+
+class MagnetRise(statusSkill):
+    def __init__(self):
+        super().__init__(pp=10,status='ST107',turns=5)
+    show_name = '电磁飘浮'
+    skill_code = 'H007'
+    skill_info = '利用电气产生的磁力浮在空中,在５回合内可以飘浮'
+    property = 'electric'
+    hit_rate = 0
+
+class ZapCannon(damageSkill):
+    def __init__(self):
+        super().__init__(pp=5,hit_status='ST002',addition_status_rate=100)
+    skill_code = 'H008'
+    show_name = '电磁炮'
+    skill_power = 120
+    hit_rate = 50
+    property = 'electric'
+    skill_info = '发射大炮一样的电流进行攻击,让对手陷入麻痹状态'
+
+class ElectricTerrain(PlaceStatusSkill):
+    def __init__(self):
+        super().__init__(pp=10,status='ST034')
+    show_name = '电气场地'
+    skill_code = 'H009'
+    property = 'electric'
+    hit_rate = 0
+    skill_info = '在５回合内变成电气场地,地面上的宝可梦将无法入眠,电属性的招式威力还会提高'
+
+
 class Twister(damageSkill):
     def __init__(self):
         super().__init__(pp=20,hit_status='ST004',addition_status=['ST024'],addition_status_rate=20)
@@ -1757,3 +1881,41 @@ class GyroBall(damageSkill):
             power =150
 
         return power
+
+class MagnetBomb(damageSkill):
+    def __init__(self):
+        super(MagnetBomb, self).__init__(pp=20,spell_skill=False)
+    show_name = '磁铁炸弹'
+    skill_code = 'X002'
+    property = 'steel'
+    skill_info = '发射吸住对手的钢铁炸弹,攻击必定会命中'
+    hit_rate = 0
+    skill_power = 60
+
+class MirrorShot(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,hit_status='ST013',addition_status_rate=30)
+    show_name = '镜光射击'
+    skill_power = 65
+    hit_rate = 85
+    property = 'steel'
+    skill_code = 'X003'
+    skill_info = '抛光自己的身体,向对手释放出闪光之力,有时会降低对手的命中率'
+
+class MetalSound(statusSkill):
+    def __init__(self):
+        super().__init__(pp=40,status='ST011',turns=2)
+    show_name = '金属音'
+    hit_rate = 85
+    property = 'steel'
+    skill_code = 'X004'
+    skill_info = '让对手听摩擦金属般讨厌的声音,大幅降低对手的特防'
+
+class FlashCannon(damageSkill):
+    def __init__(self):
+        super(FlashCannon, self).__init__(pp=10,hit_status='ST011',addition_status_rate=10)
+    show_name = '加农光炮'
+    skill_power = 80
+    property = 'steel'
+    skill_code = 'X005'
+    skill_info = '将身体的光芒聚集在一点释放出去,有时会降低对手的特防'

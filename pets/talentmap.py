@@ -11,10 +11,14 @@ talent_dict={
 }
 
 
-def addStatusOrNot(pet,status_code):
+def addStatusOrNot(pet,status_code,place):
     if 'ST100' not in pet.status:
         if status_code == 'ST004':
             if pet.talent in ['TA001',]:
+                return False
+        if status_code == 'ST003' and place.place_status:
+            #电磁场 不能睡眠
+            if place.place_status[0] == 'ST034':
                 return False
         return True
     else:

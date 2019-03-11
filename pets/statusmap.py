@@ -46,6 +46,9 @@ status_dict={
     'ST033' : status.LightScreen(status_show_name='光墙',status_code='ST033',
                                  status_info='在５回合内，受到的特殊攻击威力会减半',
                                  place_type='damage'),
+    'ST034' : status.Place(status_show_name='电气场地',status_code='ST034',
+                           status_info='任何地面上的宝可梦的电属性招式威力将会提高50%,并且不会陷入睡眠状态以及瞌睡状态',
+                           place_property='electric',place_type='power'),
     'ST100' : status.NoTalent(),
     'ST099' : status.Lock(),
     'ST098' : status.KnockOff(),
@@ -63,6 +66,7 @@ status_dict={
     'ST104' : status.Lockon(),
     'ST105' : status.Minimize(),
     'ST106' : status.Disable(),
+    'ST107' : status.MagnetRise(),
 }
 
 #清理清单
@@ -75,7 +79,7 @@ clear_list.remove('ST007')
 clear_list.remove('ST102')
 
 #回合递减
-count_index_list=['ST029','ST030','ST106']
+count_index_list=['ST029','ST030','ST106','ST104','ST107']
 
 #异常状态
 abnormal_list = ['ST001','ST002','ST003',
@@ -208,9 +212,6 @@ def checkStatusAfterTurn(obj,place):
 
     if 'ST004' in obj.status:
         removeStatus(obj,'ST004')
-
-    if 'ST104' in obj.status:
-        removeStatus(obj,'ST104')
 
     if place.place_status:
         if place.place_status[0] == 'ST031':

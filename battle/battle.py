@@ -36,7 +36,7 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
             if obj_skill.power_changed:
                 obj_skill.skill_power = obj_skill.getPower(obj_attack,obj_defense)
             damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.skill_power,place)
-            obj_skill.addStatus(obj_defense)  # 附加状态
+            obj_skill.addStatus(obj_defense,place)  # 附加状态
             if obj_skill.side_effect != None:
                 obj_skill.getSideEffect(obj_attack) #副作用
 
@@ -68,7 +68,7 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
             print(key.show_name, ':', value)
 
     elif obj_skill.skill_model == '0004':
-        obj_skill.addStatus(obj_defense)
+        obj_skill.addStatus(obj_defense,place)
 
         if obj_skill.side_effect:
             obj_skill.sideEffect(obj_attack)
@@ -76,9 +76,9 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
 
     elif obj_skill.skill_model == '0012':
         if obj_skill.doubleEffect(place.weather):
-            obj_skill.addStatus(obj_attack,double=2)
+            obj_skill.addStatus(obj_attack,place,double=2)
         else:
-            obj_skill.addStatus(obj_attack)
+            obj_skill.addStatus(obj_attack,place)
         print(obj_attack.status)
 
     elif obj_skill.skill_model == '0005':

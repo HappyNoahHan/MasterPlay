@@ -61,6 +61,9 @@ skill_dict = {
     'N035': battle.skill.Minimize,#变小
     'N036': battle.skill.Pound,#拍击
     'N037': battle.skill.Disable,#定身法
+    'N038': battle.skill.SonicBoom,#音爆
+    'N039': battle.skill.Lockon,#锁定
+    'N040': battle.skill.TriAttack,#三重攻击
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -141,12 +144,24 @@ skill_dict = {
     'P018': battle.skill.AcidArmor,#溶化
     'P019': battle.skill.VenomDrench,#毒液陷阱
     'H001': battle.skill.ThunderFang,#雷电牙
+    'H002': battle.skill.ThunderShock,#电击
+    'H003': battle.skill.ThunderWave,#电磁波
+    'H004': battle.skill.Spark,#电光
+    'H005': battle.skill.ElectroBall,#电球
+    'H006': battle.skill.Discharge,#放电
+    'H007': battle.skill.MagnetRise,#电磁飘浮
+    'H008': battle.skill.ZapCannon,#电磁炮
+    'H009': battle.skill.ElectricTerrain,#电气场地
     'G001': battle.skill.Twister,#龙卷风
     'G002': battle.skill.DragonPulse,#龙之波动
     'G003': battle.skill.DragonDance,#龙之舞
     'Y001': battle.skill.Moonlight,#月光
     'Y002': battle.skill.Moonblast,#月亮之力
     'X001': battle.skill.GyroBall,#陀螺球
+    'X002': battle.skill.MagnetBomb,#磁铁炸弹
+    'X003': battle.skill.MirrorShot,#镜光射击
+    'X004': battle.skill.MetalSound,#金属音
+    'X005': battle.skill.FlashCannon,#加农光炮
 
 }
 

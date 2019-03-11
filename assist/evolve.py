@@ -3,7 +3,7 @@
     继承  技能列表  已领悟技能
 '''
 
-from pets import fire,rock,poison,skilltree,fly,wood,water
+from pets import fire,rock,poison,skilltree,fly,wood,water,electric
 from assist import  show
 from battle import learnskill
 import time
@@ -25,6 +25,7 @@ evolve_dict={
     '角金鱼':[water.Seaking,33,'level_up'],
     '海星星':[water.Starmie,'水之滴','stone_up'],
     '臭泥':[poison.Muk,38,'level_up'],
+    '小磁怪':[electric.Magneton,30,'level_up'],
 }
 def canEvolveOrNot(obj,stone=None):
     '''
