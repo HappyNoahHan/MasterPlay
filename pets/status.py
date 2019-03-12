@@ -230,6 +230,16 @@ class PetalDance(Status):
         else:
             return False
 
+class Rollout(Status):
+    status_show_name = '滚动'
+    status_info = '在５回合内连续滚动攻击对手,招式每次击中,威力就会提高'
+    status_code = 'ST108'
+
+    def statusEffect(self,turns):
+        if turns > 3:
+            return False
+        return True
+
 class SolarBeam(Status):
     status_show_name = '日光束'
     status_info = '蓄力攻击,第二回合攻击'
@@ -248,6 +258,12 @@ class ChangePro(Status):
 class WaterSport(Place):
     def statusEffect(self,skill,power):
         if skill.property == 'fire':
+            return round(skill.skill_power * 0.5)
+        return power
+
+class MudSport(Place):
+    def statusEffect(self,skill,power):
+        if skill.property == 'electric':
             return round(skill.skill_power * 0.5)
         return power
 
@@ -290,3 +306,7 @@ class MagnetRise(Status):
     status_info = '电磁飘浮状态的宝可梦免疫地面属性招式'
     status_code = 'ST107'
 
+class SmackDown(Status):
+    status_show_name = '击落'
+    status_info = '拍落到地面'
+    status_code = 'ST109'

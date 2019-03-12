@@ -3,7 +3,8 @@ from place import block
 
 class Place(object):
 
-    def __init__(self,name='',maplist={},treasure_box_list={},npc_list={},prize_box_list={},block=None,can_fishing=False):
+    def __init__(self,name='',maplist={},treasure_box_list={},npc_list={},prize_box_list={},block=None,can_fishing=False
+                    ,weather = None, place_status = None):
         self.name = name
         self.maplist = maplist
         self.treasure_box_list = treasure_box_list
@@ -11,6 +12,8 @@ class Place(object):
         self.prize_box_list = prize_box_list
         self.block = block
         self.can_fishing = can_fishing
+        self.weather = weather
+        self.place_status = place_status
 
     def __str__(self):
         return self.name

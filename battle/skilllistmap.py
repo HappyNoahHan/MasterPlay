@@ -64,6 +64,7 @@ skill_dict = {
     'N038': battle.skill.SonicBoom,#音爆
     'N039': battle.skill.Lockon,#锁定
     'N040': battle.skill.TriAttack,#三重攻击
+    'N041': battle.skill.SelfDestruct,#自爆
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -113,14 +114,20 @@ skill_dict = {
     'D009': battle.skill.AquaRing,#水流环
     'D010': battle.skill.Waterfall,#攀瀑
     'D011': battle.skill.Soak,#浸水
-    'R001': battle.skill.DownRock,
+    'R001': battle.skill.RockThrow,#落石
     'R002': battle.skill.RockFall,
     'R003': battle.skill.PowerGem,#力量宝石
+    'R004': battle.skill.RockPolish,#岩石打磨
+    'R005': battle.skill.Rollout,  # 滚动
+    'R006': battle.skill.SmackDown,#击落
     'E001': battle.skill.Earthquake,#地震
     'E002': battle.skill.MudBomb,#泥巴炸弹
     'E003': battle.skill.SandAttack,#泼沙
     'E004': battle.skill.DrillRun,#直冲钻
     'E005': battle.skill.MudSlap,#掷泥
+    'E006': battle.skill.MudSport,#玩泥巴
+    'E007': battle.skill.Magnitude,#震级
+    'E008': battle.skill.Bulldoze,#重踏
     'Q001': battle.skill.ConfuseRay, #奇异之光
     'Q002': battle.skill.Astonish, #惊吓
     'Q003': battle.skill.Hex,#祸不单行

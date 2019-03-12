@@ -49,6 +49,9 @@ status_dict={
     'ST034' : status.Place(status_show_name='电气场地',status_code='ST034',
                            status_info='任何地面上的宝可梦的电属性招式威力将会提高50%,并且不会陷入睡眠状态以及瞌睡状态',
                            place_property='electric',place_type='power'),
+    'ST035' : status.MudSport(status_show_name='玩泥巴',status_code='ST035'
+                              ,status_info='在５回合内,电属性的招式威力会减半',
+                              place_property='ground',place_type='power'),
     'ST100' : status.NoTalent(),
     'ST099' : status.Lock(),
     'ST098' : status.KnockOff(),
@@ -67,6 +70,8 @@ status_dict={
     'ST105' : status.Minimize(),
     'ST106' : status.Disable(),
     'ST107' : status.MagnetRise(),
+    'ST108' : status.Rollout(),
+    'ST109' : status.SmackDown(),
 }
 
 #清理清单
@@ -319,6 +324,16 @@ def checkStatusEnd(player):
             removeStatus(pet,'ST103')
             pet.autoAi = False
 
+        if 'ST108' in pet.status:
+            removeStatus(pet,'ST108')
+            pet.autoAi = False
+            for key,skill in pet.skill_list.items():
+                try:
+                    if skill.power_change_by_hit:
+                        skill.hit_count = 0
+                except:
+                    pass
+
         for status in clear_list:
             if status in pet.status:
                 removeStatus(pet,status)
@@ -480,6 +495,20 @@ def checkDelayStatus(obj_attack):
             return 1
     elif 'ST103' in obj_attack.status:
         return 3
+
+    elif 'ST108' in obj_attack.status:
+        if status_dict['ST108'].statusEffect(obj_attack.status['ST108']):
+            obj_attack.status['ST108'] += 1
+            return 1
+        else:
+            return 3
     else:
         return 0
+
+def statusTurnsAddIfNotHit(obj_attack):
+    if 'ST108' in obj_attack.status:
+        obj_attack.status['ST108'] += 1
+        if obj_attack.status['ST108'] == 4:
+            removeStatus(obj_attack,'ST108')
+            obj_attack.autoAi = False
 

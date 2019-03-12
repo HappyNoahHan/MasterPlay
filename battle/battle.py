@@ -163,7 +163,7 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
 
         if not obj_skill.delay_effect or result == 3:
             pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
-            damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.skill_power)
+            damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.getPower(),place)
             #obj_skill.addStatus(obj_defense)  # 附加状态
             if damage > 0:
                 obj_defense.health -= damage
@@ -364,6 +364,15 @@ def battleRun(player,obj1,obj2,place):
                     return battleRun(player, obj2, obj1, place)
 
             if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number],hit + hit_up,obj1,obj2,obj2.dodge + dodge_up):
+                #清0
+                try:
+                    if obj1.skill_list[skill_number].power_change_by_hit:
+                        obj1.skill_list[skill_number].hit_count = 0
+                except:
+                    pass
+                #未命中状态回合增加
+                statusmap.statusTurnsAddIfNotHit(obj1)
+
                 asscount.checkBuffAfterBattle(obj1)
                 # 回合结束检查是否中毒  中毒死亡
                 if not statusmap.checkStatusAfterTurn(obj1,place):
@@ -372,6 +381,12 @@ def battleRun(player,obj1,obj2,place):
                     return True
                 assist.show.printTurn(obj2.name)
                 return battleRun(player,obj2,obj1,place)
+            #命中计数
+            try:
+                if obj1.skill_list[skill_number].power_change_by_hit:
+                    obj1.skill_list[skill_number].hit_count += 1
+            except:
+                pass
             #改写结算 直接把技能扔进去
             if damageCount(obj2,obj1,obj1.skill_list[skill_number],place):
                 # 回合结束检查是否中毒  中毒死亡

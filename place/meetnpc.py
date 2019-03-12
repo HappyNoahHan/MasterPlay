@@ -6,7 +6,7 @@ def meetNpc(player,npcer,place):
     time.sleep(2)
     if npcer.is_npc == False:
         if npcer.can_challenge == True:
-            if explore.trainerVS(player, npcer):
+            if explore.trainerVS(player, npcer,place):
                 if npcer.has_riddle == True and npcer.can_challenge == False:
                     riddle_condiction = riddle.openTheRiddle(npcer)
                     if riddle_condiction[2] == 'map':

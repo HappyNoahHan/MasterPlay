@@ -1,5 +1,5 @@
 from players import battering
-from assist import show,exp,evolve,life
+from assist import show,exp,evolve,life,changepet
 from battle import asscount
 from props import propmap
 from pets import statusmap
@@ -53,6 +53,13 @@ def explore(player,wild_pet,place):
 
                         else:
                             print("精灵停止进化！")
+
+                    if master_pet.health <= 0:
+                        master_pet.alive = False
+                        if not changepet.changePetAfterDie(player):
+                            print("没有可以使用的精灵")
+                            # 无法出战
+                            player.can_battle = False
         else:
             player.battle_run_success = False
         statusmap.checkStatusEnd(player)
@@ -60,7 +67,7 @@ def explore(player,wild_pet,place):
     else:
         return False
 
-def trainerVS(player,trainer):
+def trainerVS(player,trainer,place):
     '''
     对战训练师
     :param player:
@@ -72,7 +79,7 @@ def trainerVS(player,trainer):
         return False
     challenge_list = list(trainer.pet_list)
 
-    if battering.vsBattleing(player,trainer,challenge_list):
+    if battering.vsBattleing(player,trainer,challenge_list,place):
         if player.battle_run_success == False:
             for get_exp_pet in player.battle_pet_list:
                 #检查是否携带学习机器
@@ -105,6 +112,14 @@ def trainerVS(player,trainer):
 
                     else:
                         print("精灵停止进化！")
+
+                #同归与尽
+                if get_exp_pet.health <= 0:
+                    get_exp_pet.alive = False
+                    if not changepet.changePetAfterDie(player):
+                        print("没有可以使用的精灵")
+                        # 无法出战
+                        player.can_battle = False
 
         else:
             player.battle_run_success = False

@@ -9,7 +9,7 @@ class Geodude(propets.PropInit):
     speed_basic = 20
 
     name = '小拳石'
-    kind = '宝石'
+    kind = '岩石'
     #talent = 'TA002'
     basic_exp_value = 60
 

@@ -35,7 +35,8 @@ def battleing(player,wild_pet,change_pet = False,place=None):
 
 
     if battle_end == True:
-
+        if master_pet.health <= 0 and wild_pet.health <= 0:
+            return True
         if wild_pet.captured == False or wild_pet.captured == None:
             if master_pet.health <= 0:
                 master_pet.alive = False
@@ -61,7 +62,7 @@ def battleing(player,wild_pet,change_pet = False,place=None):
     return True
 
 
-def vsBattleing(player,trainer,challenge_list):
+def vsBattleing(player,trainer,challenge_list,place):
     '''
     训练师傅对战
     :param player:
@@ -75,7 +76,7 @@ def vsBattleing(player,trainer,challenge_list):
         print("%s 准备使用 %s Lv%s 进行战斗！" % (trainer.name,trainer_master_pet.name,trainer_master_pet.level))
         #show.showPetStatus(trainer_master_pet)
 
-        if battleing(player,trainer_master_pet):
+        if battleing(player,trainer_master_pet,place=place):
             if player.battle_run_success != True:
                 challenge_list.remove(trainer_master_pet)
                 if len(challenge_list) == 0:
@@ -85,7 +86,7 @@ def vsBattleing(player,trainer,challenge_list):
                     time.sleep(3)
                     return True
                 else:
-                    return vsBattleing(player,trainer,challenge_list)
+                    return vsBattleing(player,trainer,challenge_list,place)
             return True
         else:
             return False

@@ -115,7 +115,7 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index,power,place):
     attack,defense,spell_power,spell_defense,speed = statusmap.checkPropBeforeBattle(
         obj_attack,obj_defense,attack,defense,spell_power,spell_defense,speed
     )
-    if place.place_status:
+    if place.place_status != None:
         if statusmap.status_dict[place.place_status[0]].place_type == 'power':
             power = statusmap.placeStatusPowerUp(skill,power,place)
     print("场地技能威力Up: ", power)

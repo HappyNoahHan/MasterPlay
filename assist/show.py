@@ -111,8 +111,9 @@ def showPetErrorStatus(obj):
 
 
 def showPlaceMessage(place):
-    if place.place_status:
+    if place.place_status != None:
         print("场地： %s %s回合" % (statusmap.status_dict[place.place_status[0]].status_show_name,
               place.place_status[1]),end=' ')
     if place.weather:
         print("天气： %s" % place.weather.name)
+

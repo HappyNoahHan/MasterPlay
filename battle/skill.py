@@ -140,7 +140,8 @@ class damageSkill(skill):
 
     def cleanStatus(self,obj):
         for status in self.clean_status:
-            obj.removeStatus(status)
+            if status in obj.status:
+                obj.removeStatus(status)
 
 class MultipleDamageSkill(damageSkill):
     def addStatus(self,obj,place):
@@ -351,7 +352,7 @@ class CopySkill(skill):
 
 class DelayedSkill(skill):
     def __init__(self,pp=30,add_status_begin=None,add_status_end=None,spell_skill=True,
-                 lucky_level=1,delay_effect=True):
+                 lucky_level=1,delay_effect=True,power_change_by_hit=False,hit_count=0):
         super().__init__(pp)
         self.skill_model = '0015'
         self.add_status_begin = add_status_begin
@@ -359,6 +360,8 @@ class DelayedSkill(skill):
         self.spell_skill = spell_skill #特殊攻击类型 True 默认 物理攻击类型 False
         self.lucky_level = lucky_level
         self.delay_effect = delay_effect
+        self.power_change_by_hit = power_change_by_hit
+        self.hit_count = hit_count #击中次数
 
     def setDelayedSkill(self,pet):
         pet.setSkills('delay',self)
@@ -382,6 +385,9 @@ class DelayedSkill(skill):
 
     def doublePowerOrNot(self,obj):
         return False
+
+    def getPower(self):
+        return self.skill_power
 
 class BerryEffectSkill(skill):
     def __init__(self,pp=30,spell_skill=True,lucky_level=1):
@@ -891,6 +897,17 @@ class TriAttack(damageSkill):
     skill_code = 'N040'
     skill_info = '用３种光线进行攻击,有时会让对手陷入麻痹、灼伤或冰冻的状态'
 
+class SelfDestruct(damageSkill):
+    def __init__(self):
+        super().__init__(pp=5,side_effect=True,spell_skill=False)
+    show_name = '自爆'
+    skill_power = 200
+    skill_code = 'N041'
+    skill_info = '引发爆炸,攻击自己周围所有的宝可梦,使用后陷入濒死'
+
+    def getSideEffect(self,obj):
+        obj.health = 0
+
 class steadiness(buffSkill):
     show_name = '稳固'
     skill_code = 'N099'
@@ -1263,7 +1280,7 @@ class Fling(damageSkill):
     skill_info = '快速投掷携带的道具进行攻击,根据道具不同,威力和效果会改变'
     property = 'dark'
 
-    def getPower(self):
+    def getPower(self,obj_attack,obj_defense):
         return 60  #后续开发 暂时给一个定值
 
 class Memento(MutlipleStatusSkill):
@@ -1419,15 +1436,16 @@ class Soak(statusSkill):
     property = 'water'
     skill_code = 'D011'
 
-class DownRock(damageSkill):
-    def __init__(self,pp=35):
-        super().__init__(pp,spell_skill=False)
+class RockThrow(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,spell_skill=False)
 
-    show_name = '落岩'
+    show_name = '落石'
     skill_code = 'R001'
-    skill_power = 40
+    skill_power = 50
     property = 'rock'
-    skill_info = '使用落岩攻击，威力一般'
+    skill_info = '拿起小岩石,投掷对手进行攻击'
+    hit_rate = 90
 
 
 class RockFall(damageSkill):
@@ -1449,6 +1467,38 @@ class PowerGem(damageSkill):
     skill_power = 80
     property = 'rock'
     skill_info = '发射如宝石般闪耀的光芒攻击对手'
+
+class RockPolish(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(pp=20,status=['ST020'],turns=2)
+    show_name = '岩石打磨'
+    skill_code = 'R004'
+    skill_info = '打磨自己的身体,减少空气阻力,可以大幅提高自己的速度'
+    property = 'rock'
+    hit_rate = 0
+
+class Rollout(DelayedSkill):
+    def __init__(self):
+        super(Rollout, self).__init__(pp=20,add_status_begin='ST108',spell_skill=False,
+                                      delay_effect=False,power_change_by_hit=True)
+    show_name = '滚动'
+    skill_code = 'R005'
+    skill_info = '在５回合内连续滚动攻击对手,招式每次击中,威力就会提高'
+    property = 'rock'
+    hit_rate = 90
+    skill_power = 30
+
+    def getPower(self):
+        return 30 * pow(2,(self.hit_count - 1))
+
+class SmackDown(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,spell_skill=False,clean_status=['ST107'],hit_status='ST109',addition_status_rate=100)
+    show_name = '击落'
+    skill_code = 'R006'
+    skill_info = '扔石头或炮弹攻击飞行的对手,对手会被击落,掉到地面'
+    property = 'rock'
+    skill_power = 50
 
 class Earthquake(damageSkill):
     def __init__(self):
@@ -1496,6 +1546,38 @@ class MudSlap(damageSkill):
     skill_power = 20
     property = 'ground'
     skill_info = '向对手的脸等投掷泥块进行攻击,会降低对手的命中率'
+
+class MudSport(PlaceStatusSkill):
+    def __init__(self):
+        super(MudSport, self).__init__(pp=15,status='ST035')
+    show_name = '玩泥巴'
+    skill_code = 'E006'
+    skill_info = '一旦使用此招式,周围就会弄得到处是泥,在５回合内减弱电属性的招式'
+    property = 'ground'
+    hit_rate = 0
+
+class Magnitude(damageSkill):
+    def __init__(self):
+        super().__init__(power_changed=True,spell_skill=False)
+    show_name = '震级'
+    skill_code = 'E007'
+    skill_info = '晃动地面,攻击自己周围所有的宝可梦,招式的威力会有各种变化'
+    property = 'ground'
+
+    def getPower(self,obj_attack,obj_defense):
+        return random.choice([10,10,30,30,30,30,50,50,50,50,50,50,50,50,
+                              70,70,70,70,70,70,70,70,70,70,70,70,
+                              90,90,90,90,90,90,90,90,110,110,110,110,150,150])
+
+class Bulldoze(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,spell_skill=False,hit_status='ST023',addition_status_rate=100)
+    show_name = '重踏'
+    skill_code = 'E008'
+    skill_power = 60
+    property = 'ground'
+    skill_info = '用力踩踏地面并攻击自己周围所有的宝可梦,降低对方的速度'
+
 
 class ConfuseRay(statusSkill):
     def __init__(self):
