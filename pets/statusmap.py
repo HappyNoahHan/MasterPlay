@@ -72,6 +72,7 @@ status_dict={
     'ST107' : status.MagnetRise(),
     'ST108' : status.Rollout(),
     'ST109' : status.SmackDown(),
+    'ST110' : status.DefenseCurl(),
 }
 
 #清理清单

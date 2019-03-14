@@ -130,7 +130,7 @@ class damageSkill(skill):
                     return True
         return False
 
-    def getSideEffect(self,obj):
+    def getSideEffect(self,obj,damage):
         '''
         为pet 加上技能的副作用
         :param obj:
@@ -288,8 +288,6 @@ class suckBloodSkill(skill):
         self.suck_per = suck_per
         self.lucky_level = lucky_level
 
-    def doublePowerOrNot(self,obj):
-        return False
 
 class ImprintSkill(skill):
     def __init__(self,pp=30,lucky_level= 1,status=None,imprint_level = 1,imprint_type = None,spell_skill = None):
@@ -321,8 +319,6 @@ class ImprintSkill(skill):
             obj.setStatus(self.status)
             print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
 
-    def doublePowerOrNot(self,obj):
-        return False
 
 class SpecialStatusSkill(skill):
     def __init__(self,pp=30,status=None,turns =1 ):
@@ -382,11 +378,7 @@ class DelayedSkill(skill):
             self.setDelayedSkill(pet)
             self.addStatus(pet)
 
-
-    def doublePowerOrNot(self,obj):
-        return False
-
-    def getPower(self):
+    def getPower(self,pet):
         return self.skill_power
 
 class BerryEffectSkill(skill):
@@ -395,9 +387,6 @@ class BerryEffectSkill(skill):
         self.skill_model = '0016'
         self.spell_skill = spell_skill
         self.lucky_level = lucky_level
-
-    def doublePowerOrNot(self,obj):
-        return False
 
 class PlaceStatusSkill(skill):
     def __init__(self,pp=30,status=None,turns=5):
@@ -905,10 +894,40 @@ class SelfDestruct(damageSkill):
     skill_code = 'N041'
     skill_info = '引发爆炸,攻击自己周围所有的宝可梦,使用后陷入濒死'
 
-    def getSideEffect(self,obj):
+    def getSideEffect(self,obj,damage):
         obj.health = 0
-        obj.alive = False
+        #obj.alive = False
 
+class DoubleEdge(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,spell_skill=False,side_effect=True)
+    show_name = '舍身冲撞'
+    skill_power = 120
+    skill_code = 'N042'
+    skill_info = '拼命地猛撞向对手进行攻击,自己也会受到不小的伤害'
+
+    def getSideEffect(self,obj,damage):
+        obj.health -= round(damage / 3)
+        print("%s 受到了 %s 反弹伤害" % (obj.name,round(damage / 3)))
+
+class Explosion(damageSkill):
+    def __init__(self):
+        super().__init__(pp=5,spell_skill=False,side_effect=True)
+    show_name = '大爆炸'
+    skill_power = 250
+    skill_code = 'N043'
+    skill_info = '引发大爆炸,攻击自己周围所有的宝可梦,使用后自己会陷入濒死'
+
+    def getSideEffect(self,obj,damage):
+        obj.health = 0
+
+class DefenseCurl(GainStatusUpSkill):
+    def __init__(self):
+        super(DefenseCurl, self).__init__(pp=40,status=['ST017','ST110'])
+    skill_code = 'N044'
+    hit_rate = 0
+    show_name = '变圆'
+    skill_info = '将身体蜷曲变圆,从而提高自己的防御'
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -1295,7 +1314,7 @@ class Memento(MutlipleStatusSkill):
 
     def sideEffect(self,obj):
         obj.health = 0
-        obj.alive = False
+        #obj.alive = False
 
 class Megahorn(damageSkill):
     def __init__(self):
@@ -1314,6 +1333,16 @@ class LeechLife(suckBloodSkill):
     show_name = '吸血'
     skill_power = 80
     skill_info = "吸取对方,回复生命"
+    property = 'insect'
+
+class Steamroller(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,hit_status='ST004',addition_status_rate=30,
+                         addition_status='ST105',spell_skill=False)
+    skill_code = 'C004'
+    show_name = '疯狂滚压'
+    skill_power = 65
+    skill_info = '旋转揉成团的身体压扁对手,有时会使对手畏缩'
     property = 'insect'
 
 class Haze(removeStatusSkill):
@@ -1491,8 +1520,11 @@ class Rollout(DelayedSkill):
     hit_rate = 90
     skill_power = 30
 
-    def getPower(self):
-        return 30 * pow(2,(self.hit_count - 1))
+    def getPower(self,pet):
+        power = 30 * pow(2,(self.hit_count - 1))
+        if 'ST110' in pet.status:
+            power *= 2
+        return power
 
 class SmackDown(damageSkill):
     def __init__(self):
@@ -1502,6 +1534,36 @@ class SmackDown(damageSkill):
     skill_info = '扔石头或炮弹攻击飞行的对手,对手会被击落,掉到地面'
     property = 'rock'
     skill_power = 50
+
+class StoneEdge(damageSkill):
+    def __init__(self):
+        super(StoneEdge, self).__init__(pp=5,spell_skill=False,lucky_level=2)
+    show_name = '尖石攻击'
+    skill_code = 'R007'
+    property = 'rock'
+    skill_power = 100
+    hit_rate = 80
+    skill_info = '用尖尖的岩石刺入对手进行攻击,容易击中要'
+
+class RockBlast(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,spell_skill=False)
+    show_name = '岩石爆击'
+    skill_info = '向对手发射坚硬的岩石进行攻击,连续攻击２～５次'
+    skill_power = 25
+    hit_rate = 90
+    skill_code = 'R008'
+    multi_step = True
+    property = 'rock'
+
+class StealthRock(statusSkill):
+    def __init__(self):
+        super().__init__(pp=20,status='ST025')
+    show_name = '隐形岩'
+    hit_rate = 0
+    skill_code = 'R009'
+    skill_info = '将无数岩石悬浮在对手的周围,易受伤'
+    property = 'rock'
 
 class Earthquake(damageSkill):
     def __init__(self):

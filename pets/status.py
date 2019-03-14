@@ -310,3 +310,8 @@ class SmackDown(Status):
     status_show_name = '击落'
     status_info = '拍落到地面'
     status_code = 'ST109'
+
+class DefenseCurl(Status):
+    status_show_name = '变圆'
+    status_info = '冰球和滚动进行攻击，威力将加倍'
+    status_code = 'ST110'

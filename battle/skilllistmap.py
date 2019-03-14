@@ -65,6 +65,9 @@ skill_dict = {
     'N039': battle.skill.Lockon,#锁定
     'N040': battle.skill.TriAttack,#三重攻击
     'N041': battle.skill.SelfDestruct,#自爆
+    'N042': battle.skill.DoubleEdge,#舍身冲撞
+    'N043': battle.skill.Explosion,#大爆炸
+    'N044': battle.skill.DefenseCurl,#变圆
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -103,6 +106,7 @@ skill_dict = {
     'T009': battle.skill.Memento,#临别礼物
     'C001': battle.skill.Megahorn,#超级角击
     'C003': battle.skill.LeechLife, #吸血
+    'C004': battle.skill.Steamroller,#疯狂滚压
     'D001': battle.skill.WaterJump,
     'D002': battle.skill.Bubble,#泡沫
     'D003': battle.skill.HydroPump,#水炮
@@ -120,6 +124,9 @@ skill_dict = {
     'R004': battle.skill.RockPolish,#岩石打磨
     'R005': battle.skill.Rollout,  # 滚动
     'R006': battle.skill.SmackDown,#击落
+    'R007': battle.skill.StoneEdge,#尖石攻击
+    'R008': battle.skill.RockBlast,#岩石爆击
+    'R009': battle.skill.StealthRock,#隐形岩   交换类节能改为容易受伤
     'E001': battle.skill.Earthquake,#地震
     'E002': battle.skill.MudBomb,#泥巴炸弹
     'E003': battle.skill.SandAttack,#泼沙

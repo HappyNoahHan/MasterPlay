@@ -38,7 +38,7 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
             damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.skill_power,place)
             obj_skill.addStatus(obj_defense,place)  # 附加状态
             if obj_skill.side_effect != None:
-                obj_skill.getSideEffect(obj_attack) #副作用
+                obj_skill.getSideEffect(obj_attack,damage) #副作用
 
             if obj_skill.clean_status and damage > 0:
                 obj_skill.cleanStatus(obj_attack)
@@ -163,7 +163,7 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
 
         if not obj_skill.delay_effect or result == 3:
             pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
-            damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.getPower(),place)
+            damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.getPower(obj_attack),place)
             #obj_skill.addStatus(obj_defense)  # 附加状态
             if damage > 0:
                 obj_defense.health -= damage
@@ -208,6 +208,9 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
     if obj_defense.health <= 0: #战斗结束  debuff不会死亡
         assist.show.petDie(obj_defense)
         assist.show.battleOver()
+        if obj_attack.health <= 0:  # 反弹死
+            assist.show.petDie(obj_attack)
+            assist.show.battleOver()
         return False
 
     if obj_attack.health <= 0: #反弹死
