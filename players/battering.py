@@ -1,7 +1,7 @@
 
 import assist.show
 from assist import exp,evolve,capture,changepet,show,prize
-from props import handbook
+from props import handbook,propmap
 from battle import asscount,skilllistmap,battle,learnskill
 import random,time
 
@@ -35,30 +35,27 @@ def battleing(player,wild_pet,change_pet = False,place=None):
 
 
     if battle_end == True:
-        if master_pet.health <= 0 and wild_pet.health <= 0:
-            return True
+
         if wild_pet.captured == False or wild_pet.captured == None:
-            if master_pet.health <= 0:
-                master_pet.alive = False
-                try:
-                    #移除 死亡精灵无经验值
-                    player.battle_pet_list.remove(master_pet)
-                except ValueError:
-                    print("已经移除？？？")
-                if changepet.changePetAfterDie(player):
-                    return battleing(player,wild_pet,change_pet=True,place=place)
-                else:
-                    print("没有可以使用的精灵")
-                    #无法出战
-                    player.can_battle = False
-                    return False
+            if not master_pet.alive: #主战精灵濒危
+                if wild_pet.alive: #对方未濒危
+                    try:
+                        #移除 死亡精灵无经验值
+                        player.battle_pet_list.remove(master_pet)
+                    except ValueError:
+                        print("已经移除？？？")
+                    if changepet.changePetAfterDie(player):
+                        return battleing(player,wild_pet,change_pet=True,place=place)
+                    else:
+                        print("没有可以使用的精灵")
+                        #无法出战
+                        player.can_battle = False
+                        return False
         #捕获成功代码
         else:
             capture.addPetOrNot(player,wild_pet)
                 #print("99999999")
-
     #player.exp_status.clear()
-
     return True
 
 
@@ -71,6 +68,7 @@ def vsBattleing(player,trainer,challenge_list,place):
     :return:
     '''
     print("=" * 30)
+    player.battle_pet_list.clear()
     if player.battle_run_success == False:
         trainer_master_pet = random.choice(challenge_list)
         print("%s 准备使用 %s Lv%s 进行战斗！" % (trainer.name,trainer_master_pet.name,trainer_master_pet.level))
@@ -84,8 +82,18 @@ def vsBattleing(player,trainer,challenge_list,place):
                     trainer.can_challenge = False
                     prize.getPrize(player,trainer.prize)
                     time.sleep(3)
+                    exp.accountAfterBattleEnd(player, trainer_master_pet)
                     return True
                 else:
+                    if not player.pet_list['Master'].alive:
+                        player.battle_pet_list.remove(player.pet_list['Master'])
+                        if not changepet.changePetAfterDie(player):
+                            print("没有可以使用的精灵")
+                            # 无法出战
+                            player.can_battle = False
+                            return False
+                    exp.accountAfterBattleEnd(player, trainer_master_pet)
+                    #结算经验
                     return vsBattleing(player,trainer,challenge_list,place)
             return True
         else:

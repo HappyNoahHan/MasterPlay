@@ -907,6 +907,8 @@ class SelfDestruct(damageSkill):
 
     def getSideEffect(self,obj):
         obj.health = 0
+        obj.alive = False
+
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -1293,6 +1295,7 @@ class Memento(MutlipleStatusSkill):
 
     def sideEffect(self,obj):
         obj.health = 0
+        obj.alive = False
 
 class Megahorn(damageSkill):
     def __init__(self):
@@ -1448,9 +1451,9 @@ class RockThrow(damageSkill):
     hit_rate = 90
 
 
-class RockFall(damageSkill):
+class RockSlide(damageSkill):
     def __init__(self):
-        super().__init__(10,hit_status='ST004',addition_status_rate=5,spell_skill=False)
+        super().__init__(10,hit_status='ST004',addition_status_rate=30,spell_skill=False)
 
     show_name = '岩崩'
     skill_code = 'R002'

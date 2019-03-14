@@ -115,7 +115,7 @@ skill_dict = {
     'D010': battle.skill.Waterfall,#攀瀑
     'D011': battle.skill.Soak,#浸水
     'R001': battle.skill.RockThrow,#落石
-    'R002': battle.skill.RockFall,
+    'R002': battle.skill.RockSlide,#岩崩
     'R003': battle.skill.PowerGem,#力量宝石
     'R004': battle.skill.RockPolish,#岩石打磨
     'R005': battle.skill.Rollout,  # 滚动

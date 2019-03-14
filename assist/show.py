@@ -14,8 +14,9 @@ def battleOver():
 def gameOver():
     print("游戏结束！")
 
-def petDie(name):
-    print("%s 死亡" % name)
+def petDie(pet):
+    pet.alive = False
+    print("%s 濒危" % pet.name)
 
 def petThink(name):
     print("%s 正在思考！" % name)

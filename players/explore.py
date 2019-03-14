@@ -1,8 +1,10 @@
 from players import battering
-from assist import show,exp,evolve,life,changepet
+from assist import show,exp,evolve,life,changepet,prize
 from battle import asscount
 from props import propmap
 from pets import statusmap
+import random,time
+
 def explore(player,wild_pet,place):
     '''
     野外探险
@@ -21,45 +23,17 @@ def explore(player,wild_pet,place):
             print("%s 被吹飞"% wild_pet.name)
             return True
 
-        if player.battle_run_success == False:
+        if player.battle_run_success == False: #未逃跑
             if wild_pet.captured == False:
-                for master_pet in player.battle_pet_list:
-                    # 清除buff
-                    master_pet.buff_dict.clear()
-                    # obj1.debuff_dict.clear()
-                    master_pet.property_buff.clear()
+                if not player.pet_list['Master'].alive:
+                    player.battle_pet_list.remove(player.pet_list['Master'])
+                    if not changepet.changePetAfterDie(player):
+                        print("没有可以使用的精灵")
+                        # 无法出战
+                        player.can_battle = False
+                        return False
+                exp.accountAfterBattleEnd(player,wild_pet)
 
-                    # 计算获得的基础点数
-                    # print(master_pet.attack_base_point)
-                    # print("基础点数获得者",wild_pet.basic_point_getter)
-                    if wild_pet.basic_point_getter == master_pet:
-                        asscount.getBasePoint(master_pet, wild_pet.can_get_base_point_type,wild_pet.can_get_base_point)
-                    # print(master_pet.attack_base_point)
-
-                    # 战斗结束之后结算
-                    # 经验值计算
-                    got_exp = exp.getBattleSuccessExp(player,wild_pet)
-                    print("%s 获得 %s 经验值" % (master_pet.name, got_exp))
-                    master_pet.exp_for_current += got_exp
-
-                    if exp.isLevelUp(master_pet):
-                        show.showPetStatus(master_pet)
-                    # 进化判断
-                    if evolve.canEvolveOrNot(master_pet):
-                        print("精灵是否进化！ 1 yes  2 no ")
-                        isEvo = input(">")
-                        if int(isEvo) == 1:
-                            player.setPet('Master', evolve.isEvolve(master_pet))
-
-                        else:
-                            print("精灵停止进化！")
-
-                    if master_pet.health <= 0:
-                        master_pet.alive = False
-                        if not changepet.changePetAfterDie(player):
-                            print("没有可以使用的精灵")
-                            # 无法出战
-                            player.can_battle = False
         else:
             player.battle_run_success = False
         statusmap.checkStatusEnd(player)
@@ -78,49 +52,11 @@ def trainerVS(player,trainer,place):
         print("是什么给你的勇气还能挑衅？？？")
         return False
     challenge_list = list(trainer.pet_list)
+    #trainer_master_pet = random.choice(challenge_list)
 
     if battering.vsBattleing(player,trainer,challenge_list,place):
         if player.battle_run_success == False:
-            for get_exp_pet in player.battle_pet_list:
-                #检查是否携带学习机器
-                exp_up = propmap.checkCarryPropForExpUp(get_exp_pet)
-                # 清除buff
-                get_exp_pet.buff_dict.clear()
-                get_exp_pet.property_buff.clear()
-
-                got_exp = 0
-                for pet in trainer.pet_list:
-                    # 计算获得的基础点数
-                    if pet.basic_point_getter == get_exp_pet:
-                        print("基础点数获得者", pet.basic_point_getter)
-                        asscount.getBasePoint(get_exp_pet,pet.can_get_base_point_type,pet.can_get_base_point)
-                    # 战斗结束之后结算
-                    # 经验值计算
-                    got_exp += exp.getBattleSuccessExp(player, pet,carry_prop=exp_up)
-                print("%s 获得 %s 经验值" % (get_exp_pet.name, got_exp))
-                get_exp_pet.exp_for_current += got_exp
-
-                if exp.isLevelUp(get_exp_pet):
-                    show.showPetStatus(get_exp_pet)
-                # 进化判断
-                if evolve.canEvolveOrNot(get_exp_pet):
-
-                    print("精灵是否进化！ 1 yes  2 no ")
-                    isEvo = input(">")
-                    if int(isEvo) == 1:
-                        player.setPet('Master', evolve.isEvolve(get_exp_pet))
-
-                    else:
-                        print("精灵停止进化！")
-
-                #同归与尽
-                if get_exp_pet.health <= 0:
-                    get_exp_pet.alive = False
-                    if not changepet.changePetAfterDie(player):
-                        print("没有可以使用的精灵")
-                        # 无法出战
-                        player.can_battle = False
-
+            pass
         else:
             player.battle_run_success = False
     else:

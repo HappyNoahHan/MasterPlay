@@ -1,6 +1,7 @@
-from assist import cap,show
-from battle import learnskill
+from assist import cap,show,evolve
+from battle import learnskill,asscount
 from pets import  skilltree
+from props import propmap
 import time
 
 
@@ -99,7 +100,8 @@ def levelUp(obj):
 
     #属性改变
     obj._max_health += health_up
-    obj.health += health_up
+    if obj.alive:
+        obj.health += health_up
     obj.attack += attack_up
     obj.defense += defense_up
     obj.spell_power += spell_power_up
@@ -109,3 +111,36 @@ def levelUp(obj):
     show.propertyUp(health_up,attack_up,defense_up,spell_power_up,spell_defense_up,speed_up)
 
 
+def accountAfterBattleEnd(player,pet):
+    for get_exp_pet in player.battle_pet_list:
+        # 检查是否携带学习机器
+        exp_up = propmap.checkCarryPropForExpUp(get_exp_pet)
+        # 清除buff
+        get_exp_pet.buff_dict.clear()
+        get_exp_pet.property_buff.clear()
+
+        got_exp = 0
+
+        # 计算获得的基础点数
+        if pet.basic_point_getter == get_exp_pet:
+            print("基础点数获得者", pet.basic_point_getter)
+            asscount.getBasePoint(get_exp_pet, pet.can_get_base_point_type,
+                                  pet.can_get_base_point)
+        # 战斗结束之后结算
+        # 经验值计算
+        got_exp += getBattleSuccessExp(player, pet, carry_prop=exp_up)
+        print("%s 获得 %s 经验值" % (get_exp_pet.name, got_exp))
+        get_exp_pet.exp_for_current += got_exp
+
+        if isLevelUp(get_exp_pet):
+            show.showPetStatus(get_exp_pet)
+        # 进化判断
+        if evolve.canEvolveOrNot(get_exp_pet):
+
+            print("精灵是否进化！ 1 yes  2 no ")
+            isEvo = input(">")
+            if int(isEvo) == 1:
+                player.setPet('Master', evolve.isEvolve(get_exp_pet))
+
+            else:
+                print("精灵停止进化！")

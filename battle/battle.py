@@ -206,12 +206,12 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
 
 
     if obj_defense.health <= 0: #战斗结束  debuff不会死亡
-        assist.show.petDie(obj_defense.name)
+        assist.show.petDie(obj_defense)
         assist.show.battleOver()
         return False
 
     if obj_attack.health <= 0: #反弹死
-        assist.show.petDie(obj_attack.name)
+        assist.show.petDie(obj_attack)
         assist.show.battleOver()
         return False
 
@@ -259,7 +259,7 @@ def battleRun(player,obj1,obj2,place):
             except IndexError:
                 print("%s 陷入了自我挣扎~" % obj1.name)
                 obj1.health = 0
-                assist.show.petDie(obj1.name)
+                assist.show.petDie(obj1)
                 assist.show.battleOver()
                 return True
         elif obj1.autoAi == 'lost':
@@ -298,7 +298,7 @@ def battleRun(player,obj1,obj2,place):
         if statusmap.checkShrinkaOrNot(obj1):
             # 回合结束检查是否中毒  中毒死亡
             if not statusmap.checkStatusAfterTurn(obj1,place):
-                assist.show.petDie(obj1.name)
+                assist.show.petDie(obj1)
                 assist.show.battleOver()
                 return True
 
@@ -308,7 +308,7 @@ def battleRun(player,obj1,obj2,place):
         if statusmap.checkStatusBeforeBattle(obj1,obj1.skill_list[skill_number]):
             # 回合结束检查是否中毒  中毒死亡
             if not statusmap.checkStatusAfterTurn(obj1,place):
-                assist.show.petDie(obj1.name)
+                assist.show.petDie(obj1)
                 assist.show.battleOver()
                 return True
 
@@ -320,13 +320,13 @@ def battleRun(player,obj1,obj2,place):
             print("%s 混乱中, 对自己造成了 %s 伤害" % (obj1.name,damage))
             obj1.health -= damage
             if obj1.health <= 0:
-                assist.show.petDie(obj1.name)
+                assist.show.petDie(obj1)
                 assist.show.battleOver()
                 return True
             else:
                 # 回合结束检查是否中毒  中毒死亡
                 if not statusmap.checkStatusAfterTurn(obj1,place):
-                    assist.show.petDie(obj1.name)
+                    assist.show.petDie(obj1)
                     assist.show.battleOver()
                     return True
                 assist.show.printTurn(obj2)
@@ -349,14 +349,14 @@ def battleRun(player,obj1,obj2,place):
                 if battle.hitrate.hitForOneHitKill(obj1,obj2):
                     print("%s 一击必杀" % obj1.name)
                     obj2.health = 0
-                    assist.show.petDie(obj2.name)
+                    assist.show.petDie(obj2)
                     assist.show.battleOver()
                     return True
                 else:
                     print("%s 技能使用失败！" % obj1.name)
                     # 回合结束检查是否中毒  中毒死亡
                     if not statusmap.checkStatusAfterTurn(obj1, place):
-                        assist.show.petDie(obj1.name)
+                        assist.show.petDie(obj1)
                         assist.show.battleOver()
                         return True
 
@@ -376,7 +376,7 @@ def battleRun(player,obj1,obj2,place):
                 asscount.checkBuffAfterBattle(obj1)
                 # 回合结束检查是否中毒  中毒死亡
                 if not statusmap.checkStatusAfterTurn(obj1,place):
-                    assist.show.petDie(obj1.name)
+                    assist.show.petDie(obj1)
                     assist.show.battleOver()
                     return True
                 assist.show.printTurn(obj2.name)
@@ -391,7 +391,7 @@ def battleRun(player,obj1,obj2,place):
             if damageCount(obj2,obj1,obj1.skill_list[skill_number],place):
                 # 回合结束检查是否中毒  中毒死亡
                 if not statusmap.checkStatusAfterTurn(obj1,place):
-                    assist.show.petDie(obj1.name)
+                    assist.show.petDie(obj1)
                     assist.show.battleOver()
                     return True
                 assist.show.printTurn(obj2.name)
@@ -412,7 +412,7 @@ def battleRun(player,obj1,obj2,place):
                 time.sleep(1)
 
             if not statusmap.checkStatusAfterTurn(obj1,place):
-                assist.show.petDie(obj1.name)
+                assist.show.petDie(obj1)
                 assist.show.battleOver()
                 return True
             assist.show.printTurn(obj2.name)
@@ -455,7 +455,7 @@ def battleRun(player,obj1,obj2,place):
             if obj2.captured == False:
                 # 回合结束检查是否中毒  中毒死亡
                 if not statusmap.checkStatusAfterTurn(obj1,place):
-                    assist.show.petDie(obj1.name)
+                    assist.show.petDie(obj1)
                     assist.show.battleOver()
                     return True
                 assist.show.printTurn(obj2)
@@ -469,7 +469,7 @@ def battleRun(player,obj1,obj2,place):
             #print("重新选择！")
             #assist.show.printTurn(obj2)
             if not statusmap.checkStatusAfterTurn(obj1,place):
-                assist.show.petDie(obj1.name)
+                assist.show.petDie(obj1)
                 assist.show.battleOver()
                 return True
             return battleRun(player,obj2, obj1,place)
