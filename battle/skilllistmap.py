@@ -6,10 +6,12 @@ import random
 #2.0 pp value 内部固定
 
 skill_dict = {
-    'A001': battle.skill.fireBall,
+    'A001': battle.skill.Ember,#火花
     'A002': battle.skill.FireFang,#火焰牙
-    'A004': battle.skill.fireSpin,
-    'A005': battle.skill.JetFlame,
+    'A003': battle.skill.FlameBurst,#火焰溅射
+    'A004': battle.skill.fireSpin,#火焰漩涡
+    'A005': battle.skill.Flamethrower,#火焰喷射
+    'A006': battle.skill.Inferno,#炼狱
     'A009': battle.skill.flameAffinity,
     'F001': battle.skill.Gust, #起风
     'F002': battle.skill.WingAttack, #翅膀攻击
@@ -68,6 +70,8 @@ skill_dict = {
     'N042': battle.skill.DoubleEdge,#舍身冲撞
     'N043': battle.skill.Explosion,#大爆炸
     'N044': battle.skill.DefenseCurl,#变圆
+    'N045': battle.skill.ScaryFace,#鬼面
+    'N046': battle.skill.Slash,#劈开
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,

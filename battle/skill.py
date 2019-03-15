@@ -929,6 +929,21 @@ class DefenseCurl(GainStatusUpSkill):
     show_name = '变圆'
     skill_info = '将身体蜷曲变圆,从而提高自己的防御'
 
+class ScaryFace(statusSkill):
+    def __init__(self):
+        super().__init__(pp=10,status='ST023',turns=2)
+    skill_code = 'N045'
+    show_name = '鬼面'
+    skill_info = '用恐怖的脸瞪着对手,使其害怕,从而大幅降低对手的速度'
+
+class Slash(damageSkill):
+    def __init__(self):
+        super(Slash, self).__init__(pp=20,spell_skill=False,lucky_level=2)
+    show_name = '劈开'
+    skill_code = 'N046'
+    skill_power = 70
+    skill_info = '用爪子或镰刀等劈开对手进行攻击,容易击中要害'
+
 class steadiness(buffSkill):
     show_name = '稳固'
     skill_code = 'N099'
@@ -945,15 +960,14 @@ class strengthCre(buffSkill):
     skill_info = "力量增幅,持续3回合"
     buff_prop = 'Attack'
 
-class fireBall(damageSkill):
+class Ember(damageSkill):
     def __init__(self,pp=25):
-        super().__init__(pp,hit_status='ST001')
-    show_name = '火球'
+        super().__init__(pp,hit_status='ST001',addition_status_rate=10)
+    show_name = '火花'
     skill_code = 'A001'
     skill_power = 40
     property = 'fire'
-    skill_info = '使用火球术攻击，威力一般,有5%的几率使对手进入灼伤状态'
-    hit_rate = 80
+    skill_info = '向对手发射小型火焰进行攻击,有时会让对手陷入灼伤状态'
 
 class FireFang(MultipleDamageSkill):
     def __init__(self):
@@ -965,25 +979,43 @@ class FireFang(MultipleDamageSkill):
     skill_power = 65
     skill_info = '攻击目标造成伤害,有10%的几率使目标陷入灼伤/畏缩状态'
 
-class JetFlame(fireBall):
+class FlameBurst(damageSkill):
     def __init__(self):
-        super().__init__(pp=15)
+        super(FlameBurst, self).__init__(pp=15)
+    show_name = '火焰溅射'
+    skill_code = 'A003'
+    property = 'fire'
+    skill_power = 70
+    skill_info = '爆裂的火焰会攻击到对手'
+
+class Flamethrower(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,hit_status='ST001',addition_status_rate=10)
     show_name = '喷射火焰'
     skill_code = 'A005'
     skill_power = 90
-    skill_info = '火焰喷射，威力超绝,有5%的几率使对手进入灼伤状态'
-    hit_rate = 100
+    skill_info = '火焰喷射，威力超绝,有10%的几率使对手进入灼伤状态'
+    property = 'fire'
 
-class fireSpin(debuffSkill):
+class fireSpin(damageSkill):
     def __init__(self,pp=15):
-        super().__init__(pp)
+        super().__init__(pp,hit_status='ST010',addition_status_rate=100)
     show_name = '火焰漩涡'
     skill_code = 'A004'
-    index_per = 0.1
     property = 'fire'
-    effect_turns = 3
     skill_info = "持续性火焰伤害，每回合受到血量10%的伤害"
-    damage_debuff = True
+    skill_power = 35
+    hit_rate = 85
+
+class Inferno(damageSkill):
+    def __init__(self):
+        super().__init__(pp=5,hit_status='ST001',addition_status_rate=100)
+    show_name = '炼狱'
+    skill_code = 'A006'
+    property = 'fire'
+    skill_power = 100
+    hit_rate = 50
+    skill_info = '用烈焰包裹住对手进行攻击,让对手陷入灼伤状态'
 
 class flameAffinity(propSkill):
     def __init__(self,pp=10):
