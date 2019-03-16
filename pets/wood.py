@@ -1,5 +1,53 @@
 import pets.propets
 import random
+class Bulbasaur(pets.propets.PropInit):
+    health_basic = 45
+    attack_basic = 49
+    defense_basic = 49
+    spell_power_basic = 65
+    spell_defense_basic = 65
+    speed_basic = 45
+
+    name = '妙蛙种子'
+    kind = '种子'
+    basic_exp_value = 64
+
+    can_get_base_point = 1
+    can_get_base_point_type = 'spell_power'
+    capture_rate = 45
+    # 精灵编号
+    pet_no = '001'
+    prop = ['wood', 'poison']
+
+class Ivysaur(Bulbasaur):
+    health_basic = 60
+    attack_basic = 62
+    defense_basic = 63
+    spell_power_basic = 80
+    spell_defense_basic = 80
+    speed_basic = 60
+
+    name = '妙蛙草'
+    basic_exp_value = 142
+
+    can_get_base_point_type = ['spell_power','spell_defense']
+    # 精灵编号
+    pet_no = '002'
+
+class Venusaur(Bulbasaur):
+    health_basic = 80
+    attack_basic = 82
+    defense_basic = 83
+    spell_power_basic = 100
+    spell_defense_basic = 100
+    speed_basic = 80
+
+    name = '妙蛙花'
+    basic_exp_value = 236
+
+    can_get_base_point_type = ['spell_power','spell_defense','speed']
+    # 精灵编号
+    pet_no = '003'
 
 class Oodish(pets.propets.PropInit):
     health_basic = 45

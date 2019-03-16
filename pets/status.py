@@ -3,6 +3,7 @@ from assist import rancom
 class Status(object):
     status_show_name = '未知'
     rate = 25
+    status_giver = None
     def __str__(self):
         return self.status_show_name
 
@@ -315,3 +316,16 @@ class DefenseCurl(Status):
     status_show_name = '变圆'
     status_info = '冰球和滚动进行攻击，威力将加倍'
     status_code = 'ST110'
+
+class LeechSeed(Status):
+    status_show_name = '寄生种子'
+    status_code = 'ST111'
+    status_info = '每回合结束时,会被寄生种子夺走ＨＰ,同时回复对手的ＨＰ'
+
+    def statusEffect(self,health):
+        return round(health / 8)
+
+class WorrySeed(Status):
+    status_show_name = '烦恼种子'
+    status_code = 'ST112'
+    status_info = '不会睡眠'

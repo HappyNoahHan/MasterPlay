@@ -10,8 +10,10 @@ skill_dict = {
     'A002': battle.skill.FireFang,#火焰牙
     'A003': battle.skill.FlameBurst,#火焰溅射
     'A004': battle.skill.fireSpin,#火焰漩涡
-    'A005': battle.skill.Flamethrower,#火焰喷射
+    'A005': battle.skill.Flamethrower,#喷射火焰
     'A006': battle.skill.Inferno,#炼狱
+    'A007': battle.skill.FlareBlitz,#闪焰冲锋
+    'A008': battle.skill.HeatWave,#热风
     'A009': battle.skill.flameAffinity,
     'F001': battle.skill.Gust, #起风
     'F002': battle.skill.WingAttack, #翅膀攻击
@@ -72,6 +74,7 @@ skill_dict = {
     'N044': battle.skill.DefenseCurl,#变圆
     'N045': battle.skill.ScaryFace,#鬼面
     'N046': battle.skill.Slash,#劈开
+    'N047': battle.skill.TakeDown,#猛撞
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -90,6 +93,10 @@ skill_dict = {
     'B016': battle.skill.LeafTornado,#青草搅拌器
     'B017': battle.skill.LeafStorm,#飞叶风暴
     'B018': battle.skill.LeafBlade,#叶刃
+    'B019': battle.skill.LeechSeed,#寄生种子
+    'B020': battle.skill.WorrySeed,#烦恼种子
+    'B021': battle.skill.Synthesis,#光合作用
+    'B022': battle.skill.SeedBomb,#种子炸弹
     'S001': battle.skill.illuminatiom,
     'S002': battle.skill.Agility,#高速移动
     'S003': battle.skill.Barrier,#屏障
@@ -142,6 +149,7 @@ skill_dict = {
     'Q001': battle.skill.ConfuseRay, #奇异之光
     'Q002': battle.skill.Astonish, #惊吓
     'Q003': battle.skill.Hex,#祸不单行
+    'Q004': battle.skill.ShadowClaw,#暗影爪
     'P001': battle.skill.Toxic, #剧毒
     'P002': battle.skill.PoisonFang, #剧毒牙
     'P003': battle.skill.Venoshock, #毒液冲击
@@ -173,6 +181,8 @@ skill_dict = {
     'G001': battle.skill.Twister,#龙卷风
     'G002': battle.skill.DragonPulse,#龙之波动
     'G003': battle.skill.DragonDance,#龙之舞
+    'G004': battle.skill.DragonRage,#龙之怒
+    'G005': battle.skill.DragonClaw,#龙爪
     'Y001': battle.skill.Moonlight,#月光
     'Y002': battle.skill.Moonblast,#月亮之力
     'X001': battle.skill.GyroBall,#陀螺球

@@ -73,6 +73,8 @@ status_dict={
     'ST108' : status.Rollout(),
     'ST109' : status.SmackDown(),
     'ST110' : status.DefenseCurl(),
+    'ST111' : status.LeechSeed(),
+    'ST112' : status.WorrySeed(),
 }
 
 #清理清单
@@ -150,6 +152,7 @@ def checkShrinkaOrNot(obj):
     return False
 
 def checkStatusBeforeBattle(obj,skill):
+    #技能解除异常状态
     if skill.skill_code in ['B013']:
         return False
 
@@ -164,7 +167,7 @@ def checkStatusBeforeBattle(obj,skill):
         #if checkShrinkaOrNot(obj):
             #print("%s 畏缩不前,没有成功使用技能~" % obj.name)
         #    return True
-        if checkFrozenOrNot(obj):
+        if checkFrozenOrNot(obj,skill):
             print("%s 冰冻中, 无法使用任何技能" % obj.name)
             return True
     else:
@@ -200,6 +203,16 @@ def checkStatusAfterTurn(obj,place):
         obj.health -= damage
         if obj.health <= 0:
             return False
+
+    if 'ST111' in obj.status:
+        damage = status_dict['ST111'].statusEffect(obj._max_health)
+        print("%s 因寄生种子损失了 %s HP" % (obj.name, damage))
+        obj.health -= damage
+        if status_dict['ST111'].status_giver.alive:
+            life.healthRecoreByDrug(status_dict['ST111'].status_giver,damage)
+        if obj.health <= 0:
+            return False
+
 
     if 'ST010' in obj.status:
         if obj.status['ST010'] > 4:
@@ -353,12 +366,15 @@ def resetStatusAfterChange(pet):
     if 'ST095' in pet.status:
         removeStatus(pet,'ST095')
 
-def checkFrozenOrNot(obj):
+def checkFrozenOrNot(obj,skill):
     '''
     检查是否是冰冻状态
     :param obj:
     :return:
     '''
+    if skill.skill_code in ['A007']:
+        return False
+
     if 'ST008' in obj.status:
         if status_dict['ST008'].statusEffect():
             print("%s 解除了 冰冻！" % obj.name)

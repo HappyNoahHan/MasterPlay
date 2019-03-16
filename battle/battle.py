@@ -70,6 +70,9 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
     elif obj_skill.skill_model == '0004':
         obj_skill.addStatus(obj_defense,place)
 
+        if obj_skill.need_user:
+            obj_skill.setStatusGiver(obj_attack)
+
         if obj_skill.side_effect:
             obj_skill.sideEffect(obj_attack)
         print(obj_defense.status)

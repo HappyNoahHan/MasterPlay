@@ -14,6 +14,7 @@
                      0017 改变场地的技能 eg 青草场地 玩水
                      0018 一击必杀  eg 角钻
                      0019 锁资源技能 eg 定身法
+                     0020 吸血类状态技能 eg 寄生种子
                      --- 2.0
                      buff 类 与 debuff 类 集合
                      buff  标记attack denfense 法强 法防 提升 统一  0002 buff类技能
@@ -169,13 +170,14 @@ class debuffSkill(skill):
     damage_debuff = False
 
 class statusSkill(skill):
-    def __init__(self,pp=30,status=None,turns = 1,side_effect=False,add_condition=None):
+    def __init__(self,pp=30,status=None,turns = 1,side_effect=False,add_condition=None,need_user=False):
         super().__init__(pp)
         self.skill_model = '0004'
         self.status = status
         self.turns = turns
         self.side_effect = side_effect
         self.add_condition = add_condition #中状态条件
+        self.need_user = need_user #是否需要记录使用者
 
     def addStatus(self,obj,place):
         if self.status not in obj.status:
@@ -186,6 +188,9 @@ class statusSkill(skill):
                 print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
         else:
             print("%s 已经陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
+
+    def setStatusGiver(self,pet):
+        statusmap.status_dict[self.status].status_giver = pet
 
 class MutlipleStatusSkill(statusSkill):
     def addStatus(self,obj,place,double=1):
@@ -202,8 +207,6 @@ class MutlipleStatusSkill(statusSkill):
                     print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
             else:
                 print("%s 已经陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
-
-
 
 class GainStatusUpSkill(skill):
     '''
@@ -944,6 +947,19 @@ class Slash(damageSkill):
     skill_power = 70
     skill_info = '用爪子或镰刀等劈开对手进行攻击,容易击中要害'
 
+class TakeDown(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,spell_skill=False,side_effect=True)
+    show_name = '猛撞'
+    skill_code = 'N047'
+    skill_power = 90
+    hit_rate = 85
+    skill_info = '以惊人的气势撞向对手进行攻击,自己也会受到少许伤害'
+
+    def getSideEffect(self,obj,damage):
+        obj.health -= round(damage / 4)
+        print('%s 受到了 %s 的反弹伤害' % (obj.name,round(damage / 4 )))
+
 class steadiness(buffSkill):
     show_name = '稳固'
     skill_code = 'N099'
@@ -1016,6 +1032,31 @@ class Inferno(damageSkill):
     skill_power = 100
     hit_rate = 50
     skill_info = '用烈焰包裹住对手进行攻击,让对手陷入灼伤状态'
+
+class FlareBlitz(damageSkill):
+    def __init__(self):
+        super(FlareBlitz, self).__init__(pp=15,spell_skill=False,side_effect=True,
+                                         hit_status='ST001',addition_status_rate=10,
+                                         clean_status=['ST008'])
+    show_name = '闪焰冲锋'
+    skill_code = 'A007'
+    property = 'fire'
+    skill_power = 120
+    skill_info = '让火焰覆盖全身猛撞向对手,自己也会受到不小的伤害,有时会让对手陷入灼伤状态'
+
+    def getSideEffect(self,obj,damage):
+        obj.health -= round(damage /3)
+        print('%s 受到了 %s 的反弹伤害' % (obj.name,round(damage / 3 )))
+
+class HeatWave(damageSkill):
+    def __init__(self):
+        super(HeatWave, self).__init__(pp=10,hit_status='ST001',addition_status_rate=10)
+    show_name = '热风'
+    skill_code = 'A008'
+    skill_power = 95
+    hit_rate = 90
+    property = 'fire'
+    skill_info = '将炎热的气息吹向对手进行攻击,有时会让对手陷入灼伤状态'
 
 class flameAffinity(propSkill):
     def __init__(self,pp=10):
@@ -1197,6 +1238,49 @@ class LeafBlade(damageSkill):
     skill_power = 90
     property = 'wood'
     skill_info = '攻击目标造成伤害,击中要害率比普通招式高1级'
+
+class LeechSeed(statusSkill):
+    def __init__(self):
+        super(LeechSeed, self).__init__(pp=10,status='ST111',need_user=True)
+    show_name = '寄生种子'
+    skill_info = '植入寄生种子后,将在每回合一点一点吸取对手的ＨＰ,从而用来回复自己的ＨＰ'
+    property = 'wood'
+    hit_rate = 90
+    skill_code = 'B019'
+
+class WorrySeed(statusSkill):
+    def __init__(self):
+        super(WorrySeed, self).__init__(pp=10,status='ST112')
+    show_name = '烦恼种子'
+    property = 'wood'
+    skill_code = 'B020'
+    skill_info = '种植心神不宁的种子,使对手不能入眠,并将特性变成不眠'
+
+class Synthesis(lifeRecoreSkill):
+    def __init__(self):
+        super().__init__(pp=5,weather_condition=True)
+    show_name = '光合作用'
+    skill_code = 'B021'
+    property = 'wood'
+    hit_rate = 0
+    skill_info = '回复自己的ＨＰ,根据天气的不同,回复量也会有所变化'
+
+    def getIndexPer(self,weather):
+        if weather.code in ['W001','W002']:
+            return 0.66
+        if weather.code in ['W003']:
+            return 0.5
+        if weather.code in ['W004','W005','W006','W007','W008']:
+            return 0.25
+
+class SeedBomb(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,spell_skill=False)
+    skill_code = 'B022'
+    property = 'wood'
+    skill_power = 80
+    skill_name = '种子炸弹'
+    skill_info = '将外壳坚硬的大种子,从上方砸下攻击对手'
 
 class illuminatiom(removeDebuffSkill):
     def __init__(self,pp=20):
@@ -1703,6 +1787,15 @@ class Hex(damageSkill):
     property = 'ghost'
     skill_power = 65
 
+class ShadowClaw(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,spell_skill=False,lucky_level=2)
+    show_name = '暗影爪'
+    skill_code = 'Q004'
+    skill_power = 70
+    skill_info = '以影子做成的锐爪,劈开对手,容易击中要害'
+    property = 'ghost'
+
 class Toxic(statusSkill):
     def __init__(self):
         super().__init__(10,status = 'ST005')
@@ -2016,6 +2109,26 @@ class DragonDance(GainStatusUpSkill):
     property = 'dragon'
     skill_info = '激烈地跳起神秘且强有力的舞蹈,从而提高自己的攻击和速度'
     hit_rate = 0
+
+class DragonRage(damageSkill):
+    def __init__(self):
+        super(DragonRage, self).__init__(pp=10,fixed_damage=True)
+    show_name = '龙之怒'
+    skill_code = 'G004'
+    property = 'dragon'
+    skill_info = '将愤怒的冲击波撞向对手进行攻击,必定会给予４０的伤害'
+
+    def getDamage(self):
+        return 40
+
+class DragonClaw(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,spell_skill=False)
+    show_name = '龙爪'
+    skill_code = 'G005'
+    property = 'dragon'
+    skill_power = 80
+    skill_info = '用尖锐的巨爪劈开对手进行攻击'
 
 class Moonlight(lifeRecoreSkill):
     def __init__(self):
