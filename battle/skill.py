@@ -60,6 +60,7 @@ class skill(object):
     property = 'normal'
     hit_rate = 100
     skill_power = None
+    limit_skill = False  #限制第一回合使用
     use_condition = None  #使用条件
     multi_step = False #多段技能 默认False
     show_name = None
@@ -366,20 +367,33 @@ class DelayedSkill(skill):
         pet.setSkills('delay',self)
 
     def addStatus(self,pet):
-        pet.setStatus(self.add_status_begin)
+        if isinstance(self.add_status_begin,list):
+            for status in self.add_status_begin:
+                pet.setStatus(status)
+        else:
+            pet.setStatus(self.add_status_begin)
         pet.autoAi = 'lost'
 
     def removeStatus(self,pet):
-        pet.removeStatus(self.add_status_begin)
+        if isinstance(self.add_status_begin,list):
+            for status in self.add_status_begin:
+                pet.removeStatus(status)
+        else:
+            pet.removeStatus(self.add_status_begin)
         pet.removeSkills('delay')
         pet.autoAi = False
         if self.add_status_end != None:
             pet.setStatus(self.add_status_end)
 
     def useSkill(self,pet):
-        if self.add_status_begin not in pet.status:
-            self.setDelayedSkill(pet)
-            self.addStatus(pet)
+        if isinstance(self.add_status_begin,list):
+            if self.add_status_begin[0] not in pet.status:
+                self.setDelayedSkill(pet)
+                self.addStatus(pet)
+        else:
+            if self.add_status_begin not in pet.status:
+                self.setDelayedSkill(pet)
+                self.addStatus(pet)
 
     def getPower(self,pet):
         return self.skill_power
@@ -959,6 +973,31 @@ class TakeDown(damageSkill):
     def getSideEffect(self,obj,damage):
         obj.health -= round(damage / 4)
         print('%s 受到了 %s 的反弹伤害' % (obj.name,round(damage / 4 )))
+
+class Protect(GainStatusUpSkill):
+    def __init__(self):
+        super(Protect, self).__init__(pp=10,status=['ST017','ST019'],turns=2)
+    show_name = '守住'
+    skill_code = 'N048'
+    hit_rate = 0
+    skill_info = '守住,大幅提高防御'
+
+class SkullBash(DelayedSkill):
+    def __init__(self):
+        super(SkullBash, self).__init__(pp=10,add_status_begin=['ST113','ST017'],spell_skill=False)
+    show_name = '火箭头锤'
+    skill_code = 'N049'
+    skill_power = 130
+    skill_info = '第１回合把头缩进去,从而提高防御,第２回合攻击对手'
+
+class FakeOut(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,spell_skill=False,hit_status='ST004',addition_status_rate=100)
+    show_name = '击掌奇袭'
+    skill_code = 'N050'
+    skill_power = 40
+    skill_info = '进行先制攻击,使对手畏缩,要在出场后立刻使出才能成功'
+    limit_skill = True
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -1583,6 +1622,43 @@ class Soak(statusSkill):
     skill_info = '将大量的水泼向对手，从而使其变成水属性'
     property = 'water'
     skill_code = 'D011'
+
+class Withdraw(GainStatusUpSkill):
+    def __init__(self):
+        super(Withdraw, self).__init__(pp=40,status=['ST017'])
+    show_name = '缩入壳中'
+    skill_info = '缩入壳里保护身体,从而提高自己的防御'
+    property = 'water'
+    skill_code = 'D012'
+    hit_rate = 0
+
+class AquaTail(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,spell_skill=False)
+    skill_code = 'D013'
+    skill_power = 90
+    hit_rate = 90
+    show_name = '水流尾'
+    property = 'water'
+    skill_info = '如惊涛骇浪般挥动大尾巴攻击对手'
+
+class RainDance(PlaceStatusSkill):
+    def __init__(self):
+        super().__init__(pp=5,status='ST036')
+    skill_code = 'D014'
+    hit_rate = 0
+    show_name = '求雨'
+    property = 'water'
+    skill_info = '在５回合内一直降雨,从而提高水属性的招式威力,火属性的招式威力则降低'
+
+class AquaJet(damageSkill):
+    def __init__(self):
+        super(AquaJet, self).__init__(pp=20)
+    skill_code = 'D015'
+    show_name = '水流喷射'
+    property = 'water'
+    skill_power = 40
+    skill_info = '以迅雷不及掩耳之势扑向对手,必定能够先制攻击'
 
 class RockThrow(damageSkill):
     def __init__(self):
@@ -2211,3 +2287,11 @@ class FlashCannon(damageSkill):
     property = 'steel'
     skill_code = 'X005'
     skill_info = '将身体的光芒聚集在一点释放出去,有时会降低对手的特防'
+
+class IronDefense(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(pp=15,status=['ST017'],turns=2)
+    show_name = '铁壁'
+    skill_code = 'X006'
+    skill_info = '将皮肤变得坚硬如铁,从而大幅提高自己的防御'
+    property = 'X006'

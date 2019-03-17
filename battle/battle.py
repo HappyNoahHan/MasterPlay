@@ -229,7 +229,6 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
         #        talentmap.talentEffectAfter(obj_attack,obj_skill)
         return True
 
-
 def battleRun(player,obj1,obj2,place):
     '''
     攻击模块
@@ -290,6 +289,10 @@ def battleRun(player,obj1,obj2,place):
                 if obj1.skill_list[skill_number].use_condition not in obj1.status:
                     print("技能无法使用！")
                     return battleRun(player,obj1,obj2,place)
+            if obj1.skill_list[skill_number].limit_skill:
+                if obj1.last_used_skill:
+                    print("技能无法使用！")
+                    return battleRun(player, obj1, obj2, place)
             if obj1.skill_list[skill_number].lock:
                 print("技能被锁,无法使用！")
                 return battleRun(player,obj1,obj2,place)

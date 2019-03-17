@@ -13,6 +13,8 @@ evolve_dict={
     '妙蛙草': [wood.Venusaur,36,'level_up'],
     '小火龙': [fire.Charmeleon,16,'level_up'],
     '火恐龙': [fire.Charizard,36,'level_up'],
+    '杰尼龟': [water.Wartortle,16,'level_up'],
+    '卡咪龟': [water.Blastoise,36,'level_up'],
     '小拳石': [rock.Graveler,25,'level_up'],
     '隆隆石': [rock.Golem,'岩之心','stone_up'],
     '超音蝠': [poison.Golbat,22,'level_up'],

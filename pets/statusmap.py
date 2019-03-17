@@ -52,6 +52,9 @@ status_dict={
     'ST035' : status.MudSport(status_show_name='玩泥巴',status_code='ST035'
                               ,status_info='在５回合内,电属性的招式威力会减半',
                               place_property='ground',place_type='power'),
+    'ST036' : status.RainDance(status_show_name='求雨',status_code='ST036',
+                               status_info='在５回合内一直降雨,从而提高水属性的招式威力,火属性的招式威力则降低',
+                               place_property='water',place_type='power'),
     'ST100' : status.NoTalent(),
     'ST099' : status.Lock(),
     'ST098' : status.KnockOff(),
@@ -75,6 +78,7 @@ status_dict={
     'ST110' : status.DefenseCurl(),
     'ST111' : status.LeechSeed(),
     'ST112' : status.WorrySeed(),
+    'ST113' : status.SkullBash(),
 }
 
 #清理清单
@@ -338,6 +342,10 @@ def checkStatusEnd(player):
             removeStatus(pet,'ST103')
             pet.autoAi = False
 
+        if 'ST113' in pet.status:
+            removeStatus(pet,'ST113')
+            pet.autoAi = False
+
         if 'ST108' in pet.status:
             removeStatus(pet,'ST108')
             pet.autoAi = False
@@ -352,7 +360,7 @@ def checkStatusEnd(player):
             if status in pet.status:
                 removeStatus(pet,status)
 
-        pet.last_used_skill = None
+        pet.last_used_skill = None #最后使用的技能
 
 def resetStatusAfterChange(pet):
     '''
@@ -511,6 +519,9 @@ def checkDelayStatus(obj_attack):
             obj_attack.status['ST102'] += 1
             return 1
     elif 'ST103' in obj_attack.status:
+        return 3
+
+    elif 'ST113' in obj_attack.status:
         return 3
 
     elif 'ST108' in obj_attack.status:

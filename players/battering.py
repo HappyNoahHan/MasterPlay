@@ -100,4 +100,3 @@ def vsBattleing(player,trainer,challenge_list,place):
             return False
     else:
         return True
-

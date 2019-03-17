@@ -75,6 +75,9 @@ skill_dict = {
     'N045': battle.skill.ScaryFace,#鬼面
     'N046': battle.skill.Slash,#劈开
     'N047': battle.skill.TakeDown,#猛撞
+    'N048': battle.skill.Protect,#守住
+    'N049': battle.skill.SkullBash,#火箭头锤
+    'N050': battle.skill.FakeOut,#击掌奇袭
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -129,6 +132,10 @@ skill_dict = {
     'D009': battle.skill.AquaRing,#水流环
     'D010': battle.skill.Waterfall,#攀瀑
     'D011': battle.skill.Soak,#浸水
+    'D012': battle.skill.Withdraw,#缩入壳中
+    'D013': battle.skill.AquaTail,#水流尾
+    'D014': battle.skill.RainDance,#求雨
+    'D015': battle.skill.AquaJet,#水流喷射
     'R001': battle.skill.RockThrow,#落石
     'R002': battle.skill.RockSlide,#岩崩
     'R003': battle.skill.PowerGem,#力量宝石
@@ -190,6 +197,7 @@ skill_dict = {
     'X003': battle.skill.MirrorShot,#镜光射击
     'X004': battle.skill.MetalSound,#金属音
     'X005': battle.skill.FlashCannon,#加农光炮
+    'X006': battle.skill.IronDefense,#铁壁
 
 }
 

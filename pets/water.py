@@ -1,26 +1,56 @@
 from pets import propets
 
-class Magikarp(propets.PropInit):
-    health_basic = 20
-    attack_basic = 10
-    defense_basic = 55
-    spell_power_basic = 15
-    spell_defense_basic = 20
-    speed_basic = 80
+class Squirtle(propets.PropInit):
+    health_basic = 44
+    attack_basic = 48
+    defense_basic = 65
+    spell_power_basic = 50
+    spell_defense_basic = 64
+    speed_basic = 43
 
-    name = '鲤鱼王'
-    basic_exp_value = 20
+    name = '杰尼龟'
+    kind = '小龟'
+    basic_exp_value = 63
 
     can_get_base_point = 1
-    can_get_base_point_type = 'speed'
-    capture_rate = 255
-    canEvolve = False
+    can_get_base_point_type = 'defense'
+    capture_rate = 45
     # 精灵编号
-    pet_no = '129'
+    pet_no = '007'
     prop = ['water']
 
-    def __str__(self):
-        return super().__str__() + ':' + self.name
+class Wartortle(Squirtle):
+    health_basic = 59
+    attack_basic = 63
+    defense_basic = 80
+    spell_power_basic = 65
+    spell_defense_basic = 80
+    speed_basic = 58
+
+    name = '卡咪龟'
+    kind = '龟'
+    basic_exp_value = 142
+
+    can_get_base_point_type = ['defense','spell_defense']
+    # 精灵编号
+    pet_no = '008'
+
+class Blastoise(Squirtle):
+    health_basic = 79
+    attack_basic = 83
+    defense_basic = 100
+    spell_power_basic = 85
+    spell_defense_basic = 105
+    speed_basic = 78
+
+    name = '水箭龟'
+    kind = '甲壳'
+    basic_exp_value = 239
+
+    can_get_base_point = 3
+    can_get_base_point_type = ['spell_defense']
+    # 精灵编号
+    pet_no = '009'
 
 class Tentacool(propets.PropInit):
     health_basic = 40
@@ -167,3 +197,25 @@ class Starmie(propets.PropInit):
     # 精灵编号
     pet_no = '120'
     prop = ['water','psychic']
+
+class Magikarp(propets.PropInit):
+    health_basic = 20
+    attack_basic = 10
+    defense_basic = 55
+    spell_power_basic = 15
+    spell_defense_basic = 20
+    speed_basic = 80
+
+    name = '鲤鱼王'
+    basic_exp_value = 20
+
+    can_get_base_point = 1
+    can_get_base_point_type = 'speed'
+    capture_rate = 255
+    canEvolve = False
+    # 精灵编号
+    pet_no = '129'
+    prop = ['water']
+
+    def __str__(self):
+        return super().__str__() + ':' + self.name

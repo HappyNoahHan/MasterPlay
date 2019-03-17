@@ -259,13 +259,13 @@ class ChangePro(Status):
 class WaterSport(Place):
     def statusEffect(self,skill,power):
         if skill.property == 'fire':
-            return round(skill.skill_power * 0.5)
+            return round(power * 0.5)
         return power
 
 class MudSport(Place):
     def statusEffect(self,skill,power):
         if skill.property == 'electric':
-            return round(skill.skill_power * 0.5)
+            return round(power * 0.5)
         return power
 
 class AquaRing(Status):
@@ -329,3 +329,16 @@ class WorrySeed(Status):
     status_show_name = '烦恼种子'
     status_code = 'ST112'
     status_info = '不会睡眠'
+
+class SkullBash(Status):
+    status_show_name = '火箭头锤'
+    status_info = '蓄力攻击,第二回合攻击'
+    status_code = 'ST113'
+
+class RainDance(Place):
+    def statusEffect(self,skill,power):
+        if skill.property == 'fire':
+            return round(power * 0.5)
+        if skill.property == 'water':
+            return round(power * 1.5)
+        return power
