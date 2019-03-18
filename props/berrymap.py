@@ -1,7 +1,7 @@
 from props import berry
 berry_dict={
-    '樱子果': berry.Berry(show_name='樱子果',code='01'),
-    '零余果': berry.Berry(show_name='零余果',code='02'),
+    '樱子果': berry.CheriBerry(),
+    '零余果': berry.ChestoBerry(),
 }
 
 berry_bag={
@@ -10,6 +10,6 @@ berry_bag={
 
 
 berry_effect_for_NaturalGift={
-    '01': (80,'fire'),
-    '02': (80,'water'),
+    'BY001': (80,'fire'),
+    'BY002': (80,'water'),
 }

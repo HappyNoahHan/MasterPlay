@@ -79,6 +79,7 @@ status_dict={
     'ST111' : status.LeechSeed(),
     'ST112' : status.WorrySeed(),
     'ST113' : status.SkullBash(),
+    'ST114' : status.Safeguard(),
 }
 
 #清理清单
@@ -91,7 +92,7 @@ clear_list.remove('ST007')
 clear_list.remove('ST102')
 
 #回合递减
-count_index_list=['ST029','ST030','ST106','ST104','ST107']
+count_index_list=['ST029','ST030','ST106','ST104','ST107','ST114']
 
 #异常状态
 abnormal_list = ['ST001','ST002','ST003',

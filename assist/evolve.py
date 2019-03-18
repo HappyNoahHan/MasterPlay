@@ -3,7 +3,7 @@
     继承  技能列表  已领悟技能
 '''
 
-from pets import fire,rock,poison,skilltree,fly,wood,water,electric
+from pets import fire,rock,poison,skilltree,fly,wood,water,electric,insect
 from assist import  show
 from battle import learnskill
 import time
@@ -15,6 +15,8 @@ evolve_dict={
     '火恐龙': [fire.Charizard,36,'level_up'],
     '杰尼龟': [water.Wartortle,16,'level_up'],
     '卡咪龟': [water.Blastoise,36,'level_up'],
+    '绿毛虫': [insect.Metapod,7,'level_up'],
+    '铁甲蛹': [insect.Butterfree,10,'level_up'],
     '小拳石': [rock.Graveler,25,'level_up'],
     '隆隆石': [rock.Golem,'岩之心','stone_up'],
     '超音蝠': [poison.Golbat,22,'level_up'],

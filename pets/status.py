@@ -342,3 +342,8 @@ class RainDance(Place):
         if skill.property == 'water':
             return round(power * 1.5)
         return power
+
+class Safeguard(Status):
+    status_show_name = '神秘守护'
+    status_info = '在５回合内,不会陷入异常状态'
+    status_code = 'ST114'

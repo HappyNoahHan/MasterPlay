@@ -10,6 +10,9 @@ talent_dict={
     'TA003': pettalent.ProUpTalent(name='虫之预感',talent_code='TA003',up_type='power',match_property='insect',up_cause=3,up_number=1.5),
 }
 
+#异常状态
+abnormal_list = ['ST001','ST002','ST003','ST006',
+                 'ST005','ST007','ST008']
 
 def addStatusOrNot(pet,status_code,place):
     if 'ST100' not in pet.status:
@@ -20,6 +23,12 @@ def addStatusOrNot(pet,status_code,place):
             #电磁场 不能睡眠
             if place.place_status[0] == 'ST034':
                 return False
+
+        if 'ST114' in pet.status:
+            #神秘守护  无法被异常状态
+            if status_code in abnormal_list:
+                return False
+
         return True
     else:
         print("天赋失效～")

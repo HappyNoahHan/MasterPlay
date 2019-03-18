@@ -79,8 +79,8 @@ class skill(object):
 class damageSkill(skill):
     def __init__(self,pp=30,hit_status=None,addition_status = None,
                  addition_status_rate = 5,spell_skill=True,lucky_level=1,
-                 turns=1,power_changed=False,side_effect=None,
-                 clean_status=None,fixed_damage=False):
+                 turns=1,power_changed=False,side_effect=False,self_effect=None,
+                 clean_status=None,fixed_damage=False,berry_effect=False):
         '''
         :param pp: pp value
         :param hit_status: 附加状态
@@ -89,9 +89,11 @@ class damageSkill(skill):
         :param spell_skill: 技能类型 物理or特殊
         :param lucky_level: 会心等级 默认=1
         :param truns: status层数
-        :param side_effect: 副作用 默认None  数据形式(status turns)
+        :param side_effect: 副作用
         :param clean_status: 清除某些状态
         :param fixed_damage: 固定伤害值技能
+        :param berry_effect: 树果效果
+        :param self_effect: 自生属性提升 默认None  数据形式([status], turns, per)
         '''
         super().__init__(pp)
         self.skill_model = '0001'
@@ -105,6 +107,8 @@ class damageSkill(skill):
         self.side_effect = side_effect
         self.clean_status = clean_status
         self.fixed_damage = fixed_damage
+        self.berry_effect = berry_effect
+        self.self_effect = self_effect
 
 
     def addStatus(self,obj,place):
@@ -133,12 +137,12 @@ class damageSkill(skill):
         return False
 
     def getSideEffect(self,obj,damage):
-        '''
-        为pet 加上技能的副作用
-        :param obj:
-        :return:
-        '''
-        obj.setStatus(self.side_effect[0],self.side_effect[1])
+        return True
+
+    def selfSideEffect(self,obj):
+        if rancom.statusRandom(self.self_effect[2]):
+            for status in self.self_effect[0]:
+                obj.setStatus(status,self.self_effect[1])
 
     def cleanStatus(self,obj):
         for status in self.clean_status:
@@ -494,7 +498,7 @@ class Tailwind(buffSkill):
     skill_code = 'F007'
     index_per = 1
     effect_turns = 4
-    skill_info = "己方场地上全部的宝可梦的速度加倍。持续时间为4回合，包括使用的当回合"
+    skill_info = "己方场地上全部的宝可梦的速度加倍,持续时间为4回合,包括使用的当回合"
     buff_prop = 'Speed'
     property = 'fly'
 
@@ -549,12 +553,17 @@ class DrillPeck(damageSkill):
 
 class Pluck(damageSkill):
     def __init__(self):
-        super().__init__(pp=20,spell_skill=False)
+        super().__init__(pp=20,spell_skill=False,berry_effect=True)
     show_name = '啄食'
     skill_code = 'F013'
     skill_power = 60
-    skill_info = '攻击目标造成伤害。如果目标携带了树果，消耗掉目标的树果'#后续功能，暂时是个伤害技能
+    skill_info = '攻击目标造成伤害。如果目标携带了树果，消耗掉目标的树果'
     property = 'fly'
+
+    def eatBerry(self,obj_attack,obj_defense):
+        if obj_defense.berry:
+            obj_defense.berry.berryEffect(obj_attack)
+            obj_defense.berry = None
 
 class Tackle(damageSkill):
     def __init__(self):
@@ -999,6 +1008,21 @@ class FakeOut(damageSkill):
     skill_info = '进行先制攻击,使对手畏缩,要在出场后立刻使出才能成功'
     limit_skill = True
 
+class Safeguard(statusSkill):
+    def __init__(self):
+        super().__init__(pp=5,status='ST114')
+    show_name = '神秘守护'
+    skill_code = 'N051'
+    skill_info = '在５回合内被神奇的力量守护,从而不会陷入异常状态'
+    hit_rate = 0
+
+class Captivate(statusSkill):
+    def __init__(self):
+        super().__init__(pp=20,status='ST022',turns=2)
+    show_name = '诱惑'
+    skill_code = 'N052'
+    skill_info = '♂诱惑♀或♀诱惑♂,从而大幅降低对手的特攻'
+
 class steadiness(buffSkill):
     show_name = '稳固'
     skill_code = 'N099'
@@ -1261,7 +1285,7 @@ class LeafTornado(damageSkill):
 
 class LeafStorm(damageSkill):
     def __init__(self):
-        super().__init__(pp=5,side_effect=('ST022',2))
+        super().__init__(pp=5,self_effect=(['ST022'],2,100))
     show_name = '飞叶风暴'
     skill_code = 'B017'
     skill_power = 130
@@ -1385,6 +1409,24 @@ class CosmicPower(GainStatusUpSkill):
     property = 'psychic'
     hit_rate = 0
 
+class Confusion(damageSkill):
+    def __init__(self):
+        super().__init__(pp=25,hit_status='ST006',addition_status_rate=10)
+    show_name = '念力'
+    skill_code = 'S008'
+    skill_power = 50
+    property = 'psychic'
+    skill_info = '向对手发送微弱的念力进行攻击,有时会使对手混乱'
+
+class Psybeam(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,hit_status='ST006',addition_status_rate=10)
+    show_name = '幻象光线'
+    skill_code = 'S009'
+    skill_power = 65
+    property = 'psychic'
+    skill_info = '向对手发射神奇的光线进行攻击,有时会使对手混乱'
+
 class disperse(removeBuffSkill):
     def __init__(self,pp=20):
         super().__init__(pp)
@@ -1499,6 +1541,56 @@ class Steamroller(damageSkill):
     skill_power = 65
     skill_info = '旋转揉成团的身体压扁对手,有时会使对手畏缩'
     property = 'insect'
+
+class StringShot(statusSkill):
+    def __init__(self):
+        super().__init__(pp=20,status='ST023',turns=2)
+    show_name = '吐丝'
+    skill_code = 'C002'
+    hit_rate = 95
+    property = 'insect'
+    skill_info = '用口中吐出的丝缠绕对手,从而大幅降低对手的速度'
+
+class BugBite(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,spell_skill=False,berry_effect=True)
+    show_name = '虫咬'
+    skill_code = 'C005'
+    skill_power = 60
+    property = 'insect'
+    skill_info = '咬住进行攻击,当对手携带树果时,可以食用并获得其效'
+
+    def eatBerry(self,obj_attack,obj_defense):
+        if obj_defense.berry:
+            obj_defense.berry.berryEffect(obj_attack)
+            obj_defense.berry = None
+
+class SilverWind(damageSkill):
+    def __init__(self):
+        super().__init__(pp=5,self_effect=(['ST016','ST017','ST018','ST019','ST020'],1,10))
+    show_name = '银色旋风'
+    skill_code = 'C006'
+    skill_power = 60
+    property = 'insect'
+    skill_info = '在风中掺入鳞粉攻击对手,有时会提高自己的全部能力'
+
+class BugBuzz(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,hit_status='ST011',addition_status_rate=10)
+    show_name = '虫鸣'
+    skill_code = 'C007'
+    skill_power = 90
+    property = 'insect'
+    skill_info = '利用振动发出音波进行攻击,有时会降低对手的特防'
+
+class QuiverDance(GainStatusUpSkill):
+    def __init__(self):
+        super(QuiverDance, self).__init__(pp=20,status=['ST018','ST019','ST020'])
+    show_name = '蝶舞'
+    skill_code = 'C008'
+    hit_rate = 0
+    property = 'insect'
+    skill_info = '轻巧地跳起神秘而又美丽的舞蹈,提高自己的特攻,特防和速度'
 
 class Haze(removeStatusSkill):
     def __init__(self):

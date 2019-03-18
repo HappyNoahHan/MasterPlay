@@ -1,5 +1,6 @@
 from  pets import fly,wood,water,skilltree
 from battle import skill
+from props import berrymap
 import random
 
 wild_pet_list_in_grass_no_1 ={

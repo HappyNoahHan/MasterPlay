@@ -40,8 +40,14 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
             if obj_skill.side_effect != None:
                 obj_skill.getSideEffect(obj_attack,damage) #副作用
 
-            if obj_skill.clean_status and damage > 0:
+            if obj_skill.clean_status and damage > 0: #清除效果
                 obj_skill.cleanStatus(obj_attack)
+
+            if obj_skill.berry_effect: #树果效果
+                obj_skill.eatBerry(obj_attack,obj_defense)
+
+            if obj_skill.self_effect:#自身附加状态
+                obj_skill.selfSideEffect(obj_attack)
 
         else:
             damage = obj_skill.getDamage(obj_attack.level)

@@ -15,7 +15,7 @@ class WildForm(placebase.Place):
         :param npc_list:
         :param block:
         :param weather: 天气
-        :param place_status:  场地
+        :param place_status:  场地状态
         '''
         super().__init__(name=name,maplist=maplist,treasure_box_list=treasure_box_list,npc_list=npc_list,block=block)
         self.wild_pet_list = wild_pet_list

@@ -78,6 +78,8 @@ skill_dict = {
     'N048': battle.skill.Protect,#守住
     'N049': battle.skill.SkullBash,#火箭头锤
     'N050': battle.skill.FakeOut,#击掌奇袭
+    'N051': battle.skill.Safeguard,#神秘守护
+    'N052': battle.skill.Captivate,#诱惑
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -107,6 +109,8 @@ skill_dict = {
     'S005': battle.skill.Psychic,#精神强念
     'S006': battle.skill.LightScreen,#光墙
     'S007': battle.skill.CosmicPower,#宇宙力量
+    'S008': battle.skill.Confusion,#念力
+    'S009': battle.skill.Psybeam,#幻象光线
     'I001': battle.skill.Haze, #黑雾
     'I002': battle.skill.IceFang,#冰冻牙
     'T001': battle.skill.disperse,
@@ -119,8 +123,13 @@ skill_dict = {
     'T008': battle.skill.Fling,#投掷
     'T009': battle.skill.Memento,#临别礼物
     'C001': battle.skill.Megahorn,#超级角击
+    'C002': battle.skill.StringShot,#吐丝
     'C003': battle.skill.LeechLife, #吸血
     'C004': battle.skill.Steamroller,#疯狂滚压
+    'C005': battle.skill.BugBite,#虫咬
+    'C006': battle.skill.SilverWind,#银色旋风
+    'C007': battle.skill.BugBuzz,#虫鸣
+    'C008': battle.skill.QuiverDance,#蝶舞
     'D001': battle.skill.WaterJump,
     'D002': battle.skill.Bubble,#泡沫
     'D003': battle.skill.HydroPump,#水炮
