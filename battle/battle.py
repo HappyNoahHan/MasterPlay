@@ -47,10 +47,10 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
                 obj_skill.eatBerry(obj_attack,obj_defense)
 
             if obj_skill.self_effect:#自身附加状态
-                obj_skill.selfSideEffect(obj_attack)
+                obj_skill.selfSideEffect(obj_attack,obj_defense,damage)
 
         else:
-            damage = obj_skill.getDamage(obj_attack.level)
+            damage = obj_skill.getDamage(obj_attack,obj_defense)
 
         if damage > 0:
             obj_defense.health -= damage
@@ -415,7 +415,7 @@ def battleRun(player,obj1,obj2,place):
                 return True
         #多段
         else:
-            counts = rancom.getStepOfSkill()
+            counts = obj1.skill_list[skill_number].getStepOfSkill()
             for count in range(counts):
                 print("第 %s 次 攻击 " % (count+1))
                 print("=" * 30)

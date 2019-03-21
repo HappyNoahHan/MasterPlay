@@ -80,6 +80,8 @@ skill_dict = {
     'N050': battle.skill.FakeOut,#击掌奇袭
     'N051': battle.skill.Safeguard,#神秘守护
     'N052': battle.skill.Captivate,#诱惑
+    'N053': battle.skill.Endeavor,#蛮干
+    'N054': battle.skill.Rage,#愤怒  后续先这样
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -130,6 +132,9 @@ skill_dict = {
     'C006': battle.skill.SilverWind,#银色旋风
     'C007': battle.skill.BugBuzz,#虫鸣
     'C008': battle.skill.QuiverDance,#蝶舞
+    'C009': battle.skill.Twineedle,#双针
+    'C010': battle.skill.PinMissile,#飞弹针
+    'C011': battle.skill.FellStinger,#致命针刺
     'D001': battle.skill.WaterJump,
     'D002': battle.skill.Bubble,#泡沫
     'D003': battle.skill.HydroPump,#水炮

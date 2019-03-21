@@ -17,6 +17,8 @@ evolve_dict={
     '卡咪龟': [water.Blastoise,36,'level_up'],
     '绿毛虫': [insect.Metapod,7,'level_up'],
     '铁甲蛹': [insect.Butterfree,10,'level_up'],
+    '独角虫': [insect.Kakuna,7,'level_up'],
+    '铁壳蛹': [insect.Beedrill,10,'level_up'],
     '小拳石': [rock.Graveler,25,'level_up'],
     '隆隆石': [rock.Golem,'岩之心','stone_up'],
     '超音蝠': [poison.Golbat,22,'level_up'],

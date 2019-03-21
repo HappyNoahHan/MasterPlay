@@ -53,3 +53,59 @@ class Butterfree(Caterpie):
     capture_rate = 45
     # 精灵编号
     pet_no = '012'
+
+
+class Weedle(propets.PropInit):
+    health_basic = 40
+    attack_basic = 35
+    defense_basic = 30
+    spell_power_basic = 20
+    spell_defense_basic = 20
+    speed_basic = 50
+
+    name = '独角虫'
+    kind = '毛毛虫'
+    basic_exp_value = 39
+
+    can_get_base_point = 1
+    can_get_base_point_type = 'speed'
+    capture_rate = 255
+    # 精灵编号
+    pet_no = '013'
+    prop = ['insect','poison']
+
+class Kakuna(Weedle):
+    health_basic = 45
+    attack_basic = 25
+    defense_basic = 50
+    spell_power_basic = 25
+    spell_defense_basic = 25
+    speed_basic = 35
+
+    name = '铁壳蛹'
+    kind = '蛹'
+    basic_exp_value = 72
+
+    can_get_base_point = 2
+    can_get_base_point_type = 'defense'
+    capture_rate = 120
+    # 精灵编号
+    pet_no = '014'
+
+class Beedrill(Weedle):
+    health_basic = 65
+    attack_basic = 90
+    defense_basic = 40
+    spell_power_basic = 45
+    spell_defense_basic = 80
+    speed_basic = 75
+
+    name = '大针蜂'
+    kind = '毒蜂'
+    basic_exp_value = 178
+
+    can_get_base_point = 3
+    can_get_base_point_type = 'attack'
+    capture_rate = 45
+    # 精灵编号
+    pet_no = '015'

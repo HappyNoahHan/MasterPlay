@@ -139,15 +139,28 @@ class damageSkill(skill):
     def getSideEffect(self,obj,damage):
         return True
 
-    def selfSideEffect(self,obj):
+    def selfSideEffect(self,obj_attack,obj_defense,damage):
         if rancom.statusRandom(self.self_effect[2]):
             for status in self.self_effect[0]:
-                obj.setStatus(status,self.self_effect[1])
+                obj_attack.setStatus(status,self.self_effect[1])
 
     def cleanStatus(self,obj):
         for status in self.clean_status:
             if status in obj.status:
                 obj.removeStatus(status)
+
+    # 多段技能触发几段
+    def getStepOfSkill(self):
+        num = random.randint(1, 100)
+
+        if num < 34:
+            return 2
+        elif 33 < num < 67:
+            return 3
+        elif 66 < num < 84:
+            return 4
+        else:
+            return 5
 
 class MultipleDamageSkill(damageSkill):
     def addStatus(self,obj,place):
@@ -893,7 +906,7 @@ class SonicBoom(damageSkill):
     hit_rate = 90
     skill_info = '将冲击波撞向对手进行攻击,必定会给予２０的伤害'
 
-    def getDamage(self):
+    def getDamage(self,obj_attack,obj_defense):
         return  20
 
 class Lockon(statusSkill):
@@ -1022,6 +1035,27 @@ class Captivate(statusSkill):
     show_name = '诱惑'
     skill_code = 'N052'
     skill_info = '♂诱惑♀或♀诱惑♂,从而大幅降低对手的特攻'
+
+class Endeavor(damageSkill):
+    def __init__(self):
+        super(Endeavor, self).__init__(pp=5,fixed_damage=True,spell_skill=False)
+    show_name = '蛮干'
+    skill_code = 'N053'
+    skill_info = '给予伤害,使对手的ＨＰ变得和自己的ＨＰ一样'
+
+    def getDamage(self,obj_attack,obj_defense):
+        if obj_attack.health >= obj_defense.health:
+            return 0
+        else:
+            return obj_defense.health - obj_attack.health
+
+class Rage(damageSkill):
+    def __init__(self):
+        super(Rage, self).__init__(pp=20,spell_skill=False)
+    show_name = '愤怒'
+    skill_code = 'N054'
+    skill_power = 20
+    skill_info = '如果在使出招式后受到攻击的话,会因愤怒的力量而提高攻击'
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -1379,8 +1413,8 @@ class Psywave(damageSkill):
     skill_info = '向对手发射神奇的念波进行攻击,每次使用,伤害都会改变'
     property = 'psychic'
 
-    def getDamage(self,level):
-        return round(level * random.randint(5,15) / 10 )
+    def getDamage(self,obj_attack,obj_defense):
+        return round(obj_attack.level * random.randint(5,15) / 10 )
 
 class Psychic(damageSkill):
     def __init__(self):
@@ -1591,6 +1625,45 @@ class QuiverDance(GainStatusUpSkill):
     hit_rate = 0
     property = 'insect'
     skill_info = '轻巧地跳起神秘而又美丽的舞蹈,提高自己的特攻,特防和速度'
+
+class Twineedle(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,hit_status='ST007',addition_status_rate=20,spell_skill=False)
+    show_name = '双针'
+    skill_code = 'C009'
+    property = 'insect'
+    skill_power = 25
+    skill_info = '将２根针刺入对手,连续２次给予伤害,有时会让对手陷入中毒状态'
+    multi_step = True
+
+    def getStepOfSkill(self):
+        return 2
+
+class PinMissile(damageSkill):
+    def __init__(self):
+        super(PinMissile, self).__init__(pp=20,spell_skill=False)
+    show_name = '飞弹针'
+    skill_code = 'C010'
+    property = 'insect'
+    skill_power = 25
+    hit_rate = 95
+    multi_step = True
+    skill_info = '向对手发射锐针进行攻击,连续攻击２～５次'
+
+class FellStinger(damageSkill):
+    def __init__(self):
+        super().__init__(pp=25,spell_skill=False,self_effect=('ST016',3,100))
+    show_name = '致命针刺'
+    skill_power = 50
+    property = 'insect'
+    skill_code = 'C011'
+    skill_info = '如果使用此招式打倒对手,攻击会巨幅提高'
+
+    def selfSideEffect(self,obj_attack,obj_defense,damage):
+        if obj_defense.health - damage <= 0:
+            if rancom.statusRandom(self.self_effect[2]):
+                obj_attack.setStatus(self.self_effect[0], self.self_effect[1])
+
 
 class Haze(removeStatusSkill):
     def __init__(self):
@@ -2286,7 +2359,7 @@ class DragonRage(damageSkill):
     property = 'dragon'
     skill_info = '将愤怒的冲击波撞向对手进行攻击,必定会给予４０的伤害'
 
-    def getDamage(self):
+    def getDamage(self,obj_attack,obj_defense):
         return 40
 
 class DragonClaw(damageSkill):
