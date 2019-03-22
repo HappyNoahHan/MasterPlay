@@ -82,6 +82,10 @@ skill_dict = {
     'N052': battle.skill.Captivate,#诱惑
     'N053': battle.skill.Endeavor,#蛮干
     'N054': battle.skill.Rage,#愤怒  后续先这样
+    'N055': battle.skill.HyperFang,#必杀门牙
+    'N056': battle.skill.SuckerPunch,#突袭
+    'N057': battle.skill.SuperFang,#愤怒门牙
+    'N058': battle.skill.SwordsDance,#剑舞
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,

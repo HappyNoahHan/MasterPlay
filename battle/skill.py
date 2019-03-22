@@ -66,6 +66,7 @@ class skill(object):
     show_name = None
     skill_code = '0000'
     lock = False
+    priority = 5 #释放优先度
 
 
 
@@ -1056,6 +1057,43 @@ class Rage(damageSkill):
     skill_code = 'N054'
     skill_power = 20
     skill_info = '如果在使出招式后受到攻击的话,会因愤怒的力量而提高攻击'
+
+class HyperFang(damageSkill):
+    def __init__(self):
+        super(HyperFang, self).__init__(pp=15,hit_status='ST004',addition_status_rate=20,spell_skill=False)
+    show_name = '必杀门牙'
+    skill_code = 'N055'
+    skill_power = 80
+    hit_rate = 90
+    skill_info = '用锋利的门牙牢牢地咬住对手进行攻击,有时会使对手畏缩'
+
+class SuckerPunch(damageSkill):
+    def __init__(self):
+        super(SuckerPunch, self).__init__(pp=5,spell_skill=False)
+    show_name = '突袭'
+    skill_code = 'N056'
+    skill_power = 70
+    skill_info = '可以比对手先攻击'
+    property = 1
+
+class SuperFang(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,spell_skill=False,fixed_damage=True)
+    show_name = '愤怒门牙'
+    skill_code = 'N057'
+    hit_rate = 90
+    skill_info = '用锋利的门牙猛烈地咬住对手进行攻击,对手的ＨＰ减半'
+
+    def getDamage(self,obj_attack,obj_defense):
+        return round(obj_defense.health / 2)
+
+class SwordsDance(GainStatusUpSkill):
+    def __init__(self):
+        super(SwordsDance, self).__init__(pp=20,status=['ST016'],turns=2)
+    show_name = '剑舞'
+    skill_code = 'N058'
+    hit_rate = 0
+    skill_info = '激烈地跳起战舞提高气势,大幅提高自己的攻击'
 
 class steadiness(buffSkill):
     show_name = '稳固'
