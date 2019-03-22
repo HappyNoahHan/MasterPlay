@@ -41,7 +41,7 @@ ready 睡眠粉 毒buff
 #pp_value    技能次数（pp值）
 #index_per   buff debuff 伤害
 #skill_power 技能威力
-#hit_rate    命中  100 = 100% 命中
+#hit_rate    命中  0 = 100% 命中
 '''
 
 from assist import  rancom,petattr
@@ -1094,6 +1094,31 @@ class SwordsDance(GainStatusUpSkill):
     skill_code = 'N058'
     hit_rate = 0
     skill_info = '激烈地跳起战舞提高气势,大幅提高自己的攻击'
+
+class PlayNice(statusSkill):
+    def __init__(self):
+        super(PlayNice, self).__init__(pp=20,status='ST021')
+    show_name = '和睦相处'
+    skill_code = 'N059'
+    hit_rate = 0
+    skill_info = '和对手和睦相处,使其失去战斗的气力,从而降低对手的攻击'
+
+class Feint(damageSkill):
+    def __init__(self):
+        super(Feint, self).__init__(pp=20,spell_skill=False)
+    show_name = '佯攻'
+    skill_code = 'N060'
+    skill_power = 30
+    priority = 2
+    skill_info = '能够攻击正在使用守住或看穿等招式的对手,解除其守护效果'#后续
+
+class DoubleTeam(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(pp=15,status=['ST027'])
+    show_name = '影子分身'
+    skill_code = 'N061'
+    skill_info = '通过快速移动来制造分身,扰乱对手,从而提高闪避率'
+    hit_rate = 0
 
 class steadiness(buffSkill):
     show_name = '稳固'
@@ -2360,6 +2385,46 @@ class ElectricTerrain(PlaceStatusSkill):
     hit_rate = 0
     skill_info = '在５回合内变成电气场地,地面上的宝可梦将无法入眠,电属性的招式威力还会提高'
 
+class Nuzzle(damageSkill):
+    def __init__(self):
+        super(Nuzzle, self).__init__(pp=20,hit_status='ST002',addition_status_rate=100,spell_skill=False)
+    show_name = '蹭蹭脸颊'
+    skill_power = 20
+    property = 'electric'
+    skill_code = 'H010'
+    skill_info = '将带电的脸颊蹭蹭对手进行攻击,让对手陷入麻痹状态'
+
+class Thunderbolt(damageSkill):
+    def __init__(self):
+        super(Thunderbolt, self).__init__(pp=15,hit_status='ST002',addition_status_rate=10)
+    show_name = '十万伏特'
+    skill_power = 90
+    property = 'electric'
+    skill_code = 'H011'
+    skill_info = '向对手发出强力电击进行攻击,有时会让对手陷入麻痹状态'
+
+class WildCharge(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,side_effect=True,spell_skill=False)
+    show_name = '疯狂伏特'
+    skill_power = 90
+    skill_code = 'H012'
+    property = 'electric'
+    skill_info = '让电流覆盖全身撞向对手进行攻击,自己也会受到少许伤害'
+
+    def getSideEffect(self,obj,damage):
+        obj.health -= round(damage / 4)
+        print("%s 受到了 %s 反弹伤害" % (obj.name, round(damage / 3)))
+
+class Thunder(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,hit_status='ST002',addition_status_rate=30)
+    show_name = '打雷'
+    skill_power = 110
+    skill_code = 'H013'
+    hit_rate = 70
+    property = 'electric'
+    skill_info = '向对手劈下暴雷进行攻击,有时会让对手陷入麻痹状'
 
 class Twister(damageSkill):
     def __init__(self):

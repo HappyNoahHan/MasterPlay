@@ -86,6 +86,9 @@ skill_dict = {
     'N056': battle.skill.SuckerPunch,#突袭
     'N057': battle.skill.SuperFang,#愤怒门牙
     'N058': battle.skill.SwordsDance,#剑舞
+    'N059': battle.skill.PlayNice,#和睦相处
+    'N060': battle.skill.Feint,#佯攻
+    'N061': battle.skill.DoubleTeam,#影子分身
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -203,6 +206,10 @@ skill_dict = {
     'H007': battle.skill.MagnetRise,#电磁飘浮
     'H008': battle.skill.ZapCannon,#电磁炮
     'H009': battle.skill.ElectricTerrain,#电气场地
+    'H010': battle.skill.Nuzzle,#蹭蹭脸颊
+    'H011': battle.skill.Thunderbolt,#十万伏特
+    'H012': battle.skill.WildCharge,#疯狂伏特
+    'H013': battle.skill.Thunder,#打雷
     'G001': battle.skill.Twister,#龙卷风
     'G002': battle.skill.DragonPulse,#龙之波动
     'G003': battle.skill.DragonDance,#龙之舞
