@@ -1,5 +1,6 @@
 import battle.skilllistmap
 from pets import  statusmap,talentmap
+from assist import weathermap
 from props import propmap
 
 def printTurn(name):
@@ -116,5 +117,5 @@ def showPlaceMessage(place):
         print("场地： %s %s回合" % (statusmap.status_dict[place.place_status[0]].status_show_name,
               place.place_status[1]),end=' ')
     if place.weather:
-        print("天气： %s" % place.weather.name)
+        print("天气： %s" % weathermap.weather_dict[place.weather].name)
 

@@ -25,6 +25,9 @@ class WildForm(placebase.Place):
     def setPlaceStatus(self,key,value):
         self.place_status = [key,value]
 
+    def setPlaceWeather(self,value):
+        self.weather = value
+
     def showMap(self,player):
         if player.map_run_list[-1] != self:
             player.map_run_list.append(self)

@@ -15,7 +15,7 @@
 '''
 
 from battle import buff,skill,skilllistmap
-from assist import petattr,ppvalue,show
+from assist import petattr,ppvalue,show,weathermap
 from pets import talentmap,pettalent,statusmap,status
 from props import propmap
 import random
@@ -108,6 +108,11 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index,power,place):
                 print("技能威力翻倍")
     except AttributeError:
         pass
+
+    #检查天气对pet的加成
+    if place.weather != None:
+        weathermap.weather_dict[place.weather].propUpOrDown(obj_attack)
+        weathermap.weather_dict[place.weather].propUpOrDown(obj_defense)
 
     attack = obj_attack.getAttack()
     defense = obj_defense.getDefense()

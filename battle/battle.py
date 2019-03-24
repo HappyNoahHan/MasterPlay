@@ -206,7 +206,10 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
         assist.show.showPetErrorStatus(obj_defense)
 
     elif obj_skill.skill_model == '0017':
-        place.setPlaceStatus(obj_skill.status,obj_skill.turns)
+        if not obj_skill.weather_change:
+            place.setPlaceStatus(obj_skill.status,obj_skill.turns)
+        else:
+            place.setPlaceWeather(obj_skill.weather)
 
     elif obj_skill.skill_model == '0019':
         obj_skill.addStatus(obj_defense)
@@ -390,7 +393,7 @@ def battleRun(player,obj1,obj2,place):
 
                 asscount.checkBuffAfterBattle(obj1)
                 # 回合结束检查是否中毒  中毒死亡
-                if not statusmap.checkStatusAfterTurn(obj1,place):
+                if not statusmap.checkStatusAfterTurn(obj1,place,hit_or_not=False):
                     assist.show.petDie(obj1)
                     assist.show.battleOver()
                     return True

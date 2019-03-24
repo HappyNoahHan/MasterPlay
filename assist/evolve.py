@@ -3,7 +3,7 @@
     继承  技能列表  已领悟技能
 '''
 
-from pets import fire,rock,poison,skilltree,fly,wood,water,electric,insect,normal
+from pets import fire,rock,poison,skilltree,fly,wood,water,electric,insect,normal,ground
 from assist import  show
 from battle import learnskill
 import time
@@ -25,6 +25,7 @@ evolve_dict={
     '烈雀': [fly.Fearow, 20, 'level_up'],
     '阿柏蛇': [poison.Arbok, 22, 'level_up'],
     '皮卡丘': [electric.Raichu,'雷之闪','stone_up'],
+    '穿山鼠': [ground.Sandslash,22,'level_up'],
     '小拳石': [rock.Graveler,25,'level_up'],
     '隆隆石': [rock.Golem,'岩之心','stone_up'],
     '超音蝠': [poison.Golbat,22,'level_up'],

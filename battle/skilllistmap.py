@@ -89,6 +89,8 @@ skill_dict = {
     'N059': battle.skill.PlayNice,#和睦相处
     'N060': battle.skill.Feint,#佯攻
     'N061': battle.skill.DoubleTeam,#影子分身
+    'N062': battle.skill.FurySwipes,#乱抓
+    'N063': battle.skill.CrushClaw,#撕裂爪
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -142,6 +144,7 @@ skill_dict = {
     'C009': battle.skill.Twineedle,#双针
     'C010': battle.skill.PinMissile,#飞弹针
     'C011': battle.skill.FellStinger,#致命针刺
+    'C012': battle.skill.FuryCutter,#连斩
     'D001': battle.skill.WaterJump,
     'D002': battle.skill.Bubble,#泡沫
     'D003': battle.skill.HydroPump,#水炮
@@ -166,6 +169,7 @@ skill_dict = {
     'R007': battle.skill.StoneEdge,#尖石攻击
     'R008': battle.skill.RockBlast,#岩石爆击
     'R009': battle.skill.StealthRock,#隐形岩   交换类节能改为容易受伤
+    'R010': battle.skill.Sandstorm,#沙暴
     'E001': battle.skill.Earthquake,#地震
     'E002': battle.skill.MudBomb,#泥巴炸弹
     'E003': battle.skill.SandAttack,#泼沙
@@ -174,6 +178,8 @@ skill_dict = {
     'E006': battle.skill.MudSport,#玩泥巴
     'E007': battle.skill.Magnitude,#震级
     'E008': battle.skill.Bulldoze,#重踏
+    'E009': battle.skill.SandTomb,#流沙地狱
+    'E010': battle.skill.Dig,#挖洞
     'Q001': battle.skill.ConfuseRay, #奇异之光
     'Q002': battle.skill.Astonish, #惊吓
     'Q003': battle.skill.Hex,#祸不单行

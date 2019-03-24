@@ -1,5 +1,5 @@
 from pets import status
-from assist import rancom,life
+from assist import rancom,life,weathermap
 
 import time
 '''
@@ -80,6 +80,8 @@ status_dict={
     'ST112' : status.WorrySeed(),
     'ST113' : status.SkullBash(),
     'ST114' : status.Safeguard(),
+    'ST115' : status.FuryCutter(),
+    'ST116' : status.Dig(),
 }
 
 #清理清单
@@ -179,7 +181,7 @@ def checkStatusBeforeBattle(obj,skill):
         print("%s 没有处于任何状态！" % obj.name)
     return False
 
-def checkStatusAfterTurn(obj,place):
+def checkStatusAfterTurn(obj,place,hit_or_not = True): #默认技能命中
     '''
     检查回合结束 中毒 灼伤 伤害
     水流环 等回复HP 状态
@@ -261,6 +263,23 @@ def checkStatusAfterTurn(obj,place):
         if place.place_status[1] == 0:
             place.place_status = None
 
+    if 'ST115' in obj.status:
+        if obj.last_used_skill.skill_code != 'C012':
+            removeStatus(obj,'ST115')
+        if not hit_or_not:
+            removeStatus(obj, 'ST115')
+
+    #检查天气情况
+    if place.weather != None:
+        weathermap.weather_dict[place.weather].weatherEffect(obj)
+        if obj.health < 0:
+            return False
+
+        weathermap.weather_dict[place.weather].turns -= 1
+        if weathermap.weather_dict[place.weather].turns == 0:
+            weathermap.weather_dict[place.weather].turns = weathermap.weather_dict[place.weather]._max_turns
+            print("%s 天气结束～～" % weathermap.weather_dict[place.weather].name)
+            place.weather = None
 
     return True
 
@@ -523,6 +542,9 @@ def checkDelayStatus(obj_attack):
         return 3
 
     elif 'ST113' in obj_attack.status:
+        return 3
+
+    elif 'ST116' in obj_attack.status:
         return 3
 
     elif 'ST108' in obj_attack.status:

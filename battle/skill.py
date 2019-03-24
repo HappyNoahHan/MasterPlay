@@ -44,7 +44,7 @@ ready 睡眠粉 毒buff
 #hit_rate    命中  0 = 100% 命中
 '''
 
-from assist import  rancom,petattr
+from assist import  rancom,petattr,weathermap
 from pets import statusmap,talentmap
 from props import berrymap
 import random
@@ -252,7 +252,7 @@ class GainStatusUpSkill(skill):
 
     def doubleEffect(self,weather):
         if self.weather_condition != None and weather != None:
-            if weather.code in self.weather_condition:
+            if weather in self.weather_condition:
                 return True
         return False
 
@@ -424,11 +424,13 @@ class BerryEffectSkill(skill):
         self.lucky_level = lucky_level
 
 class PlaceStatusSkill(skill):
-    def __init__(self,pp=30,status=None,turns=5):
+    def __init__(self,pp=30,status=None,turns=5,weather_change=False,weather=None):
         super().__init__(pp)
         self.skill_model = '0017'
         self.status = status
         self.turns = turns
+        self.weather_change = weather_change
+        self.weather = weather
 
 class OneHitKillSkill(skill):
     def __init__(self,pp=30,spell_skill=True):
@@ -1120,6 +1122,25 @@ class DoubleTeam(GainStatusUpSkill):
     skill_info = '通过快速移动来制造分身,扰乱对手,从而提高闪避率'
     hit_rate = 0
 
+class FurySwipes(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,spell_skill=False)
+    show_name = '乱抓'
+    skill_code = 'N062'
+    skill_power = 18
+    hit_rate = 80
+    skill_info = '用爪子或镰刀等抓对手进行攻击,连续攻击２～５次'
+    multi_step = True
+
+class CrushClaw(damageSkill):
+    def __init__(self):
+        super(CrushClaw, self).__init__(pp=10,hit_status='ST009',addition_status_rate=50,spell_skill=False)
+    show_name = '撕裂爪'
+    skill_code = 'N063'
+    skill_power = 75
+    hit_rate = 95
+    skill_info = '用坚硬的锐爪劈开对手进行攻击,有时会降低对手的防御'
+
 class steadiness(buffSkill):
     show_name = '稳固'
     skill_code = 'N099'
@@ -1426,11 +1447,11 @@ class Synthesis(lifeRecoreSkill):
     skill_info = '回复自己的ＨＰ,根据天气的不同,回复量也会有所变化'
 
     def getIndexPer(self,weather):
-        if weather.code in ['W001','W002']:
+        if weather in ['W001','W002']:
             return 0.66
-        if weather.code in ['W003']:
+        if weather in ['W003']:
             return 0.5
-        if weather.code in ['W004','W005','W006','W007','W008']:
+        if weather in ['W004','W005','W006','W007','W008']:
             return 0.25
 
 class SeedBomb(damageSkill):
@@ -1727,6 +1748,30 @@ class FellStinger(damageSkill):
             if rancom.statusRandom(self.self_effect[2]):
                 obj_attack.setStatus(self.self_effect[0], self.self_effect[1])
 
+class FuryCutter(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,side_effect=True,spell_skill=False,power_changed=True)
+    show_name = '连斩'
+    skill_power = 40
+    property = 'insect'
+    skill_code = 'C012'
+    skill_info = '用镰刀或爪子等切斩对手进行攻击,连续击中,威力就会提高'
+    hit_rate = 95
+
+    def getPower(self,obj_attack,obj_defense):
+        if 'ST115' in obj_attack.status:
+            power = self.skill_power + self.skill_power * obj_attack.status['ST115']
+            if power > 160:
+                power = 160
+            return power
+        else:
+            return self.skill_power
+
+    def getSideEffect(self,obj,damage):
+        if 'ST115' not in obj.status:
+            obj.setStatus('ST115')
+        else:
+            obj.status['ST115'] += 1
 
 class Haze(removeStatusSkill):
     def __init__(self):
@@ -1985,6 +2030,15 @@ class StealthRock(statusSkill):
     skill_info = '将无数岩石悬浮在对手的周围,易受伤'
     property = 'rock'
 
+class Sandstorm(PlaceStatusSkill):
+    def __init__(self):
+        super().__init__(pp=10,weather='W004',weather_change=True)
+    show_name = '沙暴'
+    hit_rate = 0
+    skill_code = 'R010'
+    property = 'rock'
+    skill_info = '在５回合内扬起沙暴'
+
 class Earthquake(damageSkill):
     def __init__(self):
         super().__init__(10,spell_skill=False)
@@ -2063,6 +2117,24 @@ class Bulldoze(damageSkill):
     property = 'ground'
     skill_info = '用力踩踏地面并攻击自己周围所有的宝可梦,降低对方的速度'
 
+class SandTomb(damageSkill):
+    def __init__(self):
+        super(SandTomb, self).__init__(pp=15,spell_skill=False,hit_status='ST010',addition_status_rate=100)
+    show_name = '流沙地狱'
+    skill_code = 'E009'
+    skill_power = 35
+    hit_rate = 85
+    property = 'ground'
+    skill_info = '将对手困在铺天盖地的沙暴中,在４～５回合内进行攻击'
+
+class Dig(DelayedSkill):
+    def __init__(self):
+        super(Dig, self).__init__(pp=10,spell_skill=True,add_status_begin='ST116')
+    show_name = '挖洞'
+    skill_power = 80
+    skill_code = 'E010'
+    property = 'ground'
+    skill_info = '第１回合钻入,第２回合攻击对手'
 
 class ConfuseRay(statusSkill):
     def __init__(self):
@@ -2484,11 +2556,11 @@ class Moonlight(lifeRecoreSkill):
     skill_info = '月光恢复使用者的ＨＰ值。恢复量由当前天气决定'
 
     def getIndexPer(self,weather):
-        if weather.code in ['W001','W002']:
+        if weather in ['W001','W002']:
             return 0.66
-        if weather.code in ['W003']:
+        if weather in ['W003']:
             return 0.5
-        if weather.code in ['W004','W005','W006','W007','W008']:
+        if weather in ['W004','W005','W006','W007','W008']:
             return 0.25
 
 class Moonblast(damageSkill):

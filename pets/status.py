@@ -347,3 +347,13 @@ class Safeguard(Status):
     status_show_name = '神秘守护'
     status_info = '在５回合内,不会陷入异常状态'
     status_code = 'ST114'
+
+class FuryCutter(Status):
+    status_show_name = '连斩'
+    status_info = '连斩效果'
+    status_code = 'ST115'
+
+class Dig(Status):
+    status_show_name = '挖洞'
+    status_info = '第１回合钻入,第２回合攻击对手'
+    status_code = 'ST116'

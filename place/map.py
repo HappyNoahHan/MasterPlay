@@ -40,7 +40,7 @@ village_map_for_start={
                                     maplist=dict(map_basic,**grassfrom_map_for_no_1),
                                  wild_pet_list=wildpetlist.wild_pet_list_in_grass_no_1,
                                  treasure_box_list=treasure.treasure_box_for_maelstrom_no_1,
-                                    weather=weathermap.weather_dict['W001'],
+                                    weather='W001',
                                  npc_list = npcmap.trainer_in_grass_no_1),True],
 }
 
