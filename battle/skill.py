@@ -81,7 +81,8 @@ class damageSkill(skill):
     def __init__(self,pp=30,hit_status=None,addition_status = None,
                  addition_status_rate = 5,spell_skill=True,lucky_level=1,
                  turns=1,power_changed=False,side_effect=False,self_effect=None,
-                 clean_status=None,fixed_damage=False,berry_effect=False):
+                 clean_status=None,fixed_damage=False,berry_effect=False,
+                 remove_status=None):
         '''
         :param pp: pp value
         :param hit_status: 附加状态
@@ -95,6 +96,7 @@ class damageSkill(skill):
         :param fixed_damage: 固定伤害值技能
         :param berry_effect: 树果效果
         :param self_effect: 自生属性提升 默认None  数据形式([status], turns, per)
+        :param remove_status: 移除对方的状态
         '''
         super().__init__(pp)
         self.skill_model = '0001'
@@ -110,6 +112,7 @@ class damageSkill(skill):
         self.fixed_damage = fixed_damage
         self.berry_effect = berry_effect
         self.self_effect = self_effect
+        self.remove_status = remove_status
 
 
     def addStatus(self,obj,place):
@@ -147,6 +150,11 @@ class damageSkill(skill):
 
     def cleanStatus(self,obj):
         for status in self.clean_status:
+            if status in obj.status:
+                obj.removeStatus(status)
+
+    def removeStatus(self,obj):
+        for status in self.remove_status:
             if status in obj.status:
                 obj.removeStatus(status)
 
@@ -1157,6 +1165,33 @@ class BodySlam(damageSkill):
     skill_power = 85
     skill_info = '用整个身体压住对手进行攻击,有时会让对手陷入麻痹状态'
 
+class Thrash(DelayedSkill):
+    def __init__(self):
+        super(Thrash, self).__init__(pp=10,spell_skill=False,add_status_begin='ST117',
+                                     add_status_end='ST006',delay_effect=False)
+    show_name = '大闹一番'
+    skill_code = 'N066'
+    skill_power = 120
+    skill_info = '在２～３回合内,乱打一气地攻击对手,大闹一番后自己会陷入混乱'
+
+class DoubleSlap(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,spell_skill=False)
+    show_name = '连环巴掌'
+    skill_code = 'N067'
+    skill_power = 15
+    hit_rate = 85
+    multi_step = True
+    skill_info = '用连环巴掌拍打对手进行攻击,连续攻击２～５次'
+
+class Sing(statusSkill):
+    def __init__(self):
+        super().__init__(pp=15,status='ST003')
+    show_name = '唱歌'
+    skill_code = 'N068'
+    hit_rate = 55
+    skill_info = '让对手听舒适,美妙的歌声,从而陷入睡眠状态'
+
 class steadiness(buffSkill):
     show_name = '稳固'
     skill_code = 'N099'
@@ -1560,6 +1595,24 @@ class Psybeam(damageSkill):
     skill_power = 65
     property = 'psychic'
     skill_info = '向对手发射神奇的光线进行攻击,有时会使对手混乱'
+
+class StoredPower(damageSkill):
+    def __init__(self):
+        super(StoredPower, self).__init__(pp=10,power_changed=True)
+    show_name = '辅助力量'
+    skill_code = 'S010'
+    skill_power = 20
+    property = 'psychic'
+    skill_info = '用蓄积起来的力量攻击对手,自己的能力提高得越多,威力就越大'
+
+    def getPower(self,obj_attack,obj_defense):
+        sum = 1
+        for status in ['ST016','ST017','ST018','ST019','ST020']:
+            if status in obj_attack.status:
+                sum += obj_attack.status[status]
+
+        return self.skill_power * sum
+
 
 class disperse(removeBuffSkill):
     def __init__(self,pp=20):
@@ -2605,6 +2658,16 @@ class Moonblast(damageSkill):
     property = 'fairy'
     skill_info = '攻击目标造成伤害,30%几率令目标的特攻降低1级'
     skill_power = 95
+    
+class DisarmingVoice(damageSkill):
+    def __init__(self):
+        super(DisarmingVoice, self).__init__(pp=15)
+    show_name = '魅惑之声'
+    skill_power = 40
+    property = 'fairy'
+    skill_code = 'Y003'
+    skill_info = '发出魅惑的叫声,给予对手精神上的伤害,攻击必定会命中'
+    hit_rate = 0
 
 class GyroBall(damageSkill):
     def __init__(self):
@@ -2667,7 +2730,17 @@ class IronDefense(GainStatusUpSkill):
     show_name = '铁壁'
     skill_code = 'X006'
     skill_info = '将皮肤变得坚硬如铁,从而大幅提高自己的防御'
-    property = 'X006'
+    property = 'steel'
+
+class MeteorMash(damageSkill):
+    def __init__(self):
+        super(MeteorMash, self).__init__(pp=10,self_effect=(['ST016'],1,20),spell_skill=False)
+    show_name = '彗星拳'
+    skill_power = 90
+    hit_rate = 90
+    skill_code = 'X007'
+    property = 'steel'
+    skill_info = '使出彗星般的拳头攻击对手,有时会提高自己的攻击'
 
 class DoubleKick(damageSkill):
     def __init__(self):
@@ -2696,3 +2769,12 @@ class Superpower(damageSkill):
             obj.setStatus('ST021')
         if 'ST009' not in obj.status:
             obj.setStatus('ST009')
+
+class WakeUpSlap(damageSkill):
+    def __init__(self):
+        super().__init__(pp=10,spell_skill=False,remove_status=['ST003'],addition_status='ST003')
+    show_name = '唤醒巴掌'
+    skill_code = 'Z003'
+    property = 'combat'
+    skill_power = 70
+    skill_info = '给予睡眠状态下的对手较大的伤害,但相反对手会从睡眠中醒过来'

@@ -49,6 +49,9 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
             if obj_skill.self_effect:#自身附加状态
                 obj_skill.selfSideEffect(obj_attack,obj_defense,damage)
 
+            if obj_skill.remove_status: #移除对方状态
+                obj_skill.removeStatus(obj_defense)
+
         else:
             damage = obj_skill.getDamage(obj_attack,obj_defense)
 

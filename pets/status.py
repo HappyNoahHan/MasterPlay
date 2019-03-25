@@ -357,3 +357,18 @@ class Dig(Status):
     status_show_name = '挖洞'
     status_info = '第１回合钻入,第２回合攻击对手'
     status_code = 'ST116'
+
+class Thrash(Status):
+    status_show_name = '大闹一番'
+    status_info = '在２～３回合内,乱打一气地攻击对手,大闹一番后自己会陷入混乱'
+    status_code = 'ST117'
+
+    def statusEffect(self,turns):
+        if turns == 1:
+            if rancom.statusRandom(50):
+                return True
+            return False
+        elif turns > 1:
+            return True
+        else:
+            return False

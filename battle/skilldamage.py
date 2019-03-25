@@ -103,7 +103,7 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index,power,place):
     #2.0 检查技能威力翻倍
     try:
         if skill.addition_status:
-            if skill.doublePowerOrNot(obj_attack,obj_defense):
+            if skill.doublePowerOrNot(obj_attack):
                 power *= 2
                 print("技能威力翻倍")
     except AttributeError:

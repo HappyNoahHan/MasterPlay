@@ -53,6 +53,63 @@ class Nidoqueen(Nidoran):
     capture_rate = 45
     # 精灵编号
     pet_no = '031'
+    prop = ['poison', 'ground']
+
+class NidoranX(propets.PropInit):
+    health_basic = 46
+    attack_basic = 57
+    defense_basic = 40
+    spell_power_basic = 40
+    spell_defense_basic = 40
+    speed_basic = 50
+
+    name = '尼多朗'
+    kind = '毒针'
+    basic_exp_value = 55
+
+    can_get_base_point = 1
+    can_get_base_point_type = 'attack'
+
+    capture_rate = 235
+    # 精灵编号
+    pet_no = '032'
+    prop = ['poison']
+
+class Nidorino(NidoranX):
+    health_basic = 61
+    attack_basic = 72
+    defense_basic = 57
+    spell_power_basic = 55
+    spell_defense_basic = 55
+    speed_basic = 65
+
+    name = '尼多力诺'
+    basic_exp_value = 128
+
+    can_get_base_point = 2
+
+    capture_rate = 120
+    # 精灵编号
+    pet_no = '033'
+
+class Nidoking(NidoranX):
+    health_basic = 81
+    attack_basic = 102
+    defense_basic = 77
+    spell_power_basic = 85
+    spell_defense_basic = 75
+    speed_basic = 85
+
+    name = '尼多王'
+    kind = '钻锥'
+    basic_exp_value = 227
+
+    can_get_base_point = 3
+
+    capture_rate = 45
+    # 精灵编号
+    pet_no = '034'
+    prop = ['poison','ground']
 
 class Ekans(propets.PropInit):
     health_basic = 35

@@ -93,6 +93,9 @@ skill_dict = {
     'N063': battle.skill.CrushClaw,#撕裂爪
     'N064': battle.skill.ChipAway,#逐步击破
     'N065': battle.skill.BodySlam,#泰山压顶
+    'N066': battle.skill.Thrash,#大闹一番
+    'N067': battle.skill.DoubleSlap,#连环巴掌
+    'N068': battle.skill.Sing,#唱歌
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -124,6 +127,7 @@ skill_dict = {
     'S007': battle.skill.CosmicPower,#宇宙力量
     'S008': battle.skill.Confusion,#念力
     'S009': battle.skill.Psybeam,#幻象光线
+    'S010': battle.skill.StoredPower,#辅助力量
     'I001': battle.skill.Haze, #黑雾
     'I002': battle.skill.IceFang,#冰冻牙
     'T001': battle.skill.disperse,
@@ -227,14 +231,17 @@ skill_dict = {
     'G005': battle.skill.DragonClaw,#龙爪
     'Y001': battle.skill.Moonlight,#月光
     'Y002': battle.skill.Moonblast,#月亮之力
+    'Y003': battle.skill.DisarmingVoice,#魅惑之声
     'X001': battle.skill.GyroBall,#陀螺球
     'X002': battle.skill.MagnetBomb,#磁铁炸弹
     'X003': battle.skill.MirrorShot,#镜光射击
     'X004': battle.skill.MetalSound,#金属音
     'X005': battle.skill.FlashCannon,#加农光炮
     'X006': battle.skill.IronDefense,#铁壁
+    'X007': battle.skill.MeteorMash,#彗星拳
     'Z001': battle.skill.DoubleKick,#二连踢
     'Z002': battle.skill.Superpower,#蛮力
+    'Z003': battle.skill.WakeUpSlap,#唤醒巴掌
 
 }
 

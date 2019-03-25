@@ -82,6 +82,7 @@ status_dict={
     'ST114' : status.Safeguard(),
     'ST115' : status.FuryCutter(),
     'ST116' : status.Dig(),
+    'ST117' : status.Thrash(),
 }
 
 #清理清单
@@ -366,6 +367,10 @@ def checkStatusEnd(player):
             removeStatus(pet,'ST113')
             pet.autoAi = False
 
+        if 'ST117' in pet.status:
+            removeStatus(pet,'ST117')
+            pet.autoAi = False
+
         if 'ST108' in pet.status:
             removeStatus(pet,'ST108')
             pet.autoAi = False
@@ -538,6 +543,13 @@ def checkDelayStatus(obj_attack):
             return 2
         else:
             obj_attack.status['ST102'] += 1
+            return 1
+    elif 'ST117' in obj_attack.status:
+        if status_dict['ST117'].statusEffect(obj_attack.status['ST117']):
+            #obj_attack.status['ST102'] += 1
+            return 2
+        else:
+            obj_attack.status['ST117'] += 1
             return 1
     elif 'ST103' in obj_attack.status:
         return 3
