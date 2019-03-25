@@ -1,6 +1,6 @@
 '''
 #skill_code 技能代号  A  火系  N 普通系 B 木系 C 虫系 D 水系 S 超能=光 I 冰 T 恶=黑暗 E 地面 F 飞行 G 龙
-                     R 岩石 P 毒 Q鬼魂 H 电     Y 妖精 fairy    X 钢 steel
+                     R 岩石 P 毒 Q鬼魂 H 电     Y 妖精 fairy    X 钢 steel   Z combat 格斗
 #skill_mode 技能类型   0001 伤害技能 0002 防御临时提升 003 debuff 技能
                      0004 施加状态技能  0005 移除状态技能
                      0008 生命恢复 0009 属性亲和，同属性技能伤害加成
@@ -1141,6 +1141,22 @@ class CrushClaw(damageSkill):
     hit_rate = 95
     skill_info = '用坚硬的锐爪劈开对手进行攻击,有时会降低对手的防御'
 
+class ChipAway(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,spell_skill=False)
+    show_name = '逐步击破'
+    skill_code = 'N064'
+    skill_power = 70
+    skill_info = '看准机会稳步攻击,无视对手的能力变化,直接给予伤害'
+
+class BodySlam(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,spell_skill=False,hit_status='ST002',addition_status_rate=30,addition_status='ST105')
+    show_name = '泰山压顶'
+    skill_code = 'N065'
+    skill_power = 85
+    skill_info = '用整个身体压住对手进行攻击,有时会让对手陷入麻痹状态'
+
 class steadiness(buffSkill):
     show_name = '稳固'
     skill_code = 'N099'
@@ -1630,6 +1646,14 @@ class Memento(MutlipleStatusSkill):
     def sideEffect(self,obj):
         obj.health = 0
         #obj.alive = False
+    
+class Flatter(MutlipleStatusSkill):
+    def __init__(self):
+        super(Flatter, self).__init__(pp=15,status=['ST006','ST018'])
+    show_name = '吹捧'
+    property = 'dark'
+    skill_code = 'T010'
+    skill_info = '吹捧对手,使其混乱,同时还会提高对手的特攻'
 
 class Megahorn(damageSkill):
     def __init__(self):
@@ -2136,6 +2160,15 @@ class Dig(DelayedSkill):
     property = 'ground'
     skill_info = '第１回合钻入,第２回合攻击对手'
 
+class EarthPower(damageSkill):
+    def __init__(self):
+        super(EarthPower, self).__init__(pp=10,hit_status='ST011',addition_status_rate=10)
+    show_name = '大地之力'
+    skill_power = 90
+    skill_code = 'E011'
+    property = 'ground'
+    skill_info = '向对手脚下释放出大地之力,有时会降低对手的特防'
+
 class ConfuseRay(statusSkill):
     def __init__(self):
         super().__init__(20,status = 'ST002')
@@ -2635,3 +2668,31 @@ class IronDefense(GainStatusUpSkill):
     skill_code = 'X006'
     skill_info = '将皮肤变得坚硬如铁,从而大幅提高自己的防御'
     property = 'X006'
+
+class DoubleKick(damageSkill):
+    def __init__(self):
+        super(DoubleKick, self).__init__(spell_skill=False)
+    show_name = '二连踢'
+    skill_code = 'Z001'
+    property = 'combat'
+    skill_power = 30
+    skill_info = '用２只脚踢飞对手进行攻击,连续２次给予伤害'
+    multi_step = True
+
+    def getStepOfSkill(self):
+        return 2
+
+class Superpower(damageSkill):
+    def __init__(self):
+        super(Superpower, self).__init__(pp=5,side_effect=True,spell_skill=False)
+    show_name = '蛮力'
+    skill_code = 'Z002'
+    property = 'combat'
+    skill_power = 120
+    skill_info = '发挥惊人的力量攻击对手,自己的攻击和防御会降低'
+
+    def getSideEffect(self,obj,damage):
+        if 'ST021' not in obj.status:
+            obj.setStatus('ST021')
+        if 'ST009' not in obj.status:
+            obj.setStatus('ST009')

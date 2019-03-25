@@ -1,4 +1,59 @@
 from pets import propets
+class Nidoran(propets.PropInit):
+    health_basic = 55
+    attack_basic = 47
+    defense_basic = 52
+    spell_power_basic = 40
+    spell_defense_basic = 40
+    speed_basic = 41
+
+    name = '尼多兰'
+    kind = '毒针'
+    basic_exp_value = 55
+
+    can_get_base_point = 1
+    can_get_base_point_type = 'health'
+
+    capture_rate = 235
+    # 精灵编号
+    pet_no = '029'
+    prop = ['poison']
+
+class Nidorina(Nidoran):
+    health_basic = 70
+    attack_basic = 62
+    defense_basic = 67
+    spell_power_basic = 55
+    spell_defense_basic = 55
+    speed_basic = 56
+
+    name = '尼多娜'
+    basic_exp_value = 128
+
+    can_get_base_point = 2
+
+    capture_rate = 120
+    # 精灵编号
+    pet_no = '030'
+
+class Nidoqueen(Nidoran):
+    health_basic = 90
+    attack_basic = 92
+    defense_basic = 87
+    spell_power_basic = 75
+    spell_defense_basic = 85
+    speed_basic = 76
+
+    name = '尼多后'
+    kind = '钻锥'
+    basic_exp_value = 227
+
+    can_get_base_point = 3
+
+    capture_rate = 45
+    # 精灵编号
+    pet_no = '031'
+
 class Ekans(propets.PropInit):
     health_basic = 35
     attack_basic = 60

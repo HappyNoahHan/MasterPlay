@@ -452,7 +452,7 @@ def checkPowerSave(obj,defense,spell_defense):
         return status_dict['ST012'].statusEffect(defense,spell_defense)
     return defense,spell_defense
 
-def checkPropBeforeBattle(obj_attack,obj_defense,attack,defense,spell_power,spell_defense,speed):
+def checkPropBeforeBattle(skill,obj_attack,obj_defense,attack,defense,spell_power,spell_defense,speed):
     if obj_attack.status:
         # 2.2 检查攻击提升
         attack = checkPropUpOrDown(obj_attack, attack, 'ST016')
@@ -468,15 +468,16 @@ def checkPropBeforeBattle(obj_attack,obj_defense,attack,defense,spell_power,spel
             speed = int(speed / 2)
 
     if obj_defense.status:
-        # 2.0检查是否破甲
-        defense = checkArmorBreakOrNot(obj_defense, defense)
-        # 2.0检查破防
-        spell_defense = checkGuardBreakOrNot(obj_defense, spell_defense)
-        # 2.2 检查防御提升 特防
-        defense = checkPropUpOrDown(obj_defense, defense, 'ST017')
-        spell_defense = checkPropUpOrDown(obj_defense,spell_defense,'ST019')
-        # 2.1 检查是否蓄力
-        defense,spell_defense = checkPowerSave(obj_defense,defense,spell_defense)
+        if skill.skill_code not in ['N064']:
+            # 2.0检查是否破甲
+            defense = checkArmorBreakOrNot(obj_defense, defense)
+            # 2.0检查破防
+            spell_defense = checkGuardBreakOrNot(obj_defense, spell_defense)
+            # 2.2 检查防御提升 特防
+            defense = checkPropUpOrDown(obj_defense, defense, 'ST017')
+            spell_defense = checkPropUpOrDown(obj_defense,spell_defense,'ST019')
+            # 2.1 检查是否蓄力
+            defense,spell_defense = checkPowerSave(obj_defense,defense,spell_defense)
 
 
 

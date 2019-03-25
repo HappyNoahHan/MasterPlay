@@ -26,6 +26,8 @@ evolve_dict={
     '阿柏蛇': [poison.Arbok, 22, 'level_up'],
     '皮卡丘': [electric.Raichu,'雷之闪','stone_up'],
     '穿山鼠': [ground.Sandslash,22,'level_up'],
+    '尼多兰': [poison.Nidorina,16,'level_up'],
+    '尼多娜': [poison.Nidoqueen,'月之露','stone_up'],
     '小拳石': [rock.Graveler,25,'level_up'],
     '隆隆石': [rock.Golem,'岩之心','stone_up'],
     '超音蝠': [poison.Golbat,22,'level_up'],

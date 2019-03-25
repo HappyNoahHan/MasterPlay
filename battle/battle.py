@@ -356,7 +356,10 @@ def battleRun(player,obj1,obj2,place):
         #判断命中是否提高 携带物品
         hit_up = propmap.checkCarryPropForHit(obj1)
         print("命中提高: ",hit_up)
-        dodge_up = propmap.checkCarryPropFoeDodge(obj2)
+        if obj1.skill_list[skill_number].skill_code not in ['N064']:
+            dodge_up = propmap.checkCarryPropFoeDodge(obj2)
+        else:
+            dodge_up = 0
         print("闪避提高: ",dodge_up)
         #状态检查 命中降低或者提高
         hit = statusmap.checkStatusHitIndexBeforeBattle(obj1,hit)

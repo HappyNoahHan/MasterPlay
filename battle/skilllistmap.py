@@ -91,6 +91,8 @@ skill_dict = {
     'N061': battle.skill.DoubleTeam,#影子分身
     'N062': battle.skill.FurySwipes,#乱抓
     'N063': battle.skill.CrushClaw,#撕裂爪
+    'N064': battle.skill.ChipAway,#逐步击破
+    'N065': battle.skill.BodySlam,#泰山压顶
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -133,6 +135,7 @@ skill_dict = {
     'T007': battle.skill.KnockOff,#拍落
     'T008': battle.skill.Fling,#投掷
     'T009': battle.skill.Memento,#临别礼物
+    'T010': battle.skill.Flatter,#吹捧
     'C001': battle.skill.Megahorn,#超级角击
     'C002': battle.skill.StringShot,#吐丝
     'C003': battle.skill.LeechLife, #吸血
@@ -180,6 +183,7 @@ skill_dict = {
     'E008': battle.skill.Bulldoze,#重踏
     'E009': battle.skill.SandTomb,#流沙地狱
     'E010': battle.skill.Dig,#挖洞
+    'E011': battle.skill.EarthPower,#大地之力
     'Q001': battle.skill.ConfuseRay, #奇异之光
     'Q002': battle.skill.Astonish, #惊吓
     'Q003': battle.skill.Hex,#祸不单行
@@ -229,6 +233,8 @@ skill_dict = {
     'X004': battle.skill.MetalSound,#金属音
     'X005': battle.skill.FlashCannon,#加农光炮
     'X006': battle.skill.IronDefense,#铁壁
+    'Z001': battle.skill.DoubleKick,#二连踢
+    'Z002': battle.skill.Superpower,#蛮力
 
 }
 

@@ -112,7 +112,8 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index,power,place):
     #检查天气对pet的加成
     if place.weather != None:
         weathermap.weather_dict[place.weather].propUpOrDown(obj_attack)
-        weathermap.weather_dict[place.weather].propUpOrDown(obj_defense)
+        if skill.skill_code not in ['N064']:
+            weathermap.weather_dict[place.weather].propUpOrDown(obj_defense)
 
     attack = obj_attack.getAttack()
     defense = obj_defense.getDefense()
@@ -122,7 +123,7 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index,power,place):
     print("技能威力: ", power)
     #状态属性的提升或降低
     attack,defense,spell_power,spell_defense,speed = statusmap.checkPropBeforeBattle(
-        obj_attack,obj_defense,attack,defense,spell_power,spell_defense,speed
+        skill,obj_attack,obj_defense,attack,defense,spell_power,spell_defense,speed
     )
     if place.place_status != None:
         if statusmap.status_dict[place.place_status[0]].place_type == 'power':
