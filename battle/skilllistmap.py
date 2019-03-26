@@ -14,7 +14,9 @@ skill_dict = {
     'A006': battle.skill.Inferno,#炼狱
     'A007': battle.skill.FlareBlitz,#闪焰冲锋
     'A008': battle.skill.HeatWave,#热风
-    'A009': battle.skill.flameAffinity,
+    'A099': battle.skill.flameAffinity,
+    'A009': battle.skill.WillOWisp,#鬼火
+    'A010': battle.skill.FireBlast,#大字爆炎
     'F001': battle.skill.Gust, #起风
     'F002': battle.skill.WingAttack, #翅膀攻击
     'F003': battle.skill.AirSlash, #空气斩
@@ -96,6 +98,7 @@ skill_dict = {
     'N066': battle.skill.Thrash,#大闹一番
     'N067': battle.skill.DoubleSlap,#连环巴掌
     'N068': battle.skill.Sing,#唱歌
+    'N069': battle.skill.Roar,#吼叫
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B003': battle.skill.lifeRecovery,
@@ -128,6 +131,8 @@ skill_dict = {
     'S008': battle.skill.Confusion,#念力
     'S009': battle.skill.Psybeam,#幻象光线
     'S010': battle.skill.StoredPower,#辅助力量
+    'S011': battle.skill.Extrasensory,#神通力
+    'S012': battle.skill.Imprison,#封印
     'I001': battle.skill.Haze, #黑雾
     'I002': battle.skill.IceFang,#冰冻牙
     'T001': battle.skill.disperse,
@@ -140,6 +145,9 @@ skill_dict = {
     'T008': battle.skill.Fling,#投掷
     'T009': battle.skill.Memento,#临别礼物
     'T010': battle.skill.Flatter,#吹捧
+    'T011': battle.skill.Payback,#以牙还牙
+    'T012': battle.skill.FeintAttack,#出奇一击
+    'T013': battle.skill.NastyPlot,#诡计
     'C001': battle.skill.Megahorn,#超级角击
     'C002': battle.skill.StringShot,#吐丝
     'C003': battle.skill.LeechLife, #吸血
@@ -192,6 +200,7 @@ skill_dict = {
     'Q002': battle.skill.Astonish, #惊吓
     'Q003': battle.skill.Hex,#祸不单行
     'Q004': battle.skill.ShadowClaw,#暗影爪
+    'Q005': battle.skill.Grudge,#怨念
     'P001': battle.skill.Toxic, #剧毒
     'P002': battle.skill.PoisonFang, #剧毒牙
     'P003': battle.skill.Venoshock, #毒液冲击
@@ -232,6 +241,7 @@ skill_dict = {
     'Y001': battle.skill.Moonlight,#月光
     'Y002': battle.skill.Moonblast,#月亮之力
     'Y003': battle.skill.DisarmingVoice,#魅惑之声
+    'Y004': battle.skill.BabyDollEyes,#圆瞳
     'X001': battle.skill.GyroBall,#陀螺球
     'X002': battle.skill.MagnetBomb,#磁铁炸弹
     'X003': battle.skill.MirrorShot,#镜光射击

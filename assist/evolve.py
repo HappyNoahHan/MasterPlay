@@ -31,6 +31,7 @@ evolve_dict={
     '尼多朗': [poison.Nidorino,16,'level_up'],
     '尼多王': [poison.Nidoking,'月之露','stone_up'],
     '皮皮': [fairy.Clefable,'月之露','stone_up'],
+    '六尾': [fire.Ninetales,'火之焰','stone_up'],
     '小拳石': [rock.Graveler,25,'level_up'],
     '隆隆石': [rock.Golem,'岩之心','stone_up'],
     '超音蝠': [poison.Golbat,22,'level_up'],

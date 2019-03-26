@@ -73,7 +73,7 @@ class NoTalent(Status):
     status_info = '天赋失效'
 
 class Whirlwind(Status):
-    status_show_name = '吹飞'
+    status_show_name = '畏惧'
     status_code = 'ST101'
     status_info = '吹跑精灵'
 
@@ -372,3 +372,13 @@ class Thrash(Status):
             return True
         else:
             return False
+
+class Imprison(Status):
+    status_show_name = '封印'
+    status_info = '宝可梦使出封印后,其所学会的招式,对手的宝可梦将无法使出'
+    status_code = 'ST118'
+
+class Grudge(Status):
+    status_show_name = '怨念'
+    status_info = '因对手的招式而濒死时,该招式的ＰＰ会变为０'
+    status_code = 'ST119'

@@ -215,12 +215,17 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
             place.setPlaceWeather(obj_skill.weather)
 
     elif obj_skill.skill_model == '0019':
-        obj_skill.addStatus(obj_defense)
+        obj_skill.addStatus(obj_defense,obj_attack)
     #debuff  增幅buff 次数
     asscount.checkBuffAfterBattle(obj_attack)
 
 
     if obj_defense.health <= 0: #战斗结束  debuff不会死亡
+        #诅咒技能效果
+        if 'ST119' in obj_defense.status:
+            if obj_skill.skill_model in ['0001','0010','0018','0015']:
+                obj_skill.pp = 0
+
         assist.show.petDie(obj_defense)
         assist.show.battleOver()
         if obj_attack.health <= 0:  # 反弹死

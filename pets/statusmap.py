@@ -83,6 +83,8 @@ status_dict={
     'ST115' : status.FuryCutter(),
     'ST116' : status.Dig(),
     'ST117' : status.Thrash(),
+    'ST118' : status.Imprison(),
+    'ST119' : status.Grudge(),
 }
 
 #清理清单
@@ -380,6 +382,11 @@ def checkStatusEnd(player):
                         skill.hit_count = 0
                 except:
                     pass
+
+        if 'ST118' in pet.status:
+            removeStatus(pet,'ST118')
+            for key,skill in pet.skill_list.items():
+                skill.lock = False
 
         for status in clear_list:
             if status in pet.status:

@@ -453,7 +453,7 @@ class LockSkill(skill):
         self.turns = turns
         self.skill_model = '0019'
 
-    def addStatus(self,pet):
+    def addStatus(self,pet,attack_pet):
         if pet.last_used_skill:
             pet.setStatus(self.status, self.turns)
             pet.last_used_skill.lock = True
@@ -701,6 +701,11 @@ class Whirlwind(SpecialStatusSkill):
     skill_code = 'N014'
     hit_rate = 0
     skill_info = '吹飞对手'
+
+class Roar(Whirlwind):
+    skill_code = 'N069'
+    skill_info = '吓唬对面使其逃跑'
+    show_name = '吼叫'
 
 class Growl(statusSkill):
     def __init__(self):
@@ -1294,10 +1299,37 @@ class flameAffinity(propSkill):
     def __init__(self,pp=10):
         super().__init__(pp)
     show_name = '火焰亲和'
-    skill_code = 'A009'
+    skill_code = 'A099'
     index_per = 0.5
     property = 'fire'
     skill_info = "火焰亲和觉醒,接下来的一个回合，火属性技能伤害加成50%"
+    
+class WillOWisp(statusSkill):
+    def __init__(self):
+        super(WillOWisp, self).__init__(pp=15,status='ST001')
+    show_name = '鬼火'
+    skill_code = 'A009'
+    property = 'fire'
+    skill_info = '放出怪异的火焰,从而让对手陷入灼伤状态'
+    hit_rate = 85
+
+    def addStatus(self,obj,place):
+        for prop in obj.prop:
+            if prop in ['fire']:
+                print("火属性pet 免疫")
+                return True
+        print("%s 陷入 灼伤状态"% obj.name)
+        obj.setStatus(self.status)
+
+class FireBlast(damageSkill):
+    def __init__(self):
+        super().__init__(pp=5,hit_status='ST001',addition_status_rate=10)
+    show_name = '大字爆炎'
+    skill_code = 'A010'
+    skill_power = 110
+    hit_rate = 85
+    property = 'fire'
+    skill_info = '大字形状的火焰烧尽对手,有时会让对手陷入灼伤状态'
 
 class StunSpore(statusSkill):
     def __init__(self):
@@ -1613,6 +1645,33 @@ class StoredPower(damageSkill):
 
         return self.skill_power * sum
 
+class Extrasensory(damageSkill):
+    def __init__(self):
+        super(Extrasensory, self).__init__(pp=20,hit_status='ST004',addition_status_rate=10)
+    show_name = '神通力'
+    skill_code = 'S011'
+    skill_power = 80
+    property = 'psychic'
+    skill_info = '发出看不见的神奇力量进行攻击,有时会使对手畏缩'
+
+class Imprison(LockSkill):
+    def __init__(self):
+        super().__init__(pp=10,status='ST118',turns=1)
+    show_name = '封印'
+    skill_code = 'S012'
+    property = 'psychic'
+    skill_info = '如果对手有和自己相同的招式,那么只有对手无法使用该招式'
+    hit_rate = 0
+
+    def addStatus(self,pet,attack_pet):
+        pet.setStatus(self.status)
+        attack_pet_skilllist = []
+        for key,skill in attack_pet.skill_list.items():
+            attack_pet_skilllist.append(skill.skill_code)
+
+        for key,skill in pet.skill_list.items():
+            if skill.skill_code in attack_pet_skilllist:
+                skill.lock = True
 
 class disperse(removeBuffSkill):
     def __init__(self,pp=20):
@@ -1707,6 +1766,34 @@ class Flatter(MutlipleStatusSkill):
     property = 'dark'
     skill_code = 'T010'
     skill_info = '吹捧对手,使其混乱,同时还会提高对手的特攻'
+
+class Payback(damageSkill):
+    def __init__(self):
+        super(Payback, self).__init__(pp=10,spell_skill=False,addition_status='ST025')
+    show_name = '以牙还牙'
+    property = 'dark'
+    skill_code = 'T011'
+    skill_power = 50
+    skill_info = '蓄力攻击,如果能在对手之后攻击,招式的威力会变成２倍' #后续功能能
+
+class FeintAttack(damageSkill):
+    def __init__(self):
+        super().__init__(pp=20,spell_skill=False)
+    show_name = '出奇一击'
+    property = 'dark'
+    skill_code = 'T012'
+    skill_power = 60
+    hit_rate = 0
+    skill_info = '悄悄地靠近对手,趁其不备进行殴打,攻击必定会命中'
+
+class NastyPlot(GainStatusUpSkill):
+    def __init__(self):
+        super(NastyPlot, self).__init__(pp=20,status=['ST018'],turns=2)
+    show_name = '诡计'
+    property = 'dark'
+    skill_code = 'T013'
+    skill_info = '谋划诡计,激活头脑,大幅提高自己的特攻'
+    hit_rate = 0
 
 class Megahorn(damageSkill):
     def __init__(self):
@@ -2258,6 +2345,15 @@ class ShadowClaw(damageSkill):
     skill_info = '以影子做成的锐爪,劈开对手,容易击中要害'
     property = 'ghost'
 
+class Grudge(GainStatusUpSkill):
+    def __init__(self):
+        super().__init__(pp=5,status=['ST119'],turns=2)
+    show_name = '怨念'
+    skill_code = 'Q005'
+    skill_info = '因对手的招式而陷入濒死时给对手施加怨念,让该招式的ＰＰ变成０'
+    property = 'ghost'
+    hit_rate = 0
+
 class Toxic(statusSkill):
     def __init__(self):
         super().__init__(10,status = 'ST005')
@@ -2668,6 +2764,16 @@ class DisarmingVoice(damageSkill):
     skill_code = 'Y003'
     skill_info = '发出魅惑的叫声,给予对手精神上的伤害,攻击必定会命中'
     hit_rate = 0
+
+class BabyDollEyes(statusSkill):
+    def __init__(self):
+        super(BabyDollEyes, self).__init__(status='ST021')
+    show_name = '圆瞳'
+    skill_code = 'Y004'
+    property = 'fairy'
+    priority = 1
+    skill_info = '用圆瞳凝视对手,从而降低其攻击,必定能够先制攻击。'
+
 
 class GyroBall(damageSkill):
     def __init__(self):
