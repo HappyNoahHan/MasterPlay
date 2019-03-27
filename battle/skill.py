@@ -1,9 +1,9 @@
 '''
 #skill_code 技能代号  A  火系  N 普通系 B 木系 C 虫系 D 水系 S 超能=光 I 冰 T 恶=黑暗 E 地面 F 飞行 G 龙
                      R 岩石 P 毒 Q鬼魂 H 电     Y 妖精 fairy    X 钢 steel   Z combat 格斗
-#skill_mode 技能类型   0001 伤害技能 0002 防御临时提升 003 debuff 技能
-                     0004 施加状态技能  0005 移除状态技能
-                     0008 生命恢复 0009 属性亲和，同属性技能伤害加成
+#skill_mode 技能类型   0001 伤害技能
+                     0004 施加状态技能
+                     0008 生命恢复
                      #0010 伤害并恢复生命 合并入0001
                      0011 印记类技能 和印记多少有关 印记以状态显示
                      0012 增益状态技能
@@ -193,18 +193,6 @@ class MultipleDamageSkill(damageSkill):
                         else:
                             print("%s 免疫 %s 状态" % (obj.name,statusmap.status_dict[status].status_show_name))
 
-class buffSkill(skill):
-    def __init__(self,pp=30):
-        super().__init__(pp)
-        self.skill_model = '0002'
-
-class debuffSkill(skill):
-    def __init__(self,pp=30):
-        super().__init__(pp)
-        self.skill_model = '0003'
-
-    damage_debuff = False
-
 class statusSkill(skill):
     def __init__(self,pp=30,status=None,turns = 1,side_effect=False,add_condition=None,need_user=False):
         super().__init__(pp)
@@ -216,14 +204,11 @@ class statusSkill(skill):
         self.need_user = need_user #是否需要记录使用者
 
     def addStatus(self,obj,place):
-        if self.status not in obj.status:
-            if talentmap.addStatusOrNot(obj,self.status,place):
-                obj.setStatus(self.status,self.turns)
-                print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
-            else:
-                print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
+        if talentmap.addStatusOrNot(obj,self.status,place):
+            obj.setStatus(self.status,self.turns)
+            print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
         else:
-            print("%s 已经陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
+            print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
 
     def setStatusGiver(self,pet):
         statusmap.status_dict[self.status].status_giver = (pet,self)
@@ -235,14 +220,11 @@ class MutlipleStatusSkill(statusSkill):
                 print("没有任何效果~")
                 return True
         for status in self.status:
-            if status not in obj.status:
-                if talentmap.addStatusOrNot(obj, status,place):
-                    obj.setStatus(status,self.turns * double)
-                    print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
-                else:
-                    print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
+            if talentmap.addStatusOrNot(obj, status,place):
+                obj.setStatus(status,self.turns * double)
+                print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
             else:
-                print("%s 已经陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
+                print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
 
 class GainStatusUpSkill(skill):
     '''
@@ -258,14 +240,11 @@ class GainStatusUpSkill(skill):
 
     def addStatus(self,obj,place,double=1):
         for status in self.status:
-            if status not in obj.status:
-                if talentmap.addStatusOrNot(obj, status,place):
-                    obj.setStatus(status,self.turns * double)
-                    print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
-                else:
-                    print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
+            if talentmap.addStatusOrNot(obj, status,place):
+                obj.setStatus(status,self.turns * double)
+                print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
             else:
-                print("%s 已经陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
+                print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
 
     def doubleEffect(self,weather):
         if self.weather_condition != None and weather != None:
@@ -273,51 +252,42 @@ class GainStatusUpSkill(skill):
                 return True
         return False
 
-
-class removeStatusSkill(skill):
-    def __init__(self,pp=30,effecters='both',status=None):
-        super().__init__(pp)
-        self.skill_model = '0005'
-        self.effecters = effecters
-        self.status = status
-
-    def useSkill(self,obj_attack,obj_defense):
-        if self.effecters == 'attack':
-            statusmap.removeStatus(obj_attack, status_code=self.status)
-        elif self.effecters == 'defense':
-            statusmap.removeStatus(obj_defense,status_code=self.status)
-        else:
-            statusmap.removeStatus(obj_attack, status_code=self.status)
-            statusmap.removeStatus(obj_defense, status_code=self.status)
-
-class removeBuffSkill(skill):
-    def __init__(self,pp=30):
-        super().__init__(pp)
-        self.skill_model = '0006'
-
-    remove_num = 1
-
-class removeDebuffSkill(skill):
-    def __init__(self,pp=30):
-        super().__init__(pp)
-        self.skill_model = '0007'
-
-    remove_num = 1
-
-class lifeRecoreSkill(skill):
-    def __init__(self,pp=30,index_per=0.5,weather_condition=None):
+class RecoverSkill(skill):
+    def __init__(self,pp=30,weather_condition=None,recover_per=0.0
+                 ,recover_health = False,recover_status = False,
+                 clean_status=None,remove_status=None,hit_status=None,turns=0):
         super().__init__(pp,weather_condition)
         self.skill_model = '0008'
-        self.index_per = index_per
+        self.recover_per = recover_per
+        self.recover_health = recover_health
+        self.recover_status = recover_status
+        self.clean_status = clean_status #清除自身状态
+        self.remove_status = remove_status #清除对面状态
+        self.hit_status = hit_status #附加状态
+        self.turns = turns #层数
 
     def getIndexPer(self):
-        return self.index_per
+        return self.recover_per
 
+    def cleanStatus(self,pet):
+        for status in self.clean_status:
+            if status in pet.status:
+                statusmap.removeStatus(pet,status_code=status)
 
-class propSkill(skill):
-    def __init__(self,pp=30):
-        super().__init__(pp)
-        self.skill_model = '0009'
+    def removeStatus(self,pet):
+        for status in self.remove_status:
+            if status in pet.status:
+                statusmap.removeStatus(pet,status_code=status)
+
+    def setStatus(self,pet,place):
+        for status in self.hit_status:
+            if talentmap.addStatusOrNot(pet, status, place):
+                print("%s 陷入 %s 状态 ！" % (pet.name, statusmap.status_dict[status].status_show_name))
+            else:
+                print("%s 免疫 %s 状态 ！" % (pet.name, statusmap.status_dict[status].status_show_name))
+
+    def setStatusGiver(self,pet):
+        statusmap.status_dict[self.hit_status].status_giver = (pet,self)
 
 class ImprintSkill(skill):
     def __init__(self,pp=30,lucky_level= 1,status=None,imprint_level = 1,imprint_type = None,spell_skill = None):
@@ -500,24 +470,21 @@ class FeatherDance(statusSkill):
     property = 'fly'
     skill_code = 'F005'
 
-class Roost(lifeRecoreSkill):
+class Roost(RecoverSkill):
     def __init__(self,pp=10):
-        super().__init__(pp)
+        super().__init__(pp,recover_per=0.5,recover_health=True)
     show_name = '羽栖'
     skill_code = 'F006'
     #index_per = 0.5
     property = 'fly'
     skill_info = "恢复使用者的1⁄2的ＨＰ值"
 
-class Tailwind(buffSkill):
+class Tailwind(GainStatusUpSkill):
     def __init__(self):
-        super().__init__(15)
+        super().__init__(pp=15,status=['ST120'],turns=4)
     show_name = '顺风'
     skill_code = 'F007'
-    index_per = 1
-    effect_turns = 4
     skill_info = "己方场地上全部的宝可梦的速度加倍,持续时间为4回合,包括使用的当回合"
-    buff_prop = 'Speed'
     property = 'fly'
 
 class MirrorMove(CopySkill):
@@ -867,9 +834,9 @@ class RapidSpin(damageSkill):
     skill_info = '通过旋转来攻击对手,还可以摆脱绑紧、紧束、寄生种子和撒菱等招式'
     skill_power = 20
 
-class Recover(lifeRecoreSkill):
+class Recover(RecoverSkill):
     def __init__(self):
-        super().__init__(pp=10)
+        super().__init__(pp=10,recover_health=True,recover_per=0.5)
     show_name = '自我再生'
     skill_code = 'N033'
     skill_info = '让全身的细胞获得再生,回复一半HP'
@@ -1191,22 +1158,6 @@ class Sing(statusSkill):
     hit_rate = 55
     skill_info = '让对手听舒适,美妙的歌声,从而陷入睡眠状态'
 
-class steadiness(buffSkill):
-    show_name = '稳固'
-    skill_code = 'N099'
-    index_per = 0.2
-    effect_turns = 3
-    skill_info = "防御临时上升20%，持续3回合"
-    buff_prop = 'Defense'
-
-class strengthCre(buffSkill):
-    show_name = '力量增幅'
-    skill_code = 'N100'
-    index_per = 0.3
-    effect_turns = 3
-    skill_info = "力量增幅,持续3回合"
-    buff_prop = 'Attack'
-
 class Ember(damageSkill):
     def __init__(self,pp=25):
         super().__init__(pp,hit_status='ST001',addition_status_rate=10)
@@ -1289,15 +1240,6 @@ class HeatWave(damageSkill):
     property = 'fire'
     skill_info = '将炎热的气息吹向对手进行攻击,有时会让对手陷入灼伤状态'
 
-class flameAffinity(propSkill):
-    def __init__(self,pp=10):
-        super().__init__(pp)
-    show_name = '火焰亲和'
-    skill_code = 'A099'
-    index_per = 0.5
-    property = 'fire'
-    skill_info = "火焰亲和觉醒,接下来的一个回合，火属性技能伤害加成50%"
-    
 class WillOWisp(statusSkill):
     def __init__(self):
         super(WillOWisp, self).__init__(pp=15,status='ST001')
@@ -1344,33 +1286,6 @@ class azorLeaf(damageSkill):
     property = 'wood'
     hit_rate = 95
     skill_info = "飞叶攻击，片片不占身"
-
-class lifeRecovery(lifeRecoreSkill):
-    def __init__(self,pp=15):
-        super().__init__(pp)
-    show_name = '生命复苏'
-    skill_code = 'B003'
-    property = 'wood'
-    skill_info = "恢复技能，恢复最大生命值50%"
-
-class lifeChains(buffSkill):
-    def __init__(self,pp=15):
-        super().__init__(pp)
-    show_name = '生命锁链'
-    skill_code = 'B004'
-    index_per = 0.1
-    property = 'wood'
-    effect_turns = 3
-    skill_info = "生命锁链，每回合恢复最大生命值10%的生命，持续3回合"
-    buff_prop = 'Health'
-
-class vinesTied(debuffSkill):
-    show_name = '蔓藤捆绑'
-    skill_code = 'B005'
-    index_per = 0.1
-    property = 'wood'
-    effect_turns = 3
-    skill_info = "捆绑，持续性收到10%气血的伤害"
 
 class Absorb(damageSkill):
     def __init__(self,pp=25):
@@ -1440,9 +1355,9 @@ class PetalBlizzard(damageSkill):
     skill_power = 90
     skill_info = '攻击目标造成伤害,全场攻击'
 
-class Aromatherapy(removeStatusSkill):
+class Aromatherapy(RecoverSkill):
     def __init__(self):
-        super().__init__(status='abnormal',pp=5,effecters='attack')
+        super().__init__(pp=5,clean_status=statusmap.abnormal_list,recover_status=True)
     show_name = '芳香治疗'
     skill_info = '治愈己方队伍所有宝可梦的异常状态'
     skill_code = 'B013'
@@ -1514,9 +1429,9 @@ class WorrySeed(statusSkill):
     skill_code = 'B020'
     skill_info = '种植心神不宁的种子,使对手不能入眠,并将特性变成不眠'
 
-class Synthesis(lifeRecoreSkill):
+class Synthesis(RecoverSkill):
     def __init__(self):
-        super().__init__(pp=5,weather_condition=True)
+        super().__init__(pp=5,weather_condition=True,recover_health=True)
     show_name = '光合作用'
     skill_code = 'B021'
     property = 'wood'
@@ -1539,14 +1454,6 @@ class SeedBomb(damageSkill):
     skill_power = 80
     skill_name = '种子炸弹'
     skill_info = '将外壳坚硬的大种子,从上方砸下攻击对手'
-
-class illuminatiom(removeDebuffSkill):
-    def __init__(self,pp=20):
-        super().__init__(pp)
-    show_name = '光照'
-    skill_info = "驱散一个debuff效果"
-    skill_code = 'S001'
-    property = 'psychic'
 
 class Agility(GainStatusUpSkill):
     def __init__(self):
@@ -1666,23 +1573,6 @@ class Imprison(LockSkill):
         for key,skill in pet.skill_list.items():
             if skill.skill_code in attack_pet_skilllist:
                 skill.lock = True
-
-class disperse(removeBuffSkill):
-    def __init__(self,pp=20):
-        super().__init__(pp)
-    skill_info = "驱散一个对方的增益效果"
-    skill_code = 'T001'
-    property = 'dark'
-    show_name = '驱散'
-
-class threaten(debuffSkill):
-    skill_info = "恐吓对方，迫使对方攻击下降10%，持续3回合"
-    effect_turns = 3
-    skill_code = 'T002'
-    show_name = '恐吓'
-    property = 'dark'
-    index_per = 0.1
-    debuff_prop = 'SpellDefense'
 
 class Bite(damageSkill):
     def __init__(self):
@@ -1931,9 +1821,10 @@ class FuryCutter(damageSkill):
         else:
             obj.status['ST115'] += 1
 
-class Haze(removeStatusSkill):
+class Haze(RecoverSkill):
     def __init__(self):
-        super().__init__(status='all')
+        super().__init__(pp=5,recover_status=True,clean_status=statusmap.all_status_list,
+                         remove_status=statusmap.all_status_list)
     show_name = '黑雾'
     skill_info = '移除所有状态'
     skill_code = 'I001'
@@ -1949,14 +1840,6 @@ class IceFang(MultipleDamageSkill):
     hit_rate = 95
     skill_power = 65
     skill_info = '攻击目标造成伤害,有10%的几率使目标陷入冰冻/畏缩状态'
-
-class WaterJump(buffSkill):
-    show_name = '水溅跃'
-    skill_code = 'D001'
-    index_per = 0.1
-    effect_turns = 2
-    skill_info = "防御临时上升10%，持续2回合"
-    buff_prop = 'Defense'
 
 class Bubble(damageSkill):
     def __init__(self):
@@ -2722,9 +2605,9 @@ class DragonClaw(damageSkill):
     skill_power = 80
     skill_info = '用尖锐的巨爪劈开对手进行攻击'
 
-class Moonlight(lifeRecoreSkill):
+class Moonlight(RecoverSkill):
     def __init__(self):
-        super().__init__(pp=5,weather_condition=True)
+        super().__init__(pp=5,weather_condition=True,recover_health=True)
 
     show_name = '月光'
     skill_code = 'Y001'

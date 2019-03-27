@@ -85,6 +85,7 @@ status_dict={
     'ST117' : status.Thrash(),
     'ST118' : status.Imprison(),
     'ST119' : status.Grudge(),
+    'ST120' : status.Whirlwind(),
 }
 
 #清理清单
@@ -97,11 +98,14 @@ clear_list.remove('ST007')
 clear_list.remove('ST102')
 
 #回合递减
-count_index_list=['ST029','ST030','ST106','ST104','ST107','ST114','ST119']
+count_index_list=['ST029','ST030','ST106','ST104','ST107','ST114','ST119','ST120']
 
 #异常状态
 abnormal_list = ['ST001','ST002','ST003',
                  'ST005','ST007','ST008']
+
+#所以状态
+all_status_list = [ x[0] for x in status_dict.items()]
 
 
 def checkStatusAfterBattle(obj,skill,damage):
@@ -163,7 +167,7 @@ def checkShrinkaOrNot(obj):
 
 def checkStatusBeforeBattle(obj,skill):
     #技能解除异常状态
-    if skill.skill_code in ['B013']:
+    if skill.skill_code in ['B013','I001']:
         return False
 
     if obj.status:

@@ -14,7 +14,6 @@ skill_dict = {
     'A006': battle.skill.Inferno,#炼狱
     'A007': battle.skill.FlareBlitz,#闪焰冲锋
     'A008': battle.skill.HeatWave,#热风
-    'A099': battle.skill.flameAffinity,
     'A009': battle.skill.WillOWisp,#鬼火
     'A010': battle.skill.FireBlast,#大字爆炎
     'F001': battle.skill.Gust, #起风
@@ -101,9 +100,6 @@ skill_dict = {
     'N069': battle.skill.Roar,#吼叫
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
-    'B003': battle.skill.lifeRecovery,
-    'B004': battle.skill.lifeChains,
-    'B005': battle.skill.vinesTied,
     'B006': battle.skill.Absorb, #吸取
     'B007': battle.skill.SleepPowder,  # 催眠粉
     'B008': battle.skill.MegaDrain,#超级吸取
@@ -121,7 +117,6 @@ skill_dict = {
     'B020': battle.skill.WorrySeed,#烦恼种子
     'B021': battle.skill.Synthesis,#光合作用
     'B022': battle.skill.SeedBomb,#种子炸弹
-    'S001': battle.skill.illuminatiom,
     'S002': battle.skill.Agility,#高速移动
     'S003': battle.skill.Barrier,#屏障
     'S004': battle.skill.Psywave,#精神波
@@ -135,8 +130,6 @@ skill_dict = {
     'S012': battle.skill.Imprison,#封印
     'I001': battle.skill.Haze, #黑雾
     'I002': battle.skill.IceFang,#冰冻牙
-    'T001': battle.skill.disperse,
-    'T002': battle.skill.threaten,
     'T003': battle.skill.Bite, #咬住
     'T004': battle.skill.Crunch,#咬碎
     'T005': battle.skill.Pursuit,#追打
@@ -160,7 +153,6 @@ skill_dict = {
     'C010': battle.skill.PinMissile,#飞弹针
     'C011': battle.skill.FellStinger,#致命针刺
     'C012': battle.skill.FuryCutter,#连斩
-    'D001': battle.skill.WaterJump,
     'D002': battle.skill.Bubble,#泡沫
     'D003': battle.skill.HydroPump,#水炮
     'D004': battle.skill.WaterPulse,#水之波动

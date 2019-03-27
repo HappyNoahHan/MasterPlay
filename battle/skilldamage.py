@@ -79,7 +79,7 @@ def luckyAttack(speed,skill,lucky_up):
         return False
 
 
-def skillDamage(obj_attack,obj_defense,skill,pro_buff_index,power,place):
+def skillDamage(obj_attack,obj_defense,skill,power,place):
     '''
     伤害计算
     :param obj_attack:
@@ -151,7 +151,7 @@ def skillDamage(obj_attack,obj_defense,skill,pro_buff_index,power,place):
         basic_damage = basicDamage(obj_attack,obj_defense,obj_attack.level,skill,power,attack,defense,speed)
 
 
-    damage = round(basic_damage * pro_buff_index * attr_index_number * skill_prop_match_obj_prop)
+    damage = round(basic_damage * attr_index_number * skill_prop_match_obj_prop)
     print("基础伤害:",damage)
     #战斗中天赋计算
     #if obj_attack.talent != None:

@@ -9,7 +9,7 @@ fishing_dict={
 }
 
 can_fishing_list = {
-    '129': water.Magikarp(level=5,skill_list={'1': skill.WaterJump()})
+    '129': water.Magikarp(level=5,skill_list={'1': skill.WaterGun()})
 }
 
 

@@ -5,7 +5,6 @@ import battle.skill
 import battle.skilllistmap
 import battle.hitrate
 import assist.show
-import battle.buff
 import assist.ppvalue
 import assist.life
 import assist.petattr
@@ -30,12 +29,12 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
     #道具检查
 
     if obj_skill.skill_model == '0001':
-        pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
+
         if obj_skill.fixed_damage == False:
             # 拿到变化威力技能的 威力值
             if obj_skill.power_changed:
                 obj_skill.skill_power = obj_skill.getPower(obj_attack,obj_defense)
-            damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.skill_power,place)
+            damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,obj_skill.skill_power,place)
             obj_skill.addStatus(obj_defense,place)  # 附加状态
             if obj_skill.side_effect != None:
                 obj_skill.getSideEffect(obj_attack,damage) #副作用
@@ -66,18 +65,6 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
 
         assist.show.showPetErrorStatus(obj_defense)
 
-    elif obj_skill.skill_model == '0002':
-        obj_attack.setBuff(obj_skill,[obj_skill.effect_turns-1,obj_skill.index_per])
-        battle.buff.buffCount(obj_attack)
-        for key,value in obj_attack.buff_dict.items():
-            print(key.show_name,':',value)
-
-    elif obj_skill.skill_model == '0003':
-        obj_defense.setDebuff(obj_skill,[obj_skill.effect_turns,obj_skill.index_per])
-        battle.buff.proDebuffCount(obj_defense)
-        for key,value in obj_defense.debuff_dict.items():
-            print(key.show_name, ':', value)
-
     elif obj_skill.skill_model == '0004':
         obj_skill.addStatus(obj_defense,place)
 
@@ -95,29 +82,19 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
             obj_skill.addStatus(obj_attack,place)
         print(obj_attack.status)
 
-    elif obj_skill.skill_model == '0005':
-        obj_skill.useSkill(obj_attack=obj_attack,obj_defense=obj_defense)
-        print(obj_attack.status)
-
-    #0006 - 0007 移除buff debuff
-    elif obj_skill.skill_model == '0006':
-        battle.buff.removeObjBuff(obj_defense,obj_skill.remove_num)
-
-    elif obj_skill.skill_model == '0007':
-        battle.buff.removeOwnDebuff(obj_attack,obj_skill.remove_num)
-
     elif obj_skill.skill_model == '0008':
-        index_per = 0
-        if obj_skill.weather_condition == None:
-            index_per = obj_skill.getIndexPer()
-        else:
-            index_per = obj_skill.getIndexPer(place.weather)
-        assist.life.healthRecoverBySkill(obj_attack, index_per)
+        if obj_skill.recover_health:
+            if obj_skill.weather_condition == None:
+                index_per = obj_skill.getIndexPer()
+            else:
+                index_per = obj_skill.getIndexPer(place.weather)
+            assist.life.healthRecoverBySkill(obj_attack, index_per)
 
-    elif obj_skill.skill_model == '0009':
-        obj_attack.setProBuff(obj_skill,[obj_skill.effect_turns,obj_skill.index_per])
-        for key,value in obj_attack.property_buff.items():
-            print(key.show_name, ':', value)
+        if obj_skill.recover_status:
+            if obj_skill.remove_status:
+                obj_skill.removeStatus(obj_defense)
+            if obj_skill.clean_status:
+                obj_skill.cleanStatus(obj_attack)
 
     elif obj_skill.skill_model == '0011':
         if obj_skill.imprint_level == 1:
@@ -128,8 +105,8 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
                     assist.life.healthRecoverFromImprintSkill(obj_attack,obj_attack.status[obj_skill.status])
                     statusmap.removeStatus(obj_attack,obj_skill.status)
                 elif obj_skill.imprint_type == 'damage':
-                    pro_buff_index = battle.buff.proBuffCount(obj_attack, obj_skill)
-                    damage = skilldamage.skillDamage(obj_attack, obj_defense, obj_skill, pro_buff_index,
+
+                    damage = skilldamage.skillDamage(obj_attack, obj_defense, obj_skill,
                                                      obj_attack.status[obj_skill.status] * 100,place)
                     if damage > 0:
                         obj_defense.health -= damage
@@ -161,8 +138,7 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
             obj_skill.removeStatus(obj_attack)
 
         if not obj_skill.delay_effect or result == 3:
-            pro_buff_index = battle.buff.proBuffCount(obj_attack,obj_skill)
-            damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,pro_buff_index,obj_skill.getPower(obj_attack),place)
+            damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,obj_skill.getPower(obj_attack),place)
             #obj_skill.addStatus(obj_defense)  # 附加状态
             if damage > 0:
                 obj_defense.health -= damage
@@ -182,8 +158,7 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
             # 消耗树果
             print("%s 使用%s 消耗了 一枚 %s " % (obj_attack.name, obj_skill.show_name, obj_attack.berry.show_name))
             obj_attack.berry = None
-        pro_buff_index = battle.buff.proBuffCount(obj_attack, obj_skill)
-        damage = skilldamage.skillDamage(obj_attack, obj_defense, obj_skill, pro_buff_index, obj_skill.skill_power)
+        damage = skilldamage.skillDamage(obj_attack, obj_defense, obj_skill, obj_skill.skill_power,place)
             # obj_skill.addStatus(obj_defense)  # 附加状态
         if damage > 0:
             obj_defense.health -= damage
@@ -203,8 +178,7 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
 
     elif obj_skill.skill_model == '0019':
         obj_skill.addStatus(obj_defense,obj_attack)
-    #debuff  增幅buff 次数
-    asscount.checkBuffAfterBattle(obj_attack)
+
 
 
     if obj_defense.health <= 0: #战斗结束  debuff不会死亡
@@ -303,7 +277,7 @@ def battleRun(player,obj1,obj2,place):
         #记录最后使用的技能
         obj1.last_used_skill = obj1.skill_list[skill_number]
         # 战斗前的buff
-        asscount.checkBuffBeforeBattle(obj1, obj2)
+        #asscount.checkBuffBeforeBattle(obj1, obj2)
         # 道具检查
         assist.show.useSkill(obj1,obj1.skill_list[skill_number])
         print(obj1.skill_list[skill_number]) #显示技能描述
@@ -361,35 +335,37 @@ def battleRun(player,obj1,obj2,place):
         print("真实命中: ",hit+hit_up)
         #多段技能结算
         if obj1.skill_list[skill_number].multi_step == False:
-            if obj1.skill_list[skill_number].one_hit_kill:
-                if battle.hitrate.hitForOneHitKill(obj1,obj2):
-                    print("%s 一击必杀" % obj1.name)
-                    obj2.health = 0
-                    assist.show.petDie(obj2)
-                    assist.show.battleOver()
-                    return True
-                else:
-                    print("%s 技能使用失败！" % obj1.name)
-                    # 回合结束检查是否中毒  中毒死亡
-                    if not statusmap.checkStatusAfterTurn(obj1, place):
-                        assist.show.petDie(obj1)
+            try:
+                if obj1.skill_list[skill_number].one_hit_kill:
+                    if battle.hitrate.hitForOneHitKill(obj1,obj2):
+                        print("%s 一击必杀" % obj1.name)
+                        obj2.health = 0
+                        assist.show.petDie(obj2)
                         assist.show.battleOver()
                         return True
+                    else:
+                        print("%s 技能使用失败！" % obj1.name)
+                        # 回合结束检查是否中毒  中毒死亡
+                        if not statusmap.checkStatusAfterTurn(obj1, place):
+                            assist.show.petDie(obj1)
+                            assist.show.battleOver()
+                            return True
 
-                    assist.show.printTurn(obj2.name)
-                    return battleRun(player, obj2, obj1, place)
-
+                        assist.show.printTurn(obj2.name)
+                        return battleRun(player, obj2, obj1, place)
+            except AttributeError:
+                pass
             if not battle.hitrate.hitOrNot(obj1.skill_list[skill_number],hit + hit_up,obj1,obj2,obj2.dodge + dodge_up):
                 #清0
                 try:
                     if obj1.skill_list[skill_number].power_change_by_hit:
                         obj1.skill_list[skill_number].hit_count = 0
-                except:
+                except AttributeError:
                     pass
                 #未命中状态回合增加
                 statusmap.statusTurnsAddIfNotHit(obj1)
 
-                asscount.checkBuffAfterBattle(obj1)
+                #asscount.checkBuffAfterBattle(obj1)
                 # 回合结束检查是否中毒  中毒死亡
                 if not statusmap.checkStatusAfterTurn(obj1,place,hit_or_not=False):
                     assist.show.petDie(obj1)

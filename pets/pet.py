@@ -48,22 +48,12 @@ class Pet(object):
         self.spell_defense = cap.getCapValue(self.spell_defense_basic,self.level,self.spell_defense_indi,self.spell_defense_base_point)
         self.speed = cap.getCapValue(self.speed_basic,self.level,self.speed_indi,self.speed_base_point)
         self._max_health = self.health
-        #buff提升的能力属性
+        #临时提升的能力属性
         self.tmp_attack = 0
         self.tmp_defense = 0
         self.tmp_spell_power = 0
         self.tmp_spell_defense = 0
         self.tmp_speed = 0
-        #属性道具提升的能力属性
-        #self.prop_attack_up = 0
-        #self.prop_defense_up = 0
-        #self.prop_spell_power_up = 0
-        #self.prop_spell_defense_up = 0
-        #self.prop_speed_up = 0
-        #buff debuff 进化解除
-        self.debuff_dict = {}
-        self.buff_dict = {}
-        self.property_buff = {}
         #以下是进化时需要继承的选线
         self.skill_list = skill_list
         self.exp_for_current = exp_for_current
@@ -136,21 +126,6 @@ class Pet(object):
 
     def removeSkills(self,key):
         self.skill_list.pop(key)
-
-    def setDebuff(self,key,value):
-        self.debuff_dict[key] = value
-
-    def setBuff(self,key,value):
-        self.buff_dict[key] = value
-
-    def removeBuff(self,key):
-        self.buff_dict.pop(key)
-
-    def removeDebuff(self,key):
-        self.debuff_dict.pop(key)
-
-    def setProBuff(self,key,value):
-        self.property_buff[key] = value
 
     def setStatus(self,key,value=1):
         self.status[key] = value

@@ -382,3 +382,8 @@ class Grudge(Status):
     status_show_name = '怨念'
     status_info = '因对手的招式而濒死时,该招式的ＰＰ会变为０'
     status_code = 'ST119'
+
+class Tailwind(Status):
+    status_show_name = '顺风'
+    status_info = '速度加倍,持续时间为4回合'
+    status_code = 'ST120'

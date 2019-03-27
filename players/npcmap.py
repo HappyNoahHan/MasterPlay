@@ -32,7 +32,7 @@ trainer_in_maelstrom_no_1 = {
                            can_challenge=True,
                            is_npc=False,
                            pet_list=(water.Goldeen(level=11,skill_list={'1':skill.Bubble()},has_trainer=None),
-                                     water.Goldeen(level=12,skill_list={'1':skill.Bubble(),'2':skill.WaterJump()},has_trainer=None))
+                                     water.Goldeen(level=12,skill_list={'1':skill.Bubble(),'2':skill.WaterGun()},has_trainer=None))
                            ),
     '游泳健将': trainer.Trainer(name="游泳健将",
                             prize={'money':700,'激流球':1},
