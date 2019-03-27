@@ -51,13 +51,15 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
 
             if obj_skill.remove_status: #移除对方状态
                 obj_skill.removeStatus(obj_defense)
-
         else:
             damage = obj_skill.getDamage(obj_attack,obj_defense)
 
         if damage > 0:
             obj_defense.health -= damage
             print("造成了%s 的伤害" % damage)
+
+            if obj_skill.recover_by_damage: #吸取回复
+                obj_skill.recover(obj_attack,damage)
         else:
             obj_defense.health -= 1
             assist.show.noDamage()
@@ -116,21 +118,6 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
         obj_attack.setProBuff(obj_skill,[obj_skill.effect_turns,obj_skill.index_per])
         for key,value in obj_attack.property_buff.items():
             print(key.show_name, ':', value)
-
-    elif obj_skill.skill_model == '0010':
-        pro_buff_index = battle.buff.proBuffCount(obj_attack, obj_skill)
-        damage = skilldamage.skillDamage(obj_attack, obj_defense, obj_skill, pro_buff_index,obj_skill.skill_power,place)
-        if damage > 0:
-            obj_defense.health -= damage
-            print("造成了%s 的伤害" % damage)
-        else:
-            obj_defense.health -= 1
-            assist.show.noDamage()
-        #obj_skill.addStatus(obj_defense)  # 吸取技能无附加状态
-        #print(obj_defense.status)
-        #吸取血量
-        assist.life.healthRecoverFromDamage(obj_attack,damage,obj_skill.suck_per)
-        assist.show.showPetErrorStatus(obj_defense)
 
     elif obj_skill.skill_model == '0011':
         if obj_skill.imprint_level == 1:
@@ -223,7 +210,7 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
     if obj_defense.health <= 0: #战斗结束  debuff不会死亡
         #诅咒技能效果
         if 'ST119' in obj_defense.status:
-            if obj_skill.skill_model in ['0001','0010','0018','0015']:
+            if obj_skill.skill_model in ['0001','0015']:
                 obj_skill.pp = 0
 
         assist.show.petDie(obj_defense)
@@ -374,7 +361,7 @@ def battleRun(player,obj1,obj2,place):
         print("真实命中: ",hit+hit_up)
         #多段技能结算
         if obj1.skill_list[skill_number].multi_step == False:
-            if obj1.skill_list[skill_number].skill_model == '0018':
+            if obj1.skill_list[skill_number].one_hit_kill:
                 if battle.hitrate.hitForOneHitKill(obj1,obj2):
                     print("%s 一击必杀" % obj1.name)
                     obj2.health = 0

@@ -4,7 +4,7 @@
 #skill_mode 技能类型   0001 伤害技能 0002 防御临时提升 003 debuff 技能
                      0004 施加状态技能  0005 移除状态技能
                      0008 生命恢复 0009 属性亲和，同属性技能伤害加成
-                     0010 伤害并恢复生命
+                     #0010 伤害并恢复生命 合并入0001
                      0011 印记类技能 和印记多少有关 印记以状态显示
                      0012 增益状态技能
                      0013 特殊状态技能 eg.吹飞
@@ -12,9 +12,8 @@
                      0015 延时类技能  eg. 挖地 飞天
                      0016 树果类技能  技能效果随树果的种类而变化
                      0017 改变场地的技能 eg 青草场地 玩水
-                     0018 一击必杀  eg 角钻
+                     #0018 一击必杀  eg 角钻  合并0001
                      0019 锁资源技能 eg 定身法
-                     0020 吸血类状态技能 eg 寄生种子
                      --- 2.0
                      buff 类 与 debuff 类 集合
                      buff  标记attack denfense 法强 法防 提升 统一  0002 buff类技能
@@ -44,7 +43,7 @@ ready 睡眠粉 毒buff
 #hit_rate    命中  0 = 100% 命中
 '''
 
-from assist import  rancom,petattr,weathermap
+from assist import  rancom,petattr,weathermap,life
 from pets import statusmap,talentmap
 from props import berrymap
 import random
@@ -82,7 +81,8 @@ class damageSkill(skill):
                  addition_status_rate = 5,spell_skill=True,lucky_level=1,
                  turns=1,power_changed=False,side_effect=False,self_effect=None,
                  clean_status=None,fixed_damage=False,berry_effect=False,
-                 remove_status=None):
+                 remove_status=None,recover_by_damage = False,recover_per = 0.0,
+                 one_hit_kill=False):
         '''
         :param pp: pp value
         :param hit_status: 附加状态
@@ -97,6 +97,9 @@ class damageSkill(skill):
         :param berry_effect: 树果效果
         :param self_effect: 自生属性提升 默认None  数据形式([status], turns, per)
         :param remove_status: 移除对方的状态
+        :param recover_by_damage: 伤害回复 默认False
+        :param recover_per: 回复比例 默认0
+        :param one_hit_kill: 一击必杀 默认False
         '''
         super().__init__(pp)
         self.skill_model = '0001'
@@ -113,6 +116,9 @@ class damageSkill(skill):
         self.berry_effect = berry_effect
         self.self_effect = self_effect
         self.remove_status = remove_status
+        self.recover_by_damage = recover_by_damage
+        self.recover_per = recover_per
+        self.one_hit_kill = one_hit_kill
 
 
     def addStatus(self,obj,place):
@@ -157,6 +163,9 @@ class damageSkill(skill):
         for status in self.remove_status:
             if status in obj.status:
                 obj.removeStatus(status)
+
+    def recover(self,obj,damage):
+        life.healthRecoverFromDamage(obj,damage,self.recover_per)
 
     # 多段技能触发几段
     def getStepOfSkill(self):
@@ -217,7 +226,7 @@ class statusSkill(skill):
             print("%s 已经陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[self.status].status_show_name))
 
     def setStatusGiver(self,pet):
-        statusmap.status_dict[self.status].status_giver = pet
+        statusmap.status_dict[self.status].status_giver = (pet,self)
 
 class MutlipleStatusSkill(statusSkill):
     def addStatus(self,obj,place,double=1):
@@ -309,15 +318,6 @@ class propSkill(skill):
     def __init__(self,pp=30):
         super().__init__(pp)
         self.skill_model = '0009'
-
-class suckBloodSkill(skill):
-    def __init__(self,pp=15,spell_skill=True,suck_per = 0.5,lucky_level = 1):
-        super().__init__(pp)
-        self.skill_model = '0010'
-        self.spell_skill = spell_skill
-        self.suck_per = suck_per
-        self.lucky_level = lucky_level
-
 
 class ImprintSkill(skill):
     def __init__(self,pp=30,lucky_level= 1,status=None,imprint_level = 1,imprint_type = None,spell_skill = None):
@@ -439,12 +439,6 @@ class PlaceStatusSkill(skill):
         self.turns = turns
         self.weather_change = weather_change
         self.weather = weather
-
-class OneHitKillSkill(skill):
-    def __init__(self,pp=30,spell_skill=True):
-        super().__init__(pp)
-        self.skill_model = '0018'
-        self.spell_skill = spell_skill
 
 class LockSkill(skill):
     def __init__(self,pp=30,status=None,turns = 5):
@@ -849,9 +843,9 @@ class Flail(damageSkill):
             power = 20
         return power
 
-class HornDrill(OneHitKillSkill):
+class HornDrill(damageSkill):
     def __init__(self):
-        super().__init__(pp=5,spell_skill=False)
+        super().__init__(pp=5,spell_skill=False,one_hit_kill=True)
     show_name = '角钻'
     skill_code = 'N030'
     hit_rate = 30
@@ -1378,9 +1372,9 @@ class vinesTied(debuffSkill):
     effect_turns = 3
     skill_info = "捆绑，持续性收到10%气血的伤害"
 
-class Absorb(suckBloodSkill):
+class Absorb(damageSkill):
     def __init__(self,pp=25):
-        super().__init__(pp)
+        super().__init__(pp,recover_by_damage=True,recover_per=0.5)
 
     show_name = '吸取'
     skill_code = 'B006'
@@ -1397,9 +1391,9 @@ class SleepPowder(statusSkill):
     property = 'wood'
     hit_rate = 75
 
-class MegaDrain(suckBloodSkill):
+class MegaDrain(damageSkill):
     def __init__(self,pp=15):
-        super().__init__(pp)
+        super().__init__(pp,recover_by_damage=True,recover_per=0.5)
 
     show_name = '超级吸取'
     skill_code = 'B008'
@@ -1407,9 +1401,9 @@ class MegaDrain(suckBloodSkill):
     skill_info = "攻击目标造成伤害，自身的ＨＰ恢复“造成的伤害×50%"
     skill_power = 40
 
-class GigaDrain(suckBloodSkill):
+class GigaDrain(damageSkill):
     def __init__(self,pp=10):
-        super().__init__(pp)
+        super().__init__(pp,recover_by_damage=True,recover_per=0.5)
 
     show_name = '终极吸取'
     skill_code = 'B009'
@@ -1805,9 +1799,9 @@ class Megahorn(damageSkill):
     hit_rate = 85
     property = 'insect'
 
-class LeechLife(suckBloodSkill):
+class LeechLife(damageSkill):
     def __init__(self,pp=20):
-        super().__init__(pp,spell_skill=False)
+        super().__init__(pp,spell_skill=False,recover_by_damage=True,recover_per=0.5)
     skill_code = 'C003'
     show_name = '吸血'
     skill_power = 80

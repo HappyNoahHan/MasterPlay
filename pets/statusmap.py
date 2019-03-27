@@ -97,7 +97,7 @@ clear_list.remove('ST007')
 clear_list.remove('ST102')
 
 #回合递减
-count_index_list=['ST029','ST030','ST106','ST104','ST107','ST114']
+count_index_list=['ST029','ST030','ST106','ST104','ST107','ST114','ST119']
 
 #异常状态
 abnormal_list = ['ST001','ST002','ST003',
@@ -218,8 +218,8 @@ def checkStatusAfterTurn(obj,place,hit_or_not = True): #默认技能命中
         damage = status_dict['ST111'].statusEffect(obj._max_health)
         print("%s 因寄生种子损失了 %s HP" % (obj.name, damage))
         obj.health -= damage
-        if status_dict['ST111'].status_giver.alive:
-            life.healthRecoreByDrug(status_dict['ST111'].status_giver,damage)
+        if status_dict['ST111'].status_giver[0].alive:
+            life.healthRecoreByDrug(status_dict['ST111'].status_giver[0],damage)
         if obj.health <= 0:
             return False
 
