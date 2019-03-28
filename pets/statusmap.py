@@ -148,6 +148,11 @@ def checkSleepingOrNot(obj):
         elif obj.status['ST003'] > 4:
             removeStatus(obj,'ST003')
             return False
+        elif obj.status['ST003'] == 2:
+            if status_dict['ST003'].status_giver[1].skill_code == 'S013':
+                print("%s 清醒了！" % obj.name)
+                removeStatus(obj, 'ST003')
+                return False
 
         obj.status['ST003'] += 1
         return True
@@ -167,7 +172,7 @@ def checkShrinkaOrNot(obj):
 
 def checkStatusBeforeBattle(obj,skill):
     #技能解除异常状态
-    if skill.skill_code in ['B013','I001']:
+    if skill.skill_code in ['B013','I001','S013']:
         return False
 
     if obj.status:

@@ -98,6 +98,9 @@ skill_dict = {
     'N067': battle.skill.DoubleSlap,#连环巴掌
     'N068': battle.skill.Sing,#唱歌
     'N069': battle.skill.Roar,#吼叫
+    'N070': battle.skill.Mimic,#模仿
+    'N071': battle.skill.Round,#轮唱
+    'N072': battle.skill.HyperVoice,#巨声
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B006': battle.skill.Absorb, #吸取
@@ -128,6 +131,7 @@ skill_dict = {
     'S010': battle.skill.StoredPower,#辅助力量
     'S011': battle.skill.Extrasensory,#神通力
     'S012': battle.skill.Imprison,#封印
+    'S013': battle.skill.Rest,#睡觉
     'I001': battle.skill.Haze, #黑雾
     'I002': battle.skill.IceFang,#冰冻牙
     'T003': battle.skill.Bite, #咬住
@@ -234,6 +238,7 @@ skill_dict = {
     'Y002': battle.skill.Moonblast,#月亮之力
     'Y003': battle.skill.DisarmingVoice,#魅惑之声
     'Y004': battle.skill.BabyDollEyes,#圆瞳
+    'Y005': battle.skill.PlayRough,#嬉闹
     'X001': battle.skill.GyroBall,#陀螺球
     'X002': battle.skill.MagnetBomb,#磁铁炸弹
     'X003': battle.skill.MirrorShot,#镜光射击

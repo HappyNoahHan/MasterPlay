@@ -116,8 +116,8 @@ def accountAfterBattleEnd(player,pet):
         # 检查是否携带学习机器
         exp_up = propmap.checkCarryPropForExpUp(get_exp_pet)
         # 清除buff
-        get_exp_pet.buff_dict.clear()
-        get_exp_pet.property_buff.clear()
+        #get_exp_pet.buff_dict.clear()
+        #get_exp_pet.property_buff.clear()
 
         got_exp = 0
 

@@ -67,14 +67,14 @@ class skill(object):
     lock = False
     priority = 5 #释放优先度
 
-
-
-
     def __str__(self):
         return self.skill_info + ' || Power: ' + str(self.skill_power)
 
     def getProp(self):
         return self.property
+
+    def getPower(self):
+        return self.skill_power
 
 class damageSkill(skill):
     def __init__(self,pp=30,hit_status=None,addition_status = None,
@@ -255,7 +255,8 @@ class GainStatusUpSkill(skill):
 class RecoverSkill(skill):
     def __init__(self,pp=30,weather_condition=None,recover_per=0.0
                  ,recover_health = False,recover_status = False,
-                 clean_status=None,remove_status=None,hit_status=None,turns=0):
+                 clean_status=None,remove_status=None,hit_status=None,turns=0,
+                 max_recover_allowable = True):
         super().__init__(pp,weather_condition)
         self.skill_model = '0008'
         self.recover_per = recover_per
@@ -265,6 +266,7 @@ class RecoverSkill(skill):
         self.remove_status = remove_status #清除对面状态
         self.hit_status = hit_status #附加状态
         self.turns = turns #层数
+        self.max_recover_allowable = max_recover_allowable #满状态治疗允许
 
     def getIndexPer(self):
         return self.recover_per
@@ -282,12 +284,11 @@ class RecoverSkill(skill):
     def setStatus(self,pet,place):
         for status in self.hit_status:
             if talentmap.addStatusOrNot(pet, status, place):
+                pet.setStatus(status, self.turns)
                 print("%s 陷入 %s 状态 ！" % (pet.name, statusmap.status_dict[status].status_show_name))
             else:
                 print("%s 免疫 %s 状态 ！" % (pet.name, statusmap.status_dict[status].status_show_name))
-
-    def setStatusGiver(self,pet):
-        statusmap.status_dict[self.hit_status].status_giver = (pet,self)
+            statusmap.status_dict[status].status_giver = (pet,self)
 
 class ImprintSkill(skill):
     def __init__(self,pp=30,lucky_level= 1,status=None,imprint_level = 1,imprint_type = None,spell_skill = None):
@@ -390,9 +391,6 @@ class DelayedSkill(skill):
             if self.add_status_begin not in pet.status:
                 self.setDelayedSkill(pet)
                 self.addStatus(pet)
-
-    def getPower(self,pet):
-        return self.skill_power
 
 class BerryEffectSkill(skill):
     def __init__(self,pp=30,spell_skill=True,lucky_level=1):
@@ -1158,6 +1156,31 @@ class Sing(statusSkill):
     hit_rate = 55
     skill_info = '让对手听舒适,美妙的歌声,从而陷入睡眠状态'
 
+class Mimic(CopySkill):
+    def __init__(self):
+        super().__init__(pp=10)
+
+    show_name = '模仿'
+    skill_code = 'N070'
+    hit_rate = 0
+    skill_info = '可以将对手最后使用的招式,在战斗内变成自己的招式'
+
+class Round(damageSkill):
+    def __init__(self):
+        super(Round, self).__init__(pp=15)
+    show_name = '轮唱'
+    skill_code = 'N071'
+    skill_power = 60
+    skill_info = '用歌声攻击对手,同伴还可以接着使出轮唱招式,威力也会提高' #后续
+
+class HyperVoice(damageSkill):
+    def __init__(self):
+        super(HyperVoice, self).__init__(pp=10)
+    show_name = '巨声'
+    skill_code = 'N072'
+    skill_power = 90
+    skill_info = '给予对手又吵又响的巨大震动进行攻击'
+
 class Ember(damageSkill):
     def __init__(self,pp=25):
         super().__init__(pp,hit_status='ST001',addition_status_rate=10)
@@ -1573,6 +1596,18 @@ class Imprison(LockSkill):
         for key,skill in pet.skill_list.items():
             if skill.skill_code in attack_pet_skilllist:
                 skill.lock = True
+
+class Rest(RecoverSkill):
+    def __init__(self):
+        super(Rest, self).__init__(pp=10,recover_health=True,recover_status=True,
+                                   clean_status=statusmap.abnormal_list,hit_status=['ST003'],
+                                   turns=1,recover_per=1.0,max_recover_allowable=False)
+    show_name = '睡觉'
+    skill_code = 'S013'
+    property = 'psychic'
+    hit_rate = 0
+    skill_info = '连续睡上２回合,回复自己的全部ＨＰ以及治愈所有异常状态'
+
 
 class Bite(damageSkill):
     def __init__(self):
@@ -2651,6 +2686,15 @@ class BabyDollEyes(statusSkill):
     priority = 1
     skill_info = '用圆瞳凝视对手,从而降低其攻击,必定能够先制攻击。'
 
+class PlayRough(damageSkill):
+    def __init__(self):
+        super(PlayRough, self).__init__(pp=10,spell_skill=False,hit_status='ST021',addition_status_rate=10)
+    show_name = '嬉闹'
+    skill_code = 'Y005'
+    property = 'fairy'
+    skill_power = 90
+    hit_rate = 90
+    skill_info = '与对手嬉闹并攻击,有时会降低对手的攻击'
 
 class GyroBall(damageSkill):
     def __init__(self):

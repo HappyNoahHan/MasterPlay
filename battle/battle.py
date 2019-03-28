@@ -31,11 +31,16 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
     if obj_skill.skill_model == '0001':
 
         if obj_skill.fixed_damage == False:
-            # 拿到变化威力技能的 威力值
+            # 得到技能威力
             if obj_skill.power_changed:
-                obj_skill.skill_power = obj_skill.getPower(obj_attack,obj_defense)
-            damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,obj_skill.skill_power,place)
-            obj_skill.addStatus(obj_defense,place)  # 附加状态
+                power = obj_skill.getPower(obj_attack,obj_defense)
+            else:
+                power = obj_skill.getPower()
+            damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,power,place)
+
+            if obj_skill.hit_status:
+                obj_skill.addStatus(obj_defense,place)  # 附加状态
+
             if obj_skill.side_effect != None:
                 obj_skill.getSideEffect(obj_attack,damage) #副作用
 
@@ -85,9 +90,14 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
     elif obj_skill.skill_model == '0008':
         if obj_skill.recover_health:
             if obj_skill.weather_condition == None:
-                index_per = obj_skill.getIndexPer()
+                    index_per = obj_skill.getIndexPer()
             else:
                 index_per = obj_skill.getIndexPer(place.weather)
+
+            if not obj_skill.max_recover_allowable:
+                if obj_attack.health == obj_attack._max_health:
+                    print("技能使用失败~~")
+                    #return True
             assist.life.healthRecoverBySkill(obj_attack, index_per)
 
         if obj_skill.recover_status:
@@ -95,6 +105,10 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
                 obj_skill.removeStatus(obj_defense)
             if obj_skill.clean_status:
                 obj_skill.cleanStatus(obj_attack)
+
+        if obj_skill.hit_status:
+            obj_skill.setStatus(obj_attack,place)
+            #obj_skill.setStatusGiver(obj_attack)
 
     elif obj_skill.skill_model == '0011':
         if obj_skill.imprint_level == 1:
