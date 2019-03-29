@@ -1478,6 +1478,14 @@ class SeedBomb(damageSkill):
     skill_name = '种子炸弹'
     skill_info = '将外壳坚硬的大种子,从上方砸下攻击对手'
 
+class Spore(statusSkill):
+    def __init__(self):
+        super().__init__(pp=15,status='ST003')
+    skill_code = 'B023'
+    property = 'wood'
+    skill_info = '沙沙沙地撒满具有催眠效果的孢子,从而让对手陷入睡眠状态'
+    show_name = '蘑菇孢子'
+
 class Agility(GainStatusUpSkill):
     def __init__(self):
         super().__init__(status=['ST020'],turns=2)
@@ -1855,6 +1863,15 @@ class FuryCutter(damageSkill):
             obj.setStatus('ST115')
         else:
             obj.status['ST115'] += 1
+
+class XScissor(damageSkill):
+    def __init__(self):
+        super(XScissor, self).__init__(pp=15,spell_skill=False)
+    show_name = '十字剪'
+    skill_code = 'C013'
+    skill_power = 80
+    skill_info = '将镰刀或爪子像剪刀般地交叉,顺势劈开对手'
+    property = 'insect'
 
 class Haze(RecoverSkill):
     def __init__(self):
@@ -2443,6 +2460,15 @@ class VenomDrench(MutlipleStatusSkill):
     property = 'poison'
     skill_code = 'P019'
     skill_info = '将特殊的毒液泼向对手,对处于中毒状态的对手,其攻击、特攻和速度都会降低'
+
+class CrossPoison(damageSkill):
+    def __init__(self):
+        super(CrossPoison, self).__init__(pp=20,hit_status='ST007',addition_status_rate=10,spell_skill=False,lucky_level=2)
+    property = 'poison'
+    show_name = '十字毒刃'
+    skill_power = 70
+    skill_code = 'P020'
+    skill_info = '用毒刃劈开对手,有时会让对手陷入中毒状态,也容易击中要害'
 
 class ThunderFang(MultipleDamageSkill):
     def __init__(self):

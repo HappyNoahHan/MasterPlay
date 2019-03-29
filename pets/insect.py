@@ -109,3 +109,41 @@ class Beedrill(Weedle):
     capture_rate = 45
     # 精灵编号
     pet_no = '015'
+
+class Paras(propets.PropInit):
+    health_basic = 35
+    attack_basic = 70
+    defense_basic = 55
+    spell_power_basic = 45
+    spell_defense_basic = 55
+    speed_basic = 25
+
+    name = '派拉斯'
+    kind = '蘑菇'
+    basic_exp_value = 57
+
+    can_get_base_point = 1
+    can_get_base_point_type = 'attack'
+    capture_rate = 190
+    # 精灵编号
+    pet_no = '046'
+    prop = ['insect','wood']
+
+class Parasect(propets.PropInit):
+    health_basic = 60
+    attack_basic = 95
+    defense_basic = 80
+    spell_power_basic = 60
+    spell_defense_basic = 80
+    speed_basic = 30
+
+    name = '派拉斯特'
+    kind = '蘑菇'
+    basic_exp_value = 142
+
+    can_get_base_point = 3
+    can_get_base_point_type = 'attack'
+    capture_rate = 75
+    # 精灵编号
+    pet_no = '047'
+    prop = ['insect','wood']

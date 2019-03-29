@@ -120,6 +120,7 @@ skill_dict = {
     'B020': battle.skill.WorrySeed,#烦恼种子
     'B021': battle.skill.Synthesis,#光合作用
     'B022': battle.skill.SeedBomb,#种子炸弹
+    'B023': battle.skill.Spore,#蘑菇孢子
     'S002': battle.skill.Agility,#高速移动
     'S003': battle.skill.Barrier,#屏障
     'S004': battle.skill.Psywave,#精神波
@@ -157,6 +158,7 @@ skill_dict = {
     'C010': battle.skill.PinMissile,#飞弹针
     'C011': battle.skill.FellStinger,#致命针刺
     'C012': battle.skill.FuryCutter,#连斩
+    'C013': battle.skill.XScissor,#十字剪
     'D002': battle.skill.Bubble,#泡沫
     'D003': battle.skill.HydroPump,#水炮
     'D004': battle.skill.WaterPulse,#水之波动
@@ -216,6 +218,7 @@ skill_dict = {
     'P017': battle.skill.SludgeBomb,#污泥炸弹
     'P018': battle.skill.AcidArmor,#溶化
     'P019': battle.skill.VenomDrench,#毒液陷阱
+    'P020': battle.skill.CrossPoison,#十字毒刃
     'H001': battle.skill.ThunderFang,#雷电牙
     'H002': battle.skill.ThunderShock,#电击
     'H003': battle.skill.ThunderWave,#电磁波
