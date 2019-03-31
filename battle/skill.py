@@ -1181,6 +1181,13 @@ class HyperVoice(damageSkill):
     skill_power = 90
     skill_info = '给予对手又吵又响的巨大震动进行攻击'
 
+class Foresight(statusSkill):
+    def __init__(self):
+        super(Foresight, self).__init__(pp=40,status='ST121')
+    show_name = '识破'
+    skill_code = 'N073'
+    skill_info = '对幽灵属性宝可梦没有效果的招式以及闪避率高的对手,使用后变得能够打中'
+
 class Ember(damageSkill):
     def __init__(self,pp=25):
         super().__init__(pp,hit_status='ST001',addition_status_rate=10)
@@ -1616,6 +1623,15 @@ class Rest(RecoverSkill):
     hit_rate = 0
     skill_info = '连续睡上２回合,回复自己的全部ＨＰ以及治愈所有异常状态'
 
+class ZenHeadbut(damageSkill):
+    def __init__(self):
+        super().__init__(pp=15,spell_skill=False,hit_status='ST004',addition_status_rate=20)
+    show_name = '意念头锤'
+    skill_code = 'S014'
+    property = 'psychic'
+    hit_rate = 90
+    skill_power = 80
+    skill_info = '将思念的力量集中在前额进行攻击,有时会使对手畏缩'
 
 class Bite(damageSkill):
     def __init__(self):
@@ -1872,6 +1888,15 @@ class XScissor(damageSkill):
     skill_power = 80
     skill_info = '将镰刀或爪子像剪刀般地交叉,顺势劈开对手'
     property = 'insect'
+
+class SignalBeam(damageSkill):
+    def __init__(self):
+        super(SignalBeam, self).__init__(pp=15,hit_status='ST006',addition_status_rate=10)
+    show_name = '信号光束'
+    skill_code = 'C014'
+    skill_power = 75
+    property = 'insect'
+    skill_info = '发射神奇的光线进行攻击,有时会使对手混乱'
 
 class Haze(RecoverSkill):
     def __init__(self):

@@ -101,6 +101,7 @@ skill_dict = {
     'N070': battle.skill.Mimic,#模仿
     'N071': battle.skill.Round,#轮唱
     'N072': battle.skill.HyperVoice,#巨声
+    'N073': battle.skill.Foresight,#识破
     'B001': battle.skill.StunSpore,#麻痹粉
     'B002': battle.skill.azorLeaf,#飞叶快刀
     'B006': battle.skill.Absorb, #吸取
@@ -133,6 +134,7 @@ skill_dict = {
     'S011': battle.skill.Extrasensory,#神通力
     'S012': battle.skill.Imprison,#封印
     'S013': battle.skill.Rest,#睡觉
+    'S014': battle.skill.ZenHeadbut,#意念头锤
     'I001': battle.skill.Haze, #黑雾
     'I002': battle.skill.IceFang,#冰冻牙
     'T003': battle.skill.Bite, #咬住
@@ -159,6 +161,7 @@ skill_dict = {
     'C011': battle.skill.FellStinger,#致命针刺
     'C012': battle.skill.FuryCutter,#连斩
     'C013': battle.skill.XScissor,#十字剪
+    'C014': battle.skill.SignalBeam,#信号光束
     'D002': battle.skill.Bubble,#泡沫
     'D003': battle.skill.HydroPump,#水炮
     'D004': battle.skill.WaterPulse,#水之波动

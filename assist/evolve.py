@@ -36,6 +36,8 @@ evolve_dict={
     '超音蝠': [poison.Golbat,22,'level_up'],
     '走路草': [wood.Gloom,21,'level_up'],
     '臭臭花': [wood.Vileplume,'叶之翠','stone_up'],
+    '派拉斯': [insect.Parasect,24,'level_up'],
+    '毛球': [insect.Venomoth,31,'level_up'],
     '喇叭芽': [wood.Weepinbell,21,'level_up'],
     '口呆花': [wood.Victreebel,'叶之翠','stone_up'],
     '小拳石': [rock.Graveler,25,'level_up'],

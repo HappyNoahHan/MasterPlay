@@ -10,8 +10,10 @@ def hitOrNot(skill,rate,obj_attack,obj_defense,dodge):
     if skill.hit_rate == 0 or 'ST104' in obj_defense.status:
         print("%s 必定命中！" % skill.show_name)
         return True
-
-    dodge = statusmap.checkDogeBeforHitCount(obj_defense,dodge)
+    if 'ST121' in obj_defense.status: #被识破
+        dodge = 0
+    else:
+        dodge = statusmap.checkDogeBeforHitCount(obj_defense,dodge)
     print("闪避等级 %s 级" % dodge)
 
     if obj_attack.level > obj_defense.level:

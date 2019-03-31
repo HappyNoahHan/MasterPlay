@@ -32,4 +32,11 @@ def getAttrMap(obj_skill,obj):
         restrain_amendment.append(1)
 
     #匿名函数+reduce 得到个元素乘积
-    return reduce(lambda x,y:x*y,restrain_amendment)
+    attr_index = reduce(lambda x,y:x*y,restrain_amendment)
+
+    if 'ghost' in obj.prop and 'ST121' in obj.status:
+        if obj_skill.property == 'normal' or obj_skill.property == 'combat':
+            if attr_index == 0:
+                attr_index = 1
+
+    return attr_index

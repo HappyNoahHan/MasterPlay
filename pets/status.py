@@ -387,3 +387,8 @@ class Tailwind(Status):
     status_show_name = '顺风'
     status_info = '速度加倍,持续时间为4回合'
     status_code = 'ST120'
+
+class Identified(Status):
+    status_show_name = '被识破'
+    status_info = '躲避无效'
+    status_code = 'ST121'

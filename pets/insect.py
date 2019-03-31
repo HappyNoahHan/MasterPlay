@@ -147,3 +147,41 @@ class Parasect(propets.PropInit):
     # 精灵编号
     pet_no = '047'
     prop = ['insect','wood']
+
+class Venonat(propets.PropInit):
+    health_basic = 65
+    attack_basic = 55
+    defense_basic = 50
+    spell_power_basic = 40
+    spell_defense_basic = 55
+    speed_basic = 45
+
+    name = '毛球'
+    kind = '昆虫'
+    basic_exp_value = 61
+
+    can_get_base_point = 1
+    can_get_base_point_type = 'spell_defense'
+    capture_rate = 190
+    # 精灵编号
+    pet_no = '048'
+    prop = ['insect','poison']
+
+class Venomoth(propets.PropInit):
+    health_basic = 70
+    attack_basic = 65
+    defense_basic = 60
+    spell_power_basic = 90
+    spell_defense_basic = 75
+    speed_basic = 90
+
+    name = '摩鲁蛾'
+    kind = '毒蛾'
+    basic_exp_value = 158
+
+    can_get_base_point = 1
+    can_get_base_point_type = ['spell_power','speed']
+    capture_rate = 75
+    # 精灵编号
+    pet_no = '049'
+    prop = ['insect','poison']

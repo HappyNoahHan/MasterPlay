@@ -86,6 +86,7 @@ status_dict={
     'ST118' : status.Imprison(),
     'ST119' : status.Grudge(),
     'ST120' : status.Whirlwind(),
+    'ST121' : status.Identified(),
 }
 
 #清理清单
