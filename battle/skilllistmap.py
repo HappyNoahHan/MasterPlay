@@ -84,7 +84,7 @@ skill_dict = {
     'N053': battle.skill.Endeavor,#蛮干
     'N054': battle.skill.Rage,#愤怒  后续先这样
     'N055': battle.skill.HyperFang,#必杀门牙
-    'N056': battle.skill.SuckerPunch,#突袭
+    'N056': battle.skill.PayDay,#聚宝盆
     'N057': battle.skill.SuperFang,#愤怒门牙
     'N058': battle.skill.SwordsDance,#剑舞
     'N059': battle.skill.PlayNice,#和睦相处
@@ -148,6 +148,9 @@ skill_dict = {
     'T011': battle.skill.Payback,#以牙还牙
     'T012': battle.skill.FeintAttack,#出奇一击
     'T013': battle.skill.NastyPlot,#诡计
+    'T014': battle.skill.SuckerPunch,  # 突袭
+    'T015': battle.skill.NightSlash,#暗袭要害
+    'T016': battle.skill.Taunt,#挑衅
     'C001': battle.skill.Megahorn,#超级角击
     'C002': battle.skill.StringShot,#吐丝
     'C003': battle.skill.LeechLife, #吸血
@@ -197,6 +200,8 @@ skill_dict = {
     'E009': battle.skill.SandTomb,#流沙地狱
     'E010': battle.skill.Dig,#挖洞
     'E011': battle.skill.EarthPower,#大地之力
+    'E012': battle.skill.Fissure,#地裂
+    'E013': battle.skill.Rototiller,#耕地
     'Q001': battle.skill.ConfuseRay, #奇异之光
     'Q002': battle.skill.Astonish, #惊吓
     'Q003': battle.skill.Hex,#祸不单行

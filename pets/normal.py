@@ -35,3 +35,41 @@ class Raticate(Rattata):
     capture_rate = 127
     # 精灵编号
     pet_no = '020'
+
+class Meowth(propets.PropInit):
+    health_basic = 40
+    attack_basic = 45
+    defense_basic = 35
+    spell_power_basic = 40
+    spell_defense_basic = 40
+    speed_basic = 90
+
+    name = '喵喵'
+    kind = '妖怪猫'
+    basic_exp_value = 58
+
+    can_get_base_point = 1
+    can_get_base_point_type = 'speed'
+    capture_rate = 255
+    # 精灵编号
+    pet_no = '052'
+    prop = ['normal']
+
+class Persian(propets.PropInit):
+    health_basic = 65
+    attack_basic = 70
+    defense_basic = 60
+    spell_power_basic = 65
+    spell_defense_basic = 65
+    speed_basic = 115
+
+    name = '猫老大'
+    kind = '暹罗猫'
+    basic_exp_value = 154
+
+    can_get_base_point = 2
+    can_get_base_point_type = 'speed'
+    capture_rate = 90
+    # 精灵编号
+    pet_no = '053'
+    prop = ['normal']

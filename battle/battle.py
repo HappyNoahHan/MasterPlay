@@ -50,11 +50,14 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
             if obj_skill.berry_effect: #树果效果
                 obj_skill.eatBerry(obj_attack,obj_defense)
 
-            if obj_skill.self_effect:#自身附加状态
+            if obj_skill.self_effect:# 附加效果 等其他
                 obj_skill.selfSideEffect(obj_attack,obj_defense,damage)
 
             if obj_skill.remove_status: #移除对方状态
                 obj_skill.removeStatus(obj_defense)
+
+            if obj_skill.prize_effect: #赏金
+                obj_skill.setPrize(obj_defense)
         else:
             damage = obj_skill.getDamage(obj_attack,obj_defense)
 
@@ -288,13 +291,17 @@ def battleRun(player,obj1,obj2,place):
             if obj1.skill_list[skill_number].lock:
                 print("技能被锁,无法使用！")
                 return battleRun(player,obj1,obj2,place)
+            if 'ST122' in obj1.status:
+                if obj1.skill_list[skill_number].spell_skill == None:
+                    print("技能无法使用！")
+                    return battleRun(player,obj1,obj2,place)
         #记录最后使用的技能
         obj1.last_used_skill = obj1.skill_list[skill_number]
         # 战斗前的buff
         #asscount.checkBuffBeforeBattle(obj1, obj2)
         # 道具检查
         assist.show.useSkill(obj1,obj1.skill_list[skill_number])
-        print(obj1.skill_list[skill_number]) #显示技能描述
+        print(obj1.skill_list[skill_number]) #显示技能描述;'
         #检查畏缩 优先级最高
         if statusmap.checkShrinkaOrNot(obj1):
             # 回合结束检查是否中毒  中毒死亡
@@ -351,7 +358,7 @@ def battleRun(player,obj1,obj2,place):
         if obj1.skill_list[skill_number].multi_step == False:
             try:
                 if obj1.skill_list[skill_number].one_hit_kill:
-                    if battle.hitrate.hitForOneHitKill(obj1,obj2):
+                    if battle.hitrate.hitForOneHitKill(obj1,obj2,obj1.skill_list[skill_number]):
                         print("%s 一击必杀" % obj1.name)
                         obj2.health = 0
                         assist.show.petDie(obj2)

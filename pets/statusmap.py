@@ -87,6 +87,7 @@ status_dict={
     'ST119' : status.Grudge(),
     'ST120' : status.Whirlwind(),
     'ST121' : status.Identified(),
+    'ST122' : status.Taunt(),
 }
 
 #清理清单
@@ -99,7 +100,7 @@ clear_list.remove('ST007')
 clear_list.remove('ST102')
 
 #回合递减
-count_index_list=['ST029','ST030','ST106','ST104','ST107','ST114','ST119','ST120']
+count_index_list=['ST029','ST030','ST106','ST104','ST107','ST114','ST119','ST120','ST122']
 
 #异常状态
 abnormal_list = ['ST001','ST002','ST003',

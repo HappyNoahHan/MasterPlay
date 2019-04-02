@@ -1,5 +1,6 @@
 import random
 from pets import statusmap
+from assist import petattr
 
 def hitOrNot(skill,rate,obj_attack,obj_defense,dodge):
     #ST107 电磁飘浮 免疫地面
@@ -40,7 +41,11 @@ def hitOrNot(skill,rate,obj_attack,obj_defense,dodge):
         return False
 
 
-def hitForOneHitKill(obj_attack,obj_defense):
+def hitForOneHitKill(obj_attack,obj_defense,skill):
+    #属性相性不为0倍
+    if petattr.getAttrMap(skill,obj_defense) == 0:
+        return False
+
     if obj_attack.level < obj_defense.level:
         return False
     else:

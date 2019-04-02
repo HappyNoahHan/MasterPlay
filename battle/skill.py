@@ -82,7 +82,7 @@ class damageSkill(skill):
                  turns=1,power_changed=False,side_effect=False,self_effect=None,
                  clean_status=None,fixed_damage=False,berry_effect=False,
                  remove_status=None,recover_by_damage = False,recover_per = 0.0,
-                 one_hit_kill=False):
+                 one_hit_kill=False,prize_efect = False):
         '''
         :param pp: pp value
         :param hit_status: 附加状态
@@ -100,6 +100,7 @@ class damageSkill(skill):
         :param recover_by_damage: 伤害回复 默认False
         :param recover_per: 回复比例 默认0
         :param one_hit_kill: 一击必杀 默认False
+        :param prize_efect: 赏金增加
         '''
         super().__init__(pp)
         self.skill_model = '0001'
@@ -119,6 +120,7 @@ class damageSkill(skill):
         self.recover_by_damage = recover_by_damage
         self.recover_per = recover_per
         self.one_hit_kill = one_hit_kill
+        self.prize_effect = prize_efect
 
 
     def addStatus(self,obj,place):
@@ -194,7 +196,7 @@ class MultipleDamageSkill(damageSkill):
                             print("%s 免疫 %s 状态" % (obj.name,statusmap.status_dict[status].status_show_name))
 
 class statusSkill(skill):
-    def __init__(self,pp=30,status=None,turns = 1,side_effect=False,add_condition=None,need_user=False):
+    def __init__(self,pp=30,status=None,turns = 1,side_effect=False,add_condition=None,need_user=False,spell_skill=None):
         super().__init__(pp)
         self.skill_model = '0004'
         self.status = status
@@ -202,6 +204,7 @@ class statusSkill(skill):
         self.side_effect = side_effect
         self.add_condition = add_condition #中状态条件
         self.need_user = need_user #是否需要记录使用者
+        self.spell_skill = spell_skill #技能类型 None 变化型
 
     def addStatus(self,obj,place):
         if talentmap.addStatusOrNot(obj,self.status,place):
@@ -231,11 +234,12 @@ class GainStatusUpSkill(skill):
     多重加增益状态技能
     '''
 
-    def __init__(self, pp=30, status=None, turns=1,weather_condition=None):
+    def __init__(self, pp=30, status=None, turns=1,weather_condition=None,spell_skill=None):
         super().__init__(pp,weather_condition)
         self.skill_model = '0012'
         self.status = status
         self.turns = turns
+        self.spell_skill = spell_skill  # 技能类型 None 变化型
         #self.weather_condition = weather_condition
 
     def addStatus(self,obj,place,double=1):
@@ -256,7 +260,7 @@ class RecoverSkill(skill):
     def __init__(self,pp=30,weather_condition=None,recover_per=0.0
                  ,recover_health = False,recover_status = False,
                  clean_status=None,remove_status=None,hit_status=None,turns=0,
-                 max_recover_allowable = True):
+                 max_recover_allowable = True,spell_skill=None):
         super().__init__(pp,weather_condition)
         self.skill_model = '0008'
         self.recover_per = recover_per
@@ -267,6 +271,7 @@ class RecoverSkill(skill):
         self.hit_status = hit_status #附加状态
         self.turns = turns #层数
         self.max_recover_allowable = max_recover_allowable #满状态治疗允许
+        self.spell_skill = spell_skill
 
     def getIndexPer(self):
         return self.recover_per
@@ -322,11 +327,12 @@ class ImprintSkill(skill):
 
 
 class SpecialStatusSkill(skill):
-    def __init__(self,pp=30,status=None,turns =1 ):
+    def __init__(self,pp=30,status=None,turns =1 ,spell_skill=None):
         super().__init__(pp)
         self.skill_model = '0013'
         self.status = status
         self.turns = turns
+        self.spell_skill = spell_skill
 
     def addStatus(self,obj_attack,obj_defense):
         if obj_attack.level >= obj_defense.level:
@@ -337,9 +343,10 @@ class SpecialStatusSkill(skill):
         return False
 
 class CopySkill(skill):
-    def __init__(self,pp=30):
+    def __init__(self,pp=30,spell_skill=None):
         super().__init__(pp)
         self.skill_model = '0014'
+        self.spell_skill = spell_skill
 
     def useOrNot(self,obj):
         if obj.last_used_skill != None:
@@ -400,20 +407,22 @@ class BerryEffectSkill(skill):
         self.lucky_level = lucky_level
 
 class PlaceStatusSkill(skill):
-    def __init__(self,pp=30,status=None,turns=5,weather_change=False,weather=None):
+    def __init__(self,pp=30,status=None,turns=5,weather_change=False,weather=None,spell_skill=None):
         super().__init__(pp)
         self.skill_model = '0017'
         self.status = status
         self.turns = turns
         self.weather_change = weather_change
         self.weather = weather
+        self.spell_skill = spell_skill
 
 class LockSkill(skill):
-    def __init__(self,pp=30,status=None,turns = 5):
+    def __init__(self,pp=30,status=None,turns = 5,spell_skill=None):
         super(LockSkill, self).__init__(pp)
         self.status = status
         self.turns = turns
         self.skill_model = '0019'
+        self.spell_skill = spell_skill
 
     def addStatus(self,pet,attack_pet):
         if pet.last_used_skill:
@@ -1041,14 +1050,16 @@ class HyperFang(damageSkill):
     hit_rate = 90
     skill_info = '用锋利的门牙牢牢地咬住对手进行攻击,有时会使对手畏缩'
 
-class SuckerPunch(damageSkill):
+class PayDay(damageSkill):
     def __init__(self):
-        super(SuckerPunch, self).__init__(pp=5,spell_skill=False)
-    show_name = '突袭'
+        super(PayDay, self).__init__(pp=20,spell_skill=False,prize_efect=True)
+    show_name = '聚宝盆'
     skill_code = 'N056'
-    skill_power = 70
-    skill_info = '可以比对手先攻击'
-    property = 1
+    skill_power = 40
+    skill_info = '向对手的身体投掷小金币进行攻击,战斗后可以拿到钱'
+
+    def setPrize(self,pet):
+        pet.reward_money = pet.level * 5
 
 class SuperFang(damageSkill):
     def __init__(self):
@@ -1738,6 +1749,33 @@ class NastyPlot(GainStatusUpSkill):
     skill_info = '谋划诡计,激活头脑,大幅提高自己的特攻'
     hit_rate = 0
 
+class SuckerPunch(damageSkill):
+    def __init__(self):
+        super(SuckerPunch, self).__init__(pp=5,spell_skill=False)
+    show_name = '突袭'
+    skill_code = 'T014'
+    skill_power = 70
+    skill_info = '可以比对手先攻击'
+    property = 'dark'
+    priority = 1
+
+class NightSlash(damageSkill):
+    def __init__(self):
+        super(NightSlash, self).__init__(pp=15,lucky_level=2,spell_skill=False)
+    show_name = '暗袭要害'
+    skill_power = 70
+    skill_code = 'T015'
+    skill_info = '抓住瞬间的空隙切斩对手,容易击中要害'
+    property = 'dark'
+
+class Taunt(statusSkill):
+    def __init__(self):
+        super(Taunt, self).__init__(pp=20,status='ST122',turns=3)
+    show_name = '挑衅'
+    skill_code = 'T016'
+    skill_info = '使对手愤怒,在３回合内让对手只能使出给予伤害的招式'
+    property = 'dark'
+
 class Megahorn(damageSkill):
     def __init__(self):
         super().__init__(pp=10,spell_skill=False)
@@ -2262,6 +2300,32 @@ class EarthPower(damageSkill):
     skill_code = 'E011'
     property = 'ground'
     skill_info = '向对手脚下释放出大地之力,有时会降低对手的特防'
+
+class Fissure(damageSkill):
+    def __init__(self):
+        super().__init__(pp=5,spell_skill=False,one_hit_kill=True)
+    show_name = '地裂'
+    skill_code = 'E012'
+    property = 'ground'
+    skill_info = '让对手掉落于地裂的裂缝中进行攻击,只要命中就会一击濒死'
+
+class Rototiller(GainStatusUpSkill):
+    def __init__(self):
+        super(Rototiller, self).__init__(pp=10,status=['ST016','ST018'])
+    show_name = '耕地'
+    skill_code = 'E013'
+    property = 'ground'
+    skill_info = '翻耕土地,使草木更容易成长,会提高草属性宝可梦的攻击和特攻'
+
+    def addStatus(self, obj, place, double=1):
+        for status in self.status:
+            if 'wood' in obj.prop and 'ST116' not in obj.status and 'ST024' not in obj.status:
+                if talentmap.addStatusOrNot(obj, status, place):
+                    obj.setStatus(status, self.turns * double)
+                    print("%s 陷入 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
+                else:
+                    print("%s 免疫 %s 状态 ！" % (obj.name, statusmap.status_dict[status].status_show_name))
+
 
 class ConfuseRay(statusSkill):
     def __init__(self):

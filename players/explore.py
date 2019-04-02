@@ -63,5 +63,6 @@ def trainerVS(player,trainer,place):
         return False
     for pet in trainer.pet_list:
         life.restore(pet)
+        pet.reward_money = None #重置
     statusmap.checkStatusEnd(player)
     return True

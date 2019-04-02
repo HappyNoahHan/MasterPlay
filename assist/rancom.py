@@ -36,12 +36,22 @@ def canChoiceList(obj):
     choice_list = []
 
     for key,skill in obj.skill_list.items():
-        if obj.skill_list[key].use_condition != None:
-            if obj.skill_list[key].use_condition in obj.status:
-                choice_list.append(key)
+        if 'ST122' not in obj.status:
+            if obj.skill_list[key].use_condition != None:
+                if obj.skill_list[key].use_condition in obj.status:
+                    choice_list.append(key)
+            else:
+                if not skill.lock:
+                    choice_list.append(key)
         else:
-            if not skill.lock:
-                choice_list.append(key)
+            if skill.spell_skill != None:
+                if obj.skill_list[key].use_condition != None:
+                    if obj.skill_list[key].use_condition in obj.status:
+                        choice_list.append(key)
+                else:
+                    if not skill.lock:
+                        choice_list.append(key)
+
 
     return choice_list
 

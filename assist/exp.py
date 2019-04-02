@@ -112,6 +112,12 @@ def levelUp(obj):
 
 
 def accountAfterBattleEnd(player,pet):
+    #金钱结算
+    if pet.reward_money:
+        player.money += pet.reward_money
+        print("%s 获得 %s 金钱" % (player.name,pet.reward_money))
+        pet.reward_money = None
+
     for get_exp_pet in player.battle_pet_list:
         # 检查是否携带学习机器
         exp_up = propmap.checkCarryPropForExpUp(get_exp_pet)

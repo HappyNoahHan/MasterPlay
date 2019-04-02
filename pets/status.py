@@ -392,3 +392,8 @@ class Identified(Status):
     status_show_name = '被识破'
     status_info = '躲避无效'
     status_code = 'ST121'
+
+class Taunt(Status):
+    status_show_name = '挑衅'
+    status_info = '变得只能使出给予伤害的招式'
+    status_code = 'ST122'

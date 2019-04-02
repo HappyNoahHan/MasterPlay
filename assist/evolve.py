@@ -38,6 +38,8 @@ evolve_dict={
     '臭臭花': [wood.Vileplume,'叶之翠','stone_up'],
     '派拉斯': [insect.Parasect,24,'level_up'],
     '毛球': [insect.Venomoth,31,'level_up'],
+    '地鼠': [ground.Dugtrio,26,'level_up'],
+    '喵喵': [normal.Persian,28,'level_up'],
     '喇叭芽': [wood.Weepinbell,21,'level_up'],
     '口呆花': [wood.Victreebel,'叶之翠','stone_up'],
     '小拳石': [rock.Graveler,25,'level_up'],

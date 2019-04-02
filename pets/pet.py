@@ -83,6 +83,8 @@ class Pet(object):
         self.autoAi = autoAi
         #最后使用过的技能
         self.last_used_skill = None
+        #赏金
+        self.reward_money = None
 
     def getDefense(self):
         if self.carry_prop != None and 'ST098' not in self.status:
