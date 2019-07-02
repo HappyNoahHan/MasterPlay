@@ -343,10 +343,11 @@ class SpecialStatusSkill(skill):
         return False
 
 class CopySkill(skill):
-    def __init__(self,pp=30,spell_skill=None):
+    def __init__(self,pp=30,spell_skill=None,copy_skill_or_not=True):
         super().__init__(pp)
         self.skill_model = '0014'
         self.spell_skill = spell_skill
+        self.copy_skill_or_not = copy_skill_or_not
 
     def useOrNot(self,obj):
         if obj.last_used_skill != None:
@@ -1199,6 +1200,14 @@ class Foresight(statusSkill):
     skill_code = 'N073'
     skill_info = '对幽灵属性宝可梦没有效果的招式以及闪避率高的对手,使用后变得能够打中'
 
+class PsychUp(CopySkill):
+    def __init__(self):
+        super(PsychUp, self).__init__(pp=10,copy_skill_or_not=False)
+    show_name = '自我暗示'
+    skill_code = 'N074'
+    skill_info = '取消自身能力的变化,并复制对手的能力变化'
+    hit_rate = 0
+
 class Ember(damageSkill):
     def __init__(self,pp=25):
         super().__init__(pp,hit_status='ST001',addition_status_rate=10)
@@ -1643,6 +1652,15 @@ class ZenHeadbut(damageSkill):
     hit_rate = 90
     skill_power = 80
     skill_info = '将思念的力量集中在前额进行攻击,有时会使对手畏缩'
+
+class Amnesia(GainStatusUpSkill):
+    def __int__(self):
+        super(Amnesia, self).__int__(pp=20,status=['ST019'],turns=2)
+    show_name = '瞬间失忆'
+    skill_code = 'S015'
+    property = 'psychic'
+    hit_rate = 0
+    skill_info = '将头脑清空,瞬间忘记某事,从而大幅提高自己的特防'
 
 class Bite(damageSkill):
     def __init__(self):

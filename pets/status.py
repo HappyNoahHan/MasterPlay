@@ -14,7 +14,6 @@ class Status(object):
         else:
             return False
 
-
 class Cauma(Status):
     status_show_name = '灼伤'
     status_code = 'ST001'

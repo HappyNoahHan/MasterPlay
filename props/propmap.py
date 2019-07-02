@@ -1,7 +1,7 @@
 from props import  prop
 
 prop_dict ={
-    '攻击之爪': prop.PropertyUpProp(per=0.3,up_type='attack',show_name='攻击之爪'),
+    '攻击之爪': prop.PropertyUpProp(per=0.3,up_type='AT',show_name='攻击之爪'),
     '火焰之心': prop.SkillPowerUpProp(pety='fire',power= 30,show_name='火焰之心'),
     '聚焦之眼': prop.SkillHitUpProp(hit_up=40,show_name='聚焦之眼'),
     '五彩迷光': prop.SkillHitDownProp(dodge=10,show_name='五彩迷光'),

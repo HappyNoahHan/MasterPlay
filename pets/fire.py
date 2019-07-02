@@ -1,6 +1,4 @@
 import pets.propets
-from battle import skill
-import random
 
 class Charmander(pets.propets.PropInit):
     health_basic = 39

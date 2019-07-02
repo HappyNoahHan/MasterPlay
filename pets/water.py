@@ -52,6 +52,26 @@ class Blastoise(Squirtle):
     # 精灵编号
     pet_no = '009'
 
+class Psyduck(propets.PropInit):
+    health_basic = 50
+    attack_basic = 52
+    defense_basic = 48
+    spell_power_basic = 65
+    spell_defense_basic = 50
+    speed_basic = 55
+
+    name = '可达鸭'
+    kind = '鸭'
+    basic_exp_value = 64
+
+    can_get_base_point = 1
+    can_get_base_point_type = 'spell_power'
+
+    capture_rate = 190
+    # 精灵编号
+    pet_no = '054'
+    prop = ['water']
+
 class Tentacool(propets.PropInit):
     health_basic = 40
     attack_basic = 40

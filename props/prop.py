@@ -23,7 +23,7 @@ class Prop(object):
 
 
 class PropertyUpProp(Prop):
-    def __init__(self,per = 0.3,up_type = 'attack',show_name = ''):
+    def __init__(self,per = 0.3,up_type = '',show_name = ''):
         self.info = '属性提升道具'
         self.per = per
         self.up_type = up_type

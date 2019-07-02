@@ -87,40 +87,19 @@ class Pet(object):
         self.reward_money = None
 
     def getDefense(self):
-        if self.carry_prop != None and 'ST098' not in self.status:
-            if self.carry_prop.up_type == 'defense':
-                prop_defense_up = self.carry_prop.propCarry(self.defense)
-                return self.defense + self.tmp_defense + prop_defense_up
-        return self.defense + self.tmp_defense
+        return cap.getAbility(self.defense,self.tmp_defense,self.status,self.carry_prop,prop_type='DE')
 
     def getAttack(self):
-        if self.carry_prop != None and 'ST098' not in self.status:
-            if self.carry_prop.up_type == 'attack':
-                prop_attack_up = self.carry_prop.propCarry(self.attack)
-                return self.attack + self.tmp_attack + prop_attack_up
-        return self.attack + self.tmp_attack
+        return cap.getAbility(self.attack,self.tmp_attack,self.status,self.carry_prop,prop_type='AT')
 
     def getSpellPower(self):
-        if self.carry_prop != None and 'ST098' not in self.status:
-            if self.carry_prop.up_type == 'spell_power':
-                prop_spell_power_up = self.carry_prop.propCarry(self.spell_power)
-                return self.spell_power + self.tmp_spell_power + prop_spell_power_up
-        return self.spell_power + self.tmp_spell_power
+        return cap.getAbility(self.spell_power,self.tmp_spell_power,self.status,self.carry_prop,prop_type='SPO')
 
     def getSpellDefense(self):
-        if self.carry_prop != None and 'ST098' not in self.status:
-            if self.carry_prop.up_type == 'spell_defense':
-                prop_spell_defense_up = self.carry_prop.propCarry(self.spell_defense)
-                return self.spell_defense + self.tmp_spell_defense + prop_spell_defense_up
-        return self.spell_defense + self.tmp_spell_defense
+        return cap.getAbility(self.spell_defense,self.tmp_spell_defense,self.status,self.carry_prop,prop_type='SDE')
 
     def getSpeed(self):
-        if self.carry_prop != None and 'ST098' not in self.status:
-            if self.carry_prop.up_type == 'speed':
-                prop_speed_up = self.carry_prop.propCarry(self.speed)
-                return self.speed + self.tmp_speed + prop_speed_up
-        return self.speed + self.tmp_speed
-
+        return cap.getAbility(self.speed,self.tmp_speed,self.status,self.carry_prop,prop_type='SP')
     #不能初始化，不然用的是同一个地址
     skill_list={}
     def setSkills(self,key,value):

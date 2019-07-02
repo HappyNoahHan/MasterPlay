@@ -141,11 +141,14 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
             print("没有任何效果")
 
     elif obj_skill.skill_model == '0014':
-        copy_skill = obj_skill.useOrNot(obj_defense)
-        if copy_skill != None:
-            return damageCount(obj_defense,obj_attack,copy_skill,place)
+        if obj_skill.copy_skill_or_not:
+            copy_skill = obj_skill.useOrNot(obj_defense)
+            if copy_skill != None:
+                return damageCount(obj_defense,obj_attack,copy_skill,place)
+            else:
+                print("没有任何效果")
         else:
-            print("没有任何效果")
+            statusmap.getGainStatusFromDefenser(obj_attack,obj_defense)
 
     elif obj_skill.skill_model == '0015':
         result = statusmap.checkDelayStatus(obj_attack)

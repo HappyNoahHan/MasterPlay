@@ -120,8 +120,6 @@ def checkStatusAfterBattle(obj,skill,damage):
 
     return damage_index
 
-
-
 def checkParalysisOrNot(obj):
     '''
     检查是否是麻痹状态 有1/4几率无法成功使用技能
@@ -594,3 +592,9 @@ def statusTurnsAddIfNotHit(obj_attack):
             removeStatus(obj_attack,'ST108')
             obj_attack.autoAi = False
 
+
+def getGainStatusFromDefenser(obj_attack,obj_defense):
+    obj_attack.status = obj_defense.status
+    for status in obj_attack.status.keys():
+        if status in abnormal_list:
+            obj_attack.removeStatus(status)
