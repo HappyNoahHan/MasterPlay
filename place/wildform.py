@@ -1,24 +1,23 @@
 from place import placebase,wildpetlist,treasure,meetnpc,block
-from players import explore,trainer
+from players import explore,npcmap
 from assist import show,riddle,prize,changepet,system
 from props import bag
 import random,time,os
 
 class WildForm(placebase.Place):
-    def __init__(self,name='',wild_pet_list={},treasure_box_list={},npc_list={},block=None,weather=None,place_status=None,map_id=None):
+    def __init__(self,name='',treasure_box_list={},block=None,weather=None,place_status=None,map_id=None):
         '''
 
         :param name:
         :param maplist:
-        :param wild_pet_list:
+        :param wild_pet_list: 取消 使用map_id
         :param treasure_box_list:
         :param npc_list:
         :param block:
         :param weather: 天气
         :param place_status:  场地状态
         '''
-        super().__init__(name=name,treasure_box_list=treasure_box_list,npc_list=npc_list,block=block,map_id=map_id)
-        self.wild_pet_list = wild_pet_list
+        super().__init__(name=name,treasure_box_list=treasure_box_list,block=block,map_id=map_id)
         self.weather = weather
         self.place_status = place_status
 
@@ -56,7 +55,7 @@ class WildForm(placebase.Place):
             print("精灵在哪里呀...在哪里呀...")
             time.sleep(3)
             #try:
-            wild_pet = wildpetlist.getWildPet(self.wild_pet_list)
+            wild_pet = wildpetlist.getWildPet(self.map_id)
             #show.showPetStatus(wild_pet)
             print("你遇到了 %s ! lv: %s" % (wild_pet.name,wild_pet.level))
             if explore.explore(player,wild_pet,self):
@@ -71,7 +70,7 @@ class WildForm(placebase.Place):
         elif select_id == 'ba' or select_id == 'battle':
             #训练师对战
             time.sleep(1)
-            find_trainer = trainer.getTrainer(self.npc_list)
+            find_trainer = npcmap.getTrainer(self.map_id)
             if find_trainer != None:
                 print("遇到了 %s ！" % find_trainer.name)
                 print(find_trainer)

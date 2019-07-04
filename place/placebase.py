@@ -3,12 +3,10 @@ from place import block
 
 class Place(object):
 
-    def __init__(self,name='',maplist={},treasure_box_list={},npc_list={},prize_box_list={},block=None,can_fishing=False
+    def __init__(self,name=None,treasure_box_list={},prize_box_list={},block=None,can_fishing=False
                     ,weather = None, place_status = None,map_id=None):
         self.name = name
-        self.maplist = maplist
         self.treasure_box_list = treasure_box_list
-        self.npc_list = npc_list
         self.prize_box_list = prize_box_list
         self.block = block
         self.can_fishing = can_fishing
@@ -49,9 +47,3 @@ class Place(object):
             system.showSystem(player, select_id)
         print("指令错误！")
         return self.showMap(player)
-
-    def setMapList(self,key,value):
-        self.maplist[key][1] = value
-
-    def setNpcList(self,key,value):
-        self.npc_list[key][1] = value

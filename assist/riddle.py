@@ -1,5 +1,4 @@
 riddle_dict={
-    '迷途少女': ('3',True,'map'),
     '绿叶学徒A': ('2',True,'trainer'),
     '绿叶学徒B': ('3',True,'trainer'),
 }

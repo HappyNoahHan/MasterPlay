@@ -1,5 +1,7 @@
 from place import  placebase,treasure,meetnpc
 from assist import system,prize,changepet
+from players import npcmap
+from props import sellmap
 import time
 
 class Shop(placebase.Place):
@@ -9,19 +11,21 @@ class Shop(placebase.Place):
             player.map_run_list.append(self)
         print('='*30)
         print('当前地图  %s ' % self.name)
-        for key,item in self.npc_list.items():
+        print('地图编号  %s ' % self.map_id)
+        npc_list = npcmap.getNpcList(self.map_id)
+        for key,item in npc_list.items():
             print(key,':',item.name)
         print("请选择售货员")
         select_id = input(">")
         system.showSystem(player, select_id)
-        if select_id in self.npc_list:
-            if self.npc_list[select_id].is_special == True:
-                self.npc_list[select_id].showSellList()
-                self.buy(player,self.npc_list[select_id])
+        if select_id in npc_list:
+            if npc_list[select_id].is_special == True:
+                npc_list[select_id].showSellList()
+                self.buy(player,npc_list[select_id])
                 return self.showMap(player)
             else:
-                print(self.npc_list[select_id])
-                meetnpc.meetNpc(player, self.npc_list[select_id], self)
+                print(npc_list[select_id])
+                meetnpc.meetNpc(player, npc_list[select_id], self)
         else:
             print("指令错误！")
             return self.showMap(player)
@@ -30,17 +34,19 @@ class Shop(placebase.Place):
     def buy(self,player,shop_npc):
         print("选择你需要购买的道具!")
         select_id = input(">")
-        if select_id in shop_npc.sell_list:
+        sell_list = sellmap.getSellList(shop_npc.sell_id)
+        sell_type = sellmap.getSellType(shop_npc.sell_id)
+        if select_id in sell_list:
             print("你要买的数量:")
             number = input(">")
             if isDigt(number):
-                price = int(number) * shop_npc.sell_list[select_id][1]
+                price = int(number) * sell_list[select_id][1]
                 if price > player.money:
                     print("你没有足够的金钱！购买失败")
                     return False
                 else:
                     player.money -= price
-                    treasure.getPropsToBag(shop_npc.sell_list[select_id][0],shop_npc.sell_type,number=int(number))
+                    treasure.getPropsToBag(sell_list[select_id][0],sell_type,number=int(number))
                     print("购买成功！")
                     return True
             else:

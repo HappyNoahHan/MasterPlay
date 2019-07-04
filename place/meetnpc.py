@@ -1,4 +1,4 @@
-from players import explore
+from players import explore,npcmap
 from assist import prize,changepet,riddle
 import time
 
@@ -9,10 +9,10 @@ def meetNpc(player,npcer,place):
             if explore.trainerVS(player, npcer,place):
                 if npcer.has_riddle == True and npcer.can_challenge == False:
                     riddle_condiction = riddle.openTheRiddle(npcer)
-                    if riddle_condiction[2] == 'map':
-                        place.setMapList(riddle_condiction[0], riddle_condiction[1])
+                    if riddle_condiction[2] == 'trainer':
+                        npcmap.setNpcList(riddle_condiction[0], riddle_condiction[1],place.map_id)
                     else:
-                        place.setNpcList(riddle_condiction[0], riddle_condiction[1])
+                        pass
                 # return self.showMap(player)
             else:
                 print("无法继续战斗,请前往治疗")

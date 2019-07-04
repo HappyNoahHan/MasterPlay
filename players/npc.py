@@ -1,3 +1,5 @@
+
+from props import sellmap
 class Npc(object):
     def __init__(self,name=None,info=None,is_npc = True,is_special = False):
         #is_npc 控制是否是有功能的
@@ -19,14 +21,14 @@ class NonPeopleNpc(Npc):
 
 
 class ShopNpc(Npc):
-    def __init__(self,name='',info=None,sell_list={},sell_type='',is_npc=False):
+    def __init__(self,name='',info=None,sell_id=None,is_npc=False):
         super().__init__(name=name,info=info,is_npc=is_npc,is_special = True)
-        self.sell_list = sell_list
-        self.sell_type = sell_type
+        self.sell_id = sell_id
 
     def showSellList(self):
         print(self.info)
-        for key,item in self.sell_list.items():
+        sell_list = sellmap.getSellList(self.sell_id)
+        for key,item in sell_list.items():
             print(key,':',item[0],'  $',item[1])
 
 class Hosptial(Npc):
