@@ -1,4 +1,4 @@
-from place import village,map
+from place import village,map,topmap
 
 
 class Player(object):
@@ -8,7 +8,9 @@ class Player(object):
         self.pet_list = pet_list
 
 
-    current_place = village.Village("新手村",maplist=map.village_map_for_start)
+    map = map.whole_map
+
+    current_place = topmap.top_map_dict['MAP00']
 
     map_run_list = [current_place]
     #是否能出战

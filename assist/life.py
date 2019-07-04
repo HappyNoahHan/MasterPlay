@@ -59,10 +59,14 @@ def restore(pet):
     :return:
     '''
     pet.health = pet._max_health
-    pet.debuff_dict.clear()
-    pet.buff_dict.clear()
-    pet.property_buff.clear()
-    pet.status.clear()
+    #pet.debuff_dict.clear()
+    #pet.buff_dict.clear()
+    #pet.property_buff.clear()
+    #pet.status.clear() #需要设置恢复的状态种类
+    for status in pet.status:
+        if status in statusmap.clear_list:
+            statusmap.removeStatus(pet,status)
+
     pet.alive = True
     pet.basic_point_getter = None
 

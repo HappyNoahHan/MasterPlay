@@ -1,6 +1,5 @@
-from place import placebase,village,meetnpc
-from props import bag
-from assist import  system,prize,changepet
+from place import placebase,meetnpc
+from assist import  system
 import time
 
 class Hospital(placebase.Place):

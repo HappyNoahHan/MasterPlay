@@ -51,4 +51,3 @@ def showSystem(player,select_id):
             return player.map_run_list[-1].showMap(player)
 
 
-
