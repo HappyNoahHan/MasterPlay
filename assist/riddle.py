@@ -1,13 +1,24 @@
+from players import npcmap
+
 riddle_dict={
-    '绿叶学徒A': ('2',True,'trainer'),
-    '绿叶学徒B': ('3',True,'trainer'),
+    'MAP0301': (['MAP0302','MAP0303'],[]),
+    'MAP0302': (['MAP0303',],['MAP0301']),
+    'MAP0303': ([],['MAP0301','MAP0302']),
 }
 
 
-def openTheRiddle(trainer):
+def openTheRiddle(trainer_id,map_id):
     '''
-    解锁 解开谜语
+    解锁 解开谜语 前后挑战顺序
     :param trainer:
     :return:
     '''
-    return riddle_dict[trainer.name]
+    open_riddle_lsit = riddle_dict[trainer_id]
+
+    for id in open_riddle_lsit[0]:
+        riddle_dict[id][1].remove(trainer_id)
+
+    for id in open_riddle_lsit[0]:
+        if len(riddle_dict[id][1]) == 0:
+            npcmap.setNpcList(map_id,id)
+

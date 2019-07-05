@@ -7,6 +7,8 @@ class Player(object):
         self.money = money
         self.pet_list = pet_list
 
+    trainer_id = 'Player01'#训练师编号
+
 
     map = map.whole_map
 

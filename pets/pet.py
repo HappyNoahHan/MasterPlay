@@ -72,14 +72,9 @@ class Pet(object):
         self.alive = True
         #是否玩家所有
         self.has_trainer = has_trainer
-        if self.has_trainer == True:
-            #self.autoAi = False
-            self.captured = True
-        elif self.has_trainer == None:
-            self.captured = None
-        else:
-            #self.autoAi = True
-            self.captured = False
+        #是否捕获
+        self.captured = self.has_trainer
+
         self.autoAi = autoAi
         #最后使用过的技能
         self.last_used_skill = None

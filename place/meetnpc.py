@@ -8,12 +8,7 @@ def meetNpc(player,npcer,place):
         if npcer.can_challenge == True:
             if explore.trainerVS(player, npcer,place):
                 if npcer.has_riddle == True and npcer.can_challenge == False:
-                    riddle_condiction = riddle.openTheRiddle(npcer)
-                    if riddle_condiction[2] == 'trainer':
-                        npcmap.setNpcList(riddle_condiction[0], riddle_condiction[1],place.map_id)
-                    else:
-                        pass
-                # return self.showMap(player)
+                    riddle.openTheRiddle(npcer.trainer_id,place.map_id)
             else:
                 print("无法继续战斗,请前往治疗")
     else:
@@ -21,8 +16,8 @@ def meetNpc(player,npcer,place):
             if npcer.prize:
                 prize.getPrize(player, npcer.prize)
             elif npcer.pet_change:
-                if changepet.changePetWithNpc(player, npcer.change_condition, npcer.pet_change):
-                    npcer.pet_change = None
+                if changepet.changePetWithNpc(player, npcer):
+                    npcer.pet_change = False
         except AttributeError: #非物品道具并没有交换选项
             print("什么也没有发生")
     return place.showMap(player)

@@ -2,6 +2,7 @@
 pet 对照表
 '''
 from pets import fly,water
+from battle import skilllistmap
 
 all_pet_dict={
     '007': water.Squirtle,
@@ -22,4 +23,15 @@ all_pet_dict={
     '120': water.Staryu,
     '121': water.Starmie,
     '129': water.Magikarp,
+}
+
+trainer_pet_dict={
+    'MAP0801':(
+        all_pet_dict['016'](level=5,skill_list={'1': skilllistmap.skill_dict['N002']()},has_trainer=None),
+        all_pet_dict['016'](level=4,skill_list={'1': skilllistmap.skill_dict['N002']()},has_trainer=None)
+    ),
+
+    'MAP0201':(
+        all_pet_dict['018'](level=99,skill_list={'1': skilllistmap.skill_dict['F009']},has_trainer=True,autoAi=False)
+    ),
 }

@@ -11,18 +11,16 @@ class PetGym(placebase.Place):
         print('地图编号  %s ' % self.map_id)
         npc_list = npcmap.getNpcList(self.map_id)
         for key, item in npc_list.items():
-            if item[1] == True:
-                print(key, ':', item[0].name)
+            print(key, ':', item.name)
         print("请选择挑战")
         select_id = input(">")
         system.showSystem(player, select_id)
         if select_id in npc_list:
-            if npc_list[select_id][1] != False:
-                if npc_list[select_id][0].is_special == True:
-                    pass
-                    return self.showMap(player)
-                else:
-                    print(npc_list[select_id][0])
-                    meetnpc.meetNpc(player, npc_list[select_id][0], self)
+            if npc_list[select_id].is_special == True:
+                pass
+                return self.showMap(player)
+            else:
+                print(npc_list[select_id])
+                meetnpc.meetNpc(player, npc_list[select_id], self)
         print("指令错误！")
         return self.showMap(player)

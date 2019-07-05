@@ -2,7 +2,7 @@ from players import battering
 from assist import show,exp,evolve,life,changepet,prize
 from battle import asscount
 from props import propmap
-from pets import statusmap
+from pets import statusmap,pet_map
 import random,time
 
 def explore(player,wild_pet,place):
@@ -51,8 +51,14 @@ def trainerVS(player,trainer,place):
     if player.can_battle == False:
         print("是什么给你的勇气还能挑衅？？？")
         return False
-    challenge_list = list(trainer.pet_list)
+
+    try:
+        challenge_list = list(trainer.getPetList())
     #trainer_master_pet = random.choice(challenge_list)
+    except KeyError:
+        print("没有实装角色pet_list!!!")
+        trainer.can_challenge = False
+        return True
 
     if battering.vsBattleing(player,trainer,challenge_list,place):
         if player.battle_run_success == False:
@@ -61,7 +67,7 @@ def trainerVS(player,trainer,place):
             player.battle_run_success = False
     else:
         return False
-    for pet in trainer.pet_list:
+    for pet in trainer.getPetList():
         life.restore(pet)
         pet.reward_money = None #重置
     statusmap.checkStatusEnd(player)

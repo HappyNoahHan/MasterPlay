@@ -1,4 +1,5 @@
 from props import handbook
+from pets import pet_map
 
 def changePet(player):
     print("请选择你要交换的精灵！")
@@ -54,7 +55,7 @@ def changePetAfterDie(player):
     return True
 
 
-def changePetWithNpc(player,condition,change_pet):
+def changePetWithNpc(player,npcer):
     '''
     与Npc 交换 精灵
     :param player:
@@ -64,18 +65,22 @@ def changePetWithNpc(player,condition,change_pet):
     for key,pet in player.pet_list.items():
         current_pet_list.append(pet.name)
 
-    if condition in current_pet_list:
-        print("哇 哇 哇  %s 是我的最爱 你是否愿意和我交换 %s " % (condition,change_pet.name))
+
+    change_pet = pet_map.trainer_pet_dict[npcer.trainer_id]
+
+
+    if npcer.condition in current_pet_list:
+        print("哇 哇 哇  %s 是我的最爱 你是否愿意和我交换 %s " % (npcer.condition,change_pet.name))
         print("1 yes 2 no")
         select_id = input(">")
         if select_id == '1':
             for key,pet in player.pet_list.items():
-                if pet.name == condition:
+                if pet.name == npcer.condition:
                     print(key,":",pet.name,'LV%s' % pet.level)
             print("请选择你要交换的精灵！")
             select_pet_id = input(">")
             if select_pet_id in player.pet_list:
-                if player.pet_list[select_pet_id].name == condition:
+                if player.pet_list[select_pet_id].name == npcer.condition:
                     player.setPet(select_pet_id,change_pet)
                     #player.pet_list[select_pet_id].autoAi = False
                     print("你获得了 %s lv%s" % (player.pet_list[select_pet_id].name,player.pet_list[select_pet_id].level))
