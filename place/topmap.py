@@ -11,8 +11,9 @@ top_map_dict={
                                 map_id = 'MAP04',
                                  ),
     'MAP05': wildform.WildForm(name='大漩涡',
-                               block='绿叶徽章',
-                               map_id='MAP05'
+                               #block='绿叶徽章',
+                               map_id='MAP05',
+                               can_fish=True,
                                 ),
     'MAP06': town.Town(name='激流镇',block='绯红徽章',map_id='MAP06'),
     'MAP07': town.Town(name='绿叶镇',map_id='MAP07'),

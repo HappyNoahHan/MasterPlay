@@ -1,17 +1,15 @@
-from  pets import fly,wood,water,skilltree
-from battle import skill
-from props import berrymap
+from  pets import pet_init
 import random
 
 wild_pet_list={
     'MAP08':{
-        '026':(50,[]),
-        '043':(50,[]),
+        '016':(50,[],range(2,6)),
+        '021':(50,[],range(2,6)),
     },
     'MAP05':{
-        '072':(20,[]),
-        '118':(40,[]),
-        '120':(40,[]),
+        '072':(20,[],range(7,11)),
+        '118':(40,[],range(7,11)),
+        '120':(40,[],range(7,11)),
     },
 }
 
@@ -40,9 +38,7 @@ def meetWildPet(dict):
 
 def getWildPet(map_id):
     pet_no = meetWildPet(wild_pet_list[map_id])
+    level = random.choice(wild_pet_list[map_id][pet_no][2])
 
-    if map_id == 'MAP08':
-        if pet_no == '026':
-            return fly.Pidgey(level=random.randint(2, 4), skill_list=skilltree.getInitSkillList('041'))
-        else:
-            return water.Seadra(level=random.randint(2, 4), skill_list=skilltree.getInitSkillList('041'))
+    return pet_init.get_pet(pet_no,level=level)
+

@@ -215,7 +215,7 @@ class Starmie(propets.PropInit):
     capture_rate = 60
 
     # 精灵编号
-    pet_no = '120'
+    pet_no = '121'
     prop = ['water','psychic']
 
 class Magikarp(propets.PropInit):

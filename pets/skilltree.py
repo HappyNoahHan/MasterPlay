@@ -1,7 +1,3 @@
-from battle import skilllistmap
-import random
-
-
 pet_skill_tree = {
     '001':{
         'init': ['N001'],
@@ -1012,29 +1008,6 @@ pet_skill_tree = {
     },
 
 }
-
-
-def getInitSkillList(pet_no):
-    '''
-    野生精灵初始技能~
-    :param pet_no:
-    :return:
-    '''
-    skill_init_list = pet_skill_tree[pet_no]['init'].copy()
-
-    if skill_init_list.__len__() >= 4:
-        skill_init_list = random.sample(skill_init_list,4)
-
-    skill_list = {}
-
-    for key in skill_init_list:
-        for x in ['1','2','3','4']:
-            if x not in skill_list:
-                skill_list[x] = skilllistmap.skill_dict[key]()
-                break
-
-    return skill_list
-
 
 
 

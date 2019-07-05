@@ -3,18 +3,22 @@ from place import block
 
 class Place(object):
 
-    def __init__(self,name=None,prize_box_list={},block=None,can_fishing=False
-                    ,weather = None, place_status = None,map_id=None):
+    def __init__(self,name=None,block=None,weather=None,place_status=None,map_id=None,can_fish = False):
         self.name = name
-        self.prize_box_list = prize_box_list
         self.block = block
-        self.can_fishing = can_fishing
         self.weather = weather
         self.place_status = place_status
         self.map_id = map_id  #地图编号
+        self.can_fish = can_fish
 
     def __str__(self):
         return self.name
+
+    def setPlaceStatus(self,key,value):
+        self.place_status = [key,value]
+
+    def setPlaceWeather(self,value):
+        self.weather = value
 
     def showMap(self,player):
         can_go_list = []

@@ -5,27 +5,6 @@ from props import bag
 import random,time,os
 
 class WildForm(placebase.Place):
-    def __init__(self,name='',block=None,weather=None,place_status=None,map_id=None):
-        '''
-
-        :param name:
-        :param maplist:
-        :param wild_pet_list: 取消 使用map_id
-        :param treasure_box_list: 取消 使用map_id
-        :param npc_list: 取消  使用map_id
-        :param block:
-        :param weather: 天气
-        :param place_status:  场地状态
-        '''
-        super().__init__(name=name,block=block,map_id=map_id)
-        self.weather = weather
-        self.place_status = place_status
-
-    def setPlaceStatus(self,key,value):
-        self.place_status = [key,value]
-
-    def setPlaceWeather(self,value):
-        self.weather = value
 
     def showMap(self,player):
         can_go_list = []

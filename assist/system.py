@@ -34,20 +34,23 @@ def showSystem(player,select_id):
         #for test
         petbox.petBoxAction(player)
         return player.map_run_list[-1].showMap(player)
-    elif select_id == 'fishing':
-        if player.map_run_list[-1].can_fishing == True:
+    elif select_id == 'fish':
+        if player.map_run_list[-1].can_fish == True:
+            print("你熟练的抛下鱼竿...")
             print("你正在钓鱼...")
             time.sleep(3)
-            fished_pet = fish.fishing(player.map_run_list[-1].name)
+            fished_pet = fish.fishing(player.map_run_list[-1].map_id)
+            print("有鱼上钩了...")
+            time.sleep(1)
             #show.showPetStatus(fished_pet)
             print("你遇到了 %s ! lv: %s" % (fished_pet.name, fished_pet.level))
-            if explore.explore(player, fished_pet):
+            if explore.explore(player, fished_pet,player.map_run_list[-1]):
                 return player.map_run_list[-1].showMap(player)
             else:
                 print("无法继续战斗,请前往治疗")
                 return player.map_run_list[-1].showMap(player)
         else:
-            print("什么也没有发生")
+            print("这里不能钓鱼！！！")
             return player.map_run_list[-1].showMap(player)
 
 

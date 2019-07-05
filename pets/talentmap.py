@@ -2,7 +2,7 @@
     天赋技能表
 '''
 
-from pets import pettalent
+from pets import pettalent,statusmap
 
 talent_dict={
     'TA001': pettalent.Talent(name='精神力',talent_code='TA001'),
@@ -10,11 +10,15 @@ talent_dict={
     'TA003': pettalent.ProUpTalent(name='虫之预感',talent_code='TA003',up_type='power',match_property='insect',up_cause=3,up_number=1.5),
 }
 
-#异常状态
-abnormal_list = ['ST001','ST002','ST003','ST006',
-                 'ST005','ST007','ST008']
 
 def addStatusOrNot(pet,status_code,place):
+    '''
+    检查天赋是否免疫
+    :param pet:
+    :param status_code:
+    :param place:
+    :return:
+    '''
     if 'ST100' not in pet.status:
         if status_code == 'ST004':
             if pet.talent in ['TA001',]:
@@ -26,7 +30,7 @@ def addStatusOrNot(pet,status_code,place):
 
         if 'ST114' in pet.status:
             #神秘守护  无法被异常状态
-            if status_code in abnormal_list:
+            if status_code in statusmap.abnormal_list:
                 return False
 
         return True

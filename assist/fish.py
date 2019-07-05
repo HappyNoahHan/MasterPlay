@@ -1,26 +1,25 @@
 '''
     钓鱼功能模块
 '''
-from  pets import water
-from battle import skill
+from  pets import pet_init
 import random
-fishing_dict={
-    '绿叶大道': {'129':(255,[])}
+
+all_fish_dict = {
+    'MAP05' : {
+        '072': (255,[],5),
+    },
 }
 
-can_fishing_list = {
-    '129': water.Magikarp(level=5,skill_list={'1': skill.WaterGun()})
-}
 
 
+def fishing(map_id):
+    fishing_list = all_fish_dict[map_id]
+    pet_no = getPetNo(fishing_list)
+    level = all_fish_dict[map_id][pet_no][2]
+    return pet_init.get_pet(pet_no,level=level)
 
-def fishing(place_name):
-    fishing_list = fishing_dict[place_name]
-    get_pet_no = getfish(fishing_list)
-    return can_fishing_list[get_pet_no]
 
-
-def getfish(dict):
+def getPetNo(dict):
     base = list(range(1,256))
     number = random.randint(1,255)
     for key,value in dict.items():

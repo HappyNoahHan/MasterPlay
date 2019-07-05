@@ -3,10 +3,6 @@ from pets import fly,fire,wood,water,rock
 from battle import skill
 import random
 #has_trainter = None 指npc 精灵
-shop_list_for_green_town_petball={
-    '1': ('精灵球',100),
-    '2': ('火焰球',200)
-}#如果后面有逗号会报错，会成为1个元组
 
 npc_list={
     'MAP08' : {
