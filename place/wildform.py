@@ -5,19 +5,19 @@ from props import bag
 import random,time,os
 
 class WildForm(placebase.Place):
-    def __init__(self,name='',treasure_box_list={},block=None,weather=None,place_status=None,map_id=None):
+    def __init__(self,name='',block=None,weather=None,place_status=None,map_id=None):
         '''
 
         :param name:
         :param maplist:
         :param wild_pet_list: 取消 使用map_id
-        :param treasure_box_list:
-        :param npc_list:
+        :param treasure_box_list: 取消 使用map_id
+        :param npc_list: 取消  使用map_id
         :param block:
         :param weather: 天气
         :param place_status:  场地状态
         '''
-        super().__init__(name=name,treasure_box_list=treasure_box_list,block=block,map_id=map_id)
+        super().__init__(name=name,block=block,map_id=map_id)
         self.weather = weather
         self.place_status = place_status
 
@@ -82,7 +82,7 @@ class WildForm(placebase.Place):
         elif select_id == 'sh' or select_id == 'search':
             print("东瞅瞅，西瞅瞅，瞅出个大活宝...")
             time.sleep(1)
-            find_item = treasure.getTreasureBox(self.treasure_box_list)
+            find_item = treasure.getTreasureBox(self.map_id)
             if find_item == None:
                 print("什么也没有发现")
             else:

@@ -3,10 +3,9 @@ from place import block
 
 class Place(object):
 
-    def __init__(self,name=None,treasure_box_list={},prize_box_list={},block=None,can_fishing=False
+    def __init__(self,name=None,prize_box_list={},block=None,can_fishing=False
                     ,weather = None, place_status = None,map_id=None):
         self.name = name
-        self.treasure_box_list = treasure_box_list
         self.prize_box_list = prize_box_list
         self.block = block
         self.can_fishing = can_fishing

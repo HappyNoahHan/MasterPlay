@@ -3,8 +3,6 @@
                 dehit 闪避类  hit 命中类
 '''
 
-from props import propmap
-
 
 class Prop(object):
     show_name = '道具'
@@ -19,7 +17,7 @@ class Prop(object):
         obj.carry_prop = None
     def equipProp(self,obj):
         print("%s 装备了 %s " % (obj.name,self.show_name))
-        obj.carry_prop = propmap.prop_dict[self.show_name]
+        obj.carry_prop = self
 
 
 class PropertyUpProp(Prop):

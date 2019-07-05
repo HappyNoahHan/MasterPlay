@@ -1,19 +1,16 @@
 import random
 import time
-import math
-import battle.skill
 import battle.skilllistmap
 import battle.hitrate
 import assist.show
 import assist.ppvalue
 import assist.life
 import assist.petattr
-from assist import exp,evolve,changepet,rancom
-from battle import skilldamage,asscount
-from pets import pettalent,talentmap,status,statusmap
+from assist import changepet,rancom
+from battle import skilldamage
+from pets import statusmap
 from props import propmap,bag
 from players import battering
-import props.drug
 
 def damageCount(obj_defense,obj_attack,obj_skill,place):
     '''

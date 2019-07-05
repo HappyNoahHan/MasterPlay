@@ -2,45 +2,47 @@ import random
 from props import petballmap,drugmap,propmap
 from battle import  skilllistmap
 
-treasure_box_for_grass_no_1 ={
-    '精灵球': [1,'normal','petball'],
-    '小型回复药剂': [2,'normal','drug'],
-    '灼伤解除剂': [1,'normal','drug'],
-    #'火焰果':[1,'normal','drug'],
-    '火焰之心':[1,'elite','prop'],
+treasure_dict={
+    'MAP08' : {
+        '精灵球': [1,'normal','petball'],
+        '小型回复药剂': [2,'normal','drug'],
+        '灼伤解除剂': [1,'normal','drug'],
+        #'火焰果':[1,'normal','drug'],
+        '火焰之心':[1,'elite','prop'],
+    },
+    'MAP05' : {
+        '精灵球': [3,'normal','petball'],
+        '小型回复药剂': [2,'normal','drug'],
+        '灼伤解除剂': [2,'normal','drug'],
+        #'火焰果':[1,'normal','drug'],
+        '攻击之爪':[1,'elite','prop'],
+    },
 }
 
-treasure_box_for_maelstrom_no_1 ={
-    '精灵球': [3,'normal','petball'],
-    '小型回复药剂': [2,'normal','drug'],
-    '灼伤解除剂': [2,'normal','drug'],
-    #'火焰果':[1,'normal','drug'],
-    '攻击之爪':[1,'elite','prop'],
-}
-
-
-def getTreasureBox(place):
+def getTreasureBox(map_id):
 
     kind = getWhich()
 
     if kind == None:
         return None
     else:
-        if len(place) == 0:
+        try:
+            can_select_box = []
+            for key,value in treasure_dict[map_id].items():
+                if value[1] == kind:
+                    can_select_box.append(key)
+        except KeyError:
             return None
-        can_select_box = []
-        for key,value in place.items():
-            if value[1] == kind:
-                can_select_box.append(key)
 
         if can_select_box.__len__() == 0:
             return None
-        get_prop = random.choice(can_select_box)
-        get_kind = place[get_prop][2]
 
-        place[get_prop][0] -= 1
-        if place[get_prop][0] == 0:
-            place.pop(get_prop)
+        get_prop = random.choice(can_select_box)
+        get_kind = treasure_dict[map_id][get_prop][2]
+
+        treasure_dict[map_id][get_prop][0] -= 1
+        if treasure_dict[map_id][get_prop][0] == 0:
+            treasure_dict[map_id].pop(get_prop)
 
         return [get_prop,get_kind]
 

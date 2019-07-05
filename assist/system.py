@@ -20,7 +20,7 @@ def showSystem(player,select_id):
         handbook.showHandBook()
         return player.map_run_list[-1].showMap(player)
     elif select_id == 'search':
-        get_prize = prize.getPrizeFromBox(player.map_run_list[-1].prize_box_list)
+        get_prize = prize.getPrizeFromBox(player.map_run_list[-1].map_id) #隐藏宝物获取
         if get_prize == None:
             print("没有任何发现！")
         else:

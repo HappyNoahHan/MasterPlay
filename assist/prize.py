@@ -2,24 +2,38 @@ from  props import petballmap,propmap,drugmap,assmap
 from battle import skilllistmap
 import random
 
-prize_box_for_green_town_shop={
-    '1':['精灵球',2],
-    '2':['小型回复药剂',1],
+prize_box_dict = {
+    'MAP01':{
+        '1':['精灵球',1],
+        '2':['小型回复药剂',1],
+    },
 }
 
-def getPrizeFromBox(dict):
-    if dict:
-        select_box = []
-        for key,item in dict.items():
-            select_box.append(key)
-        select_item = random.choice(select_box)
-        item_name = dict[select_item][0]
-        dict[select_item][1] -= 1
-        if dict[select_item][1] == 0:
-            dict.pop(select_item)
-        return item_name
-    else:
+def getPrizeFromBox(map_id):
+    '''
+    获得隐藏宝物
+    :param map_id:
+    :return:
+    '''
+    try:
+        dict = prize_box_dict[map_id]
+    except KeyError:
         return None
+
+    select_box = []
+    for key,item in dict.items():
+        select_box.append(key)
+
+    if len(select_box) == 0:
+        return None
+
+    select_item = random.choice(select_box)
+    item_name = dict[select_item][0]
+    dict[select_item][1] -= 1
+    if dict[select_item][1] == 0:
+        dict.pop(select_item)
+    return item_name
+
 
 
 def putPrizeToBag(item):
