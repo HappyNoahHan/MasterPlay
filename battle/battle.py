@@ -59,13 +59,13 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
             damage = obj_skill.getDamage(obj_attack,obj_defense)
 
         if damage > 0:
-            obj_defense.health -= damage
+            obj_defense.hp -= damage
             print("造成了%s 的伤害" % damage)
 
             if obj_skill.recover_by_damage: #吸取回复
                 obj_skill.recover(obj_attack,damage)
         else:
-            obj_defense.health -= 1
+            obj_defense.hp -= 1
             assist.show.noDamage()
 
         assist.show.showPetErrorStatus(obj_defense)
@@ -95,7 +95,7 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
                 index_per = obj_skill.getIndexPer(place.weather)
 
             if not obj_skill.max_recover_allowable:
-                if obj_attack.health == obj_attack._max_health:
+                if obj_attack.hp == obj_attack._max_health:
                     print("技能使用失败~~")
                     #return True
             assist.life.healthRecoverBySkill(obj_attack, index_per)
@@ -123,10 +123,10 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
                     damage = skilldamage.skillDamage(obj_attack, obj_defense, obj_skill,
                                                      obj_attack.status[obj_skill.status] * 100,place)
                     if damage > 0:
-                        obj_defense.health -= damage
+                        obj_defense.hp -= damage
                         print("造成了%s 的伤害" % damage)
                     else:
-                        obj_defense.health -= 1
+                        obj_defense.hp -= 1
                         assist.show.noDamage()
             else:
                 print("无蓄力,没有任何效果")
@@ -158,10 +158,10 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
             damage = skilldamage.skillDamage(obj_attack,obj_defense,obj_skill,obj_skill.getPower(obj_attack),place)
             #obj_skill.addStatus(obj_defense)  # 附加状态
             if damage > 0:
-                obj_defense.health -= damage
+                obj_defense.hp -= damage
                 print("造成了%s 的伤害" % damage)
             else:
-                obj_defense.health -= 1
+                obj_defense.hp -= 1
                 assist.show.noDamage()
 
             assist.show.showPetErrorStatus(obj_defense)
@@ -173,15 +173,15 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
                 return True
             obj_skill.skill_power,obj_skill.property= obj_skill.getPowerAndProperty(obj_attack.berry)
             # 消耗树果
-            print("%s 使用%s 消耗了 一枚 %s " % (obj_attack.name, obj_skill.show_name, obj_attack.berry.show_name))
+            print("%s 使用%s 消耗了 一枚 %s " % (obj_attack.getName(), obj_skill.show_name, obj_attack.berry.show_name))
             obj_attack.berry = None
         damage = skilldamage.skillDamage(obj_attack, obj_defense, obj_skill, obj_skill.skill_power,place)
             # obj_skill.addStatus(obj_defense)  # 附加状态
         if damage > 0:
-            obj_defense.health -= damage
+            obj_defense.hp -= damage
             print("造成了%s 的伤害" % damage)
         else:
-            obj_defense.health -= 1
+            obj_defense.hp -= 1
             assist.show.noDamage()
 
 
@@ -198,7 +198,7 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
 
 
 
-    if obj_defense.health <= 0: #战斗结束  debuff不会死亡
+    if obj_defense.hp <= 0: #战斗结束  debuff不会死亡
         #诅咒技能效果
         if 'ST119' in obj_defense.status:
             if obj_skill.skill_model in ['0001','0015']:
@@ -206,12 +206,12 @@ def damageCount(obj_defense,obj_attack,obj_skill,place):
 
         assist.show.petDie(obj_defense)
         assist.show.battleOver()
-        if obj_attack.health <= 0:  # 反弹死
+        if obj_attack.hp <= 0:  # 反弹死
             assist.show.petDie(obj_attack)
             assist.show.battleOver()
         return False
 
-    if obj_attack.health <= 0: #反弹死
+    if obj_attack.hp <= 0: #反弹死
         assist.show.petDie(obj_attack)
         assist.show.battleOver()
         return False
@@ -241,24 +241,24 @@ def battleRun(player,obj1,obj2,place):
     if obj1.autoAi == True:
         #为测试方便，都指定为1
         command = '1'
-        assist.show.petThink(obj1.name)
+        assist.show.petThink(obj1.getName())
         time.sleep(3)
     elif obj1.autoAi == 'lost':
         command = '1'
-        print("%s 正处于某种强大的状态,从而暂时失去控制" % obj1.name)
+        print("%s 正处于某种强大的状态,从而暂时失去控制" % obj1.getName())
         time.sleep(3)
     else:
         print("玩家请选择指令：")
         command = input(">>")
     if command == '1':
         if obj1.autoAi == True:
-            assist.show.petSelectSkill(obj1.name)
+            assist.show.petSelectSkill(obj1.getName())
             time.sleep(3)
             try:
                 skill_number = random.choice(rancom.canChoiceList(obj1))
             except IndexError:
-                print("%s 陷入了自我挣扎~" % obj1.name)
-                obj1.health = 0
+                print("%s 陷入了自我挣扎~" % obj1.getName())
+                obj1.hp = 0
                 assist.show.petDie(obj1)
                 assist.show.battleOver()
                 return True
@@ -325,9 +325,9 @@ def battleRun(player,obj1,obj2,place):
         #检查是否混乱,会攻击自己
         if statusmap.checkChaosOrNot(obj1):
             damage = skilldamage.chaosDamage(obj1.level,obj1.getAttack(),obj1.getDefense())
-            print("%s 混乱中, 对自己造成了 %s 伤害" % (obj1.name,damage))
-            obj1.health -= damage
-            if obj1.health <= 0:
+            print("%s 混乱中, 对自己造成了 %s 伤害" % (obj1.getName(),damage))
+            obj1.hp -= damage
+            if obj1.hp <= 0:
                 assist.show.petDie(obj1)
                 assist.show.battleOver()
                 return True
@@ -344,10 +344,17 @@ def battleRun(player,obj1,obj2,place):
         #命中与否判断
         hit = obj1.skill_list[skill_number].hit_rate
         #判断命中是否提高 携带物品
-        hit_up = propmap.checkCarryPropForHit(obj1)
-        print("命中提高: ",hit_up)
+        try:
+            hit_up = propmap.checkCarryPropForHit(obj1)
+            print("命中提高: ", hit_up)
+        except AttributeError:
+            hit_up = 0
+
         if obj1.skill_list[skill_number].skill_code not in ['N064']:
-            dodge_up = propmap.checkCarryPropFoeDodge(obj2)
+            try:
+                dodge_up = propmap.checkCarryPropFoeDodge(obj2)
+            except AttributeError:
+                dodge_up = 0
         else:
             dodge_up = 0
         print("闪避提高: ",dodge_up)
@@ -359,20 +366,20 @@ def battleRun(player,obj1,obj2,place):
             try:
                 if obj1.skill_list[skill_number].one_hit_kill:
                     if battle.hitrate.hitForOneHitKill(obj1,obj2,obj1.skill_list[skill_number]):
-                        print("%s 一击必杀" % obj1.name)
-                        obj2.health = 0
+                        print("%s 一击必杀" % obj1.getName())
+                        obj2.hp = 0
                         assist.show.petDie(obj2)
                         assist.show.battleOver()
                         return True
                     else:
-                        print("%s 技能使用失败！" % obj1.name)
+                        print("%s 技能使用失败！" % obj1.getName())
                         # 回合结束检查是否中毒  中毒死亡
                         if not statusmap.checkStatusAfterTurn(obj1, place):
                             assist.show.petDie(obj1)
                             assist.show.battleOver()
                             return True
 
-                        assist.show.printTurn(obj2.name)
+                        assist.show.printTurn(obj2.getName())
                         return battleRun(player, obj2, obj1, place)
             except AttributeError:
                 pass
@@ -392,7 +399,7 @@ def battleRun(player,obj1,obj2,place):
                     assist.show.petDie(obj1)
                     assist.show.battleOver()
                     return True
-                assist.show.printTurn(obj2.name)
+                assist.show.printTurn(obj2.getName())
                 return battleRun(player,obj2,obj1,place)
             #命中计数
             try:
@@ -407,7 +414,7 @@ def battleRun(player,obj1,obj2,place):
                     assist.show.petDie(obj1)
                     assist.show.battleOver()
                     return True
-                assist.show.printTurn(obj2.name)
+                assist.show.printTurn(obj2.getName())
                 return battleRun(player,obj2,obj1,place)
             else:
                 return True
@@ -428,7 +435,7 @@ def battleRun(player,obj1,obj2,place):
                 assist.show.petDie(obj1)
                 assist.show.battleOver()
                 return True
-            assist.show.printTurn(obj2.name)
+            assist.show.printTurn(obj2.getName())
             return battleRun(player, obj2, obj1,place)
 
     elif command == '2':
@@ -443,11 +450,11 @@ def battleRun(player,obj1,obj2,place):
             else:
                 return battleRun(player,obj1,obj2,place)
         else:
-            print("%s 无法被替换的状态" % obj1.name)
+            print("%s 无法被替换的状态" % obj1.getName())
             return battleRun(player,obj1,obj2,place)
 
     elif command == '4':
-        assist.show.petUseRun(obj1.name)
+        assist.show.petUseRun(obj1.getName())
         if statusmap.checkUnlockOrNot(obj1):
             x = random.randint(1,100)
             if x in range(1,100):
@@ -455,9 +462,9 @@ def battleRun(player,obj1,obj2,place):
                 player.battle_run_success = True
                 return True
         else:
-            print("%s 被锁定了！ 无法脱逃 ~" % obj1.name)
+            print("%s 被锁定了！ 无法脱逃 ~" % obj1.getName())
         print("逃跑失败")
-        assist.show.printTurn(obj2.name)
+        assist.show.printTurn(obj2.getName())
         return battleRun(player,obj2,obj1,place)
 
     elif command == '3':

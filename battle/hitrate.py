@@ -42,9 +42,9 @@ def hitOrNot(skill,rate,obj_attack,obj_defense,dodge):
 
 
 def hitForOneHitKill(obj_attack,obj_defense,skill):
-    #属性相性不为0倍
-    if petattr.getAttrMap(skill,obj_defense) == 0:
-        return False
+    #属性相性不为0倍 后续
+    #if petattr.getAttrMap(skill,obj_defense) == 0:
+    #    return False
 
     if obj_attack.level < obj_defense.level:
         return False

@@ -36,7 +36,7 @@ class WildForm(placebase.Place):
             #try:
             wild_pet = wildpetlist.getWildPet(self.map_id)
             #show.showPetStatus(wild_pet)
-            print("你遇到了 %s ! lv: %s" % (wild_pet.name,wild_pet.level))
+            print("你遇到了 %s ! lv: %s" % (wild_pet.getName(),wild_pet.level))
             if explore.explore(player,wild_pet,self):
                 return self.showMap(player)
             else:

@@ -7,13 +7,13 @@ import random,time
 
 def battleing(player,wild_pet,change_pet = False,place=None):
     #将未发现的精灵加入图鉴
-    if wild_pet.pet_no not in handbook.pet_handbook_dict:
-        handbook.setHandBook(wild_pet.pet_no,wild_pet.name,wild_pet.prop)
+    if wild_pet.petNo not in handbook.pet_handbook_dict:
+        handbook.setHandBook(wild_pet.petNo,wild_pet.getName(),wild_pet.getAttr())
     #谁获得基础点数
     wild_pet.basic_point_getter = player.pet_list['Master']
     print("=" * 30)
     master_pet = player.pet_list['Master']
-    print("%s 准备战斗！" % master_pet.name)
+    print("%s 准备战斗！" % master_pet.getName())
     #assist.show.showPetStatus(master_pet)
     #加入战斗精灵列表
     if master_pet not in player.battle_pet_list:
@@ -26,7 +26,7 @@ def battleing(player,wild_pet,change_pet = False,place=None):
     #判断是否交换过精灵
     if change_pet == False:
         if master_pet.getSpeed() > wild_pet.getSpeed():
-            print("%s 优先进攻" % master_pet.name)
+            print("%s 优先进攻" % master_pet.getName())
             battle_end = battle.battleRun(player,master_pet, wild_pet,place)
         else:
             battle_end = battle.battleRun(player,wild_pet, master_pet,place)

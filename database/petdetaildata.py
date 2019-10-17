@@ -1,7 +1,7 @@
 
 from bs4 import BeautifulSoup
 from urllib.request import  urlopen
-import testmysql
+from database import petdata
 
 class PetDetailMsg():
     def __init__(self):
@@ -27,7 +27,7 @@ if __name__ == '__main__':
     #pet = PetDetailMsg()
     for i in range(22,152):
         pet = PetDetailMsg()
-        pet_no = testmysql.get_pet(i)
+        pet_no = petdata.get_pet(i)
         print("正在获取%s 的资料~~~~" % pet_no[1])
         pet_detail_msg = pet.getDeatilMessage(target=pet_no[2])
 
@@ -54,4 +54,4 @@ if __name__ == '__main__':
                    pet_detail_msg[59],
                    pet_detail_msg[61],
                    pet_detail_msg[63]]
-        testmysql.insertDetailData(data_list)
+        petdata.insertDetailData(data_list)

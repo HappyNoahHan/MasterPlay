@@ -91,11 +91,13 @@ def skillDamage(obj_attack,obj_defense,skill,power,place):
     #计算属性相克关系
     attr_index_number = petattr.getAttrMap(skill,obj_defense)
     print("属性克制关系: ",attr_index_number)
+    #attr_index_number = 1
     #计算是否使用的是本属性的技能
-    if skill.property in obj_attack.prop:
-        skill_prop_match_obj_prop = 1.5
-    else:
-        skill_prop_match_obj_prop = 1
+    #if skill.property in obj_attack.prop:
+    #    skill_prop_match_obj_prop = 1.5
+    #else:
+    #    skill_prop_match_obj_prop = 1
+    skill_prop_match_obj_prop =1
 
     # 检查战斗前天赋技能
     #power = skill.skill_power
@@ -117,8 +119,8 @@ def skillDamage(obj_attack,obj_defense,skill,power,place):
 
     attack = obj_attack.getAttack()
     defense = obj_defense.getDefense()
-    spell_power = obj_attack.getSpellPower()
-    spell_defense = obj_defense.getSpellDefense()
+    spell_power = obj_attack.getSpecialAttack()
+    spell_defense = obj_defense.getSpecialDefense()
     speed = obj_attack.getSpeed()
     print("技能威力: ", power)
     #状态属性的提升或降低
@@ -131,10 +133,10 @@ def skillDamage(obj_attack,obj_defense,skill,power,place):
     print("场地技能威力Up: ", power)
 
     #加入战斗前天赋计算  各 能力技能威力提升
-    attack,defense,spell_power,spell_defense,speed,power = talentmap.checkTalentBeforeBattle(
-        obj_attack,skill,attack,defense,spell_power,spell_defense,speed,power
-    )
-    print("特性技能威力Up: ", power)
+    #attack,defense,spell_power,spell_defense,speed,power = talentmap.checkTalentBeforeBattle(
+    #    obj_attack,skill,attack,defense,spell_power,spell_defense,speed,power
+    #)
+    #print("特性技能威力Up: ", power)
 
     #print("技能威力",power)
     # 检查是否有威力加强的道具

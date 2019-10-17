@@ -128,7 +128,7 @@ def checkParalysisOrNot(obj):
     '''
     if 'ST002' in obj.status:
         if status_dict['ST002'].statusEffect():
-            print("%s 处于麻痹状态,技能使用失败!" % obj.name)
+            print("%s 处于麻痹状态,技能使用失败!" % obj.getName())
             return True
     return False
 
@@ -141,7 +141,7 @@ def checkSleepingOrNot(obj):
     if 'ST003' in obj.status:
         if obj.status['ST003'] > 2 and obj.status['ST003'] <= 4:
             if status_dict['ST003'].statusEffect():
-                print("%s 清醒了！" % obj.name)
+                print("%s 清醒了！" % obj.getName())
                 removeStatus(obj,'ST003')
                 return False
 
@@ -150,7 +150,7 @@ def checkSleepingOrNot(obj):
             return False
         elif obj.status['ST003'] == 2:
             if status_dict['ST003'].status_giver[1].skill_code == 'S013':
-                print("%s 清醒了！" % obj.name)
+                print("%s 清醒了！" % obj.getName())
                 removeStatus(obj, 'ST003')
                 return False
 
@@ -166,7 +166,7 @@ def checkShrinkaOrNot(obj):
     :return:
     '''
     if 'ST004' in obj.status:
-        print("%s 畏缩不前,没有做出任何动作！" % obj.name)
+        print("%s 畏缩不前,没有做出任何动作！" % obj.getName())
         return True
     return False
 
@@ -177,20 +177,20 @@ def checkStatusBeforeBattle(obj,skill):
 
     if obj.status:
         if checkParalysisOrNot(obj):
-            print("%s 被麻痹,没有成功使用技能~" % obj.name)
+            print("%s 被麻痹,没有成功使用技能~" % obj.getName())
             return True
         if checkSleepingOrNot(obj):
-            print("%s 睡眠中,无法使用技能~" % obj.name)
+            print("%s 睡眠中,无法使用技能~" % obj.getName())
             time.sleep(3)
             return True
         #if checkShrinkaOrNot(obj):
             #print("%s 畏缩不前,没有成功使用技能~" % obj.name)
         #    return True
         if checkFrozenOrNot(obj,skill):
-            print("%s 冰冻中, 无法使用任何技能" % obj.name)
+            print("%s 冰冻中, 无法使用任何技能" % obj.getName())
             return True
     else:
-        print("%s 没有处于任何状态！" % obj.name)
+        print("%s 没有处于任何状态！" % obj.getName())
     return False
 
 def checkStatusAfterTurn(obj,place,hit_or_not = True): #默认技能命中
@@ -202,34 +202,34 @@ def checkStatusAfterTurn(obj,place,hit_or_not = True): #默认技能命中
     '''
     if 'ST005' in obj.status:
         damage = status_dict['ST005'].statusEffect(obj.status['ST005'],obj._max_health)
-        print("%s 中毒损失了 %s HP" % (obj.name,damage))
-        obj.health -= damage
-        if obj.health <= 0:
+        print("%s 中毒损失了 %s HP" % (obj.getName(),damage))
+        obj.hp -= damage
+        if obj.hp <= 0:
             return False
         #obj._max_health -= damage
         obj.status['ST005'] += 1
 
     if 'ST007' in obj.status:
         damage = status_dict['ST007'].statusEffect(obj._max_health)
-        print("%s 中毒损失了 %s HP" % (obj.name, damage))
-        obj.health -= damage
-        if obj.health <= 0:
+        print("%s 中毒损失了 %s HP" % (obj.getName(), damage))
+        obj.hp -= damage
+        if obj.hp <= 0:
             return False
 
     if 'ST001' in obj.status:
         damage = status_dict['ST001'].statusEffect(obj._max_health)
-        print("%s 因灼伤损失了 %s HP" % (obj.name, damage))
-        obj.health -= damage
-        if obj.health <= 0:
+        print("%s 因灼伤损失了 %s HP" % (obj.getName(), damage))
+        obj.hp -= damage
+        if obj.hp <= 0:
             return False
 
     if 'ST111' in obj.status:
         damage = status_dict['ST111'].statusEffect(obj._max_health)
-        print("%s 因寄生种子损失了 %s HP" % (obj.name, damage))
-        obj.health -= damage
+        print("%s 因寄生种子损失了 %s HP" % (obj.getName(), damage))
+        obj.hp -= damage
         if status_dict['ST111'].status_giver[0].alive:
             life.healthRecoreByDrug(status_dict['ST111'].status_giver[0],damage)
-        if obj.health <= 0:
+        if obj.hp <= 0:
             return False
 
 
@@ -243,9 +243,9 @@ def checkStatusAfterTurn(obj,place,hit_or_not = True): #默认技能命中
                 return True
         obj.status['ST010'] += 1
         damage = status_dict['ST010'].statusEffect(obj._max_health)
-        print("%s 因束缚损失了 %s HP" % (obj.name, damage))
-        obj.health -= damage
-        if obj.health <= 0:
+        print("%s 因束缚损失了 %s HP" % (obj.getName(), damage))
+        obj.hp -= damage
+        if obj.hp <= 0:
             return False
 
     if 'ST004' in obj.status:
@@ -284,7 +284,7 @@ def checkStatusAfterTurn(obj,place,hit_or_not = True): #默认技能命中
     #检查天气情况
     if place.weather != None:
         weathermap.weather_dict[place.weather].weatherEffect(obj)
-        if obj.health < 0:
+        if obj.hp < 0:
             return False
 
         weathermap.weather_dict[place.weather].turns -= 1
@@ -314,12 +314,12 @@ def removeStatus(obj,status_code):
             for st in abnormal_list:
                 if st in obj.status:
                     obj.removeStatus(st)
-                    print("%s 解除了 %s 状态：" % (obj.name, status_dict[st].status_show_name))
+                    print("%s 解除了 %s 状态：" % (obj.getName(), status_dict[st].status_show_name))
             return True
 
         if status_code in obj.status:
             obj.removeStatus(status_code)
-            print("%s 解除了 %s 状态：" % (obj.name, status_dict[status_code].status_show_name))
+            print("%s 解除了 %s 状态：" % (obj.getName(), status_dict[status_code].status_show_name))
         else:
             print("并没有什么效果~")
 
@@ -339,12 +339,12 @@ def checkChaosOrNot(obj):
     if 'ST006' in obj.status:
         if obj.status['ST006'] > 2 and obj.status['ST006'] < 5:
             if rancom.statusRandom(25): #1/4 几率自我解除
-                print("%s 解除了混乱状态~" % obj.name)
+                print("%s 解除了混乱状态~" % obj.getName())
                 removeStatus(obj,'ST006')
                 return False
 
         elif obj.status['ST006'] >= 5:
-            print("%s 解除了混乱状态~" % obj.name)
+            print("%s 解除了混乱状态~" % obj.getName())
             removeStatus(obj,'ST006')
             return False
 
@@ -426,7 +426,7 @@ def checkFrozenOrNot(obj,skill):
 
     if 'ST008' in obj.status:
         if status_dict['ST008'].statusEffect():
-            print("%s 解除了 冰冻！" % obj.name)
+            print("%s 解除了 冰冻！" % obj.getName())
             removeStatus(obj,'ST008')
             return False
         return True

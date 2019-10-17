@@ -21,6 +21,63 @@ attr_map_dict ={
     'fairy':{'fire':0.5,'combat':2,'poison':0.5,'dragon':2,'dark':2,'steel':0.5},
 }
 
+attr_list=['普通','格斗','飞行','毒','地面','岩石','虫','幽灵',
+           '钢','火','水','草','电','超能力','冰','龙','恶','妖精']
+attr_code_list=['normal','combat','fly','poison','ground','rock','insect','ghost',
+                'steel','fire','water','wood','electric','psychic','ice','dragon','dark','fairy']
+attr_map = dict(map(lambda x,y:[x,y],attr_code_list,attr_list))
+
+def getResistFromInitStr(resist_init_str):
+    '''
+    从克制表中拿到具体数值
+    :param str: 克制关系字符串
+    :return: 克制关系list
+    '''
+    resist_init_list = list(resist_init_str)
+    resist_str=''
+    resist_list=[]
+
+    get_mode = 1
+
+    for value in resist_init_list:
+        if get_mode == 1:
+            if value != '0':
+                resist_list.append(value)
+            else:
+                get_mode = 2
+                resist_str += value
+        elif get_mode == 2:
+            if value != '.':
+                get_mode = 1
+                resist_list.append(resist_str)
+                resist_str = ''
+                resist_list.append(value)
+            else:
+                get_mode = 3
+                resist_str += value
+        else:
+            resist_str += value
+            if value != '2':
+                resist_list.append(resist_str)
+                get_mode = 1
+    return resist_list
+
+
+
+def getResistance(obj):
+    '''
+    克制字典
+    :param obj:
+    :return: 克制字典
+    '''
+    resist_init_str = obj.getAttrRelationShip()
+    resist_list = getResistFromInitStr(resist_init_str)
+
+    #合并成字典 2种方法
+    #resist_relationship = dict(map(lambda x,y:[x,y],attr_list,resist_list))
+    resist_relationship = {key:value for key,value in zip(attr_list,resist_list)}
+
+    return resist_relationship
 
 def getAttrMap(obj_skill,obj):
     '''
@@ -29,23 +86,15 @@ def getAttrMap(obj_skill,obj):
     :param obj:
     :return:
     '''
-    restrain_amendment = []
-    try:
-        for value in obj.prop:
-            if value not in attr_map_dict[obj_skill.property]:
-                restrain_amendment.append(int(1))
-            else:
-                restrain_amendment.append(attr_map_dict[obj_skill.property][value])
-    except KeyError:
-        print("测试代码,属性克制类型未添加！")
-        restrain_amendment.append(1)
 
-    #匿名函数+reduce 得到个元素乘积
-    attr_index = reduce(lambda x,y:x*y,restrain_amendment)
+    resist_relationship = getResistance(obj)
 
+    attr_index = resist_relationship[attr_map[obj_skill.property]]
+
+    '''
     if 'ghost' in obj.prop and 'ST121' in obj.status:
         if obj_skill.property == 'normal' or obj_skill.property == 'combat':
             if attr_index == 0:
                 attr_index = 1
-
-    return attr_index
+    '''
+    return float(attr_index)

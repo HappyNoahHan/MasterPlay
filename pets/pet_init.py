@@ -1,4 +1,4 @@
-from pets import skilltree,pet_map
+from pets import skilltree,newpets
 from battle import skilllistmap
 import random
 
@@ -28,6 +28,7 @@ def getInitSkillList(pet_no):
 def get_pet(pet_no,level=1):
 
     skill_list = getInitSkillList(pet_no)
+    return newpets.Pet(int(pet_no),level,skill_list=skill_list)
 
-    return pet_map.all_pet_dict[pet_no](level=level,skill_list=skill_list)
+    #return pet_map.all_pet_dict[pet_no](level=level,skill_list=skill_list)
 

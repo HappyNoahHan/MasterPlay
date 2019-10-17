@@ -3,6 +3,7 @@ import random
 
 wild_pet_list={
     'MAP08':{
+        #no   几率    等级范围
         '016':(50,[],range(2,6)),
         '021':(50,[],range(2,6)),
     },
@@ -37,6 +38,11 @@ def meetWildPet(dict):
 
 
 def getWildPet(map_id):
+    '''
+
+    :param map_id:
+    :return: NUMBER AND LEVEL
+    '''
     pet_no = meetWildPet(wild_pet_list[map_id])
     level = random.choice(wild_pet_list[map_id][pet_no][2])
 

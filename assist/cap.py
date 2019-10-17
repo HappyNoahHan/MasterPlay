@@ -1,4 +1,4 @@
-def getCapValue(basic,lv,value_indi,base_point):
+def getCapValue(basic,lv,value_indi,base_point=0):
     '''
     计算能力值
     :param value:
@@ -8,7 +8,7 @@ def getCapValue(basic,lv,value_indi,base_point):
     return int((basic * 2 + base_point /4 + value_indi) * lv /100 + 5)
 
 
-def gethpCapValue(basic,lv,value_indi,base_point):
+def gethpCapValue(basic,lv,value_indi,base_point=0):
     '''
     计算hp 能力
     :param value:

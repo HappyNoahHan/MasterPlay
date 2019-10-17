@@ -53,12 +53,12 @@ def showPetStatus(obj):
     else:
         show_tag = ' '
     print("%s  ||  生命值：%s  攻击值 %s 防御值 %s 法攻值 %s 法防值 %s  速度 %s ||  等级: Lv%s  %s" %
-          (obj.name,obj.health,obj.getAttack(),obj.getDefense(),
-           obj.getSpellPower(),obj.getSpellDefense(),
+          (obj.getName(),obj.getHp(),obj.getAttack(),obj.getDefense(),
+           obj.getSpecialAttack(),obj.getSpecialDefense(),
            obj.getSpeed(),obj.level,show_tag)
           ,end=' || ')
-    if obj.talent:
-        print("天赋: %s" % talentmap.talent_dict[obj.talent].name,end=' || ')
+    #if obj.talent:
+    #    print("天赋: %s" % talentmap.talent_dict[obj.talent].name,end=' || ')
     if obj.status:
         for status in obj.status:
             print(statusmap.status_dict[status],end=' ')
@@ -77,7 +77,7 @@ def learnSkill(code):
     print("%s 学习成功！" % battle.skilllistmap.skill_dict[code].show_name)
 
 def useSkill(obj,skill):
-    print("%s 使用 %s 攻击！" % (obj.name, skill.show_name))
+    print("%s 使用 %s 攻击！" % (obj.getName(), skill.show_name))
 
 
 def propertyUp(health_up,attack_up,defense_up,spell_power_up,spell_defense_up,speed_up):
@@ -102,7 +102,7 @@ def checkSelectID(id,dict):
         return False
 
 def showPetErrorStatus(obj):
-    print("%s 当前状态: " % obj.name,end=" ")
+    print("%s 当前状态: " % obj.getName(),end=" ")
     if obj.status:
         for status in obj.status:
             print(statusmap.status_dict[status],end=' ')
