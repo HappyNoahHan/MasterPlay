@@ -67,7 +67,7 @@ def restore(pet):
         if status in statusmap.clear_list:
             statusmap.removeStatus(pet,status)
 
-    pet.alive = True
+    pet.is_alive = True
     pet.basic_point_getter = None
 
     for key,skill in pet.skill_list.items():

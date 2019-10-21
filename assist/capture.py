@@ -14,7 +14,7 @@ import random
 from assist import petbox
 
 def captureOrNot(obj_defense,capture_index,status_index = 0):
-    if obj_defense.captured  != False :
+    if obj_defense.has_captured  != False :
         print("%s 不可捕获" % obj_defense)
         return False
     if 'ST001' in obj_defense.status:
@@ -45,8 +45,8 @@ def addPetOrNot(player,wild_pet):
     :return:
     '''
     wild_pet.has_trainer = True
-    wild_pet.autoAi = False
-    wild_pet.captured = True
+    wild_pet.is_is_autoAi = False
+    wild_pet.has_captured = True
     wild_pet.basic_point_getter = None
     wild_pet.last_used_skill = None
 

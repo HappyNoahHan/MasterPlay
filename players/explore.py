@@ -24,8 +24,8 @@ def explore(player,wild_pet,place):
             return True
 
         if player.battle_run_success == False: #未逃跑
-            if wild_pet.captured == False:
-                if not player.pet_list['Master'].alive:
+            if wild_pet.has_captured == False:
+                if not player.pet_list['Master'].is_alive:
                     player.battle_pet_list.remove(player.pet_list['Master'])
                     if not changepet.changePetAfterDie(player):
                         print("没有可以使用的精灵")

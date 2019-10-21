@@ -87,7 +87,7 @@ def isEvolve(obj):
                                                        obj.spell_defense_base_point,
                                                        obj.speed_base_point],
                                     has_trainer=True,
-                                    autoAi=False)
+                                    is_autoAi=False)
     new_obj.realize_skill_list = obj.realize_skill_list
     new_obj.status = obj.status
     new_obj.health_indi = obj.health_indi,

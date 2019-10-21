@@ -4,14 +4,14 @@ from pets import pet_map
 def changePet(player):
     print("请选择你要交换的精灵！")
     for key,value in player.pet_list.items():
-        if value.alive == True and key != 'Master':
+        if value.is_alive == True and key != 'Master':
             print(key,':',value.name,' Lv%s' % value.level)
     print("0 : 返回！")
     select_id = input(">")
 
     if select_id in player.pet_list and select_id != 'Master':
         #player.master_pet = player.pet_list[select_id]
-        if player.pet_list[select_id].alive == True:
+        if player.pet_list[select_id].is_alive == True:
             backup_pet = player.pet_list['Master']
             player.setPet('Master',player.pet_list[select_id])
             player.setPet(select_id,backup_pet)
@@ -31,7 +31,7 @@ def changePetAfterDie(player):
     print("=" * 30)
     alive_number = 0
     for key, value in player.pet_list.items():
-        if value.alive == True:
+        if value.is_alive == True:
             alive_number += 1
             print(key,":",value.name)
 
@@ -42,7 +42,7 @@ def changePetAfterDie(player):
         select_id = input(">")
         if select_id in player.pet_list:
             # player.master_pet = player.pet_list[select_id]
-            if player.pet_list[select_id].alive == True:
+            if player.pet_list[select_id].is_alive == True:
                 backup_pet = player.pet_list['Master']
                 player.setPet('Master', player.pet_list[select_id])
                 player.setPet(select_id, backup_pet)
@@ -82,7 +82,7 @@ def changePetWithNpc(player,npcer):
             if select_pet_id in player.pet_list:
                 if player.pet_list[select_pet_id].name == npcer.condition:
                     player.setPet(select_pet_id,change_pet)
-                    #player.pet_list[select_pet_id].autoAi = False
+                    #player.pet_list[select_pet_id].is_autoAi = False
                     print("你获得了 %s lv%s" % (player.pet_list[select_pet_id].name,player.pet_list[select_pet_id].level))
                     # 将交换的精灵加入图鉴
                     if change_pet.pet_no in handbook.pet_handbook_dict:

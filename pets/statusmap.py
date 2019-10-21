@@ -227,7 +227,7 @@ def checkStatusAfterTurn(obj,place,hit_or_not = True): #默认技能命中
         damage = status_dict['ST111'].statusEffect(obj._max_health)
         print("%s 因寄生种子损失了 %s HP" % (obj.getName(), damage))
         obj.hp -= damage
-        if status_dict['ST111'].status_giver[0].alive:
+        if status_dict['ST111'].status_giver[0].is_alive:
             life.healthRecoreByDrug(status_dict['ST111'].status_giver[0],damage)
         if obj.hp <= 0:
             return False
@@ -368,23 +368,23 @@ def checkStatusEnd(player):
 
         if 'ST102' in pet.status:
             removeStatus(pet,'ST102')
-            pet.autoAi = False
+            pet.is_autoAi = False
 
         if 'ST103' in pet.status:
             removeStatus(pet,'ST103')
-            pet.autoAi = False
+            pet.is_autoAi = False
 
         if 'ST113' in pet.status:
             removeStatus(pet,'ST113')
-            pet.autoAi = False
+            pet.is_autoAi = False
 
         if 'ST117' in pet.status:
             removeStatus(pet,'ST117')
-            pet.autoAi = False
+            pet.is_autoAi = False
 
         if 'ST108' in pet.status:
             removeStatus(pet,'ST108')
-            pet.autoAi = False
+            pet.is_autoAi = False
             for key,skill in pet.skill_list.items():
                 try:
                     if skill.power_change_by_hit:
@@ -590,7 +590,7 @@ def statusTurnsAddIfNotHit(obj_attack):
         obj_attack.status['ST108'] += 1
         if obj_attack.status['ST108'] == 4:
             removeStatus(obj_attack,'ST108')
-            obj_attack.autoAi = False
+            obj_attack.is_autoAi = False
 
 
 def getGainStatusFromDefenser(obj_attack,obj_defense):

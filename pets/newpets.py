@@ -14,7 +14,7 @@
 from assist import cap,rancom
 from database import petdata
 
-class Pet(object):
+class Pets(object):
     def __init__(self,petNo,level,skill_list=None):
         self.petNo = petNo
         self.level = level
@@ -60,17 +60,19 @@ class Pet(object):
         #遇见随机数
         #self.talent = 'TA002'
         #是否濒危?改为状态？如何
-        self.alive = True
+        self.is_alive = True
         #是否玩家所有
         self.owner = None #玩家名字
         #是否捕获
-        self.captured = False
+        self.has_captured = False
         #是否AI
-        self.autoAi = True
+        self.is_autoAi = True
         #最后使用过的技能
         self.last_used_skill = None
         #赏金
-        self.reward_money = None
+        self.reward_money = 0
+        #基础经验值
+        self.basic_exp_value = self.getBasicExpValue()
 
     def getName(self):
         return self.pet_detail_msg[1]
@@ -108,6 +110,9 @@ class Pet(object):
     def getCaptureDegree(self):
         return self.pet_detail_msg[19]
 
+    def getExpForFullLevel(self):
+        return int(''.join(self.pet_detail_msg[21].split(',')))
+
     def getBasicPoint(self):
         return self.pet_detail_msg[22].split('、')
 
@@ -133,9 +138,13 @@ class Pet(object):
         return self.attack_point + self.hp_point + self.defense_point \
                + self.special_attack_point + self.special_defense_point + self.speed_point
 
+    def getBasicExpValue(self):
+        return  int((self.getExpForFullLevel()/100 * (self.pet_detail_msg[14] /1000  + 1) ) / self.getCaptureDegree())
+
+
     #for test
     def setautoAi(self,value):
-        self.autoAi = value
+        self.is_autoAi = value
 
     def setOwner(self,value):
         self.owner = value
@@ -152,5 +161,3 @@ class Pet(object):
 
     def removeStatus(self,key):
         self.status.pop(key)
-
-

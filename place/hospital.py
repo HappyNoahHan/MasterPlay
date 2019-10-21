@@ -10,7 +10,7 @@ class Hospital(placebase.Place):
             #清楚状态
             pet.health = pet._max_health
             pet.status.clear()
-            pet.alive = True
+            pet.is_alive = True
 
             for key,skill in pet.skill_list.items():
                 skill.pp_value = skill._pp_value_max

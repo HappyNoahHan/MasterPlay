@@ -98,3 +98,16 @@ def getAttrMap(obj_skill,obj):
                 attr_index = 1
     '''
     return float(attr_index)
+
+
+def samePropOrNot(skill,obj):
+    '''
+    技能属性是否和本体相合
+    :param skill:
+    :param obj:
+    :return:
+    '''
+    if attr_map[skill.property] in obj.getAttr():
+        return True
+    else:
+        return False

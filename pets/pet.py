@@ -27,7 +27,7 @@ class Pet(object):
 
     #初始化函数
     #初始化的时候 需要将技能 基础点数传输进去，不然每一个类是固定的
-    def __init__(self,level=1,skill_list={},exp_for_current=0,carry_prop=None,base_points_list=[],has_trainer=False,autoAi=True):
+    def __init__(self,level=1,skill_list={},exp_for_current=0,carry_prop=None,base_points_list=[],has_trainer=False,is_autoAi=True):
         self.level = level
 
         [self.health_indi,
@@ -74,9 +74,9 @@ class Pet(object):
         #是否玩家所有
         self.has_trainer = has_trainer
         #是否捕获
-        self.captured = self.has_trainer
+        self.has_captured = self.has_trainer
 
-        self.autoAi = autoAi
+        self.is_autoAi = False
         #最后使用过的技能
         self.last_used_skill = None
         #赏金
@@ -109,6 +109,7 @@ class Pet(object):
 
     def removeStatus(self,key):
         self.status.pop(key)
+
 
 
 

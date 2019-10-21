@@ -238,12 +238,12 @@ def battleRun(player,obj1,obj2,place):
     print("=" * 30)
     assist.show.showSelect()
     print("=" * 30)
-    if obj1.autoAi == True:
+    if obj1.is_is_autoAi == True:
         #为测试方便，都指定为1
         command = '1'
         assist.show.petThink(obj1.getName())
         time.sleep(3)
-    elif obj1.autoAi == 'lost':
+    elif obj1.is_autoAi == 'lost':
         command = '1'
         print("%s 正处于某种强大的状态,从而暂时失去控制" % obj1.getName())
         time.sleep(3)
@@ -251,7 +251,7 @@ def battleRun(player,obj1,obj2,place):
         print("玩家请选择指令：")
         command = input(">>")
     if command == '1':
-        if obj1.autoAi == True:
+        if obj1.is_autoAi == True:
             assist.show.petSelectSkill(obj1.getName())
             time.sleep(3)
             try:
@@ -262,7 +262,7 @@ def battleRun(player,obj1,obj2,place):
                 assist.show.petDie(obj1)
                 assist.show.battleOver()
                 return True
-        elif obj1.autoAi == 'lost':
+        elif obj1.is_autoAi == 'lost':
             skill_number = 'delay'
         else:
             for key, value in obj1.skill_list.items():
@@ -472,7 +472,7 @@ def battleRun(player,obj1,obj2,place):
         #propmap.getProp(propmap.prop_dict['五彩迷光'])
         use_or_not = bag.showBattleBagOrNot(player,obj2)
         if use_or_not == True:
-            if obj2.captured == False:
+            if obj2.has_captured == False:
                 # 回合结束检查是否中毒  中毒死亡
                 if not statusmap.checkStatusAfterTurn(obj1,place):
                     assist.show.petDie(obj1)

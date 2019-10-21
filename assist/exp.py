@@ -23,8 +23,8 @@ def getBattleSuccessExp(player,obj,exp_basic = 1,ai_index=1,carry_prop=1):
     :param lv:
     :return:
     '''
-    if obj.autoAi == True:
-        if obj.has_trainer == None:
+    if obj.is_autoAi == True:
+        if obj.owner:
             ai_index = 10
 
     if len(player.battle_pet_list) > 1:
@@ -100,7 +100,7 @@ def levelUp(obj):
 
     #属性改变
     obj._max_health += health_up
-    if obj.alive:
+    if obj.is_alive:
         obj.health += health_up
     obj.attack += attack_up
     obj.defense += defense_up

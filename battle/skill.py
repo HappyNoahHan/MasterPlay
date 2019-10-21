@@ -377,7 +377,7 @@ class DelayedSkill(skill):
                 pet.setStatus(status)
         else:
             pet.setStatus(self.add_status_begin)
-        pet.autoAi = 'lost'
+        pet.is_autoAi = 'lost'
 
     def removeStatus(self,pet):
         if isinstance(self.add_status_begin,list):
@@ -386,7 +386,7 @@ class DelayedSkill(skill):
         else:
             pet.removeStatus(self.add_status_begin)
         pet.removeSkills('delay')
-        pet.autoAi = False
+        pet.is_autoAi = False
         if self.add_status_end != None:
             pet.setStatus(self.add_status_end)
 

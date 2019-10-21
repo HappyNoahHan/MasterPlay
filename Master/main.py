@@ -7,8 +7,8 @@ from props import berrymap,propmap
 
 if __name__ == '__main__':
     #for test
-    #a = poison.Zubat(level=5,skill_list={'1':skill.PsychUp(),'2':skill.Slam()},has_trainer=True,autoAi=False)
-    a = newpets.Pet(23,level=5,skill_list={'1':skill.PsychUp(),'2':skill.Slam()})
+    #a = poison.Zubat(level=5,skill_list={'1':skill.PsychUp(),'2':skill.Slam()},has_trainer=True,is_autoAi=False)
+    a = newpets.Pets(23,level=5,skill_list={'1':skill.PsychUp(),'2':skill.Slam()})
     a.setautoAi(False)
 
     #a.berry = berrymap.berry_dict['零余果']

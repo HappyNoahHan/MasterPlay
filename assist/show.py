@@ -16,8 +16,8 @@ def gameOver():
     print("游戏结束！")
 
 def petDie(pet):
-    pet.alive = False
-    print("%s 濒危" % pet.name)
+    pet.is_alive = False
+    print("%s 濒危" % pet.getName())
 
 def petThink(name):
     print("%s 正在思考！" % name)
@@ -48,7 +48,7 @@ def showPetStatus(obj):
     :return:
     '''
     #propmap.checkCarryPropForObj(obj)
-    if obj.autoAi == True:
+    if obj.is_autoAi == True:
         show_tag = 'WildPet'
     else:
         show_tag = ' '

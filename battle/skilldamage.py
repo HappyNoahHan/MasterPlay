@@ -93,11 +93,11 @@ def skillDamage(obj_attack,obj_defense,skill,power,place):
     print("属性克制关系: ",attr_index_number)
     #attr_index_number = 1
     #计算是否使用的是本属性的技能
-    #if skill.property in obj_attack.prop:
-    #    skill_prop_match_obj_prop = 1.5
-    #else:
-    #    skill_prop_match_obj_prop = 1
-    skill_prop_match_obj_prop =1
+    if petattr.samePropOrNot(skill,obj_attack):
+        skill_prop_match_obj_prop = 1.5
+    else:
+        skill_prop_match_obj_prop = 1
+    #skill_prop_match_obj_prop =1
 
     # 检查战斗前天赋技能
     #power = skill.skill_power

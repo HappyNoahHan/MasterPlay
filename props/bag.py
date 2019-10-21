@@ -219,7 +219,7 @@ def showBattlePetBallBag(player,obj_defense,dict):
                 if obj_defense.pet_no in handbook.pet_handbook_dict:
                     if handbook.pet_handbook_dict[obj_defense.pet_no][2][0] == False:
                         handbook.setHandBook(obj_defense.pet_no, obj_defense.name, obj_defense.prop,capture=[True])
-                obj_defense.captured = True
+                obj_defense.has_captured = True
                 if dict[int(select_id)][1] == 0:
                     dict.pop(int(select_id))
                 return True
