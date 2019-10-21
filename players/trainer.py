@@ -1,5 +1,5 @@
 from players import npc
-from pets import  pet_map
+from pets import pet_map
 import random
 
 class Trainer(npc.Npc):

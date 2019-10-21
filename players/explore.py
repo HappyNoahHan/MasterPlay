@@ -2,7 +2,7 @@ from players import battering
 from assist import show,exp,evolve,life,changepet,prize
 from battle import asscount
 from props import propmap
-from pets import statusmap,pet_map
+from pets import statusmap
 import random,time
 
 def explore(player,wild_pet,place):

@@ -71,7 +71,7 @@ def vsBattleing(player,trainer,challenge_list,place):
     player.battle_pet_list.clear()
     if player.battle_run_success == False:
         trainer_master_pet = random.choice(challenge_list)
-        print("%s 准备使用 %s Lv%s 进行战斗！" % (trainer.name,trainer_master_pet.name,trainer_master_pet.level))
+        print("%s 准备使用 %s Lv%s 进行战斗！" % (trainer.name,trainer_master_pet.getName(),trainer_master_pet.level))
         #show.showPetStatus(trainer_master_pet)
 
         if battleing(player,trainer_master_pet,place=place):

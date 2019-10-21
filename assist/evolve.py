@@ -3,54 +3,14 @@
     继承  技能列表  已领悟技能
 '''
 
-from pets import fire,rock,poison,skilltree,fly,wood,water,electric,insect,normal,ground,fairy
+
 from assist import  show
 from battle import learnskill
 import time
 
 evolve_dict={
-    '妙蛙种子': [wood.Ivysaur,16,'level_up'],
-    '妙蛙草': [wood.Venusaur,36,'level_up'],
-    '小火龙': [fire.Charmeleon,16,'level_up'],
-    '火恐龙': [fire.Charizard,36,'level_up'],
-    '杰尼龟': [water.Wartortle,16,'level_up'],
-    '卡咪龟': [water.Blastoise,36,'level_up'],
-    '绿毛虫': [insect.Metapod,7,'level_up'],
-    '铁甲蛹': [insect.Butterfree,10,'level_up'],
-    '独角虫': [insect.Kakuna,7,'level_up'],
-    '铁壳蛹': [insect.Beedrill,10,'level_up'],
-    '波波': [fly.Pidgeotto, 18, 'level_up'],
-    '比比鸟': [fly.Pidgeot, 36, 'level_up'],
-    '小拉达': [normal.Raticate,20,'level_up'],
-    '烈雀': [fly.Fearow, 20, 'level_up'],
-    '阿柏蛇': [poison.Arbok, 22, 'level_up'],
-    '皮卡丘': [electric.Raichu,'雷之闪','stone_up'],
-    '穿山鼠': [ground.Sandslash,22,'level_up'],
-    '尼多兰': [poison.Nidorina,16,'level_up'],
-    '尼多娜': [poison.Nidoqueen,'月之露','stone_up'],
-    '尼多朗': [poison.Nidorino,16,'level_up'],
-    '尼多王': [poison.Nidoking,'月之露','stone_up'],
-    '皮皮': [fairy.Clefable,'月之露','stone_up'],
-    '六尾': [fire.Ninetales,'火之焰','stone_up'],
-    '胖丁': [fairy.Wigglytuff,'月之露','stone_up'],
-    '超音蝠': [poison.Golbat,22,'level_up'],
-    '走路草': [wood.Gloom,21,'level_up'],
-    '臭臭花': [wood.Vileplume,'叶之翠','stone_up'],
-    '派拉斯': [insect.Parasect,24,'level_up'],
-    '毛球': [insect.Venomoth,31,'level_up'],
-    '地鼠': [ground.Dugtrio,26,'level_up'],
-    '喵喵': [normal.Persian,28,'level_up'],
-    '喇叭芽': [wood.Weepinbell,21,'level_up'],
-    '口呆花': [wood.Victreebel,'叶之翠','stone_up'],
-    '小拳石': [rock.Graveler,25,'level_up'],
-    '隆隆石': [rock.Golem,'岩之心','stone_up'],
-    '玛瑙水母':[water.Tentacruel,30,'level_up'],
-    '墨海马':[water.Seadra,32,'level_up'],
-    '角金鱼':[water.Seaking,33,'level_up'],
-    '海星星':[water.Starmie,'水之滴','stone_up'],
-    '臭泥':[poison.Muk,38,'level_up'],
-    '小磁怪':[electric.Magneton,30,'level_up'],
 }
+
 def canEvolveOrNot(obj,stone=None):
     '''
     判断是否又进化形态

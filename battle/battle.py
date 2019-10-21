@@ -238,7 +238,7 @@ def battleRun(player,obj1,obj2,place):
     print("=" * 30)
     assist.show.showSelect()
     print("=" * 30)
-    if obj1.is_is_autoAi == True:
+    if obj1.is_autoAi == True:
         #为测试方便，都指定为1
         command = '1'
         assist.show.petThink(obj1.getName())

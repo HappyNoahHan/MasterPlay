@@ -53,7 +53,7 @@ def showPetStatus(obj):
     else:
         show_tag = ' '
     print("%s  ||  生命值：%s  攻击值 %s 防御值 %s 法攻值 %s 法防值 %s  速度 %s ||  等级: Lv%s  %s" %
-          (obj.getName(),obj.getHp(),obj.getAttack(),obj.getDefense(),
+          (obj.getName(),obj.hp,obj.getAttack(),obj.getDefense(),
            obj.getSpecialAttack(),obj.getSpecialDefense(),
            obj.getSpeed(),obj.level,show_tag)
           ,end=' || ')

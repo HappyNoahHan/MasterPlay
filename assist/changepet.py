@@ -1,5 +1,4 @@
 from props import handbook
-from pets import pet_map
 
 def changePet(player):
     print("请选择你要交换的精灵！")
@@ -66,7 +65,7 @@ def changePetWithNpc(player,npcer):
         current_pet_list.append(pet.name)
 
 
-    change_pet = pet_map.trainer_pet_dict[npcer.trainer_id]
+    #change_pet = pet_map.trainer_pet_dict[npcer.trainer_id]
 
 
     if npcer.condition in current_pet_list:

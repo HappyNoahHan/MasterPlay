@@ -1,5 +1,4 @@
 from players import trainer,npc
-from pets import fly,fire,wood,water,rock
 from battle import skill
 import random
 #has_trainter = None 指npc 精灵
@@ -54,7 +53,8 @@ npc_list={
         '4': trainer.Trainer(name='玩鸟少女',info='我的波波最强大...',
                              prize={'money':100},
                              can_challenge=True,
-                             is_npc=False,),
+                             is_npc=False,
+                             trainer_id='MAP0101'),
     },
 
 
