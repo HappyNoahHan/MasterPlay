@@ -18,7 +18,7 @@ class Pets(object):
     def __init__(self,petNo,level,skill_list=None):
         self.petNo = petNo
         self.level = level
-        self.pet_detail_msg=petdata.get_pet(self.petNo)
+        self.pet_detail_msg=petdata.get_pet('petDetailMessage',self.petNo)
 
         #随机数值 后续 随某个参数的提升 个体值更固定 ？
         [self.health_ini_value,

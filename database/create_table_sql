@@ -23,3 +23,17 @@ create table petDetailMessage(
  ,full_experience_for_max_level bigint
  ,base_point varchar(20)
  )ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+create table levelUpLearnSkill(
+    petNo int not null,
+    learn_condition varchar(10),
+    skill_name varchar(20),
+    skill_prop varchar(10),
+    skill_type varchar(10),
+    skill_power int,
+    skill_hit int,
+    pp_value int,
+    form varchar(10)
+    )ENGINE=MyISAM DEFAULT CHARSET=utf8;
+

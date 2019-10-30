@@ -10,7 +10,10 @@ class PetDetailMsg():
     def getDeatilMessage(self,target):
         bs_obj = BeautifulSoup(urlopen(target), features="html.parser")
         body = bs_obj.body
-        obj = body.find('tr', {'class': 'pp-tab-content'})
+        try:
+            obj = body.find('tr', {'class': 'pp-tab-content'})
+        except:
+            return 0
 
         subobj = obj.find_all('td')
 
@@ -25,11 +28,16 @@ class PetDetailMsg():
 
 if __name__ == '__main__':
     #pet = PetDetailMsg()
-    for i in range(22,152):
+    for i in range(113,152):
         pet = PetDetailMsg()
-        pet_no = petdata.get_pet(i)
-        print("正在获取%s 的资料~~~~" % pet_no[1])
+        pet_no = petdata.get_pet('petMsg',i)
+        print("正在获取%d %s 的资料~~~~" % (pet_no[0],pet_no[1]))
         pet_detail_msg = pet.getDeatilMessage(target=pet_no[2])
+
+        #如果返回值为0 跳出这次循环
+        if pet_detail_msg == 0:
+            print("无法获取资料,请检查源头!")
+            continue
 
 
         data_list=[pet_no[0],pet_no[1],
