@@ -1,4 +1,5 @@
 from database import datasetting
+import random
 
 def get_pet(petNo,table_name):
     sql = "select * from %s where petNo=%d" % (table_name,petNo)
@@ -9,6 +10,18 @@ def get_pet(petNo,table_name):
     cursor.close()
     datasetting.close_conn(db_conn)
     return pet_data
+
+def get_url():
+    sql = 'select * from skillURL'
+    db_conn = datasetting.get_conn()
+    cursor = db_conn.cursor()
+    cursor.execute(sql)
+    datas = cursor.fetchall()
+    cursor.close()
+    datasetting.close_conn(db_conn)
+
+    return datas
+
 
 def insert_data(data):
     '''
@@ -59,6 +72,72 @@ def insert_skill_data(datas):
     cursor.close()
     db_conn.commit()
     datasetting.close_conn(db_conn)
+
+def insert_skill_url(datas):
+    sql = 'insert into skillURL(type,url) values(%s,%s)'
+
+    db_conn = datasetting.get_conn()
+    cursor = db_conn.cursor()
+    for key,value in datas.items():
+        cursor.execute(sql % (repr(key),repr(value)))
+
+    cursor.close()
+    db_conn.commit()
+    datasetting.close_conn(db_conn)
+
+
+def insert_all_skill_data(datas):
+    '''
+    存储所有类型的技能信息
+    :param datas:
+    :return:
+    '''
+    sql = 'insert into skillInfo(skill_name,skill_prop,skill_type,skill_power,skill_hit,pp_value,comment,z_skill_power)'\
+        'values (%s,%s,%s,%s,%s,%s,%s,%s)'
+
+    db_conn = datasetting.get_conn()
+    cursor = db_conn.cursor()
+    for data in datas:
+        ins_data = tuple(repr(e) if e != '--' else 'NULL' for e in data.split('|'))
+        try:
+            cursor.execute(sql % ins_data)
+        except:
+            print("数据错误,忽视继续")
+            continue
+
+    cursor.close()
+    db_conn.commit()
+    datasetting.close_conn(db_conn)
+
+def get_learn_skill(pet_no):
+    print(pet_no)
+    sql = 'select * from levelUpLearnSkill where petNo=%d' % pet_no
+    sql += " and learn_condition like 'Lv.%'"
+    db_conn = datasetting.get_conn()
+    cursor = db_conn.cursor()
+
+    cursor.execute(sql)
+
+    skill_msg =cursor.fetchall()
+    cursor.close()
+    datasetting.close_conn(db_conn)
+
+    return skill_msg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

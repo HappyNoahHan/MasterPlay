@@ -37,3 +37,20 @@ create table levelUpLearnSkill(
     form varchar(10)
     )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+
+create table skillURL(
+type char (10) not null primary key,
+url text
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+create table skillInfo(
+    skill_name char(10) not null,
+    skill_prop char(4),
+    skill_type char(4),
+    skill_power int,
+    skill_hit int,
+    pp_value int,
+    comment varchar (256)
+    ,z_skill_power char(10)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+

@@ -1,5 +1,6 @@
 from pets import skilltree,newpets
 from battle import skilllistmap
+from database import petdata
 import random
 
 
@@ -31,4 +32,27 @@ def get_pet(pet_no,level=1):
     return newpets.Pets(int(pet_no),level,skill_list=skill_list)
 
     #return pet_map.all_pet_dict[pet_no](level=level,skill_list=skill_list)
+
+def get_skill_tree(pet_no):
+    skill_tree = []
+    skill_msg = petdata.get_learn_skill(pet_no)
+    for msg in skill_msg:
+        key  = msg[1].split('Lv.')[1].strip('-')
+        value = msg[2]
+        skill_tree.append((key,value))
+
+    return skill_tree
+
+def get_init_skill_list(pet_no,level):
+    skill_tree = get_skill_tree(pet_no)
+
+    key_list = []
+    for key in skill_tree:
+        if int(key[0]) < level:
+            key_list.append(key)
+
+    if key_list.__len__() > 4:
+        key_list = random.sample(key_list,4)
+
+    return key_list
 
