@@ -32,5 +32,5 @@ if __name__ == "__main__":
     dl = DownLoader()
     pet_message_list = dl.getPetMessage()
 
-    for msg in pet_message_list[0:3]:
+    for msg in pet_message_list[151:]:
         petdata.insert_data(msg)

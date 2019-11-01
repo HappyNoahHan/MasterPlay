@@ -54,3 +54,11 @@ create table skillInfo(
     ,z_skill_power char(10)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+
+create table talentInfo(
+    ch_name char(10) not null,
+    jp_name char(20) not null,
+    eg_name char(20) not null,
+    talent_comment char(50)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+

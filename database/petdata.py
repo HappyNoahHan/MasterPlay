@@ -124,8 +124,18 @@ def get_learn_skill(pet_no):
 
     return skill_msg
 
+def insert_talent_info(datas):
+    sql = 'insert into talentInfo(ch_name,jp_name,eg_name,talent_comment) values(%s,%s,%s,%s)'
 
+    db_conn = datasetting.get_conn()
+    cursor = db_conn.cursor()
 
+    for data in datas:
+        cursor.execute(sql % tuple(repr(e) for e in data))
+
+    cursor.close()
+    db_conn.commit()
+    datasetting.close_conn(db_conn)
 
 
 
