@@ -29,7 +29,7 @@ skill_dict = {
     'F011': battle.skill.AerialAce,#燕返
     'F012': battle.skill.DrillPeck,#啄钻
     'F013': battle.skill.Pluck,#啄食
-    'N001': battle.skill.Tackle,#撞击
+    18: battle.skill.Tackle,#撞击
     'N002': battle.skill.Grab,#抓
     'N003': battle.skill.Supersonic, #超音波
     'N004': battle.skill.Swift, #高速星星
@@ -46,8 +46,8 @@ skill_dict = {
     'N015': battle.skill.Growl,#叫声
     'N016': battle.skill.FuryAttack,#乱击
     'N017': battle.skill.FocusEnergy,#聚气
-    'N018': battle.skill.Growth,#生长
-    'N019': battle.skill.SweetScent,#甜甜香气
+    97: battle.skill.Growth,#生长
+    137: battle.skill.SweetScent,#甜甜香气
     'N020': battle.skill.LuckyChant,#幸运咒语
     'N021': battle.skill.NaturalGift,#自然之恩
     'N022': battle.skill.Slam,#摔打
@@ -104,7 +104,7 @@ skill_dict = {
     'N073': battle.skill.Foresight,#识破
     'N074': battle.skill.PsychUp,#自我暗示
     'B001': battle.skill.StunSpore,#麻痹粉
-    'B002': battle.skill.azorLeaf,#飞叶快刀
+    476   : battle.skill.azorLeaf,#飞叶快刀
     'B006': battle.skill.Absorb, #吸取
     'B007': battle.skill.SleepPowder,  # 催眠粉
     'B008': battle.skill.MegaDrain,#超级吸取

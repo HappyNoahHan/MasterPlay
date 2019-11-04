@@ -10,6 +10,6 @@ all_pet_dict={
 }
 
 trainer_pet_dict={
-    'MAP0101': [pet_init.get_pet('016',5),pet_init.get_pet('016',5)]
+    'MAP0101': [pet_init.get_pet(16,5),pet_init.get_pet(16,5)]
 
 }

@@ -4,21 +4,16 @@ from database import petdata
 import random
 
 
-def getInitSkillList(pet_no):
+def getInitSkillList(skill_init_list):
     '''
     野生精灵初始技能~
     :param pet_no:
     :return:
     '''
 
-    skill_init_list = skilltree.pet_skill_tree[pet_no]['init'].copy()
-
-    if skill_init_list.__len__() >= 4:
-        skill_init_list = random.sample(skill_init_list,4)
-
     skill_list = {}
 
-    for key in skill_init_list:
+    for key in skill_init_list.keys():
         for x in ['1','2','3','4']:
             if x not in skill_list:
                 skill_list[x] = skilllistmap.skill_dict[key]()
@@ -27,9 +22,9 @@ def getInitSkillList(pet_no):
     return skill_list
 
 def get_pet(pet_no,level=1):
-
-    skill_list = getInitSkillList(pet_no)
-    return newpets.Pets(int(pet_no),level,skill_list=skill_list)
+    skill_init_list = get_init_skill_list(pet_no,level)
+    skill_list = getInitSkillList(skill_init_list)
+    return newpets.Pets(pet_no,level,skill_list=skill_list)
 
     #return pet_map.all_pet_dict[pet_no](level=level,skill_list=skill_list)
 

@@ -1,7 +1,7 @@
 from database import datasetting
 import random
 
-def get_pet(petNo,table_name):
+def get_pet(table_name,petNo):
     sql = "select * from %s where petNo=%d" % (table_name,petNo)
     db_conn = datasetting.DBconn()
     cursor = db_conn.get_conn()
