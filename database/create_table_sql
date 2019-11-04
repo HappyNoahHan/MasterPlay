@@ -44,6 +44,7 @@ url text
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 create table skillInfo(
+    id smallint primary key
     skill_name char(10) not null,
     skill_prop char(4),
     skill_type char(4),

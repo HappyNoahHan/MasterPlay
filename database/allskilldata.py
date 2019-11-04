@@ -21,7 +21,8 @@ class AllSkillData(object):
 
 
 if __name__ == '__main__':
-    datas = petdata.get_url()
+    sql = 'select * from skillURL'
+    datas = petdata.get_data(sql)
     skill_list = AllSkillData()
     for data in datas:
         print("正在获取 %s 属性招式信息" % data[0])

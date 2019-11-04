@@ -35,7 +35,10 @@ def get_pet(pet_no,level=1):
 
 def get_skill_tree(pet_no):
     skill_tree = []
-    skill_msg = petdata.get_learn_skill(pet_no)
+    sql = 'select * from levelUpLearnSkill where petNo=%d' % pet_no
+    sql += " and learn_condition like 'Lv.%'"
+    skill_msg = petdata.get_data(sql)
+    #print(skill_msg)
     for msg in skill_msg:
         key  = msg[1].split('Lv.')[1].strip('-')
         value = msg[2]
@@ -44,6 +47,7 @@ def get_skill_tree(pet_no):
     return skill_tree
 
 def get_init_skill_list(pet_no,level):
+    skill_list={}
     skill_tree = get_skill_tree(pet_no)
 
     key_list = []
@@ -54,5 +58,10 @@ def get_init_skill_list(pet_no,level):
     if key_list.__len__() > 4:
         key_list = random.sample(key_list,4)
 
-    return key_list
+    for value in key_list:
+        sql = 'select id from skillInfo where skill_name=%s' % repr(value[1])
+        skill_id = petdata.get_data(sql)
+        skill_list[skill_id[0][0]] = value[1]
+
+    return skill_list
 
